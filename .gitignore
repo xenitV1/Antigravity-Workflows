@@ -1,0 +1,8 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Antigravity temp/log files if any
+*.log
+.gemini/
+.agent/temp/
