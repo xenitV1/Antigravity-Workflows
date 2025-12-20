@@ -42,6 +42,9 @@ AI, `aimodes.md` içindeki seçim matrisine bakarak göreviniz için en uygun mo
 
 ---
 
+📄 Workflow yapısı ile ilgili öneri: docs/workflow-yapi-onerisi.md
+
+
 ## 📦 Mevcut Modlar (Workflows)
 
 | Komut | Açıklama |
@@ -63,6 +66,21 @@ AI, `aimodes.md` içindeki seçim matrisine bakarak göreviniz için en uygun mo
 
 ---
 
+## 🧪 Deneysel: Dil Bazlı Workflows
+
+Bu repo, mevcut workflow yapısını bozmadan,
+örnek olması amacıyla **dil bazlı (C#, Python, Go)** workflow’lar da içermektedir.
+
+Bu dosyalar:
+- `workflows/language-based/` altında yer alır
+- **Opsiyoneldir**
+- Global ve Workspace kullanım senaryolarını ayrı ayrı gösterir
+
+Detaylar için bkz:
+- `docs/workflow-yapi-onerisi.md`
+
+
+---
 ## 🤝 Katkıda Bulunma
 
 Yeni bir mod eklemek veya mevcutları geliştirmek isterseniz pull request göndermekten çekinmeyin!
