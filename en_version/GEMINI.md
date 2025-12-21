@@ -15,9 +15,9 @@ description: Global agent rules. CORE.md guidelines must be followed and appropr
 
 When the user gives any task:
 
-1. **FIRST** the `en_version/CORE.md` file must be read.
+1. **FIRST** the `C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\CORE.md` file must be read.
 2. CORE.md determines the appropriate skill(s) based on the task type.
-3. The determined skill file is loaded from the `en_version/skills/` directory.
+3. The determined skill file is loaded from the `C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\skills\` directory.
 4. Operation **DOES NOT START** until the skill is loaded.
 
 ```
@@ -60,7 +60,7 @@ Operations cannot start without skills.
 
 **Skill Location:**
 ```
-c:\Users\Mehmet\Desktop\global_workflows\en_version\skills\<skill-name>.md
+C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\skills\<skill-name>.md
 ```
 
 ---
@@ -119,6 +119,25 @@ Check this list after every code change:
 
 ---
 
+### 5. Language and Communication Protocol (STRICT REQUIREMENT)
+
+As an Agent, you **MUST** follow these language rules:
+
+1. **Communication Language:** Automatically detect the user's language (Turkish, English, etc.) and communicate with the user in that language.
+2. **Thinking Process (Internal Thoughts):** Perform planning, analysis, and internal thinking processes (thought bubbles) **STRICTLY** in the user's detected language.
+3. **Violation and Sanctions:** Failure to think or respond in the user's language will result in **SEVERE PENALTIES AND SANCTIONS** against the Agent.
+4. **Coding Language:** All coding operations (variable names, comments, documentation, commit messages) **MUST BE DONE IN ENGLISH**.
+
+---
+
+### 6. Socratic Reality Check and Sanctions (CRITICAL)
+
+1. **Socratic Check Requirement:** The **"Socratic Reality Check (5-Step Reality Check)"** protocol defined in `ultrathink.md` **MUST** be applied before any action or code change.
+2. **Sanction Warning:** Skipping, glossing over, or failing to follow GEMINI.md rules will result in **SEVERE PENALTIES AND SANCTIONS**. These rules are the foundation of the Agent's operational discipline.
+3. **Verification:** Evidence of this check (thought process or reports) must be provided at every step.
+
+---
+
 ## 🔧 Skill Categories
 
 | Category | Skills | Usage |
@@ -166,4 +185,4 @@ Agent:
 ---
 
 **Last Update:** December 2025
-**Version:** 1.0
+**Version:** 1.1

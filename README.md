@@ -4,6 +4,19 @@
 >
 > [TR] AI Agent için merkezi skill yönetim sistemi. Görev tipine göre uygun skill(ler) otomatik olarak yüklenir.
 
+> [!IMPORTANT]
+> **[EN] Absolute Paths Notice:** This repository contains absolute directory paths (e.g., `C:\Users\Mehmet\.gemini\antigravity\...`) that **MUST** be updated after cloning to match your local setup. Please update the paths in these files:
+> * `.\GEMINI.md`
+> * `.\CORE.md`
+> * `.\en_version\GEMINI.md`
+> * `.\en_version\CORE.md`
+>
+> **[TR] Mutlak Dizin Yolları Uyarısı:** Bu depoda yerel dizin yapınıza göre **GÜNCELLEMENİZ GEREKEN** mutlak dizin yolları (örn: `C:\Users\Mehmet\.gemini\antigravity\...`) bulunmaktadır. Projeyi klonladıktan sonra şu dosyalardaki yolları güncelleyin:
+> * `.\GEMINI.md`
+> * `.\CORE.md`
+> * `.\en_version\GEMINI.md`
+> * `.\en_version\CORE.md`
+
 ---
 
 ## 🌍 Language Versions / Dil Versiyonları
@@ -58,9 +71,11 @@ global_workflows/en_version/
     └── optimization.md    # System & Flow Optimization [NEW]
 ```
 
-## 🆕 New Features (v2.0 / v3.1)
-- **Clickable navigation:** `CORE.md` now features direct links to specific skill sections.
-- **Unified Structure:** All skills now follow a standardized v2.0 format (ToC + Numbered Sections).
+## 🆕 New Features (v1.3)
+- **[EN] Socratic Reality Check:** A 5-step protocol in `ultrathink.md` to align with user intent and prevent context drift.
+- **[TR] Sokratik Gerçeklik Kontrolü:** `ultrathink.md` içinde yer alan, kullanıcı niyetini doğrulamak ve bağlam kaymasını önlemek için 5 adımlı protokol.
+- **Clickable navigation:** `CORE.md` now features direct links to specific skill sections for precision.
+- **Unified Structure:** All skills follow a standardized v2.0 format (ToC + Numbered Sections).
 - **New Skills:** Added `optimization` and `testing` skills.
 
 ---
@@ -68,9 +83,10 @@ global_workflows/en_version/
 ## 🎯 How It Works / Nasıl Çalışır?
 
 1. **[EN]** `CORE.md` is read at every task. **[TR]** Her görevde `CORE.md` okunur.
-2. **[EN]** Task is analyzed and appropriate skill(s) are identified. **[TR]** Görev analiz edilir ve uygun skill(ler) belirlenir.
-3. **[EN]** Skill file is loaded from the `skills/` directory. **[TR]** Skill dosyası `skills/` dizininden yüklenir.
-4. **[EN]** Quality checks are performed after completion. **[TR]** İşlem sonrası kalite kontrolleri yapılır.
+2. **[EN] Selection:** The Agent uses the **Selective Reading Protocol** to only load relevant sections, preserving context limits. **[TR]** Agent, **Seçici Okuma Protokolü** ile sadece ilgili bölümleri yükler, bağlam limitini (token) korur.
+3. **[EN] Planning:** `ultrathink.md` is used for deep analysis and **Socratic Reality Check**. **[TR]** `ultrathink.md` ile derin analiz ve **Sokratik Gerçeklik Kontrolü** yapılır.
+4. **[EN] Execution:** The identified skill file is loaded from the `skills/` directory. **[TR]** Belirlenen skill dosyası `skills/` dizinden yüklenir.
+5. **[EN] Quality:** Mandatory checks (ESLint/TSC) are performed after completion. **[TR]** İşlem sonrası zorunlu kontroller yapılır.
 
 ---
 

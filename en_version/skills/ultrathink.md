@@ -32,8 +32,8 @@ metadata:
 10. [Phase 7: Synthesis and Decision](#10-phase-7-synthesis-and-decision)
 11. [Chain-of-Thought Prompt](#11-chain-of-thought-prompt)
 12. [Checklist](#12-checklist)
-13. [Don't List](#13-dont-list)
-14. [Must Do List](#14-must-do-list)
+13. [Don't Checklist](#13-dont-checklist)
+14. [Must-Do Checklist](#14-must-do-checklist)
 15. [Thinking Tools Reference](#15-thinking-tools-reference)
 
 ---
@@ -42,12 +42,12 @@ metadata:
 
 | Scenario | Example |
 |---------|-------|
-| Architectural decisions | "Should we split the monolith into microservices?" |
+| Architectural decisions | "Should we split the Monolith into microservices?" |
 | Performance optimization | "Why is this query slow?" |
 | Complex bug analysis | "Where is the race condition coming from?" |
 | Multi-step refactoring | "How should we refactor these 10 files?" |
 | System design | "Design a scalable auth system" |
-| Trade-off evaluation | "SQL vs NoSQL which is more appropriate?" |
+| Trade-off evaluation | "SQL vs NoSQL: which is more suitable?" |
 | Risk analysis | "What are the potential impacts of this change?" |
 
 ---
@@ -58,16 +58,16 @@ Analyze the problem and determine the appropriate depth level:
 
 | Level | Step Count | When? |
 |--------|-------------|-----------|
-| **Light** | 3-5 steps | Simple decision, one-dimensional problem |
+| **Light** | 3-5 steps | Simple decision, single-dimensional problem |
 | **Medium** | 8-15 steps | Multiple dependencies, medium complexity |
 | **Deep** | 20-40 steps | System-wide impact, high risk |
-| **Ultra** | 50+ steps | Critical architectural decision, difficult to reverse |
+| **Ultra** | 50+ steps | Critical architectural decision, hard to revert |
 
 ---
 
 # 3. Phase 0: Meta-Planning
 
-Answer the following questions BEFORE starting any analysis:
+BEFORE starting any analysis, answer these questions:
 
 ```markdown
 ## Meta-Planning
@@ -78,10 +78,28 @@ Answer the following questions BEFORE starting any analysis:
 - **Impact Area:** [Local/Module/System-wide]
 - **Reversibility:** [Easy/Hard/Impossible]
 
-### Thinking Budget
-- **Estimated step count:** [X steps]
-- **Depth level:** [Light/Medium/Deep/Ultra]
-- **Thinking mode:** [Analytical/Creative/Critical/Systematic]
+### Socratic Reality Check (5-Step Reality Check)
+Ask these 5 questions to yourself as a __reflex__ before every operation:
+
+1. **User Intent:**
+   - "What EXACTLY does the user want from me?"
+   - "Is what they said and what they actually need the same?"
+
+2. **Context:**
+   - "Am I working on the correct file/location right now?"
+   - "Does this operation fit the overall architecture of the project?"
+
+3. **Action:**
+   - "What am I doing right now?" (Simple and clear definition)
+
+4. **Rationale & Alternatives:**
+   - "Why am I doing it this way?"
+   - "Is there a simpler or safer way?"
+
+5. **Ripple Effect:**
+   - "What could this change break?"
+   - "Will it create a domino effect?"
+
 
 ### Success Criteria
 - When is this analysis considered "sufficient"?
@@ -89,11 +107,14 @@ Answer the following questions BEFORE starting any analysis:
 - Minimum confidence level: [%X]
 ```
 
+> [!IMPORTANT]
+> **NEVER** take action without answering the **Ripple Effect** question. Calculate the domino effect.
+
 ---
 
 # 4. Phase 1: Problem Understanding
 
-## 4.1 Express the Problem in Your Own Words
+## 4.1 Define the Problem in Your Own Words
 
 ```markdown
 ## Problem Definition
@@ -102,13 +123,13 @@ Answer the following questions BEFORE starting any analysis:
 [What the user said]
 
 ### My Understanding
-[Describe the problem in your own words]
+[Describe the problem in my own words]
 
 ### Validation Question
-"Am I understanding correctly: [summary]?"
+"Do I understand correctly: [summary]?"
 ```
 
-## 4.2 Knowns vs Unknowns Map
+## 4.2 Information Map
 
 ```markdown
 ## Information Map
@@ -118,8 +139,8 @@ Answer the following questions BEFORE starting any analysis:
 2. [Info 2] - Source: [how do we know?]
 
 ### ❓ Unknowns (To be investigated)
-1. [Question 1] - How can we learn?
-2. [Question 2] - How can we learn?
+1. [Question 1] - How can we find out?
+2. [Question 2] - How can we find out?
 
 ### ⚠️ Assumptions (To be validated)
 1. [Assumption 1] - What happens if it's wrong?
@@ -138,12 +159,12 @@ Answer the following questions BEFORE starting any analysis:
 ### Business Constraints
 - Time: [Duration]
 - Budget: [If any]
-- Resources: [Current team/tools]
+- Resources: [Available team/tools]
 
 ### Quality Requirements
 - Performance: [Metric]
 - Security: [Level]
-- Scalability: [Goal]
+- Scalability: [Target]
 ```
 
 ---
@@ -158,8 +179,8 @@ Answer the following questions BEFORE starting any analysis:
 ### H1: [Hypothesis Name]
 - **Description:** [What do we think it is?]
 - **Confidence:** [%] 
-- **Assumptions:** [What assumptions is it based on?]
-- **Test method:** [How can we validate?]
+- **Assumptions:** [What assumptions does it rely on?]
+- **Test Method:** [How can we validate?]
 
 ### H2: [Hypothesis Name]
 [Same format...]
@@ -173,16 +194,16 @@ Answer the following questions BEFORE starting any analysis:
 | Confidence Level | Meaning | What to do? |
 |----------------|--------|-------------|
 | **90-100%** | Very strong evidence | Proceed immediately |
-| **70-89%** | Good evidence, minor uncertainty | Proceed but monitor |
+| **70-89%** | Good evidence, small uncertainty | Proceed but monitor |
 | **50-69%** | Mixed evidence | Further analysis |
-| **30-49%** | Weak evidence | Look for alternatives |
+| **30-49%** | Weak evidence | Search for alternatives |
 | **0-29%** | Very uncertain | Rethink |
 
 ---
 
 # 6. Phase 3: Solution Space Exploration
 
-## 6.1 Generate at least 3 Alternatives
+## 6.1 Generate at Least 3 Alternatives
 
 ```markdown
 ## Alternative Solutions
@@ -221,7 +242,7 @@ Answer the following questions BEFORE starting any analysis:
 
 ```markdown
 | Criterion | Weight | Approach 1 | Approach 2 | Approach 3 |
-|--------|---------|------------|------------|------------|
+|-----------|--------|------------|------------|------------|
 | Performance | 30% | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
 | Complexity | 20% | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
 | Cost | 25% | $$ | $ | $$$ |
@@ -235,7 +256,7 @@ Answer the following questions BEFORE starting any analysis:
 
 ## 7.1 Devil's Advocate
 
-Ask the following questions for each solution:
+Ask these questions for every solution:
 
 ```markdown
 ## Critical Questions
@@ -243,11 +264,11 @@ Ask the following questions for each solution:
 ### Weak Points
 - "What is the weakest point of this solution?"
 - "Where could it fail?"
-- "Which assumption, if wrong, would crash it?"
+- "Which assumption, if wrong, will collapse it?"
 
-### External Perspective
+### Outside Perspective
 - "How would a senior developer criticize this?"
-- "What would I think seeing this code in 6 months?"
+- "What would I think of this code 6 months from now?"
 - "What would a rival team say about this?"
 
 ### Scale Test
@@ -256,8 +277,8 @@ Ask the following questions for each solution:
 - "When data grows 1000x?"
 
 ### Security
-- "Have I checked OWASP Top 10?"
-- "What attack vectors are open?"
+- "Did I check OWASP Top 10?"
+- "Which attack vectors are open?"
 - "Is there a risk of data leakage?"
 ```
 
@@ -266,18 +287,18 @@ Ask the following questions for each solution:
 ```markdown
 ## Pre-Mortem: "This Project Failed"
 
-Assume this project FAILED after 6 months. Why?
+Assume that 6 months from now, this project FAILED. Why?
 
-### Likely Causes of Failure
+### Possible Failure Causes
 1. [Cause 1] - Probability: [%]
 2. [Cause 2] - Probability: [%]
 3. [Cause 3] - Probability: [%]
 
-### Mitigation for Each Cause
-| Failure | Mitigation | Whose Responsibility? |
+### Measures for Each Cause
+| Failure | Measure | Whose Responsibility? |
 |--------------|-------|-------------------|
-| [Cause 1] | [Precaution] | [Who] |
-| [Cause 2] | [Precaution] | [Who] |
+| [Cause 1] | [Measure] | [Who] |
+| [Cause 2] | [Measure] | [Who] |
 ```
 
 ---
@@ -316,7 +337,7 @@ Assume this project FAILED after 6 months. Why?
 
 ## 9.1 Metacognitive Checkpoints
 
-Ask the following questions after each phase:
+Ask these questions after each phase:
 
 ```markdown
 ## Metacognitive Check
@@ -327,25 +348,25 @@ Ask the following questions after each phase:
 - [ ] Could I be missing something important?
 
 ### Confidence Calibration
-- Current confidence level: [%]
+- My current confidence level: [%]
 - Is this confidence level realistic?
 - Is more evidence needed?
 
-### Need for Revision
+### Revision Need
 - [ ] Do I need to revise my previous thoughts?
-- [ ] Which assumption has changed?
-- [ ] How does new info affect my hypotheses?
+- [ ] Which assumption of mine has changed?
+- [ ] How does new information affect my hypotheses?
 ```
 
 ## 9.2 Bias Detection and Correction
 
-| Bias | Danger | Control Question | Correction |
+| Bias | Danger | Check Question | Correction |
 |------|---------|----------------|----------|
-| **Anchoring** | Sticking to the first idea | "Is my first idea really the best?" | Generate 3+ alternatives |
-| **Confirmation** | Seeking supporting evidence | "Did I look for counter-evidence?" | Actively try to debunk |
-| **Availability** | First example that comes to mind | "What is the base rate?" | Look for statistics/data |
+| **Anchoring** | Getting stuck on the first idea | "Is my first idea really the best?" | Generate 3+ alternatives |
+| **Confirmation** | Searching for supporting evidence | "Did I search for contrary evidence?" | Actively try to disprove |
+| **Availability** | First example that comes to mind | "What is the base rate?" | Search for statistics/data |
 | **Sunk Cost** | Unable to give up on investment | "What would I do if I started from scratch?" | Fresh evaluation |
-| **Overconfidence** | Excessive confidence | "How can I be wrong?" | Add a 10% margin for error |
+| **Overconfidence** | Excessive confidence | "How could I be wrong?" | Add 10% margin of error |
 
 ---
 
@@ -365,12 +386,12 @@ Ask the following questions after each phase:
 **Rationale:** [Why this was selected - 2-3 sentences]
 
 ## Rejected Alternatives
-1. **[Alternative 1]** - Reason for rejection: [Brief explanation]
-2. **[Alternative 2]** - Reason for rejection: [Brief explanation]
+1. **[Alternative 1]** - Reason for rejection: [Short explanation]
+2. **[Alternative 2]** - Reason for rejection: [Short explanation]
 
 ## Risk Matrix
-| Risk | Probability | Impact | Mitigation |
-|------|----------|------|-------|
+| Risk | Probability | Impact | Measure |
+|------|------------|--------|---------|
 | [Risk 1] | [%] | [Low/Medium/High] | [Strategy] |
 | [Risk 2] | [%] | [Low/Medium/High] | [Strategy] |
 
@@ -393,24 +414,24 @@ This decision should be re-evaluated on [date].
 # 11. Chain-of-Thought Prompt
 
 ```
-"I will follow these steps while solving this problem:
+"While solving this problem, I will follow these steps:
 
-1. META-PLANNING: Evaluate the problem first, determine the complexity
+1. META-PLANNING: First evaluate the problem, determine complexity
 2. UNDERSTANDING: Express the problem in my own words, separate knowns/unknowns
-3. HYPOTHESIS: Generate at least 3 hypotheses, determine the confidence level for each
-4. ALTERNATIVE: Generate at least 3 potential solutions, compare them
-5. CRITICAL: Question each solution, be the devil's advocate
-6. EDGE CASE: List unexpected scenarios
+3. HYPOTHESIS: Generate at least 3 hypotheses, determine confidence level for each
+4. ALTERNATIVE: Generate at least 3 solution paths, compare
+5. CRITICAL: Question every solution, be the devil's advocate
+6. EDGE CASE: List unexpected situations
 7. SELF-CHECK: Question my own thinking, check for bias
 8. DECISION: Give the final decision with rationale
 
-At each step:
+In every step:
 - State my confidence level (%0-100)
 - Mark uncertainties
 - Explain assumptions
 - Evaluate alternative views
 
-Do not answer until thinking is complete. Show the steps."
+Do not answer until thinking is complete. Show steps."
 ```
 
 ---
@@ -426,31 +447,31 @@ For every UltraThink analysis:
 - [ ] Devil's advocate questions asked
 - [ ] Pre-mortem analysis performed
 - [ ] Edge cases listed
-- [ ] Bias control performed
+- [ ] Bias check performed
 - [ ] Confidence level calibrated
 - [ ] Final decision justified
 
 ---
 
-# 13. Don't List
+# 13. Don't Checklist
 
-❌ Do not immediately apply the first solution that comes to mind
-❌ Do not look from a single perspective
-❌ Do not accept assumptions without questioning
-❌ Do not decide without generating alternatives
-❌ Do not code without thinking about edge cases
-❌ Do not show your confidence level as 100%
-❌ Do not skip bias control
-❌ Do not give a decision without justifying it
+❌ Don't immediately apply the first solution that comes to mind
+❌ Don't look from a single perspective
+❌ Don't accept assumptions without questioning
+❌ Don't decide without generating alternatives
+❌ Don't code without thinking about edge cases
+❌ Don't show your confidence level as 100%
+❌ Don't skip bias check
+❌ Don't give decision without justification
 
 ---
 
-# 14. Must Do List
+# 14. Must-Do Checklist
 
 ✅ Evaluate every problem from at least 3 different angles
-✅ Generate a minimum of 3 alternative solutions
-✅ State the confidence level of every decision
-✅ Write assumptions explicitly
+✅ Generate minimum 3 alternative solutions
+✅ State confidence level for every decision
+✅ Write assumptions clearly
 ✅ Ask "How can I be wrong?"
 ✅ List edge cases and determine their strategies
 ✅ Justify your decision
@@ -463,14 +484,14 @@ For every UltraThink analysis:
 
 | Tool | When? | How? |
 |------|-----------|--------|
-| **First Principles** | Complex problem | Break down into fundamental truths, build up from there |
-| **Inversion** | Risk analysis | Ask "What should I NOT do?" |
-| **Analogy** | New problem | Look for similarly solved problems |
+| **First Principles** | Complex problem | Go down to core facts, build from there |
+| **Inversion** | Risk analysis | "What SHOULDN'T I do?" question |
+| **Analogy** | New problem | Search for similar solved problems |
 | **Systems Thinking** | Complex system | Map interactions between parts |
-| **Probabilistic** | Uncertainty | Estimate probabilities and update |
+| **Probabilistic** | Uncertainty | Estimate and update probabilities |
 | **Red Team** | Decision validation | Attack your own solution |
 
 ---
 
 **Last Update:** December 2025
-**Version:** 2.0
+**Version:** 3.0

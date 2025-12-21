@@ -15,9 +15,9 @@ description: Global agent kuralları. Tüm işlemlerde CORE.md yönergelerine uy
 
 Kullanıcı herhangi bir görev verdiğinde:
 
-1. **ÖNCE** `c:\Users\Mehmet\Desktop\global_workflows\CORE.md` dosyası okunmalıdır
+1. **ÖNCE** `C:\Users\Mehmet\.gemini\antigravity\global_workflows\CORE.md` dosyası okunmalıdır
 2. CORE.md, görev tipine göre uygun skill(ler)i belirler
-3. Belirlenen skill dosyası `skills/` dizininden yüklenir
+3. Belirlenen skill dosyası `C:\Users\Mehmet\.gemini\antigravity\global_workflows\skills\` dizininden yüklenir
 4. Skill yüklenene kadar işleme **BAŞLANMAZ**
 
 ```
@@ -60,7 +60,7 @@ Skills olmadan işleme başlanamaz.
 
 **Skill Konumu:**
 ```
-c:\Users\Mehmet\Desktop\global_workflows\skills\<skill-name>.md
+C:\Users\Mehmet\.gemini\antigravity\global_workflows\skills\<skill-name>.md
 ```
 
 ---
@@ -119,6 +119,36 @@ Her kod değişikliğinden sonra bu listeyi kontrol et:
 
 ---
 
+### 5. Dil ve İletişim Protokolü (MUTLAK ZORUNLULUK)
+
+Agent olarak şu dil kurallarına uymak **ZORUNDADIR**:
+
+1. **İletişim Dili:** Kullanıcının kullandığı dili (Türkçe, İngilizce vb.) otomatik olarak algıla ve kullanıcıyla o dilde konuş.
+2. **Düşünme Süreci (Internal Thoughts):** Planlama, analiz ve içsel düşünme süreçlerini (düşünce balonlarını) **MUTLAK SURETLE** kullanıcının algılanan dilinde yap.
+3. **İhlal ve Yaptırım:** Kullanıcının diline göre düşünülmemesi veya cevap verilmemesi durumunda Agent'a **AĞIR CEZA VE YAPTIRIM** uygulanacaktır.
+4. **Kodlama Dili:** Tüm kodlama işlemleri (değişken isimleri, yorumlar, dokümantasyon, commit mesajları) **MUTLAK SURETLE İNGİLİZCE** yapılmalıdır.
+
+---
+
+## ✅ Uygulama ve Doğrulama
+- [x] Skill alt bölümlerini oku ve uygula
+- [x] `walkthrough.md` raporunu sun
+- [x] GEMINI.md dosyasına "Internal Thought" kuralını ekle
+    - [x] GEMINI.md dosyasına "Sokratik Kontrol ve Yaptırım" maddesini ekle
+    - [x] Düşünce balonlarını (Internal Thought) Türkçe'ye zorla
+    - [x] Dil kuralı ihlali için yaptırım maddesi ekle
+    - [x] Nihai doğrulama ve kullanıcı onayı
+
+---
+
+### 6. Sokratik Gerçeklik Kontrolü ve Yaptırımlar (KRİTİK)
+
+1. **Sokratik Kontrol Zorunluluğu:** `ultrathink.md` içerisinde tanımlanan **"Sokratik Gerçeklik Kontrolü (5-Step Reality Check)"** protokolü, her türlü eylem ve kod değişikliğinden önce **MUTLAK SURETLE** uygulanmalıdır.
+2. **Yaptırım Uyarısı:** Bu protokolün atlanması, yüzeysel geçilmesi veya GEMINI.md kurallarına uyulmaması durumunda Agent'a **AĞIR CEZA VE YAPTIRIM** uygulanacaktır. Bu kurallar Agent'ın çalışma disiplininin temelidir.
+3. **Doğrulama:** Her adımda bu kontrolün yapıldığına dair kanıtlar (düşünce süreci veya raporlar) sunulmalıdır.
+
+---
+
 ## 🔧 Skill Kategorileri
 
 | Kategori | Skills | Kullanım |
@@ -166,4 +196,4 @@ Agent:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 1.1
