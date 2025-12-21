@@ -6,36 +6,55 @@
 
 ---
 
+## 🌍 Language Versions / Dil Versiyonları
+
+### 🇹🇷 Turkish (Default)
+Original files are located in the root directory and `skills/` folder.
+* **GEMINI.md**: `.\GEMINI.md`
+* **CORE.md**: `.\CORE.md`
+* **Skills**: `.\skills\*.md`
+
+### 🇺🇸 English
+Translated files are located in the `en_version` directory. Use these if you prefer an English-native workflow.
+* **GEMINI.md**: `.\en_version\GEMINI.md`
+* **CORE.md**: `.\en_version\CORE.md`
+* **Skills**: `.\en_version\skills\*.md`
+
+---
+
 ## 🚀 Installation / Kurulum
 
-1. Clone this repository / Bu repository'yi klonlayın
-2. Copy `GEMINI.md` to your system directory / `GEMINI.md` dosyasını sistem dizinine kopyalayın:
-
+### [TR] Türkçe Kurulum
 ```powershell
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 ```
 
+### [EN] English Installation
+```powershell
+Copy-Item ".\en_version\GEMINI.md" "$HOME\.gemini\GEMINI.md"
+```
+
 ---
 
-## 📁 Structure / Yapı
+## 📁 Structure / Yapı (English Version)
 
 ```
-global_workflows/
-├── GEMINI.md              # Global rules / Global kurallar
-├── CORE.md                # Central orchestrator / Merkezi orchestrator
-└── skills/                # Specialized skill files / Özelleşmiş skill dosyaları
-    ├── ultrathink.md      # Deep thinking protocol / Derin düşünme protokolü
-    ├── architecture.md    # System design / Sistem tasarımı
-    ├── design-system.md   # UI/UX guides / UI/UX rehberi
-    ├── backend.md         # Server-side development / Server-side geliştirme
-    ├── mobile.md          # Cross-platform mobile / Mobil geliştirme
-    ├── testing.md         # TDD & testing strategies / Test stratejileri
-    ├── debugging.md       # Systematic debugging / Hata ayıklama
-    ├── refactoring.md     # Code improvement / Kod iyileştirme
+global_workflows/en_version/
+├── GEMINI.md              # Global rules
+├── CORE.md                # Central orchestrator
+└── skills/                # Specialized skill files
+    ├── ultrathink.md      # Deep thinking protocol
+    ├── architecture.md    # System design
+    ├── design-system.md   # UI/UX guides
+    ├── backend.md         # Server-side development
+    ├── mobile.md          # Cross-platform mobile
+    ├── testing.md         # TDD & testing strategies
+    ├── debugging.md       # Systematic debugging
+    ├── refactoring.md     # Code improvement
     ├── production-deployment.md # DevOps/CI-CD
-    ├── multi-file-sync.md # Multi-file changes / Çoklu dosya senkronizasyonu
-    ├── dependency-management.md # Package management / Paket yönetimi
-    └── documentation.md   # Technical docs / Teknik dokümantasyon
+    ├── multi-file-sync.md # Multi-file changes
+    ├── dependency-management.md # Package management
+    └── documentation.md   # Technical docs
 ```
 
 ---
@@ -57,21 +76,10 @@ global_workflows/
 
 ---
 
-## 🔗 Skill Categories / Kategoriler
-
-| Category / Kategori | Skills |
-|:---:|---|
-| **Thinking / Düşünme** | ultrathink, architecture |
-| **Dev / Geliştirme** | backend, mobile, design-system |
-| **Quality / Kalite** | testing, debugging, refactoring |
-| **Ops / Operasyon** | production-deployment, multi-file-sync, dependency-management, documentation |
-
----
-
 ## 📄 License / Lisans
 
 MIT License
 
 ---
 
-**Developed by / Geliştiren:** [xenit_v0](https://x.com/xenit_v0)
+**Developed by / Geliştiren:** [@xenit-v0](https://x.com/xenit_v0)
