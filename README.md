@@ -54,8 +54,14 @@ global_workflows/en_version/
     ├── production-deployment.md # DevOps/CI-CD
     ├── multi-file-sync.md # Multi-file changes
     ├── dependency-management.md # Package management
-    └── documentation.md   # Technical docs
+    ├── documentation.md   # Technical docs
+    └── optimization.md    # System & Flow Optimization [NEW]
 ```
+
+## 🆕 New Features (v2.0 / v3.1)
+- **Clickable navigation:** `CORE.md` now features direct links to specific skill sections.
+- **Unified Structure:** All skills now follow a standardized v2.0 format (ToC + Numbered Sections).
+- **New Skills:** Added `optimization` and `testing` skills.
 
 ---
 

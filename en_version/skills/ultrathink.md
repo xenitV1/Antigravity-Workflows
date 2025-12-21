@@ -18,7 +18,27 @@ metadata:
 
 ---
 
-## 🎯 When to Use?
+# 📋 Contents
+
+1. [When to Use?](#1-when-to-use)
+2. [Thinking Depth Levels](#2-thinking-depth-levels)
+3. [Phase 0: Meta-Planning](#3-phase-0-meta-planning)
+4. [Phase 1: Problem Understanding](#4-phase-1-problem-understanding)
+5. [Phase 2: Hypothesis Generation](#5-phase-2-hypothesis-generation)
+6. [Phase 3: Solution Space Exploration](#6-phase-3-solution-space-exploration)
+7. [Phase 4: Critical Evaluation](#7-phase-4-critical-evaluation)
+8. [Phase 5: Edge Case Matrix](#8-phase-5-edge-case-matrix)
+9. [Phase 6: Self-Correction Loop](#9-phase-6-self-correction-loop)
+10. [Phase 7: Synthesis and Decision](#10-phase-7-synthesis-and-decision)
+11. [Chain-of-Thought Prompt](#11-chain-of-thought-prompt)
+12. [Checklist](#12-checklist)
+13. [Don't List](#13-dont-list)
+14. [Must Do List](#14-must-do-list)
+15. [Thinking Tools Reference](#15-thinking-tools-reference)
+
+---
+
+# 1. When to Use?
 
 | Scenario | Example |
 |---------|-------|
@@ -32,7 +52,7 @@ metadata:
 
 ---
 
-## 📏 Thinking Depth Levels
+# 2. Thinking Depth Levels
 
 Analyze the problem and determine the appropriate depth level:
 
@@ -45,7 +65,7 @@ Analyze the problem and determine the appropriate depth level:
 
 ---
 
-## 🧠 Phase 0: Meta-Planning
+# 3. Phase 0: Meta-Planning
 
 Answer the following questions BEFORE starting any analysis:
 
@@ -71,9 +91,9 @@ Answer the following questions BEFORE starting any analysis:
 
 ---
 
-## 🔍 Phase 1: Problem Understanding
+# 4. Phase 1: Problem Understanding
 
-### 1.1 Express the Problem in Your Own Words
+## 4.1 Express the Problem in Your Own Words
 
 ```markdown
 ## Problem Definition
@@ -88,7 +108,7 @@ Answer the following questions BEFORE starting any analysis:
 "Am I understanding correctly: [summary]?"
 ```
 
-### 1.2 Knowns vs Unknowns Map
+## 4.2 Knowns vs Unknowns Map
 
 ```markdown
 ## Information Map
@@ -106,7 +126,7 @@ Answer the following questions BEFORE starting any analysis:
 2. [Assumption 2] - What happens if it's wrong?
 ```
 
-### 1.3 Constraints and Requirements
+## 4.3 Constraints and Requirements
 
 ```markdown
 ## Constraints
@@ -128,9 +148,9 @@ Answer the following questions BEFORE starting any analysis:
 
 ---
 
-## 💡 Phase 2: Hypothesis Generation
+# 5. Phase 2: Hypothesis Generation
 
-### 2.1 Initial Hypotheses
+## 5.1 Initial Hypotheses
 
 ```markdown
 ## Hypothesis List
@@ -148,7 +168,7 @@ Answer the following questions BEFORE starting any analysis:
 [Same format...]
 ```
 
-### 2.2 Hypothesis Confidence Calibration
+## 5.2 Hypothesis Confidence Calibration
 
 | Confidence Level | Meaning | What to do? |
 |----------------|--------|-------------|
@@ -160,9 +180,9 @@ Answer the following questions BEFORE starting any analysis:
 
 ---
 
-## 🔄 Phase 3: Solution Space Exploration
+# 6. Phase 3: Solution Space Exploration
 
-### 3.1 Generate at least 3 Alternatives
+## 6.1 Generate at least 3 Alternatives
 
 ```markdown
 ## Alternative Solutions
@@ -197,7 +217,7 @@ Answer the following questions BEFORE starting any analysis:
 [Same format...]
 ```
 
-### 3.2 Comparison Matrix
+## 6.2 Comparison Matrix
 
 ```markdown
 | Criterion | Weight | Approach 1 | Approach 2 | Approach 3 |
@@ -211,9 +231,9 @@ Answer the following questions BEFORE starting any analysis:
 
 ---
 
-## ⚖️ Phase 4: Critical Evaluation
+# 7. Phase 4: Critical Evaluation
 
-### 4.1 Devil's Advocate
+## 7.1 Devil's Advocate
 
 Ask the following questions for each solution:
 
@@ -241,7 +261,7 @@ Ask the following questions for each solution:
 - "Is there a risk of data leakage?"
 ```
 
-### 4.2 Pre-Mortem Analysis
+## 7.2 Pre-Mortem Analysis
 
 ```markdown
 ## Pre-Mortem: "This Project Failed"
@@ -262,9 +282,9 @@ Assume this project FAILED after 6 months. Why?
 
 ---
 
-## 🎯 Phase 5: Edge Case Matrix
+# 8. Phase 5: Edge Case Matrix
 
-### 5.1 Input Edge Cases
+## 8.1 Input Edge Cases
 
 | Scenario | Normal | Edge Case | Strategy |
 |---------|--------|-----------|----------|
@@ -273,7 +293,7 @@ Assume this project FAILED after 6 months. Why?
 | Format | UTF-8 | Emoji/Special chars | Sanitization |
 | Size | <1MB | >100MB | Streaming + chunk |
 
-### 5.2 State Edge Cases
+## 8.2 State Edge Cases
 
 | Scenario | Normal | Edge Case | Strategy |
 |---------|--------|-----------|----------|
@@ -282,7 +302,7 @@ Assume this project FAILED after 6 months. Why?
 | Connection | Online | Offline | Queue + sync |
 | Memory | Normal | High usage | GC + cleanup |
 
-### 5.3 Business Edge Cases
+## 8.3 Business Edge Cases
 
 | Scenario | Normal | Edge Case | Strategy |
 |---------|--------|-----------|----------|
@@ -292,9 +312,9 @@ Assume this project FAILED after 6 months. Why?
 
 ---
 
-## 🔁 Phase 6: Self-Correction Loop
+# 9. Phase 6: Self-Correction Loop
 
-### 6.1 Metacognitive Checkpoints
+## 9.1 Metacognitive Checkpoints
 
 Ask the following questions after each phase:
 
@@ -317,7 +337,7 @@ Ask the following questions after each phase:
 - [ ] How does new info affect my hypotheses?
 ```
 
-### 6.2 Bias Detection and Correction
+## 9.2 Bias Detection and Correction
 
 | Bias | Danger | Control Question | Correction |
 |------|---------|----------------|----------|
@@ -329,9 +349,9 @@ Ask the following questions after each phase:
 
 ---
 
-## ✅ Phase 7: Synthesis and Decision
+# 10. Phase 7: Synthesis and Decision
 
-### 7.1 Final Decision Template
+## 10.1 Final Decision Template
 
 ```markdown
 # 🧠 UltraThink Analysis Report
@@ -370,7 +390,7 @@ This decision should be re-evaluated on [date].
 
 ---
 
-## 🧠 Chain-of-Thought Prompt
+# 11. Chain-of-Thought Prompt
 
 ```
 "I will follow these steps while solving this problem:
@@ -395,7 +415,7 @@ Do not answer until thinking is complete. Show the steps."
 
 ---
 
-## ✅ Checklist
+# 12. Checklist
 
 For every UltraThink analysis:
 
@@ -412,7 +432,7 @@ For every UltraThink analysis:
 
 ---
 
-## 🔴 Don't List
+# 13. Don't List
 
 ❌ Do not immediately apply the first solution that comes to mind
 ❌ Do not look from a single perspective
@@ -425,7 +445,7 @@ For every UltraThink analysis:
 
 ---
 
-## ✅ Must Do List
+# 14. Must Do List
 
 ✅ Evaluate every problem from at least 3 different angles
 ✅ Generate a minimum of 3 alternative solutions
@@ -439,7 +459,7 @@ For every UltraThink analysis:
 
 ---
 
-## 📚 Thinking Tools Reference
+# 15. Thinking Tools Reference
 
 | Tool | When? | How? |
 |------|-----------|--------|

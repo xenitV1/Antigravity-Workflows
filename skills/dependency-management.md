@@ -18,7 +18,23 @@ metadata:
 
 ---
 
-## 🎯 Temel Prensipler
+# 📋 İçindekiler
+
+1. [Temel Prensipler](#1-temel-prensipler)
+2. [Paket Ekleme Kararı](#2-paket-ekleme-kararı)
+3. [Security Auditing](#3-security-auditing)
+4. [Version Management](#4-version-management)
+5. [Upgrade Stratejisi](#5-upgrade-stratejisi)
+6. [Lock File Yönetimi](#6-lock-file-yönetimi)
+7. [Dependency Cleanup](#7-dependency-cleanup)
+8. [Dependency Monitoring](#8-dependency-monitoring)
+9. [Kontrol Listesi](#9-kontrol-listesi)
+10. [Yapma Listesi](#10-yapma-listesi)
+11. [Mutlaka Yap Listesi](#11-mutlaka-yap-listesi)
+
+---
+
+# 1. Temel Prensipler
 
 | Prensip | Açıklama |
 |---------|----------|
@@ -30,9 +46,9 @@ metadata:
 
 ---
 
-## 📏 Paket Ekleme Kararı
+# 2. Paket Ekleme Kararı
 
-### Paket Eklemeden Önce
+## 2.1 Paket Eklemeden Önce
 
 ```markdown
 ## Paket Değerlendirme Checklist
@@ -60,7 +76,7 @@ metadata:
 - [ ] GPL değil (commercial projeler için)
 ```
 
-### Paket Karşılaştırma
+## 2.2 Paket Karşılaştırma
 
 ```markdown
 ## Paket Karşılaştırma: Date Library
@@ -78,9 +94,9 @@ metadata:
 
 ---
 
-## 🔒 Security Auditing
+# 3. Security Auditing
 
-### npm audit
+## 3.1 npm audit
 
 ```bash
 # Güvenlik taraması
@@ -99,25 +115,20 @@ npm audit --json
 npm audit --omit=dev
 ```
 
-### Audit Raporunu Anlama
+## 3.2 Audit Raporunu Anlama
 
 ```
 ┌───────────────┬──────────────────────────────────────────────────────┐
 │ Critical      │ eval injection in lodash < 4.17.21                    │
-├───────────────┼──────────────────────────────────────────────────────┤
-│ Package       │ lodash                                                │
-├───────────────┼──────────────────────────────────────────────────────┤
-│ Severity      │ critical                                              │
-├───────────────┼──────────────────────────────────────────────────────┤
-│ Vulnerable    │ <4.17.21                                              │
-├───────────────┼──────────────────────────────────────────────────────┤
-│ Patched in    │ >=4.17.21                                             │
-├───────────────┼──────────────────────────────────────────────────────┤
-│ Dependency of │ my-project > some-package > lodash                    │
+| Package       │ lodash                                                |
+| Severity      │ critical                                              |
+| Vulnerable    │ <4.17.21                                              |
+| Patched in    │ >=4.17.21                                             |
+| Dependency of │ my-project > some-package > lodash                    |
 └───────────────┴──────────────────────────────────────────────────────┘
 ```
 
-### Snyk Integration
+## 3.3 Snyk Integration
 
 ```bash
 # Snyk CLI kurulumu
@@ -136,7 +147,7 @@ snyk monitor
 snyk wizard
 ```
 
-### CI Pipeline'da Audit
+## 3.4 CI Pipeline'da Audit
 
 ```yaml
 # .github/workflows/security.yml
@@ -165,9 +176,9 @@ jobs:
 
 ---
 
-## 📦 Version Management
+# 4. Version Management
 
-### Semantic Versioning
+## 4.1 Semantic Versioning
 
 ```
 MAJOR.MINOR.PATCH
@@ -177,7 +188,7 @@ MAJOR.MINOR.PATCH
   └─────────────── Breaking changes
 ```
 
-### Version Range Syntax
+## 4.2 Version Range Syntax
 
 ```json
 {
@@ -192,7 +203,7 @@ MAJOR.MINOR.PATCH
 }
 ```
 
-### Önerilen Yaklaşım
+## 4.3 Önerilen Yaklaşım
 
 ```json
 {
@@ -214,9 +225,9 @@ MAJOR.MINOR.PATCH
 
 ---
 
-## ⬆️ Upgrade Stratejisi
+# 5. Upgrade Stratejisi
 
-### Düzenli Minor Updates
+## 5.1 Düzenli Minor Updates
 
 ```bash
 # Outdated paketleri göster
@@ -233,7 +244,7 @@ npx npm-check-updates -u --target minor
 npm install
 ```
 
-### Major Updates (Dikkatli!)
+## 5.2 Major Updates (Dikkatli!)
 
 ```markdown
 ## Major Update Checklist: package@X.0.0
@@ -258,7 +269,7 @@ npm install
 - [ ] Code review
 ```
 
-### Major Update Örneği
+## 5.3 Major Update Örneği
 
 ```bash
 # 1. Branch oluştur
@@ -288,9 +299,9 @@ git commit -m "chore: upgrade react to v19"
 
 ---
 
-## 🔐 Lock File Yönetimi
+# 6. Lock File Yönetimi
 
-### package-lock.json
+## 6.1 package-lock.json
 
 ```bash
 # Zorunlu olarak lock file'dan install
@@ -304,7 +315,7 @@ npm install
 npm audit signatures
 ```
 
-### .npmrc Ayarları
+## 6.2 .npmrc Ayarları
 
 ```ini
 # .npmrc
@@ -317,9 +328,9 @@ engine-strict=true           # Enforce engine requirements
 
 ---
 
-## 🧹 Dependency Cleanup
+# 7. Dependency Cleanup
 
-### Kullanılmayan Paketleri Bul
+## 7.1 Kullanılmayan Paketleri Bul
 
 ```bash
 # depcheck kurulumu
@@ -328,7 +339,7 @@ npm install -g depcheck
 # Kullanılmayan paketleri bul
 depcheck
 
-# Sonuç
+# Sonur:
 Unused dependencies
 * lodash
 * moment
@@ -337,7 +348,7 @@ Unused devDependencies
 * @types/express
 ```
 
-### Paket Boyutu Analizi
+## 7.2 Paket Boyutu Analizi
 
 ```bash
 # Bundle size analysis
@@ -350,7 +361,7 @@ npx source-map-explorer dist/main.js
 # Paket boyutlarını online kontrol
 ```
 
-### Cleanup Script
+## 7.3 Cleanup Script
 
 ```bash
 # Gereksiz paketleri kaldır
@@ -366,9 +377,9 @@ npm cache clean --force
 
 ---
 
-## 📊 Dependency Monitoring
+# 8. Dependency Monitoring
 
-### Dependabot Config
+## 8.1 Dependabot Config
 
 ```yaml
 # .github/dependabot.yml
@@ -392,7 +403,7 @@ updates:
         dependency-type: development
 ```
 
-### Renovate Config
+## 8.2 Renovate Config
 
 ```json
 // renovate.json
@@ -414,14 +425,14 @@ updates:
 
 ---
 
-## ✅ Kontrol Listesi
+# 9. Kontrol Listesi
 
 ### Paket Eklerken
 - [ ] Gerçekten gerekli mi?
 - [ ] Alternatifler değerlendirildi mi?
 - [ ] Paket kalitesi yeterli mi?
 - [ ] Security audit temiz mi?
-- [ ] Lisans uyumlu mu?
+- [ ] Lisans uyumlu mi?
 - [ ] Bundle size kabul edilebilir mi?
 
 ### Düzenli Bakım (Haftalık)
@@ -438,7 +449,7 @@ updates:
 
 ---
 
-## 🔴 Yapma Listesi
+# 10. Yapma Listesi
 
 ❌ npm install --save ile "*" veya "latest" kullanma
 ❌ package-lock.json'ı .gitignore'a ekleme
@@ -449,7 +460,7 @@ updates:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 11. Mutlaka Yap Listesi
 
 ✅ package-lock.json'ı commit et
 ✅ CI'da `npm ci` kullan (npm install değil)
@@ -462,4 +473,4 @@ updates:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

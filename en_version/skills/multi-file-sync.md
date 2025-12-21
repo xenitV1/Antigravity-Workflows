@@ -18,19 +18,58 @@ metadata:
 
 ---
 
-## 📏 Core Principles
+# 📋 Contents
 
-### 1. Atomic Changes
+1. [Core Principles](#1-core-principles)
+2. [Multi-File Change Process](#2-multi-file-change-process)
+3. [Tools and Techniques](#3-tools-and-techniques)
+4. [Context Preservation (Context Keeping)](#4-context-preservation-context-keeping)
+5. [Dangerous Situations](#5-dangerous-situations)
+6. [Rollback Strategies](#6-rollback-strategies)
+7. [Checklist](#7-checklist)
+8. [Don't List](#8-dont-list)
+9. [Must Do List](#9-must-do-list)
 
-Every commit should contain only ONE logical change.
+---
 
-- **✅ CORRECT**: 
-  - Commit 1: "rename: userId -> customerId in types"
-  - Commit 2: "rename: userId -> customerId in services"
-- **❌ INCORRECT**: 
-  - Commit 1: "refactor everything" (all changes in one commit)
+# 1. Core Principles
 
-### 2. Dependency Order
+## 1.1 Atomic Changes
+
+```markdown
+## Atomic Change Rule
+
+Every commit should contain only ONE logical change:
+
+✅ CORRECT:
+- Commit 1: "rename: userId -> customerId in types"
+- Commit 2: "rename: userId -> customerId in services"
+- Commit 3: "rename: userId -> customerId in controllers"
+
+❌ INCORRECT:
+- Commit 1: "refactor everything" (all changes in one commit)
+```
+
+## 1.2 Test-First Approach
+
+```bash
+# Run tests before and after each step
+npm test
+
+# Make step
+# ... change ...
+
+# Test again
+npm test
+
+# If passed, commit
+git commit -m "step X: description"
+```
+
+## 1.3 Dependency Order
+
+```markdown
+## Change Order
 
 Follow the direction of dependencies:
 
@@ -41,87 +80,340 @@ Follow the direction of dependencies:
 5. Routes/Entry points
 6. Tests
 7. Documentation
+```
 
 ---
 
-## 🔄 Multi-File Change Process
+# 2. Multi-File Change Process
 
-### Phase 1: Analysis and Planning
+## 2.1 Phase 1: Analysis and Planning
 
-Document the impact analysis, affected files, and dependency graph.
+```markdown
+## Change Plan
 
-### Phase 2: Preparation
+### Impact Analysis
+Change: [What will change]
 
-Create a clean branch, verify working state (tests, build, lint), and backup/stash.
+### Affected Files
+1. `src/types/user.ts` - Type definition
+2. `src/services/userService.ts` - Service layer
+3. `src/controllers/userController.ts` - Controller
+4. `src/routes/userRoutes.ts` - Routes
+5. `tests/user.test.ts` - Tests
 
-### Phase 3: Step-by-Step Implementation
+### Dependency Graph
+```
+types/user.ts
+     │
+     ├── services/userService.ts
+     │        │
+     │        └── controllers/userController.ts
+     │                     │
+     │                     └── routes/userRoutes.ts
+     │
+     └── tests/user.test.ts
+```
 
-1. Update Type definitions -> Commit.
-2. Update Services -> Commit.
-3. Update Controllers -> Commit.
-4. Update Routes -> Commit.
-5. Update Tests -> Commit.
+### Risk Assessment
+- Breaking change: [Yes/No]
+- Downtime required: [Yes/No]
+- Rollback plan: [Strategy]
+```
+
+## 2.2 Phase 2: Preparation
+
+```bash
+# 1. Create clean branch
+git checkout -b feature/rename-user-to-customer
+
+# 2. Verify working state
+npm test
+npm run build
+npm run lint
+
+# 3. Backup/stash (for safety)
+git stash push -m "backup before big refactor"
+```
+
+## 2.3 Phase 3: Step-by-Step Implementation
+
+```typescript
+// STEP 1: Change Type definition
+// src/types/user.ts
+// ❌ Old
+interface User {
+  userId: string;
+  name: string;
+}
+
+// ✅ New
+interface User {
+  customerId: string;  // userId -> customerId
+  name: string;
+}
+
+// Commit: "rename: userId -> customerId in User interface"
+```
+
+```typescript
+// STEP 2: Update Service
+// src/services/userService.ts
+export async function getUser(customerId: string) { // userId -> customerId
+  return db.user.findUnique({
+    where: { customerId } // userId -> customerId
+  });
+}
+
+// Commit: "rename: userId -> customerId in userService"
+```
+
+```typescript
+// STEP 3: Update Controller
+// Commit: "rename: userId -> customerId in userController"
+
+// STEP 4: Update Routes
+// Commit: "rename: userId -> customerId in routes"
+
+// STEP 5: Update Tests
+// Commit: "rename: userId -> customerId in tests"
+```
+
+## 2.4 Phase 4: Verification
+
+```bash
+# Run all checks
+npm run lint
+npx tsc --noEmit
+npm test
+npm run build
+
+# If all pass
+git push origin feature/rename-user-to-customer
+```
 
 ---
 
-## 🛠️ Tools and Techniques
+# 3. Tools and Techniques
 
-### IDE Refactoring (Rename Symbol)
-Automates updates for all occurrences, but only for TS/JS references. It won't find string occurrences.
+## 3.1 IDE Refactoring (Rename Symbol)
 
-### Grep / Find and Replace
-Use `grep` to find all occurrences and `sed` for replacement (with caution!). Always preview with `grep` first.
+```typescript
+// VS Code / WebStorm
+// F2 or Right Click -> Rename Symbol
 
-### TypeScript Auto-detection
-Use `npx tsc --noEmit` to find type errors after changes.
+// Automatically updates all usages
+// BUT: Only TypeScript/JavaScript references
+// Won't find usages inside strings!
+```
+
+## 3.2 Check with Grep
+
+```bash
+# Find all usages
+grep -r "userId" --include="*.ts" --include="*.tsx" src/
+
+# Case insensitive
+grep -ri "userid" src/
+
+# Exclude directories
+grep -r "userId" --exclude-dir={node_modules,dist} .
+```
+
+## 3.3 Find and Replace (Carefully!)
+
+```bash
+# Replace with sed (USE CAREFULLY!)
+# Preview first
+grep -r "oldName" src/
+
+# Then replace
+find src -type f -name "*.ts" -exec sed -i 's/oldName/newName/g' {} +
+
+# WARNING: Sed does blind replacement, false matches possible!
+```
+
+## 3.4 Auto-detection with TypeScript
+
+```bash
+# Show type errors
+npx tsc --noEmit
+
+# Watch mode
+npx tsc --noEmit --watch
+```
 
 ---
 
-## 🔍 Context Preservation
+# 4. Context Preservation (Context Keeping)
 
-### Progress Tracker
-Always maintain a checklist of completed and pending steps, current step details, and any issues or legacy compatibility notes.
+## 4.1 Document Working State
+
+```markdown
+## Progress Tracker
+
+### Completed Steps
+- [x] Types updated
+- [x] Services updated
+- [ ] Controllers updated
+- [ ] Routes updated
+- [ ] Tests updated
+
+### Current Step
+Updating `userId` -> `customerId` in Controllers
+
+### Pending Issues
+- [ ] Legacy API backward compatibility
+- [ ] Database migration might be needed
+
+### Notes
+- There are 3 places with userId in userController.ts
+- One is query param, two are in body
+```
+
+## 4.2 Using Git Stash
+
+```bash
+# Save unfinished work
+git stash push -m "WIP: userId rename, controllers remaining"
+
+# List stashes
+git stash list
+
+# Apply back
+git stash pop
+
+# Apply specific stash
+git stash apply stash@{0}
+```
+
+## 4.3 Branch Strategy
+
+```bash
+# Feature branch
+git checkout -b refactor/rename-userid
+
+# Intermediate commits
+git commit -m "WIP: types done"
+git commit -m "WIP: services done"
+
+# Squash before merge (optional)
+git rebase -i main
+# Mark WIP commits as "squash"
+```
 
 ---
 
-## 🔙 Rollback Strategies
+# 5. Dangerous Situations
 
-- **Git Revert**: Revert specific commits or ranges.
-- **Partial Rollback**: Bring specific files back to their previous state using `git checkout`.
+## 5.1 Breaking Change Detection
+
+```typescript
+// API change = Breaking change
+// BEFORE: /users/:userId
+// AFTER: /users/:customerId
+
+// Solution 1: Support both old and new
+router.get('/users/:userId', handleByUserId);
+router.get('/users/:customerId', handleByCustomerId);
+
+// Solution 2: Aliasing
+router.get('/users/:id', (req) => {
+  const id = req.params.id; // Generic name
+});
+```
+
+## 5.2 Database Column Rename
+
+```sql
+-- DANGEROUS: Direct rename
+ALTER TABLE users RENAME COLUMN user_id TO customer_id;
+-- ❌ Breaks old code!
+
+-- SAFE: Expand and Contract pattern
+-- Step 1: Add new column
+ALTER TABLE users ADD COLUMN customer_id UUID;
+UPDATE users SET customer_id = user_id;
+
+-- Step 2: Update code (support both columns)
+
+-- Step 3: Remove old column (after code is fully migrated)
+ALTER TABLE users DROP COLUMN user_id;
+```
 
 ---
 
-## ✅ Checklist
+# 6. Rollback Strategies
 
+## 6.1 Git Revert
+
+```bash
+# Revert specific commit
+git revert <commit-hash>
+
+# Range revert
+git revert HEAD~3..HEAD
+
+# Revert merge
+git revert -m 1 <merge-commit>
+```
+
+## 6.2 Partial Rollback
+
+```bash
+# Revert only specific file
+git checkout HEAD~1 -- src/services/userService.ts
+
+# Revert to specific commit version
+git checkout abc123 -- src/services/userService.ts
+```
+
+---
+
+# 7. Checklist
+
+### Before Starting
 - [ ] Affected files listed
 - [ ] Dependency order determined
-- [ ] Tests and type check pass at every step
-- [ ] Separate commits made for each atomic change
-- [ ] Build and lint pass after completion
+- [ ] Tests passed
+- [ ] Clean git state
+
+### At Every Step
+- [ ] One logical change
+- [ ] Tests passed
+- [ ] Type check passed
+- [ ] Separate commit made
+
+### After Completion
+- [ ] All tests passed
+- [ ] Build successful
+- [ ] Lint clean
+- [ ] Code review received
 - [ ] Documentation updated
 
 ---
 
-## 🔴 Don't List
+# 8. Don't List
 
 ❌ Do not make all changes in a single commit
 ❌ Do not proceed without running tests
 ❌ Do not skip the dependency order
-❌ Do not rely solely on manual string replacement
-❌ Do not perform DB rename and code change in the same deployment
+❌ Do not rely solely on manual string replacement (grep + sed)
+❌ Do not perform DB column rename + code change in the same deployment
 
 ---
 
-## ✅ Must Do List
+# 9. Must Do List
 
 ✅ Document impact analysis
 ✅ Follow dependency order
 ✅ Run tests after every step
+✅ Commit every atomic step
 ✅ Use IDE refactoring tools
+✅ Check with Grep
 ✅ Ensure Zero TypeScript errors
 ✅ Have a rollback plan
 
 ---
 
 **Last Update:** December 2025
-**Version:** 1.0
+**Version:** 2.0

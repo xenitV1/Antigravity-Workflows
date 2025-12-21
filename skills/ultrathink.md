@@ -18,7 +18,27 @@ metadata:
 
 ---
 
-## 🎯 Ne Zaman Kullanılmalı?
+# 📋 İçindekiler
+
+1. [Ne Zaman Kullanılmalı?](#1-ne-zaman-kullanılmalı)
+2. [Düşünme Derinlik Seviyeleri](#2-düşünme-derinlik-seviyeleri)
+3. [Faz 0: Meta-Planlama](#3-faz-0-meta-planlama)
+4. [Faz 1: Problem Anlama](#4-faz-1-problem-anlama)
+5. [Faz 2: Hipotez Üretimi](#5-faz-2-hipotez-üretimi)
+6. [Faz 3: Çözüm Uzayı Keşfi](#6-faz-3-çözüm-uzayı-keşfi)
+7. [Faz 4: Kritik Değerlendirme](#7-faz-4-kritik-değerlendirme)
+8. [Faz 5: Edge Case Matrisi](#8-faz-5-edge-case-matrisi)
+9. [Faz 6: Self-Correction Loop](#9-faz-6-self-correction-loop)
+10. [Faz 7: Sentez ve Karar](#10-faz-7-sentez-ve-karar)
+11. [Chain-of-Thought Prompt](#11-chain-of-thought-prompt)
+12. [Kontrol Listesi](#12-kontrol-listesi)
+13. [Yapma Listesi](#13-yapma-listesi)
+14. [Mutlaka Yap Listesi](#14-mutlaka-yap-listesi)
+15. [Düşünme Araçları Referansı](#15-düşünme-araçları-referansı)
+
+---
+
+# 1. Ne Zaman Kullanılmalı?
 
 | Senaryo | Örnek |
 |---------|-------|
@@ -32,7 +52,7 @@ metadata:
 
 ---
 
-## 📏 Düşünme Derinlik Seviyeleri
+# 2. Düşünme Derinlik Seviyeleri
 
 Problemi analiz ederek uygun derinlik seviyesini belirle:
 
@@ -45,7 +65,7 @@ Problemi analiz ederek uygun derinlik seviyesini belirle:
 
 ---
 
-## 🧠 Faz 0: Meta-Planlama
+# 3. Faz 0: Meta-Planlama
 
 Her analize başlamadan ÖNCE şu soruları cevapla:
 
@@ -71,9 +91,9 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 
 ---
 
-## 🔍 Faz 1: Problem Anlama
+# 4. Faz 1: Problem Anlama
 
-### 1.1 Problemi Kendi Kelimelerinle İfade Et
+## 4.1 Problemi Kendi Kelimelerinle İfade Et
 
 ```markdown
 ## Problem Tanımı
@@ -88,7 +108,7 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 "Doğru anlıyor muyum: [özet]?"
 ```
 
-### 1.2 Bilinen vs Bilinmeyen Haritası
+## 4.2 Bilgi Haritası
 
 ```markdown
 ## Bilgi Haritası
@@ -106,7 +126,7 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 2. [Varsayım 2] - Yanlışsa ne olur?
 ```
 
-### 1.3 Kısıtlar ve Gereksinimler
+## 4.3 Kısıtlar ve Gereksinimler
 
 ```markdown
 ## Kısıtlar
@@ -128,9 +148,9 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 
 ---
 
-## 💡 Faz 2: Hipotez Üretimi
+# 5. Faz 2: Hipotez Üretimi
 
-### 2.1 İlk Hipotezler
+## 5.1 İlk Hipotezler
 
 ```markdown
 ## Hipotez Listesi
@@ -148,7 +168,7 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 [Aynı format...]
 ```
 
-### 2.2 Hipotez Güven Kalibrasyonu
+## 5.2 Hipotez Güven Kalibrasyonu
 
 | Güven Seviyesi | Anlamı | Ne Yapmalı? |
 |----------------|--------|-------------|
@@ -160,9 +180,9 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 
 ---
 
-## 🔄 Faz 3: Çözüm Uzayı Keşfi
+# 6. Faz 3: Çözüm Uzayı Keşfi
 
-### 3.1 En Az 3 Alternatif Üret
+## 6.1 En Az 3 Alternatif Üret
 
 ```markdown
 ## Alternatif Çözümler
@@ -197,7 +217,7 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 [Aynı format...]
 ```
 
-### 3.2 Karşılaştırma Matrisi
+## 6.2 Karşılaştırma Matrisi
 
 ```markdown
 | Kriter | Ağırlık | Yaklaşım 1 | Yaklaşım 2 | Yaklaşım 3 |
@@ -211,9 +231,9 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 
 ---
 
-## ⚖️ Faz 4: Kritik Değerlendirme
+# 7. Faz 4: Kritik Değerlendirme
 
-### 4.1 Devil's Advocate (Şeytanın Avukatı)
+## 7.1 Devil's Advocate (Şeytanın Avukatı)
 
 Her çözüm için şu soruları sor:
 
@@ -241,7 +261,7 @@ Her çözüm için şu soruları sor:
 - "Veri sızıntısı riski var mı?"
 ```
 
-### 4.2 Pre-Mortem Analizi
+## 7.2 Pre-Mortem Analizi
 
 ```markdown
 ## Pre-Mortem: "Bu Proje Başarısız Oldu"
@@ -262,9 +282,9 @@ Varsay ki 6 ay sonra bu proje BAŞARISIZ oldu. Neden?
 
 ---
 
-## 🎯 Faz 5: Edge Case Matrisi
+# 8. Faz 5: Edge Case Matrisi
 
-### 5.1 Input Edge Cases
+## 8.1 Input Edge Cases
 
 | Senaryo | Normal | Edge Case | Strateji |
 |---------|--------|-----------|----------|
@@ -273,7 +293,7 @@ Varsay ki 6 ay sonra bu proje BAŞARISIZ oldu. Neden?
 | Format | UTF-8 | Emoji/Special chars | Sanitization |
 | Boyut | <1MB | >100MB | Streaming + chunk |
 
-### 5.2 State Edge Cases
+## 8.2 State Edge Cases
 
 | Senaryo | Normal | Edge Case | Strateji |
 |---------|--------|-----------|----------|
@@ -282,7 +302,7 @@ Varsay ki 6 ay sonra bu proje BAŞARISIZ oldu. Neden?
 | Connection | Online | Offline | Queue + sync |
 | Memory | Normal | High usage | GC + cleanup |
 
-### 5.3 Business Edge Cases
+## 8.3 Business Edge Cases
 
 | Senaryo | Normal | Edge Case | Strateji |
 |---------|--------|-----------|----------|
@@ -292,9 +312,9 @@ Varsay ki 6 ay sonra bu proje BAŞARISIZ oldu. Neden?
 
 ---
 
-## 🔁 Faz 6: Self-Correction Loop
+# 9. Faz 6: Self-Correction Loop
 
-### 6.1 Metacognitive Checkpoints
+## 9.1 Metacognitive Checkpoints
 
 Her fazdan sonra şu soruları sor:
 
@@ -317,7 +337,7 @@ Her fazdan sonra şu soruları sor:
 - [ ] Yeni bilgi hipotezlerimi nasıl etkiliyor?
 ```
 
-### 6.2 Bias Tespiti ve Düzeltme
+## 9.2 Bias Tespiti ve Düzeltme
 
 | Bias | Tehlike | Kontrol Sorusu | Düzeltme |
 |------|---------|----------------|----------|
@@ -329,9 +349,9 @@ Her fazdan sonra şu soruları sor:
 
 ---
 
-## ✅ Faz 7: Sentez ve Karar
+# 10. Faz 7: Sentez ve Karar
 
-### 7.1 Final Karar Şablonu
+## 10.1 Final Karar Şablonu
 
 ```markdown
 # 🧠 UltraThink Analiz Raporu
@@ -370,7 +390,7 @@ Bu karar [tarih] tarihinde yeniden değerlendirilmeli.
 
 ---
 
-## 🧠 Chain-of-Thought Prompt
+# 11. Chain-of-Thought Prompt
 
 ```
 "Bu problemi çözerken şu adımları takip edeceğim:
@@ -395,7 +415,7 @@ Düşünme tamamlanana kadar cevap verme. Adımları göster."
 
 ---
 
-## ✅ Kontrol Listesi
+# 12. Kontrol Listesi
 
 Her UltraThink analizi için:
 
@@ -412,7 +432,7 @@ Her UltraThink analizi için:
 
 ---
 
-## 🔴 Yapma Listesi
+# 13. Yapma Listesi
 
 ❌ İlk aklına gelen çözümü hemen uygulama
 ❌ Tek bir perspektiften bakma
@@ -425,7 +445,7 @@ Her UltraThink analizi için:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 14. Mutlaka Yap Listesi
 
 ✅ Her problemi en az 3 farklı açıdan değerlendir
 ✅ Minimum 3 alternatif çözüm üret
@@ -439,7 +459,7 @@ Her UltraThink analizi için:
 
 ---
 
-## 📚 Düşünme Araçları Referansı
+# 15. Düşünme Araçları Referansı
 
 | Araç | Ne Zaman? | Nasıl? |
 |------|-----------|--------|
@@ -453,4 +473,4 @@ Her UltraThink analizi için:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+**Versiyon:** 3.0
