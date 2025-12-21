@@ -18,7 +18,22 @@ metadata:
 
 ---
 
-## 🎯 Refactoring Altın Kuralı
+# 📋 İçindekiler
+
+1. [Refactoring Altın Kuralı](#1-refactoring-altın-kuralı)
+2. [Ne Zaman Refactor?](#2-ne-zaman-refactor)
+3. [Refactoring Süreci](#3-refactoring-süreci)
+4. [Common Refactoring Patterns](#4-common-refactoring-patterns)
+5. [Code Smells](#5-code-smells)
+6. [Safe Refactoring Checklist](#6-safe-refactoring-checklist)
+7. [Incremental Refactoring Strategy](#7-incremental-refactoring-strategy)
+8. [Kontrol Listesi](#8-kontrol-listesi)
+9. [Yapma Listesi](#9-yapma-listesi)
+10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+
+---
+
+# 1. Refactoring Altın Kuralı
 
 > **"Refactoring davranışı DEĞİŞTİRMEZ, sadece yapıyı iyileştirir"**
 
@@ -32,9 +47,9 @@ After Refactoring:
 
 ---
 
-## 📏 Ne Zaman Refactor?
+# 2. Ne Zaman Refactor?
 
-### Refactor Zamanı
+## 2.1 Refactor Zamanı
 
 | Sinyal | Örnek |
 |--------|-------|
@@ -44,7 +59,7 @@ After Refactoring:
 | **After fixing bug** | Bug fix sonrası kodu iyileştir |
 | **Code review feedback** | İyileştirme önerileri alındığında |
 
-### Refactor Etme Zamanı DEĞİL
+## 2.2 Refactor Etme Zamanı DEĞİL
 
 | Durum | Neden? |
 |-------|--------|
@@ -55,9 +70,9 @@ After Refactoring:
 
 ---
 
-## 🔄 Refactoring Süreci
+# 3. Refactoring Süreci
 
-### Adım 1: Güvenlik Ağı Oluştur
+## 3.1 Adım 1: Güvenlik Ağı Oluştur
 
 ```typescript
 // Mevcut davranışı belgele ve test et
@@ -85,7 +100,7 @@ describe('calculateTotal', () => {
 });
 ```
 
-### Adım 2: Küçük Adımlarla İlerle
+## 3.2 Adım 2: Küçük Adımlarla İlerle
 
 ```typescript
 // ❌ YANLIŞ: Büyük değişiklik
@@ -98,7 +113,7 @@ describe('calculateTotal', () => {
 // Commit 4: Remove duplication
 ```
 
-### Adım 3: Her Adımda Test Çalıştır
+## 3.3 Adım 3: Her Adımda Test Çalıştır
 
 ```bash
 # Her küçük değişiklikten sonra
@@ -113,9 +128,9 @@ git commit -m "refactor: extract calculateItemTotal helper"
 
 ---
 
-## 🛠️ Common Refactoring Patterns
+# 4. Common Refactoring Patterns
 
-### 1. Extract Function
+## 4.1 Extract Function
 
 ```typescript
 // ❌ ÖNCE: Long function
@@ -160,7 +175,7 @@ function calculateOrderTotal(order: Order): number {
 }
 ```
 
-### 2. Replace Conditional with Polymorphism
+## 4.2 Replace Conditional with Polymorphism
 
 ```typescript
 // ❌ ÖNCE: Switch statement
@@ -213,7 +228,7 @@ function calculateShipping(order: Order): number {
 }
 ```
 
-### 3. Replace Magic Numbers with Constants
+## 4.3 Replace Magic Numbers with Constants
 
 ```typescript
 // ❌ ÖNCE
@@ -231,7 +246,7 @@ const tax = amount * TAX_RATE;
 if (retryCount > MAX_RETRY_COUNT) { /* ... */ }
 ```
 
-### 4. Simplify Conditionals
+## 4.4 Simplify Conditionals
 
 ```typescript
 // ❌ ÖNCE: Nested conditionals
@@ -274,7 +289,7 @@ function getOrderLevel(total: number): 'high' | 'medium' | 'low' {
 }
 ```
 
-### 5. Remove Duplication (DRY)
+## 4.5 Remove Duplication (DRY)
 
 ```typescript
 // ❌ ÖNCE: Duplicated code
@@ -315,9 +330,9 @@ async function createUser(data: CreateUserDto) {
 
 ---
 
-## 🔍 Code Smells
+# 5. Code Smells
 
-### Identification
+## 5.1 Identification
 
 | Smell | Belirti | Çözüm |
 |-------|---------|-------|
@@ -332,7 +347,7 @@ async function createUser(data: CreateUserDto) {
 | **Parallel Inheritance** | Her yeni class'ta ikizini yaratma | Inheritance refactor |
 | **Dead Code** | Kullanılmayan kod | Remove |
 
-### Detection Tools
+## 5.2 Detection Tools
 
 ```bash
 # ESLint complexity rules
@@ -352,9 +367,9 @@ sonar.qualitygate.wait=true
 
 ---
 
-## 🛡️ Safe Refactoring Checklist
+# 6. Safe Refactoring Checklist
 
-### Before Starting
+## 6.1 Before Starting
 
 ```markdown
 ## Pre-Refactoring Checklist
@@ -379,7 +394,7 @@ sonar.qualitygate.wait=true
 - [ ] Code freeze var mı?
 ```
 
-### During Refactoring
+## 6.2 During Refactoring
 
 ```markdown
 ## During Refactoring
@@ -391,7 +406,7 @@ sonar.qualitygate.wait=true
 - [ ] Bug fix yapmıyorum (sadece refactor)
 ```
 
-### After Refactoring
+## 6.3 After Refactoring
 
 ```markdown
 ## Post-Refactoring
@@ -406,9 +421,9 @@ sonar.qualitygate.wait=true
 
 ---
 
-## 🔄 Incremental Refactoring Strategy
+# 7. Incremental Refactoring Strategy
 
-### Strangler Fig Pattern
+## 7.1 Strangler Fig Pattern
 
 ```typescript
 // Eski kodu sarmala, yavaşça yenisiyle değiştir
@@ -442,7 +457,7 @@ async getUser(id: string) {
 
 ---
 
-## ✅ Kontrol Listesi
+# 8. Kontrol Listesi
 
 Her refactoring'de:
 
@@ -458,7 +473,7 @@ Her refactoring'de:
 
 ---
 
-## 🔴 Yapma Listesi
+# 9. Yapma Listesi
 
 ❌ Test olmadan refactor
 ❌ Büyük değişiklikleri tek seferde
@@ -470,7 +485,7 @@ Her refactoring'de:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 10. Mutlaka Yap Listesi
 
 ✅ Önce test yaz veya mevcut testleri doğrula
 ✅ Mevcut davranışı anla
@@ -484,4 +499,4 @@ Her refactoring'de:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

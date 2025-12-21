@@ -18,9 +18,23 @@ metadata:
 
 ---
 
-## 📏 Temel Prensipler
+# 📋 İçindekiler
 
-### 1. Atomik Değişiklikler
+1. [Temel Prensipler](#1-temel-prensipler)
+2. [Multi-File Değişiklik Süreci](#2-multi-file-değişiklik-süreci)
+3. [Araçlar ve Teknikler](#3-araçlar-ve-teknikler)
+4. [Bağlam Koruma (Context Keeping)](#4-bağlam-koruma-context-keeping)
+5. [Tehlikeli Durumlar](#5-tehlikeli-durumlar)
+6. [Rollback Stratejileri](#6-rollback-stratejileri)
+7. [Kontrol Listesi](#7-kontrol-listesi)
+8. [Yapma Listesi](#8-yapma-listesi)
+9. [Mutlaka Yap Listesi](#9-mutlaka-yap-listesi)
+
+---
+
+# 1. Temel Prensipler
+
+## 1.1 Atomik Değişiklikler
 
 ```markdown
 ## Atomik Değişiklik Kuralı
@@ -36,7 +50,7 @@ Her commit TEK bir mantıksal değişiklik içermeli:
 - Commit 1: "refactor everything" (tüm değişiklikler tek commit'te)
 ```
 
-### 2. Test-First Yaklaşım
+## 1.2 Test-First Yaklaşım
 
 ```bash
 # Her adımdan önce ve sonra testleri çalıştır
@@ -52,7 +66,7 @@ npm test
 git commit -m "step X: description"
 ```
 
-### 3. Bağımlılık Sıralaması
+## 1.3 Bağımlılık Sıralaması
 
 ```markdown
 ## Değişiklik Sırası
@@ -70,9 +84,9 @@ Bağımlılık yönünde ilerle:
 
 ---
 
-## 🔄 Multi-File Değişiklik Süreci
+# 2. Multi-File Değişiklik Süreci
 
-### Faz 1: Analiz ve Planlama
+## 2.1 Faz 1: Analiz ve Planlama
 
 ```markdown
 ## Değişiklik Planı
@@ -106,7 +120,7 @@ types/user.ts
 - Rollback planı: [Strateji]
 ```
 
-### Faz 2: Hazırlık
+## 2.2 Faz 2: Hazırlık
 
 ```bash
 # 1. Temiz branch oluştur
@@ -121,7 +135,7 @@ npm run lint
 git stash push -m "backup before big refactor"
 ```
 
-### Faz 3: Adım Adım Uygulama
+## 2.3 Faz 3: Adım Adım Uygulama
 
 ```typescript
 // ADIM 1: Type tanımını değiştir
@@ -164,12 +178,12 @@ export async function getUser(customerId: string) { // userId -> customerId
 // Commit: "rename: userId -> customerId in tests"
 ```
 
-### Faz 4: Doğrulama
+## 2.4 Faz 4: Doğrulama
 
 ```bash
 # Tüm kontrolleri çalıştır
 npm run lint
-npm run type-check
+npx tsc --noEmit
 npm test
 npm run build
 
@@ -179,9 +193,9 @@ git push origin feature/rename-user-to-customer
 
 ---
 
-## 🛠️ Araçlar ve Teknikler
+# 3. Araçlar ve Teknikler
 
-### IDE Refactoring (Rename Symbol)
+## 3.1 IDE Refactoring (Rename Symbol)
 
 ```typescript
 // VS Code / WebStorm
@@ -192,7 +206,7 @@ git push origin feature/rename-user-to-customer
 // String içindeki kullanımları bulamaz!
 ```
 
-### Grep ile Kontrol
+## 3.2 Grep ile Kontrol
 
 ```bash
 # Tüm kullanım yerlerini bul
@@ -205,7 +219,7 @@ grep -ri "userid" src/
 grep -r "userId" --exclude-dir={node_modules,dist} .
 ```
 
-### Find and Replace (Dikkatli!)
+## 3.3 Find and Replace (Dikkatli!)
 
 ```bash
 # Sed ile replace (DIKKATLI KULLAN!)
@@ -218,7 +232,7 @@ find src -type f -name "*.ts" -exec sed -i 's/oldName/newName/g' {} +
 # UYARI: Sed kör değiştirme yapar, yanlış eşleşmeler olabilir!
 ```
 
-### TypeScript ile Otomatik Tespit
+## 3.4 TypeScript ile Otomatik Tespit
 
 ```bash
 # Type error'ları göster
@@ -230,9 +244,9 @@ npx tsc --noEmit --watch
 
 ---
 
-## 🔍 Bağlam Koruma (Context Keeping)
+# 4. Bağlam Koruma (Context Keeping)
 
-### Çalışma Durumunu Belgele
+## 4.1 Çalışma Durumunu Belgele
 
 ```markdown
 ## Progress Tracker
@@ -256,7 +270,7 @@ Controllers'da `userId` -> `customerId` değişikliği
 - Biri query param, ikisi body'de
 ```
 
-### Git Stash Kullanımı
+## 4.2 Git Stash Kullanımı
 
 ```bash
 # Yarım kalan işi kaydet
@@ -272,7 +286,7 @@ git stash pop
 git stash apply stash@{0}
 ```
 
-### Branch Stratejisi
+## 4.3 Branch Stratejisi
 
 ```bash
 # Feature branch
@@ -289,9 +303,9 @@ git rebase -i main
 
 ---
 
-## ⚠️ Tehlikeli Durumlar
+# 5. Tehlikeli Durumlar
 
-### Breaking Change Detection
+## 5.1 Breaking Change Detection
 
 ```typescript
 // API değişikliği = Breaking change
@@ -308,7 +322,7 @@ router.get('/users/:id', (req) => {
 });
 ```
 
-### Database Column Rename
+## 5.2 Database Column Rename
 
 ```sql
 -- TEHLIKELI: Direkt rename
@@ -328,9 +342,9 @@ ALTER TABLE users DROP COLUMN user_id;
 
 ---
 
-## 🔙 Rollback Stratejileri
+# 6. Rollback Stratejileri
 
-### Git Revert
+## 6.1 Git Revert
 
 ```bash
 # Belirli commit'i geri al
@@ -343,7 +357,7 @@ git revert HEAD~3..HEAD
 git revert -m 1 <merge-commit>
 ```
 
-### Partial Rollback
+## 6.2 Partial Rollback
 
 ```bash
 # Sadece belirli dosyayı eski haline getir
@@ -355,7 +369,7 @@ git checkout abc123 -- src/services/userService.ts
 
 ---
 
-## ✅ Kontrol Listesi
+# 7. Kontrol Listesi
 
 ### Başlamadan Önce
 - [ ] Etkilenen dosyalar listelendi
@@ -378,7 +392,7 @@ git checkout abc123 -- src/services/userService.ts
 
 ---
 
-## 🔴 Yapma Listesi
+# 8. Yapma Listesi
 
 ❌ Tüm değişiklikleri tek commit'te yapma
 ❌ Test çalıştırmadan devam etme
@@ -388,7 +402,7 @@ git checkout abc123 -- src/services/userService.ts
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 9. Mutlaka Yap Listesi
 
 ✅ Etki analizini yap ve belgele
 ✅ Bağımlılık sırasına göre ilerle
@@ -402,4 +416,4 @@ git checkout abc123 -- src/services/userService.ts
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

@@ -20,7 +20,20 @@ metadata:
 
 ---
 
-## 🎯 Framework Seçimi
+# 📋 İçindekiler
+
+1. [Framework Seçimi](#1-framework-seçimi)
+2. [React Native Best Practices](#2-react-native-best-practices)
+3. [Flutter Best Practices](#3-flutter-best-practices)
+4. [Mobile Security](#4-mobile-security)
+5. [Platform-Specific Code](#5-platform-specific-code)
+6. [Kontrol Listesi](#6-kontrol-listesi)
+7. [Yapma Listesi](#7-yapma-listesi)
+8. [Mutlaka Yap Listesi](#8-mutlaka-yap-listesi)
+
+---
+
+# 1. Framework Seçimi
 
 | Kriter | React Native | Flutter |
 |--------|--------------|---------|
@@ -34,9 +47,9 @@ metadata:
 
 ---
 
-## 📱 React Native Best Practices
+# 2. React Native Best Practices
 
-### Proje Yapısı
+## 2.1 Proje Yapısı
 
 ```
 src/
@@ -58,7 +71,7 @@ src/
 └── App.tsx
 ```
 
-### Functional Components & Hooks
+## 2.2 Functional Components & Hooks
 
 ```typescript
 // ✅ Modern functional component
@@ -106,7 +119,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-### Performance Optimization
+## 2.3 Performance Optimization
 
 ```typescript
 // ✅ FlatList optimizasyonu
@@ -140,7 +153,7 @@ const sortedItems = useMemo(() =>
 );
 ```
 
-### State Management (Zustand)
+## 2.4 State Management (Zustand)
 
 ```typescript
 // store/useAuthStore.ts
@@ -176,7 +189,7 @@ export const useAuthStore = create<AuthState>()(
 const { user, login, logout } = useAuthStore();
 ```
 
-### Secure Storage
+## 2.5 Secure Storage
 
 ```typescript
 // ❌ YANLIŞ - AsyncStorage güvenli değil
@@ -190,7 +203,7 @@ const token = await SecureStore.getItemAsync('token');
 await SecureStore.deleteItemAsync('token');
 ```
 
-### Navigation (React Navigation)
+## 2.6 Navigation (React Navigation)
 
 ```typescript
 // navigation/types.ts
@@ -225,9 +238,9 @@ export function RootNavigator() {
 
 ---
 
-## 🐦 Flutter Best Practices
+# 3. Flutter Best Practices
 
-### Proje Yapısı (Feature-First)
+## 3.1 Proje Yapısı (Feature-First)
 
 ```
 lib/
@@ -254,7 +267,7 @@ lib/
 └── main.dart
 ```
 
-### Widget Best Practices
+## 3.2 Widget Best Practices
 
 ```dart
 // ✅ const constructor kullan
@@ -295,7 +308,7 @@ class UserProfile extends StatelessWidget {
 }
 ```
 
-### State Management (Riverpod)
+## 3.3 State Management (Riverpod)
 
 ```dart
 // providers/auth_provider.dart
@@ -359,7 +372,7 @@ class LoginScreen extends ConsumerWidget {
 }
 ```
 
-### Performance Optimization
+## 3.4 Performance Optimization
 
 ```dart
 // ✅ ListView.builder kullan (lazy loading)
@@ -390,7 +403,7 @@ List<User> _parseUsers(String jsonString) {
 }
 ```
 
-### Responsive Design
+## 3.5 Responsive Design
 
 ```dart
 // ✅ MediaQuery kullan
@@ -425,9 +438,9 @@ FittedBox(
 
 ---
 
-## 🔒 Mobile Security
+# 4. Mobile Security
 
-### Secure Data Storage
+## 4.1 Secure Data Storage
 
 ```typescript
 // React Native - Encrypted storage
@@ -446,7 +459,7 @@ await storage.write(key: 'token', value: token);
 final token = await storage.read(key: 'token');
 ```
 
-### API Security
+## 4.2 API Security
 
 ```typescript
 // ✅ Certificate pinning
@@ -460,7 +473,7 @@ const response = await fetch(url, {
 });
 ```
 
-### Code Obfuscation
+## 4.3 Code Obfuscation
 
 ```bash
 # React Native (Hermes + ProGuard)
@@ -474,9 +487,9 @@ flutter build apk --obfuscate --split-debug-info=./debug-info
 
 ---
 
-## 📱 Platform-Specific Code
+# 5. Platform-Specific Code
 
-### React Native
+## 5.1 React Native
 
 ```typescript
 import { Platform } from 'react-native';
@@ -505,7 +518,7 @@ const styles = StyleSheet.create({
 // Button.android.tsx
 ```
 
-### Flutter
+## 5.2 Flutter
 
 ```dart
 import 'dart:io' show Platform;
@@ -524,7 +537,7 @@ Platform.isIOS
 
 ---
 
-## ✅ Kontrol Listesi
+# 6. Kontrol Listesi
 
 Her mobile projede:
 
@@ -543,7 +556,7 @@ Her mobile projede:
 
 ---
 
-## 🔴 Yapma Listesi
+# 7. Yapma Listesi
 
 ❌ AsyncStorage'da hassas veri tutma
 ❌ Inline styles (StyleSheet kullan)
@@ -556,7 +569,7 @@ Her mobile projede:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 8. Mutlaka Yap Listesi
 
 ✅ React.memo / const widgets kullan
 ✅ useCallback/useMemo ile memoization
@@ -572,4 +585,4 @@ Her mobile projede:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

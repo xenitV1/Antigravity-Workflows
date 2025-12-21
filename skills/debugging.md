@@ -18,7 +18,24 @@ metadata:
 
 ---
 
-## 🎯 Debugging Döngüsü
+# 📋 İçindekiler
+
+1. [Debugging Döngüsü](#1-debugging-döngüsü)
+2. [Faz 1: REPRODUCE (Tekrarlama)](#2-faz-1-reproduce-tekrarlama)
+3. [Faz 2: UNDERSTAND (Anlama)](#3-faz-2-understand-anlama)
+4. [Faz 3: ISOLATE (İzolasyon)](#4-faz-3-isolate-izolasyon)
+5. [Faz 4: HYPOTHESIZE (Hipotez)](#5-faz-4-hypothesize-hipotez)
+6. [Faz 5: TEST (Test Etme)](#6-faz-5-test-test-etme)
+7. [Faz 6: FIX (Düzeltme)](#7-faz-6-fix-düzeltme)
+8. [Faz 7: REFLECT (Yansıtma)](#8-faz-7-reflect-yansıtma)
+9. [Debugging Araçları](#9-debugging-araçları)
+10. [Kontrol Listesi](#10-kontrol-listesi)
+11. [Yapma Listesi](#11-yapma-listesi)
+12. [Mutlaka Yap Listesi](#12-mutlaka-yap-listesi)
+
+---
+
+# 1. Debugging Döngüsü
 
 ```
 ┌─────────────┐
@@ -58,9 +75,9 @@ metadata:
 
 ---
 
-## 📏 Faz 1: REPRODUCE (Tekrarlama)
+# 2. Faz 1: REPRODUCE (Tekrarlama)
 
-### Hatayı Tutarlı Tekrarla
+## 2.1 Hatayı Tutarlı Tekrarla
 
 ```markdown
 ## Hata Tekrarlama Raporu
@@ -90,7 +107,7 @@ metadata:
 - [ ] Henüz tekrarlayamadım
 ```
 
-### Tekrarlama İpuçları
+## 2.2 Tekrarlama İpuçları
 
 ```typescript
 // Seed kullanarak deterministik test
@@ -106,9 +123,9 @@ await page.route('**/*', route => route.abort()); // Offline
 
 ---
 
-## 🔍 Faz 2: UNDERSTAND (Anlama)
+# 3. Faz 2: UNDERSTAND (Anlama)
 
-### Sistemi Anla
+## 3.1 Sistemi Anla
 
 ```markdown
 ## Sistem Haritası
@@ -133,7 +150,7 @@ User Input → API → Service → Database
 | Output | A | B ❌ |
 ```
 
-### 5 Whys Tekniği
+## 3.2 5 Whys Tekniği
 
 ```markdown
 ## 5 Whys Analysis
@@ -151,9 +168,9 @@ User Input → API → Service → Database
 
 ---
 
-## 🎯 Faz 3: ISOLATE (İzolasyon)
+# 4. Faz 3: ISOLATE (İzolasyon)
 
-### Binary Search ile Hata Bulma
+## 4.1 Binary Search ile Hata Bulma
 
 ```markdown
 ## İzolasyon Stratejisi
@@ -175,7 +192,7 @@ git bisect good v1.0.0        # Bu versiyon düzgündü
 git bisect run npm test       # Otomatik test çalıştır
 ```
 
-### Minimal Reproduction
+## 4.2 Minimal Reproduction
 
 ```typescript
 // Büyük uygulamadan minimal örnek çıkar
@@ -191,9 +208,9 @@ const minimalExample = () => {
 
 ---
 
-## 💡 Faz 4: HYPOTHESIZE (Hipotez)
+# 5. Faz 4: HYPOTHESIZE (Hipotez)
 
-### Olası Nedenleri Listele
+## 5.1 Olası Nedenleri Listele
 
 ```markdown
 ## Hipotez Listesi
@@ -209,7 +226,7 @@ const minimalExample = () => {
 → Başla: Hipotez #1
 ```
 
-### Common Bug Patterns
+## 5.2 Common Bug Patterns
 
 | Pattern | Belirtiler | Kontrol Et |
 |---------|------------|------------|
@@ -223,9 +240,9 @@ const minimalExample = () => {
 
 ---
 
-## 🧪 Faz 5: TEST (Test Etme)
+# 6. Faz 5: TEST (Test Etme)
 
-### Debugging Araçları
+## 6.1 Debugging Araçları
 
 ```typescript
 // 1. Console methods
@@ -248,7 +265,7 @@ function processData(data) {
 // Condition: user.role === 'admin'
 ```
 
-### Node.js Debugging
+## 6.2 Node.js Debugging
 
 ```bash
 # Node Inspector
@@ -268,7 +285,7 @@ node --inspect-brk src/index.js
 }
 ```
 
-### Network Debugging
+## 6.3 Network Debugging
 
 ```typescript
 // Fetch/XHR intercepting
@@ -300,9 +317,9 @@ axios.interceptors.response.use(
 
 ---
 
-## 🔧 Faz 6: FIX (Düzeltme)
+# 7. Faz 6: FIX (Düzeltme)
 
-### Fix Stratejisi
+## 7.1 Fix Stratejisi
 
 ```markdown
 ## Fix Planı
@@ -326,7 +343,7 @@ axios.interceptors.response.use(
 - [ ] Edge case'ler kontrol edildi
 ```
 
-### Fix Sonrası Test
+## 7.2 Fix Sonrası Test
 
 ```typescript
 // Regression test yaz
@@ -344,9 +361,9 @@ test('should handle missing item property', () => {
 
 ---
 
-## 📝 Faz 7: REFLECT (Yansıtma)
+# 8. Faz 7: REFLECT (Yansıtma)
 
-### Post-Mortem Dokumentasyonu
+## 8.1 Post-Mortem Dokumentasyonu
 
 ```markdown
 ## Bug Post-Mortem
@@ -379,9 +396,9 @@ Bu tür hataları önlemek için:
 
 ---
 
-## 🛠️ Debugging Araçları
+# 9. Debugging Araçları
 
-### Static Analysis
+## 9.1 Static Analysis
 
 ```bash
 # ESLint ile potansiyel hataları bul
@@ -394,7 +411,7 @@ npx tsc --noEmit
 # VS Code extension veya CI integration
 ```
 
-### Runtime Analysis
+## 9.2 Runtime Analysis
 
 ```typescript
 // Performance profiling
@@ -409,7 +426,7 @@ console.profileEnd('myFunction');
 // Components tab → Profiler → Record
 ```
 
-### Logging Best Practices
+## 9.3 Logging Best Practices
 
 ```typescript
 // Structured logging
@@ -433,7 +450,7 @@ logger.fatal('Fatal error');
 
 ---
 
-## ✅ Kontrol Listesi
+# 10. Kontrol Listesi
 
 Her debugging session'da:
 
@@ -449,7 +466,7 @@ Her debugging session'da:
 
 ---
 
-## 🔴 Yapma Listesi
+# 11. Yapma Listesi
 
 ❌ Tahminle düzeltmeye çalışma (print debugging loop)
 ❌ Birden fazla şeyi aynı anda değiştirme
@@ -461,7 +478,7 @@ Her debugging session'da:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 12. Mutlaka Yap Listesi
 
 ✅ Önce tekrarla, sonra debug et
 ✅ Binary search ile izole et
@@ -475,4 +492,4 @@ Her debugging session'da:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

@@ -19,7 +19,24 @@ metadata:
 
 ---
 
-## 🎯 Kapsam
+# 📋 İçindekiler
+
+1. [Kapsam](#1-kapsam)
+2. [Temel Prensipler](#2-temel-prensipler)
+3. [Proje Yapısı](#3-proje-yapısı)
+4. [API Tasarım Kuralları](#4-api-tasarım-kuralları)
+5. [Input Validation (Zod)](#5-input-validation-zod)
+6. [Güvenlik Best Practices](#6-güvenlik-best-practices)
+7. [Veritabanı Patterns](#7-veritabanı-patterns)
+8. [Performance Optimization](#8-performance-optimization)
+9. [Error Handling](#9-error-handling)
+10. [Kontrol Listesi](#10-kontrol-listesi)
+11. [Yapma Listesi](#11-yapma-listesi)
+12. [Mutlaka Yap Listesi](#12-mutlaka-yap-listesi)
+
+---
+
+# 1. Kapsam
 
 | Alan | Teknolojiler |
 |------|--------------|
@@ -34,9 +51,9 @@ metadata:
 
 ---
 
-## 📏 Temel Prensipler
+# 2. Temel Prensipler
 
-### 1. TypeScript Strict Mode (Zorunlu)
+## 2.1 TypeScript Strict Mode (Zorunlu)
 
 ```json
 // tsconfig.json
@@ -54,7 +71,7 @@ metadata:
 }
 ```
 
-### 2. `any` Tipi Yasak
+## 2.2 `any` Tipi Yasak
 
 ```typescript
 // ❌ YANLIŞ
@@ -81,7 +98,7 @@ function parseInput(input: unknown): DataPayload {
 }
 ```
 
-### 3. ES Modules (ESM) Kullan
+## 2.3 ES Modules (ESM) Kullan
 
 ```typescript
 // ✅ Modern ESM syntax
@@ -98,9 +115,9 @@ export const userRouter = Router();
 
 ---
 
-## 🏗️ Proje Yapısı
+# 3. Proje Yapısı
 
-### Feature-First Structure (Önerilen)
+## 3.1 Feature-First Structure (Önerilen)
 
 ```
 src/
@@ -138,9 +155,9 @@ src/
 
 ---
 
-## 🔧 API Tasarım Kuralları
+# 4. API Tasarım Kuralları
 
-### RESTful Endpoint Conventions
+## 4.1 RESTful Endpoint Conventions
 
 ```typescript
 // Resource naming (çoğul, küçük harf, kebab-case)
@@ -159,7 +176,7 @@ POST   /api/v1/users/:userId/orders
 GET    /api/v1/users?page=1&limit=10&sort=createdAt:desc&filter[status]=active
 ```
 
-### Response Format Standardı
+## 4.2 Response Format Standardı
 
 ```typescript
 // Başarılı response
@@ -198,7 +215,7 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 }
 ```
 
-### HTTP Status Codes
+## 4.3 HTTP Status Codes
 
 | Kod | Kullanım |
 |-----|----------|
@@ -216,7 +233,7 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 
 ---
 
-## ✅ Input Validation (Zod)
+# 5. Input Validation (Zod)
 
 ```typescript
 import { z } from 'zod';
@@ -254,9 +271,9 @@ router.post('/users', validateBody(CreateUserSchema), createUser);
 
 ---
 
-## 🔒 Güvenlik Best Practices
+# 6. Güvenlik Best Practices
 
-### 1. Environment Variables
+## 6.1 Environment Variables
 
 ```typescript
 // env.validation.ts
@@ -279,7 +296,7 @@ const secret = "hardcoded-secret-key";
 const secret = env.JWT_SECRET;
 ```
 
-### 2. Security Headers (Helmet)
+## 6.2 Security Headers (Helmet)
 
 ```typescript
 import helmet from 'helmet';
@@ -308,7 +325,7 @@ app.use(rateLimit({
 }));
 ```
 
-### 3. SQL Injection Prevention
+## 6.3 SQL Injection Prevention
 
 ```typescript
 // ❌ ASLA raw query'de değişken kullanma
@@ -325,7 +342,7 @@ const users = await prisma.$queryRaw`
 `;
 ```
 
-### 4. Authentication & Authorization
+## 6.4 Authentication & Authorization
 
 ```typescript
 // JWT middleware
@@ -369,9 +386,9 @@ router.delete('/users/:id', authMiddleware, requireRole('admin'), deleteUser);
 
 ---
 
-## 🗄️ Veritabanı Patterns
+# 7. Veritabanı Patterns
 
-### Repository Pattern
+## 7.1 Repository Pattern
 
 ```typescript
 // users.repository.ts
@@ -402,7 +419,7 @@ class UserRepository implements IUserRepository {
 }
 ```
 
-### Transaction Handling
+## 7.2 Transaction Handling
 
 ```typescript
 async function transferMoney(fromId: string, toId: string, amount: number) {
@@ -428,9 +445,9 @@ async function transferMoney(fromId: string, toId: string, amount: number) {
 
 ---
 
-## ⚡ Performance Optimization
+# 8. Performance Optimization
 
-### 1. Async/Await Best Practices
+## 8.1 Async/Await Best Practices
 
 ```typescript
 // ❌ Sequential (yavaş)
@@ -453,7 +470,7 @@ const results = await Promise.allSettled([
 ]);
 ```
 
-### 2. Caching (Redis)
+## 8.2 Caching (Redis)
 
 ```typescript
 import Redis from 'ioredis';
@@ -486,7 +503,7 @@ async function updateUser(id: string, data: UpdateUserDto) {
 }
 ```
 
-### 3. Database Query Optimization
+## 8.3 Database Query Optimization
 
 ```typescript
 // ❌ N+1 problem
@@ -513,7 +530,7 @@ const users = await prisma.user.findMany({
 
 ---
 
-## 📝 Error Handling
+# 9. Error Handling
 
 ```typescript
 // Custom error classes
@@ -561,7 +578,7 @@ app.use(errorHandler);
 
 ---
 
-## ✅ Kontrol Listesi
+# 10. Kontrol Listesi
 
 Her backend geliştirmede:
 
@@ -579,7 +596,7 @@ Her backend geliştirmede:
 
 ---
 
-## 🔴 Yapma Listesi
+# 11. Yapma Listesi
 
 ❌ `any` tipi kullanma
 ❌ Hardcoded secret/password yazma
@@ -592,7 +609,7 @@ Her backend geliştirmede:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 12. Mutlaka Yap Listesi
 
 ✅ Her endpoint için input validation
 ✅ Tüm async işlemlerde try-catch
@@ -608,4 +625,4 @@ Her backend geliştirmede:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

@@ -19,9 +19,36 @@ Her tasarım elementi matematiksel olarak tutarlı bir sistem içinde olmalı. R
 
 ---
 
-## 📏 Spacing System (8-Point Grid)
+# 📋 İçindekiler
 
-### Temel Kural
+1. [Spacing System (8-Point Grid)](#1-spacing-system-8-point-grid)
+2. [Layout & Grid System](#2-layout--grid-system)
+3. [Typography Scale (Type Scale)](#3-typography-scale-type-scale)
+4. [Color System](#4-color-system)
+5. [Component Sizing](#5-component-sizing)
+6. [Responsive Breakpoints](#6-responsive-breakpoints)
+7. [Visual Hierarchy](#7-visual-hierarchy)
+8. [Animation & Transitions](#8-animation--transitions)
+9. [White Space Rules](#9-white-space-rules)
+10. [Micro-interactions](#10-micro-interactions)
+11. [Modern CSS Features (2025)](#11-modern-css-features-2025)
+12. [Accessibility Standards](#12-accessibility-standards)
+13. [Kontrol Listesi](#13-kontrol-listesi)
+14. [Yapay Zekaya Özel Prompt Örneği](#14-yapay-zekaya-özel-prompt-örneği)
+15. [Chain-of-Thought Prompt (Adım Adım Düşünme)](#15-chain-of-thought-prompt-adım-adım-düşünme)
+16. [Dinamik Karar Alma - Bağlamsal Esneklik](#16-dinamik-karar-alma---bağlamsal-esneklik)
+17. [Gerçek Dünya Örnekleri](#17-gerçek-dünya-örnekleri)
+18. [Ana Prensipler](#18-ana-prensipler)
+19. [Esneklik vs Tutarlılık Dengesi](#19-esneklik-vs-tutarlılık-dengesi)
+20. [Akıllı Prompt Ekleme](#20-akıllı-prompt-ekleme)
+21. [Self-Correction Prompt](#21-self-correction-prompt)
+22. [Referanslar ve Kaynaklar](#22-referanslar-ve-kaynaklar)
+
+---
+
+# 1. Spacing System (8-Point Grid)
+
+## 1.1 Temel Kural
 
 Tüm boşluklar 8'in katları olmalı. Bu modern UI/UX'in altın standardıdır.
 
@@ -37,7 +64,7 @@ Tüm boşluklar 8'in katları olmalı. Bu modern UI/UX'in altın standardıdır.
 128px - 4XL - Hero section padding
 ```
 
-### Padding Yapısı
+## 1.2 Padding Yapısı
 
 - **Card/Container içi padding**: 24px veya 32px
 - **Button padding**: Dikey 12px, Yatay 24px
@@ -48,9 +75,9 @@ Tüm boşluklar 8'in katları olmalı. Bu modern UI/UX'in altın standardıdır.
 
 ---
 
-## 📐 Layout & Grid System
+# 2. Layout & Grid System
 
-### Container Sistem
+## 2.1 Container Sistem
 
 ```
 Mobile:     100% width, 16px side padding
@@ -61,13 +88,13 @@ Wide:       1440px max-width, 48px side padding
 
 > Tüm max-width değerleri 8'in katıdır: 768, 1200, 1440
 
-### Grid Columns
+## 2.2 Grid Columns
 
 - **Desktop**: 12 column grid, 24px gutter
 - **Tablet**: 8 column grid, 16px gutter
 - **Mobile**: 4 column grid, 16px gutter
 
-### Aspect Ratios
+## 2.3 Aspect Ratios
 
 Görseller ve medya için standart oranlar:
 
@@ -79,9 +106,9 @@ Görseller ve medya için standart oranlar:
 
 ---
 
-## 🔤 Typography Scale (Type Scale)
+# 3. Typography Scale (Type Scale)
 
-### Modern Font Sizing (Practical Scale - Tailwind Based)
+## 3.1 Modern Font Sizing (Practical Scale - Tailwind Based)
 
 > Not: Bu scale matematiksel Major Third (1.250) değil, pratik kullanım için optimize edilmiş Tailwind-style bir scale'dir.
 
@@ -99,14 +126,14 @@ Görseller ve medya için standart oranlar:
 80px  - Extra large display
 ```
 
-### Line Height Oranları
+## 3.2 Line Height Oranları
 
 - **Başlıklar (H1-H3)**: 1.2 - 1.3
 - **Body text**: 1.5 - 1.6
 - **Small text**: 1.4
 - **Hero text**: 1.1
 
-### Font Weight Hierarchy
+## 3.3 Font Weight Hierarchy
 
 ```
 300 - Light (Decorative use only)
@@ -117,7 +144,7 @@ Görseller ve medya için standart oranlar:
 800 - Extra bold (Hero sections)
 ```
 
-### Letter Spacing (Tracking)
+## 3.4 Letter Spacing (Tracking)
 
 - **Büyük başlıklar (48px+)**: -0.02em (tighter)
 - **Normal başlıklar**: 0
@@ -127,16 +154,16 @@ Görseller ve medya için standart oranlar:
 
 ---
 
-## 🎨 Color System
+# 4. Color System
 
-### Contrast Ratios (WCAG 2.1)
+## 4.1 Contrast Ratios (WCAG 2.1)
 
 - **Normal text**: Minimum 4.5:1
 - **Large text (18px+)**: Minimum 3:1
 - **UI components**: Minimum 3:1
 - **AAA standart**: 7:1 (ideal)
 
-### Renk Paleti Yapısı
+## 4.2 Renk Paleti Yapısı
 
 ```
 Primary: 10 shades (50, 100, 200...900, 950)
@@ -148,7 +175,7 @@ Error: 5 shades
 Info: 5 shades
 ```
 
-### Opacity Scale
+## 4.3 Opacity Scale
 
 ```
 100% - Tam opak (default)
@@ -163,9 +190,9 @@ Info: 5 shades
 
 ---
 
-## 🔲 Component Sizing
+# 5. Component Sizing
 
-### Button Sizes
+## 5.1 Button Sizes
 
 ```
 Small:   Height 32px, Padding 8px 16px, Font 14px
@@ -174,7 +201,7 @@ Large:   Height 48px, Padding 14px 32px, Font 18px
 XLarge:  Height 56px, Padding 16px 40px, Font 20px
 ```
 
-### Border Radius System
+## 5.2 Border Radius System
 
 ```
 0px    - None (sharp corners)
@@ -188,7 +215,7 @@ XLarge:  Height 56px, Padding 16px 40px, Font 20px
 
 > Not: 12px yaygın kullanılsa da 8-point grid'e tam uymaz. Tutarlılık için 8px veya 16px tercih edin.
 
-### Icon Sizes
+## 5.3 Icon Sizes
 
 ```
 16px - Small icons (inline with text)
@@ -201,9 +228,9 @@ XLarge:  Height 56px, Padding 16px 40px, Font 20px
 
 ---
 
-## 📱 Responsive Breakpoints
+# 6. Responsive Breakpoints
 
-### Standard Breakpoints
+## 6.1 Standard Breakpoints
 
 ```
 Mobile:       0px - 639px
@@ -213,7 +240,7 @@ Desktop:      1024px - 1439px
 Wide Desktop: 1440px+
 ```
 
-### Tailwind CSS Breakpoint Mapping
+## 6.2 Tailwind CSS Breakpoint Mapping
 
 ```
 sm:  640px   → Tablet small
@@ -223,7 +250,7 @@ xl:  1280px  → Large desktop
 2xl: 1536px  → Wide screens
 ```
 
-### Responsive Font Scaling
+## 6.3 Responsive Font Scaling
 
 ```css
 /* Modern Fluid Typography Formula (2025) */
@@ -257,7 +284,7 @@ p {
 }
 ```
 
-### Fluid Spacing (Bonus)
+## 6.4 Fluid Spacing (Bonus)
 
 ```css
 :root {
@@ -272,9 +299,9 @@ p {
 
 ---
 
-## ⚡ Visual Hierarchy
+# 7. Visual Hierarchy
 
-### Z-Index Scale (Layering)
+## 7.1 Z-Index Scale (Layering)
 
 ```
 -1    - Behind content
@@ -288,7 +315,7 @@ p {
 9999  - Emergency top layer
 ```
 
-### Shadow System (Elevation)
+## 7.2 Shadow System (Elevation)
 
 ```
 shadow-xs:   0 1px 2px rgba(0,0,0,0.05)
@@ -299,14 +326,14 @@ shadow-xl:   0 20px 25px rgba(0,0,0,0.1)
 shadow-2xl:  0 25px 50px rgba(0,0,0,0.15)
 ```
 
-### Focus States
+## 7.3 Focus States
 
 - **Ring width**: 2px - 4px
 - **Ring offset**: 2px
 - **Ring color**: Primary color at 50% opacity
 - **Outline style**: Solid, never dashed
 
-### Focus Visible (Modern Approach)
+## 7.4 Focus Visible (Modern Approach)
 
 ```css
 /* Keyboard navigation için focus göster */
@@ -330,9 +357,9 @@ shadow-2xl:  0 25px 50px rgba(0,0,0,0.15)
 
 ---
 
-## 🎭 Animation & Transitions
+# 8. Animation & Transitions
 
-### Duration Scale
+## 8.1 Duration Scale
 
 ```
 75ms   - Instant (very subtle)
@@ -343,7 +370,7 @@ shadow-2xl:  0 25px 50px rgba(0,0,0,0.15)
 700ms  - Very slow (special effects)
 ```
 
-### Easing Functions
+## 8.2 Easing Functions
 
 ```
 ease-in:      Başlangıç yavaş (cubic-bezier(0.4, 0, 1, 1))
@@ -354,16 +381,16 @@ ease-bounce:  Spring effect için
 
 ---
 
-## 📊 White Space Rules
+# 9. White Space Rules
 
-### Content Density
+## 9.1 Content Density
 
 - **Tight**: 8px - 12px spacing (Data tables)
 - **Normal**: 16px - 24px spacing (Default)
 - **Relaxed**: 32px - 48px spacing (Marketing pages)
 - **Spacious**: 64px+ spacing (Luxury/Premium)
 
-### Reading Width
+## 9.2 Reading Width
 
 - **Optimal**: 60-75 characters per line (600px - 750px)
 - **Maximum**: 90 characters
@@ -376,9 +403,9 @@ ease-bounce:  Spring effect için
 
 ---
 
-## 🎯 Micro-interactions
+# 10. Micro-interactions
 
-### Button States
+## 10.1 Button States
 
 ```
 Default:  Base state
@@ -388,7 +415,7 @@ Focus:    Ring outline
 Disabled: Opacity 50%, Cursor not-allowed
 ```
 
-### Loading States
+## 10.2 Loading States
 
 - **Skeleton width**: 100%, 75%, 50% (varied)
 - **Animation duration**: 1500ms
@@ -396,9 +423,9 @@ Disabled: Opacity 50%, Cursor not-allowed
 
 ---
 
-## 🚀 Modern CSS Features (2025)
+# 11. Modern CSS Features (2025)
 
-### Container Queries
+## 11.1 Container Queries
 
 Component-based responsive tasarım için viewport yerine container'a göre stil uygula:
 
@@ -425,7 +452,7 @@ Component-based responsive tasarım için viewport yerine container'a göre stil
 }
 ```
 
-### System Preferences (User Preferences)
+## 11.2 System Preferences (User Preferences)
 
 Kullanıcının sistem tercihlerine göre uyum sağla:
 
@@ -465,7 +492,7 @@ Kullanıcının sistem tercihlerine göre uyum sağla:
 }
 ```
 
-### CSS Logical Properties
+## 11.3 CSS Logical Properties
 
 LTR/RTL desteği için fiziksel yerine mantıksal özellikler kullan:
 
@@ -487,15 +514,15 @@ LTR/RTL desteği için fiziksel yerine mantıksal özellikler kullan:
 
 ---
 
-## 🔍 Accessibility Standards
+# 12. Accessibility Standards
 
-### Touch Targets
+## 12.1 Touch Targets
 
 - **Minimum size**: 44x44px (Apple) / 48x48px (Google)
 - **Optimal size**: 48x48px veya daha büyük
 - **Spacing between**: Minimum 8px
 
-### Focus Indicators
+## 12.2 Focus Indicators
 
 - **Visibility**: Her zaman görünür olmalı
 - **Contrast**: 3:1 minimum (background ile)
@@ -503,7 +530,7 @@ LTR/RTL desteği için fiziksel yerine mantıksal özellikler kullan:
 
 ---
 
-## ✅ Kontrol Listesi
+# 13. Kontrol Listesi
 
 Her tasarım elementi için kontrol et:
 
@@ -520,7 +547,7 @@ Her tasarım elementi için kontrol et:
 
 ---
 
-## 💡 Yapay Zekaya Özel Prompt Örneği
+# 14. Yapay Zekaya Özel Prompt Örneği
 
 ### Basit Versiyon
 
@@ -543,7 +570,7 @@ Her bir değer bu sisteme uymalı, rastgele sayı kullanma."
 
 ---
 
-## 🧠 Chain-of-Thought Prompt (Adım Adım Düşünme)
+# 15. Chain-of-Thought Prompt (Adım Adım Düşünme)
 
 Bu prompt yapay zekayı her adımda düşünerek, kontrol ederek ilerlemesini sağlar:
 
@@ -703,11 +730,11 @@ Soru 5: Margin-bottom ne olmalı?
 
 ---
 
-## 🧩 DİNAMİK KARAR ALMA - Bağlamsal Esneklik
+# 16. Dinamik Karar Alma - Bağlamsal Esneklik
 
 **ÖNEMLİ**: Bu sistem bir ROBOT DEĞİL, akıllı bir tasarımcı gibi düşünmeli!
 
-### Esnek Düşünme Prensibi
+## 16.1 Esnek Düşünme Prensibi
 
 ```
 "Tasarım kurallarına UYARKEN, her kararı projenin bağlamında değerlendir:
@@ -899,7 +926,7 @@ Ama sistemin SUNDUĞU SEÇENEKLERİ akıllıca KULLAN."
 
 ---
 
-## 🔄 Self-Correction Prompt
+# 21. Self-Correction Prompt
 
 ```
 "Tasarımı tamamladıktan sonra:
@@ -918,7 +945,7 @@ Ama sistemin SUNDUĞU SEÇENEKLERİ akıllıca KULLAN."
 
 ---
 
-## 📚 Referanslar ve Kaynaklar
+# 22. Referanslar ve Kaynaklar
 
 - **Material Design 3**: Google'ın 2025 design system'i
 - **Tailwind CSS**: Utility-first spacing ve typography

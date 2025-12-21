@@ -18,7 +18,23 @@ metadata:
 
 ---
 
-## 🎯 Mimari Karar Süreci
+# 📋 İçindekiler
+
+1. [Mimari Karar Süreci](#1-mimari-karar-süreci)
+2. [Functional vs Non-Functional Requirements](#2-functional-vs-non-functional-requirements)
+3. [Architecture Patterns](#3-architecture-patterns)
+4. [Scalability Patterns](#4-scalability-patterns)
+5. [Database Selection](#5-database-selection)
+6. [Security Architecture](#6-security-architecture)
+7. [Architecture Decision Record (ADR)](#7-architecture-decision-record-adr)
+8. [Capacity Planning](#8-capacity-planning)
+9. [Kontrol Listesi](#9-kontrol-listesi)
+10. [Yapma Listesi](#10-yapma-listesi)
+11. [Mutlaka Yap Listesi](#11-mutlaka-yap-listesi)
+
+---
+
+# 1. Mimari Karar Süreci
 
 ```
 1. REQUIREMENTS → Gereksinimleri anla
@@ -41,9 +57,9 @@ metadata:
 
 ---
 
-## 📏 Functional vs Non-Functional Requirements
+# 2. Functional vs Non-Functional Requirements
 
-### Functional Requirements (What)
+## 2.1 Functional Requirements (What)
 
 ```markdown
 ## Functional Requirements
@@ -59,7 +75,7 @@ metadata:
 - "Admin olarak stok yönetimi yapmak istiyorum"
 ```
 
-### Non-Functional Requirements (How)
+## 2.2 Non-Functional Requirements (How)
 
 ```markdown
 ## Non-Functional Requirements
@@ -86,9 +102,9 @@ metadata:
 
 ---
 
-## 🏗️ Architecture Patterns
+# 3. Architecture Patterns
 
-### 1. Monolith vs Microservices
+## 3.1 Monolith vs Microservices
 
 | Aspect | Monolith | Microservices |
 |--------|----------|---------------|
@@ -114,7 +130,7 @@ Microservices SEÇSEN Eğer:
 - [ ] Polyglot persistence gerekli
 ```
 
-### 2. Layered Architecture
+## 3.2 Layered Architecture
 
 ```
 ┌─────────────────────────────────────┐
@@ -128,7 +144,7 @@ Microservices SEÇSEN Eğer:
 └─────────────────────────────────────┘
 ```
 
-### 3. Event-Driven Architecture
+## 3.3 Event-Driven Architecture
 
 ```
 ┌──────────┐     ┌──────────────┐     ┌────────────┐
@@ -137,10 +153,10 @@ Microservices SEÇSEN Eğer:
 └──────────┘     └──────────────┘     └────────────┘
                         │
                         ▼
-              ┌─────────────────┐
-              │ Event Store     │
-              │ (Audit/Replay)  │
-              └─────────────────┘
+               ┌─────────────────┐
+               │ Event Store     │
+               │ (Audit/Replay)  │
+               └─────────────────┘
 ```
 
 **Kullanım Alanları:**
@@ -149,7 +165,7 @@ Microservices SEÇSEN Eğer:
 - System integration
 - CQRS implementation
 
-### 4. CQRS (Command Query Responsibility Segregation)
+## 3.4 CQRS (Command Query Responsibility Segregation)
 
 ```
             ┌─────────────────────────────┐
@@ -171,9 +187,9 @@ Microservices SEÇSEN Eğer:
 
 ---
 
-## 🔄 Scalability Patterns
+# 4. Scalability Patterns
 
-### Horizontal vs Vertical Scaling
+## 4.1 Horizontal vs Vertical Scaling
 
 ```markdown
 ## Vertical Scaling (Scale Up)
@@ -189,17 +205,17 @@ Microservices SEÇSEN Eğer:
 - Load balancer gerekli
 ```
 
-### Load Balancing
+## 4.2 Load Balancing
 
 ```
-           ┌───────────────┐
-           │ Load Balancer │
-           └───────┬───────┘
-        ┌──────────┼──────────┐
-        │          │          │
-   ┌────▼───┐ ┌────▼───┐ ┌────▼───┐
-   │ App 1  │ │ App 2  │ │ App 3  │
-   └────────┘ └────────┘ └────────┘
+            ┌───────────────┐
+            │ Load Balancer │
+            └───────┬───────┘
+         ┌──────────┼──────────┐
+         │          │          │
+    ┌────▼───┐ ┌────▼───┐ ┌────▼───┐
+    │ App 1  │ │ App 2  │ │ App 3  │
+    └────────┘ └────────┘ └────────┘
 ```
 
 **Algorithms:**
@@ -208,27 +224,27 @@ Microservices SEÇSEN Eğer:
 - IP Hash: Client IP'ye göre (sticky)
 - Weighted: Ağırlıklı dağıtım
 
-### Caching Strategy
+## 4.3 Caching Strategy
 
 ```
-              ┌─────────┐
-              │ Client  │
-              └────┬────┘
-                   │
-              ┌────▼────┐
-              │   CDN   │ ← Static assets
-              └────┬────┘
-                   │
-              ┌────▼────┐
-              │   App   │
-              └────┬────┘
-                   │
-        ┌──────────┴──────────┐
-        │                     │
-   ┌────▼────┐          ┌─────▼────┐
-   │  Redis  │          │ Database │
-   │ (Cache) │          │          │
-   └─────────┘          └──────────┘
+               ┌─────────┐
+               │ Client  │
+               └────┬────┘
+                    │
+               ┌────▼────┐
+               │   CDN   │ ← Static assets
+               └────┬────┘
+                    │
+               ┌────▼────┐
+               │   App   │
+               └────┬────┘
+                    │
+         ┌──────────┴──────────┐
+         │                     │
+    ┌────▼────┐          ┌─────▼────┐
+    │  Redis  │          │ Database │
+    │ (Cache) │          │          │
+    └─────────┘          └──────────┘
 ```
 
 **Cache Patterns:**
@@ -259,9 +275,9 @@ async function deleteUser(id: string) {
 
 ---
 
-## 🗄️ Database Selection
+# 5. Database Selection
 
-### SQL vs NoSQL
+## 5.1 SQL vs NoSQL
 
 | Criteria | SQL (PostgreSQL) | NoSQL (MongoDB) |
 |----------|------------------|-----------------|
@@ -271,7 +287,7 @@ async function deleteUser(id: string) {
 | **Scaling** | Vertical + Read replicas | Horizontal (sharding) |
 | **Best For** | Complex queries, transactions | High write throughput, flexible schema |
 
-**Karar Ağacı:**
+**Karar Matrisi:**
 ```markdown
 PostgreSQL SEÇSEN Eğer:
 - [ ] Complex JOINs gerekli
@@ -294,9 +310,9 @@ Redis SEÇSEN Eğer (cache olarak):
 
 ---
 
-## 🔐 Security Architecture
+# 6. Security Architecture
 
-### Defense in Depth
+## 6.1 Defense in Depth
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -310,7 +326,7 @@ Redis SEÇSEN Eğer (cache olarak):
 └─────────────────────────────────────────────┘
 ```
 
-### Zero Trust Architecture
+## 6.2 Zero Trust Architecture
 
 ```markdown
 ## Zero Trust Principles
@@ -330,7 +346,7 @@ Redis SEÇSEN Eğer (cache olarak):
 
 ---
 
-## 📝 Architecture Decision Record (ADR)
+# 7. Architecture Decision Record (ADR)
 
 ```markdown
 # ADR-001: Database Selection
@@ -384,9 +400,9 @@ PostgreSQL kullanacağız.
 
 ---
 
-## 📊 Capacity Planning
+# 8. Capacity Planning
 
-### Back-of-envelope Estimation
+## 8.1 Back-of-envelope Estimation
 
 ```markdown
 ## Capacity Estimation Example
@@ -413,7 +429,7 @@ RPS (peak) = 230 × 3 = ~700 RPS
 
 ---
 
-## ✅ Kontrol Listesi
+# 9. Kontrol Listesi
 
 Her mimari kararda:
 
@@ -428,7 +444,7 @@ Her mimari kararda:
 
 ---
 
-## 🔴 Yapma Listesi
+# 10. Yapma Listesi
 
 ❌ Over-engineering (YAGNI)
 ❌ Premature optimization
@@ -440,7 +456,7 @@ Her mimari kararda:
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 11. Mutlaka Yap Listesi
 
 ✅ Start simple, evolve
 ✅ Document decisions (ADR)
@@ -454,4 +470,4 @@ Her mimari kararda:
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

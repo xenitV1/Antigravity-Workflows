@@ -18,7 +18,22 @@ metadata:
 
 ---
 
-## 🎯 Dokümantasyon Tipleri
+# 📋 İçindekiler
+
+1. [Dokümantasyon Tipleri](#1-dokümantasyon-tipleri)
+2. [README Best Practices](#2-readme-best-practices)
+3. [Code Documentation](#3-code-documentation)
+4. [API Documentation](#4-api-documentation)
+5. [Changelog](#5-changelog)
+6. [Architecture Documentation](#6-architecture-documentation)
+7. [Writing Guidelines](#7-writing-guidelines)
+8. [Kontrol Listesi](#8-kontrol-listesi)
+9. [Yapma Listesi](#9-yapma-listesi)
+10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+
+---
+
+# 1. Dokümantasyon Tipleri
 
 | Tip | Hedef Kitle | Amaç |
 |-----|-------------|------|
@@ -31,9 +46,9 @@ metadata:
 
 ---
 
-## 📏 README Best Practices
+# 2. README Best Practices
 
-### README Template
+## 2.1 README Template
 
 ```markdown
 # Project Name
@@ -84,7 +99,7 @@ const result = myFunction({ option: 'value' });
 MIT © [Your Name](https://github.com/yourusername)
 ```
 
-### README Kuralları
+## 2.2 README Kuralları
 
 | Kural | Açıklama |
 |-------|----------|
@@ -96,9 +111,9 @@ MIT © [Your Name](https://github.com/yourusername)
 
 ---
 
-## 💻 Code Documentation
+# 3. Code Documentation
 
-### JSDoc/TSDoc
+## 3.1 JSDoc/TSDoc
 
 ```typescript
 /**
@@ -125,7 +140,7 @@ function calculateTotal(amount: number, taxRate: number): number {
 }
 ```
 
-### Comment Best Practices
+## 3.2 Comment Best Practices
 
 ```typescript
 // ❌ YANLIŞ: What (kod zaten söylüyor)
@@ -161,9 +176,9 @@ app.use(authorize);
 
 ---
 
-## 📡 API Documentation
+# 4. API Documentation
 
-### OpenAPI/Swagger
+## 4.1 OpenAPI/Swagger
 
 ```yaml
 # openapi.yaml
@@ -225,7 +240,7 @@ components:
         - email
 ```
 
-### API Doc Template
+## 4.2 API Doc Template
 
 ```markdown
 ## Create User
@@ -290,22 +305,13 @@ Creates a new user account.
   }
 }
 ```
-
-### Example
-
-```bash
-curl -X POST https://api.example.com/api/v1/users \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer your-token" \
-  -d '{"email": "user@example.com", "password": "SecurePass123!", "name": "John"}'
-```
 ```
 
 ---
 
-## 📋 Changelog
+# 5. Changelog
 
-### Keep a Changelog Format
+## 5.1 Keep a Changelog Format
 
 ```markdown
 # Changelog
@@ -339,14 +345,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Security
 - Patched XSS vulnerability in comments
-
-## [1.1.0] - 2025-01-01
-
-### Added
-- Initial release
 ```
 
-### Conventional Commits
+## 5.2 Conventional Commits
 
 ```bash
 # Format: <type>(<scope>): <description>
@@ -369,9 +370,9 @@ After: { success: true, data: { id, name, email } }
 
 ---
 
-## 🏗️ Architecture Documentation
+# 6. Architecture Documentation
 
-### C4 Model
+## 6.1 C4 Model
 
 ```markdown
 ## System Context (Level 1)
@@ -415,7 +416,7 @@ graph TB
 ```
 ```
 
-### Architecture Decision Records (ADR)
+## 6.2 Architecture Decision Records (ADR)
 
 ```markdown
 # ADR-002: API Authentication
@@ -439,21 +440,13 @@ We will use JWT tokens for authentication with refresh token rotation.
 ### Negative
 - Token revocation is complex
 - Larger request payload
-
-## Alternatives Considered
-
-### Session-based auth
-Rejected due to scaling complexity
-
-### OAuth only
-Rejected - too complex for simple use case
 ```
 
 ---
 
-## 📖 Writing Guidelines
+# 7. Writing Guidelines
 
-### Audience-First Writing
+## 7.1 Audience-First Writing
 
 ```markdown
 ## Target Audience Analysis
@@ -477,7 +470,7 @@ Rejected - too complex for simple use case
 - Link to source code
 ```
 
-### Style Guide
+## 7.2 Style Guide
 
 | Do | Don't |
 |----|-------|
@@ -489,7 +482,7 @@ Rejected - too complex for simple use case
 
 ---
 
-## ✅ Kontrol Listesi
+# 8. Kontrol Listesi
 
 ### README
 - [ ] Tek cümlelik açıklama
@@ -513,7 +506,7 @@ Rejected - too complex for simple use case
 
 ---
 
-## 🔴 Yapma Listesi
+# 9. Yapma Listesi
 
 ❌ Obvious comment'ler yazma
 ❌ Güncellemeden bırakma
@@ -523,7 +516,7 @@ Rejected - too complex for simple use case
 
 ---
 
-## ✅ Mutlaka Yap Listesi
+# 10. Mutlaka Yap Listesi
 
 ✅ README ile başla
 ✅ API'yi OpenAPI ile belgele
@@ -537,4 +530,4 @@ Rejected - too complex for simple use case
 ---
 
 **Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+**Versiyon:** 2.0

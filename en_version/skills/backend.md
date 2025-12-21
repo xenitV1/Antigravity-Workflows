@@ -19,7 +19,24 @@ metadata:
 
 ---
 
-## 🎯 Scope
+# 📋 Contents
+
+1. [Scope](#1-scope)
+2. [Core Principles](#2-core-principles)
+3. [Project Structure](#3-project-structure)
+4. [API Design Rules](#4-api-design-rules)
+5. [Input Validation (Zod)](#5-input-validation-zod)
+6. [Security Best Practices](#6-security-best-practices)
+7. [Database Patterns](#7-database-patterns)
+8. [Performance Optimization](#8-performance-optimization)
+9. [Error Handling](#9-error-handling)
+10. [Checklist](#10-checklist)
+11. [Don't List](#11-dont-list)
+12. [Must Do List](#12-must-do-list)
+
+---
+
+# 1. Scope
 
 | Area | Technologies |
 |------|--------------|
@@ -34,9 +51,9 @@ metadata:
 
 ---
 
-## 📏 Core Principles
+# 2. Core Principles
 
-### 1. TypeScript Strict Mode (Mandatory)
+## 2.1 TypeScript Strict Mode (Mandatory)
 
 ```json
 // tsconfig.json
@@ -54,7 +71,7 @@ metadata:
 }
 ```
 
-### 2. `any` Type is Forbidden
+## 2.2 `any` Type is Forbidden
 
 ```typescript
 // ❌ INCORRECT
@@ -81,7 +98,7 @@ function parseInput(input: unknown): DataPayload {
 }
 ```
 
-### 3. Use ES Modules (ESM)
+## 2.3 Use ES Modules (ESM)
 
 ```typescript
 // ✅ Modern ESM syntax
@@ -98,9 +115,9 @@ export const userRouter = Router();
 
 ---
 
-## 🏗️ Project Structure
+# 3. Project Structure
 
-### Feature-First Structure (Recommended)
+## 3.1 Feature-First Structure (Recommended)
 
 ```
 src/
@@ -138,9 +155,9 @@ src/
 
 ---
 
-## 🔧 API Design Rules
+# 4. API Design Rules
 
-### RESTful Endpoint Conventions
+## 4.1 RESTful Endpoint Conventions
 
 ```typescript
 // Resource naming (plural, lowercase, kebab-case)
@@ -159,7 +176,7 @@ POST   /api/v1/users/:userId/orders
 GET    /api/v1/users?page=1&limit=10&sort=createdAt:desc&filter[status]=active
 ```
 
-### Response Format Standard
+## 4.2 Response Format Standard
 
 ```typescript
 // Successful response
@@ -198,7 +215,7 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 }
 ```
 
-### HTTP Status Codes
+## 4.3 HTTP Status Codes
 
 | Code | Usage |
 |-----|----------|
@@ -216,7 +233,7 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 
 ---
 
-## ✅ Input Validation (Zod)
+# 5. Input Validation (Zod)
 
 ```typescript
 import { z } from 'zod';
@@ -254,9 +271,9 @@ router.post('/users', validateBody(CreateUserSchema), createUser);
 
 ---
 
-## 🔒 Security Best Practices
+# 6. Security Best Practices
 
-### 1. Environment Variables
+## 6.1 Environment Variables
 
 ```typescript
 // env.validation.ts
@@ -279,7 +296,7 @@ const secret = "hardcoded-secret-key";
 const secret = env.JWT_SECRET;
 ```
 
-### 2. Security Headers (Helmet)
+## 6.2 Security Headers (Helmet)
 
 ```typescript
 import helmet from 'helmet';
@@ -308,7 +325,7 @@ app.use(rateLimit({
 }));
 ```
 
-### 3. SQL Injection Prevention
+## 6.3 SQL Injection Prevention
 
 ```typescript
 // ❌ NEVER use variables in raw query
@@ -325,11 +342,53 @@ const users = await prisma.$queryRaw`
 `;
 ```
 
+## 6.4 Authentication & Authorization
+
+```typescript
+// JWT middleware
+import jwt from 'jsonwebtoken';
+
+interface JwtPayload {
+  userId: string;
+  email: string;
+  role: 'user' | 'admin';
+}
+
+function authMiddleware(req: Request, res: Response, next: NextFunction) {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  
+  if (!token) {
+    return res.status(401).json(createErrorResponse('UNAUTHORIZED', 'Token required'));
+  }
+  
+  try {
+    const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
+    req.user = decoded;
+    next();
+  } catch {
+    return res.status(401).json(createErrorResponse('INVALID_TOKEN', 'Invalid token'));
+  }
+}
+
+// Role-based access
+function requireRole(...roles: string[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json(createErrorResponse('FORBIDDEN', 'Access denied'));
+    }
+    next();
+  };
+}
+
+// Usage
+router.delete('/users/:id', authMiddleware, requireRole('admin'), deleteUser);
+```
+
 ---
 
-## 🗄️ Database Patterns
+# 7. Database Patterns
 
-### Repository Pattern
+## 7.1 Repository Pattern
 
 ```typescript
 // users.repository.ts
@@ -355,27 +414,69 @@ class UserRepository implements IUserRepository {
   async create(data: CreateUserDto): Promise<User> {
     return this.prisma.user.create({ data });
   }
+  
+  // ... other methods
+}
+```
+
+## 7.2 Transaction Handling
+
+```typescript
+async function transferMoney(fromId: string, toId: string, amount: number) {
+  return prisma.$transaction(async (tx) => {
+    const from = await tx.account.update({
+      where: { id: fromId },
+      data: { balance: { decrement: amount } },
+    });
+    
+    if (from.balance < 0) {
+      throw new Error('Insufficient funds');
+    }
+    
+    await tx.account.update({
+      where: { id: toId },
+      data: { balance: { increment: amount } },
+    });
+    
+    return { success: true };
+  });
 }
 ```
 
 ---
 
-## ⚡ Performance Optimization
+# 8. Performance Optimization
 
-### 1. Async/Await Best Practices
+## 8.1 Async/Await Best Practices
 
 ```typescript
+// ❌ Sequential (slow)
+const user = await getUser(id);
+const orders = await getOrders(id);
+const payments = await getPayments(id);
+
 // ✅ Parallel (fast)
 const [user, orders, payments] = await Promise.all([
   getUser(id),
   getOrders(id),
   getPayments(id),
 ]);
+
+// Promise.allSettled (fault tolerant)
+const results = await Promise.allSettled([
+  fetchData1(),
+  fetchData2(),
+  fetchData3(),
+]);
 ```
 
-### 2. Caching (Redis)
+## 8.2 Caching (Redis)
 
 ```typescript
+import Redis from 'ioredis';
+
+const redis = new Redis(env.REDIS_URL);
+
 async function getCachedUser(id: string): Promise<User | null> {
   const cacheKey = `user:${id}`;
   
@@ -393,13 +494,69 @@ async function getCachedUser(id: string): Promise<User | null> {
   
   return user;
 }
+
+// Cache invalidation
+async function updateUser(id: string, data: UpdateUserDto) {
+  const user = await userRepository.update(id, data);
+  await redis.del(`user:${id}`);
+  return user;
+}
+```
+
+## 8.3 Database Query Optimization
+
+```typescript
+// ❌ N+1 problem
+const users = await prisma.user.findMany();
+for (const user of users) {
+  const posts = await prisma.post.findMany({ where: { authorId: user.id } });
+}
+
+// ✅ Single query with Include
+const users = await prisma.user.findMany({
+  include: { posts: true },
+});
+
+// ✅ Select only necessary fields
+const users = await prisma.user.findMany({
+  select: {
+    id: true,
+    name: true,
+    email: true,
+    _count: { select: { posts: true } },
+  },
+});
 ```
 
 ---
 
-## 📝 Error Handling
+# 9. Error Handling
 
 ```typescript
+// Custom error classes
+class AppError extends Error {
+  constructor(
+    public statusCode: number,
+    public code: string,
+    message: string,
+  ) {
+    super(message);
+    this.name = 'AppError';
+  }
+}
+
+class NotFoundError extends AppError {
+  constructor(resource: string) {
+    super(404, 'NOT_FOUND', `${resource} not found`);
+  }
+}
+
+class ValidationError extends AppError {
+  constructor(message: string) {
+    super(400, 'VALIDATION_ERROR', message);
+  }
+}
+
 // Global error handler
 function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   console.error(err);
@@ -421,7 +578,7 @@ app.use(errorHandler);
 
 ---
 
-## ✅ Checklist
+# 10. Checklist
 
 In every backend development:
 
@@ -439,7 +596,7 @@ In every backend development:
 
 ---
 
-## 🔴 Don't List
+# 11. Don't List
 
 ❌ Do not use `any` type
 ❌ Do not write hardcoded secrets/passwords
@@ -452,7 +609,7 @@ In every backend development:
 
 ---
 
-## ✅ Must Do List
+# 12. Must Do List
 
 ✅ Input validation for every endpoint
 ✅ Try-catch in all async operations
@@ -468,4 +625,4 @@ In every backend development:
 ---
 
 **Last Update:** December 2025
-**Version:** 1.0
+**Version:** 2.0
