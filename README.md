@@ -1,59 +1,73 @@
 # Global Workflows - Skills System
 
-> AI Agent için merkezi skill yönetim sistemi. Görev tipine göre uygun skill(ler) otomatik olarak yüklenir.
+> [EN] Central skill management system for AI Agents. Appropriate skill(s) are automatically loaded based on the task type.
+>
+> [TR] AI Agent için merkezi skill yönetim sistemi. Görev tipine göre uygun skill(ler) otomatik olarak yüklenir.
 
-## 🚀 Kurulum
+---
 
-1. Bu repository'yi klonlayın
-2. `GEMINI.md` dosyasını sistem dizinine kopyalayın:
+## 🚀 Installation / Kurulum
+
+1. Clone this repository / Bu repository'yi klonlayın
+2. Copy `GEMINI.md` to your system directory / `GEMINI.md` dosyasını sistem dizinine kopyalayın:
 
 ```powershell
-Copy-Item ".\GEMINI.md" "C:\Users\Mehmet\.gemini\GEMINI.md"
+Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 ```
 
-## 📁 Yapı
+---
+
+## 📁 Structure / Yapı
 
 ```
 global_workflows/
-├── GEMINI.md              # Global kurallar (sistem dizinine kopyalanmalı)
-├── CORE.md                # Merkezi orchestrator
-└── skills/
-    ├── ultrathink.md      # Derin düşünme protokolü
-    ├── architecture.md    # Sistem tasarımı
-    ├── design-system.md   # UI/UX rehberi
-    ├── backend.md         # Server-side geliştirme
-    ├── mobile.md          # Cross-platform mobile
-    ├── testing.md         # TDD ve test stratejileri
-    ├── debugging.md       # Sistematik hata ayıklama
-    ├── refactoring.md     # Güvenli kod iyileştirme
+├── GEMINI.md              # Global rules / Global kurallar
+├── CORE.md                # Central orchestrator / Merkezi orchestrator
+└── skills/                # Specialized skill files / Özelleşmiş skill dosyaları
+    ├── ultrathink.md      # Deep thinking protocol / Derin düşünme protokolü
+    ├── architecture.md    # System design / Sistem tasarımı
+    ├── design-system.md   # UI/UX guides / UI/UX rehberi
+    ├── backend.md         # Server-side development / Server-side geliştirme
+    ├── mobile.md          # Cross-platform mobile / Mobil geliştirme
+    ├── testing.md         # TDD & testing strategies / Test stratejileri
+    ├── debugging.md       # Systematic debugging / Hata ayıklama
+    ├── refactoring.md     # Code improvement / Kod iyileştirme
     ├── production-deployment.md # DevOps/CI-CD
-    ├── multi-file-sync.md # Çoklu dosya değişikliği
-    ├── dependency-management.md # Paket yönetimi
-    └── documentation.md   # Teknik dokümantasyon
+    ├── multi-file-sync.md # Multi-file changes / Çoklu dosya senkronizasyonu
+    ├── dependency-management.md # Package management / Paket yönetimi
+    └── documentation.md   # Technical docs / Teknik dokümantasyon
 ```
 
-## 🎯 Nasıl Çalışır?
+---
 
-1. Her görevde `CORE.md` okunur
-2. Görev analiz edilir ve uygun skill(ler) belirlenir
-3. Skill dosyası `skills/` dizininden yüklenir
-4. İşlem tamamlandıktan sonra kod kalite kontrolleri yapılır
+## 🎯 How It Works / Nasıl Çalışır?
 
-## 📏 Kurallar
+1. **[EN]** `CORE.md` is read at every task. **[TR]** Her görevde `CORE.md` okunur.
+2. **[EN]** Task is analyzed and appropriate skill(s) are identified. **[TR]** Görev analiz edilir ve uygun skill(ler) belirlenir.
+3. **[EN]** Skill file is loaded from the `skills/` directory. **[TR]** Skill dosyası `skills/` dizininden yüklenir.
+4. **[EN]** Quality checks are performed after completion. **[TR]** İşlem sonrası kalite kontrolleri yapılır.
 
-- ✅ Her işlemden sonra ESLint/TypeScript kontrolü
-- ✅ Yazılan kod en az 2 kez review edilmeli
-- ✅ Skill yüklenmeden işleme başlanmaz
+---
 
-## 🔗 Skill Kategorileri
+## 📏 Rules / Kurallar
 
-| Kategori | Skills |
-|----------|--------|
-| **Düşünme** | ultrathink, architecture |
-| **Geliştirme** | backend, mobile, design-system |
-| **Kalite** | testing, debugging, refactoring |
-| **Operasyon** | production-deployment, multi-file-sync, dependency-management, documentation |
+- ✅ **[EN]** ESLint/TypeScript check after every change. **[TR]** Her işlemden sonra ESLint/TypeScript kontrolü.
+- ✅ **[EN]** Code must be reviewed at least twice. **[TR]** Yazılan kod en az 2 kez review edilmeli.
+- ✅ **[EN]** No work starts without loading skills. **[TR]** Skill yüklenene kadar işleme başlanmaz.
 
-## 📄 Lisans
+---
+
+## 🔗 Skill Categories / Kategoriler
+
+| Category / Kategori | Skills |
+|:---:|---|
+| **Thinking / Düşünme** | ultrathink, architecture |
+| **Dev / Geliştirme** | backend, mobile, design-system |
+| **Quality / Kalite** | testing, debugging, refactoring |
+| **Ops / Operasyon** | production-deployment, multi-file-sync, dependency-management, documentation |
+
+---
+
+## 📄 License / Lisans
 
 MIT License
