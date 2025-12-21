@@ -71,3 +71,7 @@ global_workflows/
 ## 📄 License / Lisans
 
 MIT License
+
+---
+
+**Developed by / Geliştiren:** [xenit_v0](https://x.com/xenit_v0)
