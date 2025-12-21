@@ -78,16 +78,37 @@ Her analize başlamadan ÖNCE şu soruları cevapla:
 - **Etki Alanı:** [Lokal/Modül/Sistem Geneli]
 - **Geri Dönüşü:** [Kolay/Zor/İmkansız]
 
-### Düşünme Bütçesi
-- **Tahmini adım sayısı:** [X adım]
-- **Derinlik seviyesi:** [Hafif/Orta/Derin/Ultra]
-- **Düşünme modu:** [Analitik/Kreatif/Kritik/Sistematik]
+### Sokratik Gerçeklik Kontrolü (5-Step Reality Check)
+Her işlemden önce bu 5 soruyu __refleks olarak__ kendine sor:
+
+1. **Kullanıcı Niyeti (Intent):**
+   - "Kullanıcı benden TAM OLARAK ne istiyor?"
+   - "Söylediği şey ile asıl ihtiyacı aynı mı?"
+
+2. **Bağlam (Context):**
+   - "Şu an üzerinde çalıştığım dosya/konum doğru mu?"
+   - "Bu işlem projenin genel mimarisine uyuyor mu?"
+
+3. **Eylem (Action):**
+   - "Şu an ne yapıyorum?" (Basit ve net tanım)
+
+4. **Gerekçe & Alternatif (Rationale):**
+   - "Bunu neden böyle yapıyorum?"
+   - "Daha basit veya güvenli bir yolu var mı?"
+
+5. **Zincirleme Etki (Ripple Effect):**
+   - "Bu değişiklik neleri bozabilir?"
+   - "Domino etkisi yaratır mı?"
+
 
 ### Başarı Kriteri
 - Bu analiz ne zaman "yeterli" sayılır?
 - Hangi sorular cevaplanmalı?
 - Minimum güven seviyesi: [%X]
 ```
+
+> [!IMPORTANT]
+> **Zincirleme Etki** sorusunu cevaplamadan asla aksiyon alma. Domino etkisini hesapla.
 
 ---
 
