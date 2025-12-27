@@ -9,15 +9,47 @@ description: Global agent rules. CORE.md guidelines must be followed and appropr
 
 ---
 
+## 🔧 DYNAMIC PATH DETECTION (Automatic)
+
+> [!NOTE]
+> **For AI Agent:** When reading this file, **automatically detect** the paths.
+> Determine directory structure based on user's home directory.
+
+### Installation Structure
+
+```
+~/.gemini/
+├── GEMINI.md                    # This file (Global rules)
+└── antigravity/
+    ├── CORE.md                  # Central orchestrator
+    └── global_workflows/
+        └── skills/              # Skill files
+
+~/.agent/                        # Antigravity IDE Rules & Workflows
+├── rules/                       # 15 workspace rules
+└── workflows/                   # 8 slash command workflows
+```
+
+**Placeholder Definitions:**
+| Placeholder | Meaning |
+|-------------|---------|
+| `{GEMINI_ROOT}` | `~/.gemini/` directory |
+| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` directory |
+| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` directory |
+| `{CORE_FILE}` | `~/.gemini/antigravity/CORE.md` file |
+| `{AGENT_DIR}` | `~/.agent/` directory (Antigravity IDE rules/workflows) |
+
+---
+
 ## 🚨 ABSOLUTE RULES (Always Applicable)
 
 ### 1. CORE.md Requirement
 
 When the user gives any task:
 
-1. **FIRST** the `C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\CORE.md` file must be read.
+1. **FIRST** the `{CORE_FILE}` file must be read.
 2. CORE.md determines the appropriate skill(s) based on the task type.
-3. The determined skill file is loaded from the `C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\skills\` directory.
+3. The determined skill file is loaded from the `{SKILLS_DIR}` directory.
 4. Operation **DOES NOT START** until the skill is loaded.
 
 ```
@@ -60,7 +92,7 @@ Operations cannot start without skills.
 
 **Skill Location:**
 ```
-C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\skills\<skill-name>.md
+{SKILLS_DIR}/<skill-name>.md
 ```
 
 ---

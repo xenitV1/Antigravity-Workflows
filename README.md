@@ -1,107 +1,205 @@
-# Global Workflows - Skills System
+# Antigravity Workflows - AI Agent Skills System
 
-> [EN] Central skill management system for AI Agents. Appropriate skill(s) are automatically loaded based on the task type.
+> [EN] Comprehensive AI Agent skill system for Antigravity IDE. Includes rules, workflows, and skills with automatic activation.
 >
-> [TR] AI Agent için merkezi skill yönetim sistemi. Görev tipine göre uygun skill(ler) otomatik olarak yüklenir.
-
-> [!IMPORTANT]
-> **[EN] Absolute Paths Notice:** This repository contains absolute directory paths (e.g., `C:\Users\Mehmet\.gemini\antigravity\...`) that **MUST** be updated after cloning to match your local setup. Please update the paths in these files:
-> * `.\GEMINI.md`
-> * `.\CORE.md`
-> * `.\en_version\GEMINI.md`
-> * `.\en_version\CORE.md`
->
-> **[TR] Mutlak Dizin Yolları Uyarısı:** Bu depoda yerel dizin yapınıza göre **GÜNCELLEMENİZ GEREKEN** mutlak dizin yolları (örn: `C:\Users\Mehmet\.gemini\antigravity\...`) bulunmaktadır. Projeyi klonladıktan sonra şu dosyalardaki yolları güncelleyin:
-> * `.\GEMINI.md`
-> * `.\CORE.md`
-> * `.\en_version\GEMINI.md`
-> * `.\en_version\CORE.md`
+> [TR] Antigravity IDE için kapsamlı AI Agent yetenek sistemi. Otomatik aktivasyon ile rules, workflows ve skills içerir.
 
 ---
 
-## 🌍 Language Versions / Dil Versiyonları
+## 🚀 Kurulum / Installation
 
-### 🇹🇷 Turkish (Default)
-Original files are located in the root directory and `skills/` folder.
-* **GEMINI.md**: `.\GEMINI.md`
-* **CORE.md**: `.\CORE.md`
-* **Skills**: `.\skills\*.md`
+### Windows (PowerShell)
 
-### 🇺🇸 English
-Translated files are located in the `en_version` directory. Use these if you prefer an English-native workflow.
-* **GEMINI.md**: `.\en_version\GEMINI.md`
-* **CORE.md**: `.\en_version\CORE.md`
-* **Skills**: `.\en_version\skills\*.md`
-
----
-
-## 🚀 Installation / Kurulum
-
-### [TR] Türkçe Kurulum
 ```powershell
+# 1. Dizinleri oluştur
+New-Item -ItemType Directory -Force -Path "$HOME\.gemini\antigravity\global_workflows"
+New-Item -ItemType Directory -Force -Path "$HOME\.agent\rules"
+New-Item -ItemType Directory -Force -Path "$HOME\.agent\workflows"
+
+# 2. GEMINI.md -> ~/.gemini/
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
+
+# 3. CORE.md -> ~/.gemini/antigravity/
+Copy-Item ".\CORE.md" "$HOME\.gemini\antigravity\CORE.md"
+
+# 4. Skills -> ~/.gemini/antigravity/global_workflows/
+Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\global_workflows\"
+
+# 5. Antigravity Rules -> ~/.agent/rules/
+Copy-Item ".\.agent\rules\*" "$HOME\.agent\rules\" -Recurse
+
+# 6. Antigravity Workflows -> ~/.agent/workflows/
+Copy-Item ".\.agent\workflows\*" "$HOME\.agent\workflows\" -Recurse
 ```
 
-### [EN] English Installation
-```powershell
-Copy-Item ".\en_version\GEMINI.md" "$HOME\.gemini\GEMINI.md"
+### macOS/Linux (Bash)
+
+```bash
+# 1. Dizinleri oluştur
+mkdir -p ~/.gemini/antigravity/global_workflows
+mkdir -p ~/.agent/rules
+mkdir -p ~/.agent/workflows
+
+# 2. GEMINI.md -> ~/.gemini/
+cp GEMINI.md ~/.gemini/GEMINI.md
+
+# 3. CORE.md -> ~/.gemini/antigravity/
+cp CORE.md ~/.gemini/antigravity/CORE.md
+
+# 4. Skills -> ~/.gemini/antigravity/global_workflows/
+cp -r skills ~/.gemini/antigravity/global_workflows/
+
+# 5. Antigravity Rules -> ~/.agent/rules/
+cp -r .agent/rules/* ~/.agent/rules/
+
+# 6. Antigravity Workflows -> ~/.agent/workflows/
+cp -r .agent/workflows/* ~/.agent/workflows/
 ```
 
 ---
 
-## 📁 Structure / Yapı (English Version)
+## 📁 Kurulum Sonrası Yapı
 
 ```
-global_workflows/en_version/
-├── GEMINI.md              # Global rules
-├── CORE.md                # Central orchestrator
-└── skills/                # Specialized skill files
-    ├── ultrathink.md      # Deep thinking protocol
-    ├── architecture.md    # System design
-    ├── design-system.md   # UI/UX guides
-    ├── backend.md         # Server-side development
-    ├── mobile.md          # Cross-platform mobile
-    ├── testing.md         # TDD & testing strategies
-    ├── debugging.md       # Systematic debugging
-    ├── refactoring.md     # Code improvement
-    ├── production-deployment.md # DevOps/CI-CD
-    ├── multi-file-sync.md # Multi-file changes
-    ├── dependency-management.md # Package management
-    ├── documentation.md   # Technical docs
-    └── optimization.md    # System & Flow Optimization [NEW]
+~/.gemini/
+├── GEMINI.md                           # Global kurallar
+└── antigravity/
+    ├── CORE.md                         # Merkezi orkestratör
+    └── global_workflows/
+        └── skills/                     # 13 skill dosyası
+            ├── ultrathink.md
+            ├── architecture.md
+            ├── backend.md
+            └── ...
+
+~/.agent/                               # Antigravity IDE Native
+├── rules/                              # 15 workspace rule
+│   ├── ultrathink.md       (Model Decision)
+│   ├── quality-gates.md    (Always On)
+│   ├── backend.md          (Glob: *.ts, *.js)
+│   ├── testing.md          (Glob: *.test.*)
+│   └── ...
+└── workflows/                          # 8 slash command
+    ├── ultrathink.md       (/ultrathink)
+    ├── plan.md             (/plan)
+    ├── implement.md        (/implement)
+    ├── review.md           (/review)
+    ├── debug.md            (/debug)
+    ├── test.md             (/test)
+    ├── refactor.md         (/refactor)
+    └── deploy.md           (/deploy)
 ```
 
-## 🆕 New Features (v1.3)
-- **[EN] Socratic Reality Check:** A 5-step protocol in `ultrathink.md` to align with user intent and prevent context drift.
-- **[TR] Sokratik Gerçeklik Kontrolü:** `ultrathink.md` içinde yer alan, kullanıcı niyetini doğrulamak ve bağlam kaymasını önlemek için 5 adımlı protokol.
-- **Clickable navigation:** `CORE.md` now features direct links to specific skill sections for precision.
-- **Unified Structure:** All skills follow a standardized v2.0 format (ToC + Numbered Sections).
-- **New Skills:** Added `optimization` and `testing` skills.
+---
+
+## 🔧 Antigravity IDE Rules
+
+### Aktivasyon Modları
+
+| Mod | Açıklama | Örnek |
+|-----|----------|-------|
+| **Always On** | Her zaman aktif | `quality-gates.md` |
+| **Model Decision** | AI karar verir | `ultrathink.md`, `debugging.md` |
+| **Glob** | Dosya pattern'ine göre | `*.ts` -> `backend.md` |
+
+### Rule Listesi (15 adet)
+
+| Rule | Aktivasyon | Açıklama |
+|------|------------|----------|
+| `ultrathink.md` | Model Decision | Derin analiz protokolü |
+| `core-orchestrator.md` | Model Decision | Skill yönlendirici |
+| `quality-gates.md` | **Always On** | Kalite kontrolleri |
+| `backend.md` | Glob: `*.ts, *.js` | Backend geliştirme |
+| `testing.md` | Glob: `*.test.*` | Test stratejileri |
+| `debugging.md` | Model Decision | Hata ayıklama |
+| `architecture.md` | Model Decision | Sistem tasarımı |
+| `refactoring.md` | Model Decision | Kod iyileştirme |
+| `design-system.md` | Glob: `*.css` | UI tutarlılık |
+| `mobile.md` | Glob: `*.tsx, App.*` | Mobil geliştirme |
+| `production-deployment.md` | Model Decision | DevOps/CI-CD |
+| `multi-file-sync.md` | Model Decision | Çoklu dosya |
+| `dependency-management.md` | Glob: `package.json` | Paket yönetimi |
+| `documentation.md` | Glob: `*.md` | Dokümantasyon |
+| `optimization.md` | Model Decision | Performans |
 
 ---
 
-## 🎯 How It Works / Nasıl Çalışır?
+## ⚡ Antigravity Workflows (Slash Commands)
 
-1. **[EN]** `CORE.md` is read at every task. **[TR]** Her görevde `CORE.md` okunur.
-2. **[EN] Selection:** The Agent uses the **Selective Reading Protocol** to only load relevant sections, preserving context limits. **[TR]** Agent, **Seçici Okuma Protokolü** ile sadece ilgili bölümleri yükler, bağlam limitini (token) korur.
-3. **[EN] Planning:** `ultrathink.md` is used for deep analysis and **Socratic Reality Check**. **[TR]** `ultrathink.md` ile derin analiz ve **Sokratik Gerçeklik Kontrolü** yapılır.
-4. **[EN] Execution:** The identified skill file is loaded from the `skills/` directory. **[TR]** Belirlenen skill dosyası `skills/` dizinden yüklenir.
-5. **[EN] Quality:** Mandatory checks (ESLint/TSC) are performed after completion. **[TR]** İşlem sonrası zorunlu kontroller yapılır.
-
----
-
-## 📏 Rules / Kurallar
-
-- ✅ **[EN]** ESLint/TypeScript check after every change. **[TR]** Her işlemden sonra ESLint/TypeScript kontrolü.
-- ✅ **[EN]** Code must be reviewed at least twice. **[TR]** Yazılan kod en az 2 kez review edilmeli.
-- ✅ **[EN]** No work starts without loading skills. **[TR]** Skill yüklenene kadar işleme başlanmaz.
+| Workflow | Komut | Açıklama |
+|----------|-------|----------|
+| `ultrathink.md` | `/ultrathink` | Derin düşünme modu |
+| `plan.md` | `/plan` | Görev planlama |
+| `implement.md` | `/implement` | Özellik geliştirme |
+| `review.md` | `/review` | Kod inceleme |
+| `debug.md` | `/debug` | Hata ayıklama |
+| `test.md` | `/test` | Test yazma |
+| `refactor.md` | `/refactor` | Güvenli refactoring |
+| `deploy.md` | `/deploy` | Production deployment |
 
 ---
 
-## 📄 License / Lisans
+## 🎯 Nasıl Çalışır?
+
+### Antigravity IDE Akışı
+
+```
+Kullanıcı komutu verir
+        │
+        ▼
+┌─────────────────────────┐
+│ Glob Pattern Kontrolü   │ → *.ts dosyası? -> backend.md aktif
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│ Always On Rules         │ → quality-gates.md her zaman aktif
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│ Model Decision          │ → Karmaşık görev? -> ultrathink.md
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│ Workflow Çağrısı        │ → /debug -> debug.md workflow'u
+└─────────────────────────┘
+```
+
+### Workflow Zincirleme
+
+```
+/plan -> /ultrathink (karmaşık görevler için)
+/implement -> /plan + /test
+/deploy -> /test + /review
+```
+
+---
+
+## 📏 Kurallar
+
+- ✅ Her işlemden sonra ESLint/TypeScript kontrolü
+- ✅ Kod en az 2 kez review edilmeli
+- ✅ Skill/Rule yüklenmeden işleme başlanmaz
+- ✅ Sokratik Gerçeklik Kontrolü (5-Step) her eylemden önce
+
+---
+
+## 🌍 Dil Versiyonları
+
+| Dil | Konum |
+|-----|-------|
+| 🇹🇷 Türkçe | `./` (root) |
+| 🇺🇸 English | `./en_version/` |
+
+---
+
+## 📄 Lisans / License
 
 MIT License
 
 ---
 
-**Developed by / Geliştiren:** [@xenit-v0](https://x.com/xenit_v0)
+**Geliştiren / Developed by:** [@xenit-v0](https://x.com/xenit_v0)
+**Versiyon:** 2.0 (Antigravity IDE Native Support)

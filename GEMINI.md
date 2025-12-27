@@ -9,15 +9,47 @@ description: Global agent kuralları. Tüm işlemlerde CORE.md yönergelerine uy
 
 ---
 
+## 🔧 DİNAMİK PATH ALGILAMA (Otomatik)
+
+> [!NOTE]
+> **AI Agent için:** Bu dosyayı okuduğunda, path'leri **otomatik olarak algıla**.
+> Dizin yapısını kullanıcının home dizinine göre belirle.
+
+### Kurulum Yapısı
+
+```
+~/.gemini/
+├── GEMINI.md                    # Bu dosya (Global kurallar)
+└── antigravity/
+    ├── CORE.md                  # Merkezi orkestratör
+    └── global_workflows/
+        └── skills/              # Skill dosyaları
+
+~/.agent/                        # Antigravity IDE Rules & Workflows
+├── rules/                       # 15 workspace rule
+└── workflows/                   # 8 slash command workflow
+```
+
+**Placeholder Tanımları:**
+| Placeholder | Anlamı |
+|-------------|--------|
+| `{GEMINI_ROOT}` | `~/.gemini/` dizini |
+| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` dizini |
+| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` dizini |
+| `{CORE_FILE}` | `~/.gemini/antigravity/CORE.md` dosyası |
+| `{AGENT_DIR}` | `~/.agent/` dizini (Antigravity IDE rules/workflows) |
+
+---
+
 ## 🚨 MUTLAK KURALLAR (Her Zaman Geçerli)
 
 ### 1. CORE.md Zorunluluğu
 
 Kullanıcı herhangi bir görev verdiğinde:
 
-1. **ÖNCE** `C:\Users\Mehmet\.gemini\antigravity\global_workflows\CORE.md` dosyası okunmalıdır
+1. **ÖNCE** `{CORE_FILE}` dosyası okunmalıdır
 2. CORE.md, görev tipine göre uygun skill(ler)i belirler
-3. Belirlenen skill dosyası `C:\Users\Mehmet\.gemini\antigravity\global_workflows\skills\` dizininden yüklenir
+3. Belirlenen skill dosyası `{SKILLS_DIR}` dizininden yüklenir
 4. Skill yüklenene kadar işleme **BAŞLANMAZ**
 
 ```
@@ -60,7 +92,7 @@ Skills olmadan işleme başlanamaz.
 
 **Skill Konumu:**
 ```
-C:\Users\Mehmet\.gemini\antigravity\global_workflows\skills\<skill-name>.md
+{SKILLS_DIR}/<skill-name>.md
 ```
 
 ---

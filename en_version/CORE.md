@@ -9,6 +9,38 @@ description: Central Orchestrator & Skills Registry. Loads automatically to rout
 
 ---
 
+## 🔧 DYNAMIC PATH DETECTION (Automatic)
+
+> [!NOTE]
+> **For AI Agent:** When reading this file, **automatically detect** the paths.
+> Determine directory structure based on user's home directory.
+
+### Installation Structure
+
+```
+~/.gemini/
+├── GEMINI.md                    # Global rules
+└── antigravity/
+    ├── CORE.md                  # This file (Central orchestrator)
+    └── global_workflows/
+        └── skills/              # Skill files
+
+~/.agent/                        # Antigravity IDE Rules & Workflows
+├── rules/                       # 15 workspace rules (Model Decision/Glob/Always On)
+└── workflows/                   # 8 slash commands (/ultrathink, /plan, etc.)
+```
+
+**Placeholder Definitions:**
+| Placeholder | Meaning |
+|-------------|---------|
+| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` directory |
+| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` directory |
+| `{AGENT_DIR}` | `~/.agent/` directory |
+| `{RULES_DIR}` | `~/.agent/rules/` directory |
+| `{WORKFLOWS_DIR}` | `~/.agent/workflows/` directory |
+
+---
+
 # 📋 Contents
 
 1. [Skills Reference - Which Skill When?](#1-skills-reference---which-skill-when)
@@ -322,7 +354,7 @@ Complex tasks may require multiple skills:
 
 # 4. Skills Directory Structure
 
-C:\Users\Mehmet\.gemini\antigravity\global_workflows\en_version\
+{WORKFLOWS_ROOT}/
 ├── GEMINI.md           ← Global rules
 ├── CORE.md             ← This file (Central orchestrator)
 └── skills/

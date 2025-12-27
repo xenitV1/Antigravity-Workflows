@@ -9,6 +9,38 @@ description: Central Orchestrator & Skills Registry. Loads automatically to rout
 
 ---
 
+## 🔧 DİNAMİK PATH ALGILAMA (Otomatik)
+
+> [!NOTE]
+> **AI Agent için:** Bu dosyayı okuduğunda, path'leri **otomatik olarak algıla**.
+> Dizin yapısını kullanıcının home dizinine göre belirle.
+
+### Kurulum Yapısı
+
+```
+~/.gemini/
+├── GEMINI.md                    # Global kurallar
+└── antigravity/
+    ├── CORE.md                  # Bu dosya (Merkezi orkestratör)
+    └── global_workflows/
+        └── skills/              # Skill dosyaları
+
+~/.agent/                        # Antigravity IDE Rules & Workflows
+├── rules/                       # 15 workspace rule (Model Decision/Glob/Always On)
+└── workflows/                   # 8 slash command (/ultrathink, /plan, etc.)
+```
+
+**Placeholder Tanımları:**
+| Placeholder | Anlamı |
+|-------------|--------|
+| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` dizini |
+| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` dizini |
+| `{AGENT_DIR}` | `~/.agent/` dizini |
+| `{RULES_DIR}` | `~/.agent/rules/` dizini |
+| `{WORKFLOWS_DIR}` | `~/.agent/workflows/` dizini |
+
+---
+
 # 📋 İçindekiler
 
 1. [Skills Referansı - Ne Zaman Hangi Skill?](#1-skills-referansı---ne-zaman-hangi-skill)
@@ -326,7 +358,7 @@ Karmaşık görevler birden fazla skill gerektirebilir:
 
 # 4. Skills Dizin Yapısı
 
-C:\Users\Mehmet\.gemini\antigravity\global_workflows\
+{WORKFLOWS_ROOT}/
 ├── GEMINI.md           ← Global kurallar
 ├── CORE.md             ← Bu dosya (Merkezi orchestrator)
 └── skills/
