@@ -1,6 +1,6 @@
 ---
 name: optimization
-description: Sistem ve akış optimizasyonu rehberi. 2025 AI-driven optimizasyon, darboğaz tespiti ve kullanıcı akış iyileştirmeleri.
+description: System and flow optimization guide. 2025 AI-driven optimization, bottleneck identification, and user flow improvements.
 metadata:
   skillport:
     category: operations
@@ -12,120 +12,120 @@ metadata:
       - observability
 ---
 
-# Optimization Skill - Sistem & Akış Optimizasyonu
+# Optimization Skill - System & Flow Optimization
 
-> Yazılım sistemlerini ve kullanıcı akışlarını en yüksek performans ve verimliliğe ulaştırma metodolojisi.
-> 2025 AI-destekli gözlemlenebilirlik ve sistematik iyileştirme teknikleri.
-
----
-
-# 📋 İçindekiler
-
-1. [Optimizasyon Prensipleri (2025)](#1-optimizasyon-prensipleri-2025)
-2. [Darboğaz Tespiti (Bottleneck Identification)](#2-darboğaz-tespiti-bottleneck-identification)
-3. [AI-Driven Optimizasyon](#3-ai-driven-optimizasyon)
-4. [Modern Gözlemlenebilirlik (Observability)](#4-modern-gözlemlenebilirlik-observability)
-5. [Frontend & Kullanıcı Deneyimi Optimizasyonu](#5-frontend--kullanıcı-deneyimi-optimizasyonu)
-6. [Backend & Veritabanı Optimizasyonu](#6-backend--veritabanı-optimizasyonu)
-7. [Sistematik İyileştirme Döngüsü](#7-sistematik-iyileştirme-döngüsü)
-8. [Kontrol Listesi](#8-kontrol-listesi)
-9. [Yapma Listesi](#9-yapma-listesi)
-10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+> Methodology to bring software systems and user flows to peak performance and efficiency.
+> 2025 AI-assisted observability and systematic improvement techniques.
 
 ---
 
-# 1. Optimizasyon Prensipleri (2025)
+# 📋 Contents
 
-| Prensip                       | Açıklama                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| **Measurement Over Guessing** | Ölçemediğin şeyi optimize edemezsin.                                      |
-| **80/20 Rule (Pareto)**       | Sorunların %80'i, kodun %20'sinden kaynaklanır.                           |
-| **Don't Optimize Early**      | Önce çalıştır, sonra doğru çalıştır, en son hızlı çalıştır.               |
-| **User-Centric Metrics**      | Sadece teknik hız değil, algılanan hız (perceived performance) önemlidir. |
-| **AI-Assisted Analysis**      | Karmaşık veri setlerini analiz etmek için AI araçlarını kullan.           |
-
----
-
-# 2. Darboğaz Tespiti (Bottleneck Identification)
-
-## 2.1 Sistematik Hata & Yavaşlık Tespiti
-
-Darboğazları tespit etmek için şu adımları izle:
-
-1. **Profiling:** Kodun hangi kısımlarının CPU/Memory tükettiğini belirle.
-2. **Tracing:** İsteklerin (request) sistemler arasındaki yolculuğunu izle.
-3. **Log Analysis:** Hata ve yavaşlık örüntülerini (patterns) bul.
-4. **User Flow Analysis:** Kullanıcının takıldığı veya yavaşladığı "adım"ları tespit et.
-
-## 2.2 Darboğaz İşaretleri
-
-- **CPU Spikes:** Yoğun matematiksel işlem veya sonsuz döngü.
-- **Memory Leaks:** Zamanla artan ve düşmeyen bellek kullanımı.
-- **High Latency:** Veritabanı sorguları veya dış API bağımlılıkları.
-- **Lock Contention:** Çoklu işlemlerde (concurrency) kaynak bekleme süreleri.
+1. [Optimization Principles (2025)](#1-optimization-principles-2025)
+2. [Bottleneck Identification](#2-bottleneck-identification)
+3. [AI-Driven Optimization](#3-ai-driven-optimization)
+4. [Modern Observability](#4-modern-observability)
+5. [Frontend & User Experience Optimization](#5-frontend--user-experience-optimization)
+6. [Backend & Database Optimization](#6-backend--database-optimization)
+7. [Systematic Improvement Cycle](#7-systematic-improvement-cycle)
+8. [Checklist](#8-checklist)
+9. [Don't List](#9-dont-list)
+10. [Must Do List](#10-must-do-list)
 
 ---
 
-# 3. AI-Driven Optimizasyon
+# 1. Optimization Principles (2025)
 
-2025 yılında optimizasyon, manuel analizden AI destekli analize evrilmiştir:
-
-- **AI Profiling:** AI araçlarının kod tabanını inceleyip potansiyel performans sorunlarını önceden tahmin etmesi.
-- **Automated Refactoring:** Performans düşüren kod bloklarının AI tarafından "cleaner & faster" versiyonları ile değiştirilmesi.
-- **Predictive Scaling:** Gelecekteki yükü tahmin edip altyapıyı önceden hazılaması.
+| Principle                     | Description                                              |
+| ----------------------------- | -------------------------------------------------------- |
+| **Measurement Over Guessing** | You cannot optimize what you do not measure.             |
+| **80/20 Rule (Pareto)**       | 80% of problems come from 20% of the code.               |
+| **Don't Optimize Early**      | Make it run, then make it right, then make it fast.      |
+| **User-Centric Metrics**      | Perceived performance matters more than technical speed. |
+| **AI-Assisted Analysis**      | Use AI tools to analyze complex datasets.                |
 
 ---
 
-# 4. Modern Gözlemlenebilirlik (Observability)
+# 2. Bottleneck Identification
 
-## 4.1 OpenTelemetry ve Full-Stack Visibility
+## 2.1 Systematic Error & Slowness Detection
 
-Sistemi sadece "izlemek" (monitoring) yetmez, "anlamak" (observability) gerekir:
+Follow these steps to identify bottlenecks:
 
-- **Metrics:** Zamana dayalı numerik veriler (örn: saniyedeki istek sayısı).
-- **Traces:** Tek bir isteğin sistemdeki tüm izi (Microservices/Distributed tracing).
-- **Logs:** Detaylı olay kayıtları.
+1. **Profiling:** Identify which parts calculate CPU/Memory.
+2. **Tracing:** Trace the journey of requests across systems.
+3. **Log Analysis:** Find error and latency patterns.
+4. **User Flow Analysis:** Identify the "steps" where the user gets stuck or slowed down.
 
-## 4.2 Gözlemlenebilirlik Araçları
+## 2.2 Signs of Bottlenecks
 
-- **Prometheus & Grafana:** Metrik görselleştirme.
+- **CPU Spikes:** Heavy mathematical operations or infinite loops.
+- **Memory Leaks:** Memory usage increasing over time without dropping.
+- **High Latency:** Database queries or external API dependencies.
+- **Lock Contention:** Waiting times for resources in concurrent processes.
+
+---
+
+# 3. AI-Driven Optimization
+
+In 2025, optimization has evolved from manual analysis to AI-assisted analysis:
+
+- **AI Profiling:** AI tools inspecting the codebase to predict potential performance issues.
+- **Automated Refactoring:** AI replacing performance-degrading code blocks with "cleaner & faster" versions.
+- **Predictive Scaling:** Predicting future load and preparing infrastructure in advance.
+
+---
+
+# 4. Modern Observability
+
+## 4.1 OpenTelemetry and Full-Stack Visibility
+
+It is not enough to just "monitor" the system, you need to "understand" it (observability):
+
+- **Metrics:** Time-based numeric data (e.g., requests per second).
+- **Traces:** The entire trail of a single request through the system (Microservices/Distributed tracing).
+- **Logs:** Detailed event records.
+
+## 4.2 Observability Tools
+
+- **Prometheus & Grafana:** Metric visualization.
 - **Jaeger/Zipkin:** Distributed tracing.
 - **New Relic / Datadog:** Full-stack APM (Application Performance Monitoring).
 
 ---
 
-# 5. Frontend & Kullanıcı Deneyimi Optimizasyonu
+# 5. Frontend & User Experience Optimization
 
 ## 5.1 Core Web Vitals (2025)
 
-- **LCP (Largest Contentful Paint):** En büyük içeriğin yüklenme süresi.
-- **INP (Interaction to Next Paint):** Kullanıcı etkileşimine verilen tepki hızı (FID'nin yerini aldı).
-- **CLS (Cumulative Layout Shift):** Sayfa düzenindeki kaymalar (göze hoş gelmeyen zıplamalar).
+- **LCP (Largest Contentful Paint):** Load time of the largest content element.
+- **INP (Interaction to Next Paint):** Response speed to user interaction (replaced FID).
+- **CLS (Cumulative Layout Shift):** Shifts in page layout.
 
-## 5.2 Teknikler
+## 5.2 Techniques
 
-- **Static Replacement:** JavaScript render yerine Server-Side Rendering (SSR) veya Static Site Generation (SSG).
-- **Image Optimization:** WebP/AVIF formatları, responsive sizes ve lazy loading.
-- **Bundle Splitting:** Kullanılmayan JavaScript'i yüklememe (Tree shaking).
+- **Static Replacement:** Server-Side Rendering (SSR) or Static Site Generation (SSG) instead of JavaScript render.
+- **Image Optimization:** WebP/AVIF formats, responsive sizes, and lazy loading.
+- **Bundle Splitting:** Not loading unused JavaScript (Tree shaking).
 
 ---
 
-# 6. Backend & Veritabanı Optimizasyonu
+# 6. Backend & Database Optimization
 
 ## 6.1 Database Query Optimization
 
-- **Indexing:** Doğru kolonlara index eklemek sorgu hızını 100x artırabilir.
-- **N+1 Avoidance:** Tek tek sorgu atmak yerine "include" veya "join" kullanmak.
-- **Query Caching:** Sık değişmeyen verileri Redis gibi memory-store'larda tutmak.
+- **Indexing:** Adding indexes to correct columns can increase query speed by 100x.
+- **N+1 Avoidance:** Using "include" or "join" instead of querying one by one.
+- **Query Caching:** Keeping infrequently changing data in memory-stores like Redis.
 
-## 6.2 Konvansiyonel Teknikler
+## 6.2 Conventional Techniques
 
-- **Connection Pooling:** Veritabanı bağlantılarını açık tutup tekrar kullanmak.
-- **Asynchronous Processing:** Zaman alan işleri (e-posta gönderimi vb.) arka plana (background jobs) atmak.
+- **Connection Pooling:** Keeping database connections open for reuse.
+- **Asynchronous Processing:** Offloading time-consuming tasks (email sending, etc.) to background jobs.
 
 ---
 
-# 7. Sistematik İyileştirme Döngüsü
+# 7. Systematic Improvement Cycle
 
 ```mermaid
 graph LR
@@ -135,41 +135,41 @@ graph LR
     D --> A
 ```
 
-1. **Measure:** Mevcut durumu ölç (Baseline).
-2. **Analyze:** Darboğazı ve nedenini bul.
-3. **Optimize:** En büyük etkiyi yaratacak değişikliği yap.
-4. **Verify:** Değişikliğin performansa etkisini doğrula (Regression test).
+1. **Measure:** Measure the current state (Baseline).
+2. **Analyze:** Find the bottleneck and its cause.
+3. **Optimize:** Make the change that creates the biggest impact.
+4. **Verify:** Confirm the effect of the change on performance (Regression test).
 
 ---
 
-# 8. Kontrol Listesi
+# 8. Checklist
 
-- [ ] Darboğaz teknik verilerle (metrics) doğrulandı mı?
-- [ ] Erken optimizasyon (premature optimization) yapılmadığından emin misin?
-- [ ] Yapılan değişikliğin rollback planı hazır mı?
-- [ ] Değişiklik sonrası "algılanan performans" (perceived performance) ölçüldü mü?
-- [ ] Yeni bir darboğaz yaratılmadığı test edildi mi?
-
----
-
-# 9. Yapma Listesi
-
-❌ Ölçüm yapmadan kodu değiştirme.
-❌ Sadece benchmark sonuçlarına bakarak (gerçek kullanıcı verisi olmadan) karar verme.
-❌ Tek seferde çok fazla parametreyi optimize etmeye çalışma.
-❌ "Daha hızlı" uğruna kod okunabilirliğini (readability) feda etme.
+- [ ] Is the bottleneck verified with technical data (metrics)?
+- [ ] Are you sure it's not premature optimization?
+- [ ] Is a rollback plan ready for the change?
+- [ ] Was "perceived performance" measured after the change?
+- [ ] Was it tested that no new bottleneck was created?
 
 ---
 
-# 10. Mutlaka Yap Listesi
+# 9. Don't List
 
-✅ 80/20 kuralına odaklan; en çok kullanılan akışları iyileştir.
-✅ OpenTelemetry standartlarını kullanarak sistemini şeffaf hale getir.
-✅ AI araçlarını veri analizi ve kalıp tespiti (pattern detection) için kullan.
-✅ Kullanıcı flow analizleri ile "hissedilen" yavaşlıkları öncelikle gider.
-✅ Her optimizasyon sonrası regression testleri çalıştır.
+❌ Do not change code without measuring.
+❌ Do not decide based solely on benchmark results (without real user data).
+❌ Do not try to optimize too many parameters at once.
+❌ Do not sacrifice code readability for the sake of "faster".
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.0
+# 10. Must Do List
+
+✅ Focus on the 80/20 rule; improve the most used flows.
+✅ Make your system transparent using OpenTelemetry standards.
+✅ Use AI tools for data analysis and pattern detection.
+✅ Fix "felt" slowness primarily through user flow analysis.
+✅ Run regression tests after every optimization.
+
+---
+
+**Last Update:** December 2025
+**Version:** 1.0

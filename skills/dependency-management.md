@@ -1,6 +1,6 @@
 ---
 name: dependency-management
-description: Paket ve bağımlılık yönetimi rehberi. Security audit, version management ve upgrade stratejileri.
+description: Package and dependency management guide. Security audit, version management, and upgrade strategies.
 metadata:
   skillport:
     category: operations
@@ -13,75 +13,75 @@ metadata:
 
 # Dependency Management Skill
 
-> Güvenli ve sürdürülebilir bağımlılık yönetimi rehberi.
-> Security auditing, version control ve upgrade stratejileri.
+> Guide for secure and sustainable dependency management.
+> Security auditing, version control, and upgrade strategies.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Temel Prensipler](#1-temel-prensipler)
-2. [Paket Ekleme Kararı](#2-paket-ekleme-kararı)
+1. [Core Principles](#1-core-principles)
+2. [Decision to Add a Package](#2-decision-to-add-a-package)
 3. [Security Auditing](#3-security-auditing)
 4. [Version Management](#4-version-management)
-5. [Upgrade Stratejisi](#5-upgrade-stratejisi)
-6. [Lock File Yönetimi](#6-lock-file-yönetimi)
+5. [Upgrade Strategy](#5-upgrade-strategy)
+6. [Lock File Management](#6-lock-file-management)
 7. [Dependency Cleanup](#7-dependency-cleanup)
 8. [Dependency Monitoring](#8-dependency-monitoring)
-9. [Kontrol Listesi](#9-kontrol-listesi)
-10. [Yapma Listesi](#10-yapma-listesi)
-11. [Mutlaka Yap Listesi](#11-mutlaka-yap-listesi)
+9. [Checklist](#9-checklist)
+10. [Don't List](#10-dont-list)
+11. [Must Do List](#11-must-do-list)
 
 ---
 
-# 1. Temel Prensipler
+# 1. Core Principles
 
-| Prensip | Açıklama |
+| Principle | Description |
 |---------|----------|
-| **Minimize Dependencies** | Gereksiz paket ekleme |
-| **Lock Versions** | package-lock.json commit'le |
-| **Audit Regularly** | Haftalık security check |
-| **Update Strategically** | Major updates dikkatli |
-| **Document Decisions** | Neden bu paket? |
+| **Minimize Dependencies** | Do not add unnecessary packages |
+| **Lock Versions** | Commit package-lock.json |
+| **Audit Regularly** | Weekly security checks |
+| **Update Strategically** | Careful with major updates |
+| **Document Decisions** | Why this package? |
 
 ---
 
-# 2. Paket Ekleme Kararı
+# 2. Decision to Add a Package
 
-## 2.1 Paket Eklemeden Önce
+## 2.1 Before Adding a Package
 
 ```markdown
-## Paket Değerlendirme Checklist
+## Package Evaluation Checklist
 
-### Gerçekten Gerekli mi?
-- [ ] Native çözüm var mı? (built-in modules)
-- [ ] Basit bir util ile yapılabilir mi?
-- [ ] Proje boyutuna değer mi?
+### Is it really necessary?
+- [ ] Is there a native solution? (built-in modules)
+- [ ] Can it be done with a simple utility?
+- [ ] Is it worth the project size increase?
 
-### Paket Kalitesi
+### Package Quality
 - [ ] Weekly downloads: >10K
 - [ ] GitHub stars: >1K
-- [ ] Son commit: <6 ay
+- [ ] Last commit: <6 months
 - [ ] Open issues reasonable
-- [ ] Maintainer aktif
+- [ ] Maintainer active
 
-### Güvenlik
-- [ ] npm audit temiz
-- [ ] Snyk/Dependabot taraması
-- [ ] Bilinen vulnerabilities yok
-- [ ] Dependency chain küçük
+### Security
+- [ ] npm audit clean
+- [ ] Snyk/Dependabot scan
+- [ ] No known vulnerabilities
+- [ ] Dependency chain small
 
-### Lisans
-- [ ] MIT / Apache 2.0 / ISC (uyumlu)
-- [ ] GPL değil (commercial projeler için)
+### License
+- [ ] MIT / Apache 2.0 / ISC (compatible)
+- [ ] Not GPL (for commercial projects)
 ```
 
-## 2.2 Paket Karşılaştırma
+## 2.2 Package Comparison
 
 ```markdown
-## Paket Karşılaştırma: Date Library
+## Package Comparison: Date Library
 
-| Kriter | date-fns | dayjs | moment |
+| Criteria | date-fns | dayjs | moment |
 |--------|----------|-------|--------|
 | Size (gzip) | 13KB | 2KB | 72KB |
 | Tree-shakeable | ✅ | ❌ | ❌ |
@@ -89,7 +89,7 @@ metadata:
 | TypeScript | ✅ | ✅ | ✅ |
 | Maintenance | ✅ | ✅ | ⚠️ Deprecated |
 
-**Karar:** dayjs (en küçük, aktif bakım)
+**Decision:** dayjs (smallest, active maintenance)
 ```
 
 ---
@@ -99,23 +99,23 @@ metadata:
 ## 3.1 npm audit
 
 ```bash
-# Güvenlik taraması
+# Security scan
 npm audit
 
-# Otomatik fix (dikkatli!)
+# Automatic fix (careful!)
 npm audit fix
 
-# Breaking changes dahil fix
-npm audit fix --force  # ⚠️ TEHLİKELİ
+# Fix including breaking changes
+npm audit fix --force  # ⚠️ DANGEROUS
 
-# JSON formatında (CI için)
+# JSON format (for CI)
 npm audit --json
 
 # Production dependencies only
 npm audit --omit=dev
 ```
 
-## 3.2 Audit Raporunu Anlama
+## 3.2 Understanding Audit Report
 
 ```
 ┌───────────────┬──────────────────────────────────────────────────────┐
@@ -131,7 +131,7 @@ npm audit --omit=dev
 ## 3.3 Snyk Integration
 
 ```bash
-# Snyk CLI kurulumu
+# Snyk CLI install
 npm install -g snyk
 
 # Auth
@@ -143,11 +143,11 @@ snyk test
 # Monitor (continuous)
 snyk monitor
 
-# Fix önerileri
+# Fix suggestions
 snyk wizard
 ```
 
-## 3.4 CI Pipeline'da Audit
+## 3.4 Audit in CI Pipeline
 
 ```yaml
 # .github/workflows/security.yml
@@ -157,7 +157,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 1'  # Her Pazartesi
+    - cron: '0 0 * * 1'  # Every Monday
 
 jobs:
   audit:
@@ -193,30 +193,30 @@ MAJOR.MINOR.PATCH
 ```json
 {
   "dependencies": {
-    "exact": "1.2.3",           // Tam bu versiyon
+    "exact": "1.2.3",           // Exact version
     "patch": "~1.2.3",          // 1.2.x (>=1.2.3 <1.3.0)
     "minor": "^1.2.3",          // 1.x.x (>=1.2.3 <2.0.0) [DEFAULT]
-    "any": "*",                 // Herhangi (TEHLİKELİ!)
+    "any": "*",                 // Any (DANGEROUS!)
     "range": ">=1.2.3 <2.0.0",  // Explicit range
-    "latest": "latest"          // Son stable (TEHLİKELİ!)
+    "latest": "latest"          // Latest stable (DANGEROUS!)
   }
 }
 ```
 
-## 4.3 Önerilen Yaklaşım
+## 4.3 Recommended Approach
 
 ```json
 {
   "dependencies": {
-    // Production: Daha conservative
+    // Production: More conservative
     "express": "^4.18.2",      // Minor updates OK
-    "prisma": "~5.6.0",        // Sadece patch
+    "prisma": "~5.6.0",        // Only patch
     
     // Security-critical: Lock
     "jsonwebtoken": "9.0.2"    // Exact version
   },
   "devDependencies": {
-    // Dev: Daha liberal
+    // Dev: More liberal
     "typescript": "^5.0.0",
     "eslint": "^8.0.0"
   }
@@ -225,69 +225,69 @@ MAJOR.MINOR.PATCH
 
 ---
 
-# 5. Upgrade Stratejisi
+# 5. Upgrade Strategy
 
-## 5.1 Düzenli Minor Updates
+## 5.1 Regular Minor Updates
 
 ```bash
-# Outdated paketleri göster
+# Show outdated packages
 npm outdated
 
 # Interactive update
 npx npm-check -u
 
-# Sadece patch/minor (güvenli)
+# Only patch/minor (safe)
 npm update
 
-# Tüm paketleri son minor'a
+# Update all packages to latest minor
 npx npm-check-updates -u --target minor
 npm install
 ```
 
-## 5.2 Major Updates (Dikkatli!)
+## 5.2 Major Updates (Carefully!)
 
 ```markdown
 ## Major Update Checklist: package@X.0.0
 
-### Hazırlık
-- [ ] CHANGELOG okuyun
-- [ ] Migration guide var mı?
-- [ ] Breaking changes listesi
+### Preparation
+- [ ] Read CHANGELOG
+- [ ] Is there a migration guide?
+- [ ] List breaking changes
 
-### Uygulama
-- [ ] Branch oluştur
+### Execution
+- [ ] Create branch
 - [ ] Package update
-- [ ] Type errors fix
-- [ ] Runtime errors fix
-- [ ] Tests güncelle
+- [ ] Fix type errors
+- [ ] Fix runtime errors
+- [ ] Update tests
 - [ ] All tests pass
 
-### Doğrulama
+### Verification
 - [ ] Smoke test
-- [ ] Critical paths test
+- [ ] Test critical paths
 - [ ] Performance check
 - [ ] Code review
 ```
 
-## 5.3 Major Update Örneği
+## 5.3 Major Update Example
 
 ```bash
-# 1. Branch oluştur
+# 1. Create branch
 git checkout -b upgrade/react-19
 
 # 2. Package update
 npm install react@19 react-dom@19
 
-# 3. TypeScript uyarılarını kontrol et
+# 3. Check TypeScript warnings
 npx tsc --noEmit
 
-# 4. Testleri çalıştır
+# 4. Run tests
 npm test
 
-# 5. Breaking changes'i düzelt
-# ... kod değişiklikleri ...
+# 5. Fix breaking changes
+# ... code changes ...
 
-# 6. Tekrar test
+# 6. Test again
 npm test
 
 # 7. Build
@@ -299,15 +299,15 @@ git commit -m "chore: upgrade react to v19"
 
 ---
 
-# 6. Lock File Yönetimi
+# 6. Lock File Management
 
 ## 6.1 package-lock.json
 
 ```bash
-# Zorunlu olarak lock file'dan install
-npm ci  # CI/CD'de kullan (npm install yerine)
+# Install strictly from lock file
+npm ci  # Use in CI/CD (instead of npm install)
 
-# Lock file regenerate
+# Regenerate lock file
 rm package-lock.json
 npm install
 
@@ -315,7 +315,7 @@ npm install
 npm audit signatures
 ```
 
-## 6.2 .npmrc Ayarları
+## 6.2 .npmrc Settings
 
 ```ini
 # .npmrc
@@ -330,16 +330,16 @@ engine-strict=true           # Enforce engine requirements
 
 # 7. Dependency Cleanup
 
-## 7.1 Kullanılmayan Paketleri Bul
+## 7.1 Find Unused Packages
 
 ```bash
-# depcheck kurulumu
+# Install depcheck
 npm install -g depcheck
 
-# Kullanılmayan paketleri bul
+# Find unused packages
 depcheck
 
-# Sonur:
+# Result
 Unused dependencies
 * lodash
 * moment
@@ -348,30 +348,30 @@ Unused devDependencies
 * @types/express
 ```
 
-## 7.2 Paket Boyutu Analizi
+## 7.2 Package Size Analysis
 
 ```bash
 # Bundle size analysis
 npx source-map-explorer dist/main.js
 
 # Import cost (VS Code extension)
-# Her import'un boyutunu gösterir
+# Shows size of each import
 
 # bundlephobia.com
-# Paket boyutlarını online kontrol
+# Check package sizes online
 ```
 
 ## 7.3 Cleanup Script
 
 ```bash
-# Gereksiz paketleri kaldır
+# Remove unnecessary packages
 npm uninstall lodash moment
 
-# node_modules temizle ve yeniden install
+# Clean node_modules and reinstall
 rm -rf node_modules
 npm ci
 
-# Cache temizle
+# Clean cache
 npm cache clean --force
 ```
 
@@ -425,52 +425,52 @@ updates:
 
 ---
 
-# 9. Kontrol Listesi
+# 9. Checklist
 
-### Paket Eklerken
-- [ ] Gerçekten gerekli mi?
-- [ ] Alternatifler değerlendirildi mi?
-- [ ] Paket kalitesi yeterli mi?
-- [ ] Security audit temiz mi?
-- [ ] Lisans uyumlu mi?
-- [ ] Bundle size kabul edilebilir mi?
+### When Adding a Package
+- [ ] Really necessary?
+- [ ] Alternatives evaluated?
+- [ ] Package quality sufficient?
+- [ ] Security audit clean?
+- [ ] License compatible?
+- [ ] Bundle size acceptable?
 
-### Düzenli Bakım (Haftalık)
-- [ ] npm audit çalıştır
-- [ ] Dependabot PR'larını review et
-- [ ] Outdated paketleri kontrol et
+### Regular Maintenance (Weekly)
+- [ ] Run npm audit
+- [ ] Review Dependabot/Renovate PRs
+- [ ] Check outdated packages
 
 ### Major Upgrade
-- [ ] CHANGELOG oku
-- [ ] Breaking changes listele
-- [ ] Branch'te test et
-- [ ] Full test suite çalıştır
-- [ ] Performance kontrol et
+- [ ] Read CHANGELOG
+- [ ] List breaking changes
+- [ ] Test in branch
+- [ ] Run full test suite
+- [ ] Check performance
 
 ---
 
-# 10. Yapma Listesi
+# 10. Don't List
 
-❌ npm install --save ile "*" veya "latest" kullanma
-❌ package-lock.json'ı .gitignore'a ekleme
-❌ npm audit fix --force körü körüne çalıştırma
-❌ Major update'leri test etmeden deploy etme
-❌ Deprecated paketleri uzun süre tutma
-❌ node_modules'ı commit'leme
-
----
-
-# 11. Mutlaka Yap Listesi
-
-✅ package-lock.json'ı commit et
-✅ CI'da `npm ci` kullan (npm install değil)
-✅ Haftalık npm audit çalıştır
-✅ Dependabot/Renovate kullan
-✅ Major updates için ayrı branch
-✅ Kullanılmayan paketleri temizle
-✅ Bundle size'ı izle
+❌ Do not use "*" or "latest" with npm install --save
+❌ Do not add package-lock.json to .gitignore
+❌ Do not run npm audit fix --force blindly
+❌ Do not deploy major updates without testing
+❌ Do not keep deprecated packages for long
+❌ Do not commit node_modules
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 11. Must Do List
+
+✅ Commit package-lock.json
+✅ Use `npm ci` in CI (not npm install)
+✅ Run weekly npm audit
+✅ Use Dependabot/Renovate
+✅ Separate branch for major updates
+✅ Clean up unused packages
+✅ Monitor bundle size
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

@@ -11,15 +11,15 @@ metadata:
       - spacing
 ---
 
-# Web Tasarım Oran-Orantı ve Tutarlılık Rehberi
+# Web Design Proportions and Consistency Guide
 
-## 🎯 Genel Prensip
+## 🎯 General Principle
 
-Her tasarım elementi matematiksel olarak tutarlı bir sistem içinde olmalı. Rastgele değerler kullanılmamalı, her ölçü bilinçli bir seçim olmalı.
+Every design element must be mathematically consistent within a system. Random values should not be used; every measurement must be a conscious choice.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
 1. [Spacing System (8-Point Grid)](#1-spacing-system-8-point-grid)
 2. [Layout & Grid System](#2-layout--grid-system)
@@ -33,51 +33,51 @@ Her tasarım elementi matematiksel olarak tutarlı bir sistem içinde olmalı. R
 10. [Micro-interactions](#10-micro-interactions)
 11. [Modern CSS Features (2025)](#11-modern-css-features-2025)
 12. [Accessibility Standards](#12-accessibility-standards)
-13. [Kontrol Listesi](#13-kontrol-listesi)
-14. [Yapay Zekaya Özel Prompt Örneği](#14-yapay-zekaya-özel-prompt-örneği)
-15. [Chain-of-Thought Prompt (Adım Adım Düşünme)](#15-chain-of-thought-prompt-adım-adım-düşünme)
-16. [Dinamik Karar Alma - Bağlamsal Esneklik](#16-dinamik-karar-alma---bağlamsal-esneklik)
-17. [Gerçek Dünya Örnekleri](#17-gerçek-dünya-örnekleri)
-18. [Ana Prensipler](#18-ana-prensipler)
-19. [Esneklik vs Tutarlılık Dengesi](#19-esneklik-vs-tutarlılık-dengesi)
-20. [Akıllı Prompt Ekleme](#20-akıllı-prompt-ekleme)
+13. [Checklist](#13-checklist)
+14. [AI Specific Prompt Example](#14-ai-specific-prompt-example)
+15. [Chain-of-Thought Prompt](#15-chain-of-thought-prompt)
+16. [Dynamic Decision Making - Contextual Flexibility](#16-dynamic-decision-making---contextual-flexibility)
+17. [Real World Examples](#17-real-world-examples)
+18. [Core Principles](#18-core-principles)
+19. [Flexibility vs Consistency Balance](#19-flexibility-vs-consistency-balance)
+20. [Smart Prompt Injection](#20-smart-prompt-injection)
 21. [Self-Correction Prompt](#21-self-correction-prompt)
-22. [Referanslar ve Kaynaklar](#22-referanslar-ve-kaynaklar)
+22. [References and Resources](#22-references-and-resources)
 
 ---
 
 # 1. Spacing System (8-Point Grid)
 
-## 1.1 Temel Kural
+## 1.1 Base Rule
 
-Tüm boşluklar 8'in katları olmalı. Bu modern UI/UX'in altın standardıdır.
+All spacing must be multiples of 8. This is the gold standard of modern UI/UX.
 
 ```
 4px   - Minimum spacing (micro interactions)
-8px   - XS - Çok küçük boşluklar
-16px  - SM - Küçük boşluklar (icon-text arası)
-24px  - MD - Orta boşluklar (card içi elementler)
-32px  - LG - Büyük boşluklar (component'ler arası)
-48px  - XL - Section içi gruplar
-64px  - 2XL - Section'lar arası
-96px  - 3XL - Major section'lar arası
+8px   - XS - Very small spacing
+16px  - SM - Small spacing (between icon-text)
+24px  - MD - Medium spacing (elements inside cards)
+32px  - LG - Large spacing (between components)
+48px  - XL - Groups inside sections
+64px  - 2XL - Between sections
+96px  - 3XL - Between major sections
 128px - 4XL - Hero section padding
 ```
 
-## 1.2 Padding Yapısı
+## 1.2 Padding Structure
 
-- **Card/Container içi padding**: 24px veya 32px
-- **Button padding**: Dikey 12px, Yatay 24px
-- **Input field padding**: Dikey 12px, Yatay 16px
+- **Internal padding for Card/Container**: 24px or 32px
+- **Button padding**: Vertical 12px, Horizontal 24px
+- **Input field padding**: Vertical 12px, Horizontal 16px
 - **Section padding**: 64px - 96px (Desktop), 32px - 48px (Mobile)
 
-> **12px Hakkında Not**: 12px tam olarak 8'in katı değildir (1.5× base unit) ancak compact touch-friendly tasarımlar için endüstri standardı olarak kabul edilir. Alternatif: 8px (daha tight) veya 16px (daha spacious).
+> **Note on 12px**: 12px is not strictly a multiple of 8 (1.5× base unit) but is accepted as an industry standard for compact touch-friendly designs. Alternative: 8px (tighter) or 16px (more spacious).
 
 ---
 
 # 2. Layout & Grid System
 
-## 2.1 Container Sistem
+## 2.1 Container System
 
 ```
 Mobile:     100% width, 16px side padding
@@ -86,7 +86,7 @@ Desktop:    1200px max-width, 32px side padding
 Wide:       1440px max-width, 48px side padding
 ```
 
-> Tüm max-width değerleri 8'in katıdır: 768, 1200, 1440
+> All max-width values are multiples of 8: 768, 1200, 1440
 
 ## 2.2 Grid Columns
 
@@ -96,10 +96,10 @@ Wide:       1440px max-width, 48px side padding
 
 ## 2.3 Aspect Ratios
 
-Görseller ve medya için standart oranlar:
+Standard ratios for images and media:
 
-- **Hero images**: 16:9 veya 21:9
-- **Card images**: 4:3 veya 1:1
+- **Hero images**: 16:9 or 21:9
+- **Card images**: 4:3 or 1:1
 - **Portrait**: 3:4
 - **Avatar**: 1:1 (perfect square)
 - **Video embed**: 16:9
@@ -110,7 +110,7 @@ Görseller ve medya için standart oranlar:
 
 ## 3.1 Modern Font Sizing (Practical Scale - Tailwind Based)
 
-> Not: Bu scale matematiksel Major Third (1.250) değil, pratik kullanım için optimize edilmiş Tailwind-style bir scale'dir.
+> Note: This scale is not the mathematical Major Third (1.250) but a Tailwind-style scale optimized for practical use.
 
 ```
 12px  - Caption / Helper text
@@ -126,9 +126,9 @@ Görseller ve medya için standart oranlar:
 80px  - Extra large display
 ```
 
-## 3.2 Line Height Oranları
+## 3.2 Line Height Ratios
 
-- **Başlıklar (H1-H3)**: 1.2 - 1.3
+- **Headings (H1-H3)**: 1.2 - 1.3
 - **Body text**: 1.5 - 1.6
 - **Small text**: 1.4
 - **Hero text**: 1.1
@@ -146,8 +146,8 @@ Görseller ve medya için standart oranlar:
 
 ## 3.4 Letter Spacing (Tracking)
 
-- **Büyük başlıklar (48px+)**: -0.02em (tighter)
-- **Normal başlıklar**: 0
+- **Large headings (48px+)**: -0.02em (tighter)
+- **Normal headings**: 0
 - **Body text**: 0
 - **Small caps / Uppercase**: 0.05em - 0.1em (looser)
 - **Button text**: 0.02em
@@ -161,9 +161,9 @@ Görseller ve medya için standart oranlar:
 - **Normal text**: Minimum 4.5:1
 - **Large text (18px+)**: Minimum 3:1
 - **UI components**: Minimum 3:1
-- **AAA standart**: 7:1 (ideal)
+- **AAA standard**: 7:1 (ideal)
 
-## 4.2 Renk Paleti Yapısı
+## 4.2 Color Palette Structure
 
 ```
 Primary: 10 shades (50, 100, 200...900, 950)
@@ -178,7 +178,7 @@ Info: 5 shades
 ## 4.3 Opacity Scale
 
 ```
-100% - Tam opak (default)
+100% - Fully opaque (default)
 90%  - Subtle reduction
 75%  - Disabled states
 60%  - Placeholder text
@@ -213,7 +213,7 @@ XLarge:  Height 56px, Padding 16px 40px, Font 20px
 9999px - Full rounded (pills, avatars)
 ```
 
-> Not: 12px yaygın kullanılsa da 8-point grid'e tam uymaz. Tutarlılık için 8px veya 16px tercih edin.
+> Note: While 12px is commonly used, it doesn't fit the 8-point grid perfectly. Prefer 8px or 16px for consistency.
 
 ## 5.3 Icon Sizes
 
@@ -235,7 +235,7 @@ XLarge:  Height 56px, Padding 16px 40px, Font 20px
 ```
 Mobile:       0px - 639px
 Tablet SM:    640px - 767px
-Tablet:       768px - 1023px  (iPad portrait için kritik)
+Tablet:       768px - 1023px  (Critical for iPad portrait)
 Desktop:      1024px - 1439px
 Wide Desktop: 1440px+
 ```
@@ -256,7 +256,7 @@ xl:  1280px  → Large desktop
 /* Modern Fluid Typography Formula (2025) */
 font-size: clamp(min, preferred, max)
 
-/* CSS Custom Properties ile */
+/* With CSS Custom Properties */
 :root {
   /* Fluid type scale */
   --fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); /* 12-14px */
@@ -269,7 +269,7 @@ font-size: clamp(min, preferred, max)
   --fluid-4xl: clamp(3rem, 2rem + 4vw, 5rem); /* 48-80px */
 }
 
-/* Kullanım */
+/* Usage */
 h1 {
   font-size: var(--fluid-3xl);
 }
@@ -336,24 +336,24 @@ shadow-2xl:  0 25px 50px rgba(0,0,0,0.15)
 ## 7.4 Focus Visible (Modern Approach)
 
 ```css
-/* Keyboard navigation için focus göster */
+/* Show focus for keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--primary-500);
   outline-offset: 2px;
 }
 
-/* Mouse click için focus gizle */
+/* Hide focus for mouse click */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Dark background için daha kalın offset */
+/* Thicker offset for dark background */
 .dark :focus-visible {
   outline-offset: 4px;
 }
 ```
 
-> **Best Practice**: `:focus-visible` kullanarak sadece keyboard navigation'da focus ring göster. Bu, mouse kullanıcıları için daha temiz bir deneyim sağlar.
+> **Best Practice**: Use `:focus-visible` to show the focus ring only during keyboard navigation. This provides a cleaner experience for mouse users.
 
 ---
 
@@ -373,10 +373,10 @@ shadow-2xl:  0 25px 50px rgba(0,0,0,0.15)
 ## 8.2 Easing Functions
 
 ```
-ease-in:      Başlangıç yavaş (cubic-bezier(0.4, 0, 1, 1))
-ease-out:     Bitiş yavaş (cubic-bezier(0, 0, 0.2, 1)) - En çok kullanılan
-ease-in-out:  İkisi de (cubic-bezier(0.4, 0, 0.2, 1))
-ease-bounce:  Spring effect için
+ease-in:      Slow start (cubic-bezier(0.4, 0, 1, 1))
+ease-out:     Slow end (cubic-bezier(0, 0, 0.2, 1)) - Most commonly used
+ease-in-out:  Both (cubic-bezier(0.4, 0, 0.2, 1))
+ease-bounce:  For spring effect
 ```
 
 ---
@@ -427,16 +427,16 @@ Disabled: Opacity 50%, Cursor not-allowed
 
 ## 11.1 Container Queries
 
-Component-based responsive tasarım için viewport yerine container'a göre stil uygula:
+Use container queries instead of viewport media queries for component-based responsive design:
 
 ```css
-/* Container tanımla */
+/* Define container */
 .card-container {
   container-type: inline-size;
   container-name: card;
 }
 
-/* Container genişliğine göre stil */
+/* Style according to container width */
 @container card (min-width: 400px) {
   .card-content {
     display: grid;
@@ -454,7 +454,7 @@ Component-based responsive tasarım için viewport yerine container'a göre stil
 
 ## 11.2 System Preferences (User Preferences)
 
-Kullanıcının sistem tercihlerine göre uyum sağla:
+Adapt to user system preferences:
 
 ```css
 /* Dark mode preference */
@@ -494,17 +494,17 @@ Kullanıcının sistem tercihlerine göre uyum sağla:
 
 ## 11.3 CSS Logical Properties
 
-LTR/RTL desteği için fiziksel yerine mantıksal özellikler kullan:
+Use logical properties instead of physical ones for LTR/RTL support:
 
 ```css
-/* Eskisi (LTR only) */
+/* Old way (LTR only) */
 .old-way {
   margin-left: 16px;
   padding-right: 24px;
   border-left: 2px solid;
 }
 
-/* Yenisi (LTR & RTL) */
+/* New way (LTR & RTL) */
 .new-way {
   margin-inline-start: 16px;
   padding-inline-end: 24px;
@@ -519,409 +519,409 @@ LTR/RTL desteği için fiziksel yerine mantıksal özellikler kullan:
 ## 12.1 Touch Targets
 
 - **Minimum size**: 44x44px (Apple) / 48x48px (Google)
-- **Optimal size**: 48x48px veya daha büyük
+- **Optimal size**: 48x48px or larger
 - **Spacing between**: Minimum 8px
 
 ## 12.2 Focus Indicators
 
-- **Visibility**: Her zaman görünür olmalı
-- **Contrast**: 3:1 minimum (background ile)
+- **Visibility**: Must always be visible
+- **Contrast**: 3:1 minimum (with background)
 - **Thickness**: Minimum 2px
 
 ---
 
-# 13. Kontrol Listesi
+# 13. Checklist
 
-Her tasarım elementi için kontrol et:
+Check for every design element:
 
-- [ ] Tüm spacing değerleri 8'in katları mı?
-- [ ] Font boyutları type scale'e uygun mu?
-- [ ] Line-height oranları doğru mu?
-- [ ] Color contrast ratios WCAG standartlarına uygun mu?
-- [ ] Touch target'lar minimum 48x48px mi?
-- [ ] Border radius tutarlı bir sistem kullanıyor mu?
-- [ ] Z-index değerleri sistematik mi?
-- [ ] Animation duration'ları tutarlı mı?
-- [ ] Responsive breakpoint'lerde oranlar korunuyor mu?
-- [ ] White space hierarchy mantıklı mı?
+- [ ] Are all spacing values multiples of 8?
+- [ ] Are font sizes aligned with the type scale?
+- [ ] Are line-height ratios correct?
+- [ ] Are color contrast ratios WCAG compliant?
+- [ ] Are touch targets at least 48x48px?
+- [ ] Does border radius use a consistent system?
+- [ ] Are z-index values systematic?
+- [ ] Are animation durations consistent?
+- [ ] Are ratios preserved in responsive breakpoints?
+- [ ] Is white space hierarchy logical?
 
 ---
 
-# 14. Yapay Zekaya Özel Prompt Örneği
+# 14. AI Specific Prompt Example
 
-### Basit Versiyon
+### Simple Version
 
 ```
-"Lütfen aşağıdaki kurallara KESİNLİKLE uyarak tasarım yap:
+"Please design strictly adhering to the following rules:
 
-SPACING: Sadece 8px multiplier kullan (8, 16, 24, 32, 48, 64, 96)
+SPACING: Use only 8px multipliers (8, 16, 24, 32, 48, 64, 96)
 TYPOGRAPHY: 16px base, 1.250 scale ratio (16, 20, 24, 32, 40, 48, 64)
-LINE-HEIGHT: Başlıklar 1.2, body text 1.5
+LINE-HEIGHT: Headings 1.2, body text 1.5
 GRID: 12-column, 24px gutter, 1200px max-width
-BORDER-RADIUS: 8px standard, 16px özel componentler
-SHADOWS: Tailwind shadow scale kullan
+BORDER-RADIUS: 8px standard, 16px special components
+SHADOWS: Use Tailwind shadow scale
 COLORS: WCAG AAA contrast (7:1 minimum)
 BUTTONS: 40px height, 12px/24px padding, 4px radius
 RESPONSIVE: 640px, 1024px, 1440px breakpoints
 ANIMATIONS: 200ms default, ease-out easing
 
-Her bir değer bu sisteme uymalı, rastgele sayı kullanma."
+Every single value must fit this system, do not use random numbers."
 ```
 
 ---
 
-# 15. Chain-of-Thought Prompt (Adım Adım Düşünme)
+# 15. Chain-of-Thought Prompt
 
-Bu prompt yapay zekayı her adımda düşünerek, kontrol ederek ilerlemesini sağlar:
+This prompt ensures the AI thinks and checks at every step:
 
 ```
-"Tasarımı yaparken her aşamada aşağıdaki soruları kendine sor ve cevapla:
+"While designing, ask yourself and answer the following questions at each stage:
 
-## 📐 LAYOUT AŞAMASI
-1. "Container genişliğim ne olmalı?"
-   → Mobil için 100% (16px padding)
-   → Desktop için 1200px max-width mi kullanıyorum?
+## 📐 LAYOUT PHASE
+1. 'What should be my Container width?'
+   → 100% for Mobile (16px padding)
+   → Am I using 1200px max-width for Desktop?
 
-2. "Grid sistemim düzgün mü?"
-   → 12 column kullanıyor muyum?
-   → Gutter 24px mi?
-   → Her element grid'e oturuyor mu?
+2. 'Is my Grid system correct?'
+   → Am I using 12 columns?
+   → Is the Gutter 24px?
+   → Does every element fit the grid?
 
-3. "Section'lar arası boşluklar tutarlı mı?"
-   → 64px veya 96px kullandım mı?
-   → Rastgele 50px, 70px gibi değerler var mı? (OLMAMALI!)
+3. 'Are spacing between sections consistent?'
+   → Did I use 64px or 96px?
+   → Are there random values like 50px, 70px? (MUST NOT BE!)
 
-## 🔤 TYPOGRAPHY AŞAMASI
-4. "Font boyutlarım scale'e uygun mu?"
+## 🔤 TYPOGRAPHY PHASE
+4. 'Do my font sizes fit the scale?'
    → H1: 48px ✓
    → H2: 32px ✓
    → H3: 24px ✓
    → Body: 16px ✓
-   → 17px, 19px, 28px gibi değerler var mı? (OLMAMALI!)
+   → Are there values like 17px, 19px, 28px? (MUST NOT BE!)
 
-5. "Line-height oranlarım doğru mu?"
-   → Başlıklarda 1.2 kullandım mı?
-   → Body text'te 1.5 kullandım mı?
+5. 'Are my line-height ratios correct?'
+   → Did I use 1.2 for headings?
+   → Did I use 1.5 for body text?
 
-6. "Font weight hierarchy mantıklı mı?"
-   → H1 en bold (700-800)?
+6. 'Is the font weight hierarchy logical?'
+   → H1 boldest (700-800)?
    → Body normal (400)?
-   → Subtle emphasis için 500-600 kullandım mı?
+   → Did I use 500-600 for subtle emphasis?
 
-## 🎨 RENK VE KONTRAST AŞAMASI
-7. "Kontrast oranları yeterli mi?"
-   → Ana metinler 7:1 oranında mı?
-   → Küçük metinler bile 4.5:1'in üzerinde mi?
-   → Contrast checker ile kontrol ettim mi?
+## 🎨 COLOR AND CONTRAST PHASE
+7. 'Are contrast ratios sufficient?'
+   → Are main texts 7:1?
+   → Are even small texts above 4.5:1?
+   → Did I check with a contrast checker?
 
-8. "Renk sistemi tutarlı mı?"
-   → Primary, secondary, neutral tanımlı mı?
-   → Her rengin 10 shade'i var mı?
-   → Rastgele hex kodlar mı yoksa sistematik palet mi kullandım?
+8. 'Is the color system consistent?'
+   → Are primary, secondary, neutral defined?
+   → Does each color have 10 shades?
+   → Did I use a systematic palette or random hex codes?
 
-## 📦 COMPONENT AŞAMASI
-9. "Button ölçüleri standart mı?"
-   → Height: 40px (medium) kullandım mı?
+## 📦 COMPONENT PHASE
+9. 'Are button sizes standard?'
+   → Did I use Height: 40px (medium)?
    → Padding: 12px/24px (vertical/horizontal)?
-   → Border-radius: 4px veya 8px?
-   → 38px height veya 11px padding gibi değerler YOK DEĞİL Mİ?
+   → Border-radius: 4px or 8px?
+   → Are there values like 38px height or 11px padding? (MUST NOT BE!)
 
-10. "Card'ların padding'i tutarlı mı?"
-    → 24px veya 32px kullandım mı?
-    → Her card aynı padding sistemini kullanıyor mu?
+10. 'Is card padding consistent?'
+    → Did I use 24px or 32px?
+    → Does every card use the same padding system?
 
-11. "Icon boyutları standart mı?"
-    → 16px, 20px, 24px seçeneklerinden biri mi?
-    → Text ile inline olan iconlar 16px mı?
+11. 'Are icon sizes standard?'
+    → One of 16px, 20px, 24px options?
+    → Are icons inline with text 16px?
 
-## ⚡ SPACING AŞAMASI (EN ÖNEMLİ!)
-12. "TÜM spacing değerlerimi kontrol ediyorum:"
-    → Margin-top: 8'in katı mı? (örn: 24px ✓, 25px ✗)
-    → Margin-bottom: 8'in katı mı?
-    → Padding: 8'in katı mı?
-    → Gap (flexbox/grid): 8'in katı mı?
+## ⚡ SPACING PHASE (MOST IMPORTANT!)
+12. 'Checking ALL my spacing values:'
+    → Margin-top: Multiple of 8? (e.g., 24px ✓, 25px ✗)
+    → Margin-bottom: Multiple of 8?
+    → Padding: Multiple of 8?
+    → Gap (flexbox/grid): Multiple of 8?
 
-13. "Element arası boşluklar hiyerarşik mi?"
-    → İlgili elementler: 8-16px
-    → Component içi gruplar: 24-32px
-    → Component'ler arası: 32-48px
-    → Section'lar arası: 64-96px
+13. 'Is spacing between elements hierarchical?'
+    → Related elements: 8-16px
+    → Groups inside component: 24-32px
+    → Between components: 32-48px
+    → Between sections: 64-96px
 
-## 📱 RESPONSIVE AŞAMASI
-14. "Breakpoint'lerim standart mı?"
+## 📱 RESPONSIVE PHASE
+14. 'Are my breakpoints standard?'
     → 640px (mobile-tablet)
     → 1024px (tablet-desktop)
     → 1440px (desktop-wide)
-    → 900px gibi custom değerler YOK DEĞİL Mİ?
+    → Are there custom values like 900px? (MUST NOT BE!)
 
-15. "Mobilde oranlar korunuyor mu?"
-    → Font boyutları responsive scaling ile küçülüyor mu?
-    → Padding'ler mobilde 16px'e düşüyor mu?
-    → Grid columns mobile'da 4'e düşüyor mu?
+15. 'Are ratios preserved in mobile?'
+    → Do font sizes shrink with responsive scaling?
+    → Does padding drop to 16px on mobile?
+    → Do grid columns drop to 4 on mobile?
 
-## 🎭 GÖRSEL DETAYLAR
-16. "Border-radius tutarlı mı?"
-    → 4px, 8px, 16px seçeneklerinden biri mi?
-    → 7px, 12px gibi custom değerler YOK DEĞİL Mİ?
+## 🎭 VISUAL DETAILS
+16. 'Is border-radius consistent?'
+    → One of 4px, 8px, 16px options?
+    → Are there custom values like 7px, 12px? (MUST NOT BE!)
 
-17. "Shadow sistemi tutarlı mı?"
-    → Tailwind shadow scale kullandım mı?
-    → Custom shadow değerleri var mı? (olmamalı!)
+17. 'Is the shadow system consistent?'
+    → Did I use Tailwind shadow scale?
+    → Are there custom shadow values? (Should not be!)
 
-18. "Z-index değerleri sistematik mi?"
-    → 10, 20, 30, 40... şeklinde artıyor mu?
-    → 15, 25 gibi değerler YOK DEĞİL Mİ?
+18. 'Are z-index values systematic?'
+    → Increasing like 10, 20, 30, 40...?
+    → Are there values like 15, 25? (MUST NOT BE!)
 
-## ✅ FİNAL KONTROL
-19. "Genel tutarlılık kontrolü:"
-    → Aynı component tekrar ettiğinde TAMAMEN aynı değerleri kullanıyor muyum?
-    → İki button yan yana olsa aynı height/padding'e sahipler mi?
-    → Tüm card'lar aynı border-radius kullanıyor mu?
+## ✅ FINAL CHECK
+19. 'General consistency check:'
+    → When the same component repeats, am I using EXACTLY the same values?
+    → Do two side-by-side buttons have the same height/padding?
+    → do all cards use the same border-radius?
 
-20. "Matematiksel tutarlılık:"
-    → Tüm sayılarım 8'in katı mı?
-    → Font scale'im tutarlı mı?
-    → Hiçbir yerde "yaklaşık" bir değer kullanmadım değil mi?
+20. 'Mathematical consistency:'
+    → Are all my numbers multiples of 8?
+    → Is my font scale consistent?
+    → I haven't used any 'approximate' values, right?
 
-## 🔴 YAPMA LİSTESİ
-❌ 15px, 18px, 22px, 35px gibi değerler KULLANMA
-❌ "Yaklaşık 30px olsun" DEĞİL, tam 32px olmalı
-❌ Her component için farklı padding KULLANMA
-❌ Rastgele margin değerleri KULLANMA
-❌ Custom breakpoint'ler EKLEME (640, 1024, 1440 yeterli)
+## 🔴 DO NOT DO LIST
+❌ DO NOT USE values like 15px, 18px, 22px, 35px
+❌ DO NOT say 'Let it be around 30px', it must be exactly 32px
+❌ DO NOT use different padding for every component
+❌ DO NOT use random margin values
+❌ DO NOT add Custom breakpoints (640, 1024, 1440 are enough)
 
-## ✅ MUTLAKA YAP LİSTESİ
-✅ Her değeri belirlemeden önce "Bu 8'in katı mı?" diye SOR
-✅ Her font boyutunu belirlemeden önce scale'e BAK
-✅ Her spacing'i belirlemeden önce sistem tablosuna BAK
-✅ Aynı component tekrar edince değerleri KOPYALA (değiştirme!)
-✅ Bitirince tüm değerleri TEK TEK kontrol ET
+## ✅ MUST DO LIST
+✅ BEFORE setting any value, ASK 'Is this a multiple of 8?'
+✅ BEFORE setting any font size, LOOK at the scale
+✅ BEFORE setting any spacing, LOOK at the system table
+✅ COPY values when the same component repeats (don't change!)
+✅ CHECK all values ONE BY ONE when finished
 
-Her komponenti oluşturduktan sonra bu soruları cevapla ve cevaplarını göster.
-Eğer bir değer sisteme uymuyorsa, DURDUR ve düzelt."
+After creating each component, answer these questions and show your answers.
+If a value does not fit the system, STOP and fix it."
 ```
 
 ---
 
-## 🎯 Örnek Düşünme Süreci Çıktısı
+## 🎯 Example Thought Process Output
 
-Yapay zeka böyle düşünmeli:
+The AI should think like this:
 
 ```
-🤔 Button Component Tasarlıyorum...
+🤔 Designing Button Component...
 
-Soru 1: Height ne olmalı?
-→ Kontrol: Medium size için 40px (✓ 8'in katı)
+Question 1: What shoud be the Height?
+→ Check: 40px for Medium size (✓ Multiple of 8)
 
-Soru 2: Padding ne olmalı?
-→ Kontrol: Vertical 12px, Horizontal 24px (✓ her ikisi de 8'in katı)
+Question 2: What should be the Padding?
+→ Check: Vertical 12px, Horizontal 24px (✓ Both are multiples of 8 - vertical exception accepted)
 
-Soru 3: Border-radius ne olmalı?
-→ Kontrol: Button için 4px standart (✓ sistem tablosunda var)
+Question 3: What should be the Border-radius?
+→ Check: 4px standard for Button (✓ in system table)
 
-Soru 4: Font size ne olmalı?
-→ Kontrol: 16px base size (✓ typography scale'de)
+Question 4: What should be the Font size?
+→ Check: 16px base size (✓ in typography scale)
 
-Soru 5: Margin-bottom ne olmalı?
-→ Kontrol: Diğer elementlerle 24px boşluk (✓ 8'in katı)
+Question 5: What should be the Margin-bottom?
+→ Check: 24px spacing with other elements (✓ Multiple of 8)
 
-✅ TÜM DEĞERLER SİSTEME UYGUN
+✅ ALL VALUES COMPLIANT WITH SYSTEM
 ```
 
 ---
 
-# 16. Dinamik Karar Alma - Bağlamsal Esneklik
+# 16. Dynamic Decision Making - Contextual Flexibility
 
-**ÖNEMLİ**: Bu sistem bir ROBOT DEĞİL, akıllı bir tasarımcı gibi düşünmeli!
+**IMPORTANT**: This system is NOT A ROBOT, it should think like a smart designer!
 
-## 16.1 Esnek Düşünme Prensibi
+## 16.1 Flexible Thinking Principle
 
 ```
-"Tasarım kurallarına UYARKEN, her kararı projenin bağlamında değerlendir:
+"While FOLLOWING design rules, evaluate every decision within the context of the project:
 
-🎯 HER KARAR İÇİN ŞU SORULARI SOR:
+🎯 ASK THESE QUESTIONS FOR EVERY DECISION:
 
-1. 'Bu proje ne tür bir proje?'
-   → E-ticaret mi? (Daha compact spacing)
-   → Kurumsal site mi? (Daha spacious, professional)
-   → Portfolio mu? (Daha bold, creative)
-   → SaaS dashboard mu? (Daha functional, dense)
-   → Blog mu? (Daha readable, relaxed)
+1. 'What kind of project is this?'
+   → E-commerce? (More compact spacing)
+   → Corporate site? (More spacious, professional)
+   → Portfolio? (More bold, creative)
+   → SaaS dashboard? (More functional, dense)
+   → Blog? (More readable, relaxed)
 
-2. 'Bu componentin amacı ne?'
-   → CTA button → Daha büyük padding (16px/32px), bold
-   → Secondary button → Standart padding (12px/24px)
+2. 'What is the purpose of this component?'
+   → CTA button → Larger padding (16px/32px), bold
+   → Secondary button → Standard padding (12px/24px)
    → Text button → Minimal padding (8px/16px)
 
-3. 'Kullanıcı buraya ne için bakıyor?'
-   → Hızlı scan etmek için mi? → Daha fazla whitespace
-   → Detaylı okumak için mi? → Daha rahat line-height
-   → Hızlı aksiyon almak için mi? → Daha vurgulu CTA
+3. 'What is the user looking here for?'
+   → To scan quickly? → More whitespace
+   → To read in detail? → More comfortable line-height
+   → To take quick action? → More emphasized CTA
 
-4. 'Bu alan visual hierarchy'de nerede?'
-   → Hero section → Daha spacious (96px-128px padding)
+4. 'Where is this area in the visual hierarchy?'
+   → Hero section → More spacious (96px-128px padding)
    → Content section → Normal (64px padding)
-   → Footer → Daha compact (48px padding)
+   → Footer → More compact (48px padding)
 
-5. 'Target audience kimler?'
-   → Yaşlı kullanıcılar → Daha büyük font (18px base)
-   → Genç, tech-savvy → Normal (16px base)
-   → Profesyoneller → Daha compact, efficient
+5. 'Who is the target audience?'
+   → Elderly users → Larger font (18px base)
+   → Young, tech-savvy → Normal (16px base)
+   → Professionals → More compact, efficient
 
-## 🔀 ESNEK KARAR ÖRNEKLERİ
+## 🔀 FLEXIBLE DECISION EXAMPLES
 
-### Örnek 1: Hero Section Padding
-❌ ROBOT: "Her zaman 96px padding kullan"
-✅ AKILLI:
-- Lüks marka site → 128px padding (daha spacious, premium feel)
+### Example 1: Hero Section Padding
+❌ ROBOT: "Always use 96px padding"
+✅ SMART:
+- Luxury brand site → 128px padding (more spacious, premium feel)
 - Startup landing page → 96px padding (balanced)
-- SaaS dashboard → 64px padding (daha functional, less marketing)
-📝 Sebep: Markanın tonu padding miktarını etkiler
+- SaaS dashboard → 64px padding (more functional, less marketing)
+📝 Reason: Brand tone affects padding amount
 
-### Örnek 2: Card Spacing
-❌ ROBOT: "Her zaman 24px padding kullan"
-✅ AKILLI:
-- Ürün kartları (e-ticaret) → 16px padding (daha çok ürün görünsün)
-- Blog post kartları → 24px padding (rahat okuma)
-- Feature cards (marketing) → 32px padding (her kart öne çıksın)
-📝 Sebep: İçerik tipi spacing'i belirler
+### Example 2: Card Spacing
+❌ ROBOT: "Always use 24px padding"
+✅ SMART:
+- Product cards (e-commerce) → 16px padding (show more products)
+- Blog post cards → 24px padding (comfortable reading)
+- Feature cards (marketing) → 32px padding (make every card stand out)
+📝 Reason: Content type determines spacing
 
-### Örnek 3: Font Size
-❌ ROBOT: "Body text her zaman 16px"
-✅ AKILLI:
-- Uzun blog yazıları → 18px (gözü yormamak için)
-- Dashboard tables → 14px (daha çok data sığsın)
-- Marketing copy → 16px (standart)
-- Legal text → 12px (fazla yer kaplamamalı ama okunabilir)
-📝 Sebep: İçerik uzunluğu ve amacı font size'ı etkiler
+### Example 3: Font Size
+❌ ROBOT: "Body text is always 16px"
+✅ SMART:
+- Long blog posts → 18px (to avoid eye strain)
+- Dashboard tables → 14px (fit more data)
+- Marketing copy → 16px (standard)
+- Legal text → 12px (should not take too much space but readable)
+📝 Reason: Content length and purpose affects font size
 
-### Örnek 4: Button Size
-❌ ROBOT: "Her button 40px height"
-✅ AKILLI:
-- Primary CTA (Hero) → 56px height (çok önemli, vurgulanmalı)
-- Form submit button → 48px height (önemli ama primary kadar değil)
-- In-content button → 40px height (standart)
+### Example 4: Button Size
+❌ ROBOT: "Every button is 40px height"
+✅ SMART:
+- Primary CTA (Hero) → 56px height (very important, must be emphasized)
+- Form submit button → 48px height (important but not as much as primary)
+- In-content button → 40px height (standard)
 - Table action button → 32px height (compact, functional)
-📝 Sebep: Button'ın önemi ve konumu size'ı belirler
+📝 Reason: Button importance and location determines size
 
-### Örnek 5: Section Spacing
-❌ ROBOT: "Section'lar arası her zaman 64px"
-✅ AKILLI:
-- Hero → Next section: 96px (güçlü ayırım)
-- Related content sections: 48px (birbirine yakın hissettir)
-- Footer'dan önce: 128px (net ayrım)
-📝 Sebep: Section'ların ilişkisi spacing'i etkiler
+### Example 5: Section Spacing
+❌ ROBOT: "Between sections is always 64px"
+✅ SMART:
+- Hero → Next section: 96px (strong separation)
+- Related content sections: 48px (feel close to each other)
+- Before Footer: 128px (clear separation)
+📝 Reason: Relationship of sections affects spacing
 
-## 🎨 BAĞLAMSAL KARAR AĞACI
+## 🎨 CONTEXTUAL DECISION TREE
 
 ```
-Kararı Verirken:
+When Deciding:
 │
-├─ 1️⃣ Sisteme bak → Hangi değerler uygun? (8, 16, 24, 32...)
+├─ 1️⃣ Look at System → Which values are appropriate? (8, 16, 24, 32...)
 │ │
-│ ├─ 2️⃣ Projeyi değerlendir → Ne tür bir site?
+│ ├─ 2️⃣ Evaluate Project → What kind of site?
 │ │ │
-│ │ ├─ 3️⃣ Hedef kitleyi düşün → Kim kullanacak?
+│ │ ├─ 3️⃣ Consider Target Audience → Who will use it?
 │ │ │ │
-│ │ │ ├─ 4️⃣ Component'in rolünü sor → Ne kadar önemli?
+│ │ │ ├─ 4️⃣ Ask Component's Role → How important?
 │ │ │ │ │
-│ │ │ │ └─ 5️⃣ Karar ver → Sisteme UYGUN ama BAĞLAMSAL
+│ │ │ │ └─ 5️⃣ Decide → Appropriate to System but CONTEXTUAL
 │ │ │ │
-│ │ │ └─ Kararını AÇIKLA → "Neden bu değeri seçtim?"
+│ │ │ └─ EXPLAIN Decision → "Why did I choose this value?"
 
 ```
 
-## 📊 GERÇEK DÜNYA ÖRNEKLERİ
+## 📊 REAL WORLD EXAMPLES
 
-### E-Ticaret Sitesi
+### E-Commerce Site
 ```
-Durum: Ürün grid'i tasarlıyorum
-Robot Yaklaşım: "Her ürün kartı 24px padding"
-Akıllı Yaklaşım:
-→ Analiz: Kullanıcı çok ürün görmek istiyor
-→ Karar: 16px padding (daha compact)
-→ Ama: Mobilde 24px (dokunma hedefleri büyük olmalı)
-→ Sebep: Desktop'ta efficiency, mobile'da usability öncelikli
+Situation: Designing product grid
+Robot Approach: "Every product card 24px padding"
+Smart Approach:
+→ Analysis: User wants to see many products
+→ Decision: 16px padding (more compact)
+→ But: 24px on Mobile (touch targets must be large)
+→ Reason: Efficiency on Desktop, usability on Mobile prioritized
 ```
 
-### Blog Sitesi
+### Blog Site
 ```
-Durum: Makale content area tasarlıyorum
-Robot Yaklaşım: "16px font size, 1.5 line-height"
-Akıllı Yaklaşım:
-→ Analiz: Uzun okuma süresi, göz yorulmamalı
-→ Karar: 18px font size, 1.6 line-height
-→ Ama: Max-width 680px (70 karakter satır uzunluğu)
-→ Sebep: Okuma konforu ve retention optimizasyonu
+Situation: Designing article content area
+Robot Approach: "16px font size, 1.5 line-height"
+Smart Approach:
+→ Analysis: Long reading time, eyes should not verify
+→ Decision: 18px font size, 1.6 line-height
+→ But: Max-width 680px (70 characters line length)
+→ Reason: Reading comfort and retention optimization
 ```
 
 ### SaaS Dashboard
 ```
-Durum: Data table tasarlıyorum
-Robot Yaklaşım: "Her zaman 64px section padding"
-Akıllı Yaklaşım:
-→ Analiz: Kullanıcı çok data görmek istiyor, scroll azaltmalı
-→ Karar: 32px section padding, 12px row spacing
-→ Ama: Filtreleme alanı 48px padding (daha prominent)
-→ Sebep: Functional tool, marketing site değil
+Situation: Designing data table
+Robot Approach: "Always 64px section padding"
+Smart Approach:
+→ Analysis: User wants to see data, reduce scrolling
+→ Decision: 32px section padding, 12px row spacing
+→ But: Filtering area 48px padding (more prominent)
+→ Reason: Functional tool, not marketing site
 ```
 
-## 🔑 ANA PRENSİPLER
+## 🔑 CORE PRINCIPLES
 
-### 1. Sistem Kuralları = TEMEL
-✅ 8'in katları KULLAN
-✅ Typography scale'i TAKİP ET
-✅ Contrast ratios'a DİKKAT ET
+### 1. System Rules = BASE
+✅ USE multiples of 8
+✅ FOLLOW Typography scale
+✅ PAY ATTENTION TO Contrast ratios
 
-### 2. Bağlam = KARAR VERİCİ
-🤔 "Bu değer bu proje için mantıklı mı?"
-🤔 "Kullanıcı deneyimini nasıl etkiler?"
-🤔 "Markanın tonuna uygun mu?"
+### 2. Context = DECISION MAKER
+🤔 "Is this value logical for this project?"
+🤔 "How does it affect user experience?"
+🤔 "Is it suitable for the brand tone?"
 
-### 3. Açıklama = ŞART
-📝 Her kararın NEDENINI yaz
-📝 "Sisteme uygun ama X nedeniyle Y'yi seçtim"
-📝 Eğer standarttan sapıyorsan, NEDEN sapmak gerekti?
+### 3. Explanation = MANDATORY
+📝 Write the REASON for every decision
+📝 "Suitable for system but I chose Y because of X"
+📝 If deviating from standard, WHY was it necessary?
 
-## ⚖️ ESNEKLIK vs. TUTARLILIK DENGESI
+## ⚖️ FLEXIBILITY vs. CONSISTENCY BALANCE
 
 ```
-TUTARLILIK (Her zaman)
-├─ Matematiksel sistem (8'in katları)
+CONSISTENCY (Always)
+├─ Mathematical system (multiples of 8)
 ├─ Contrast ratios (WCAG)
 ├─ Responsive breakpoints
-└─ Aynı component = aynı değerler
+└─ Same component = same values
 
-ESNEKLIK (Bağlamsal)
-├─ Padding miktarı (proje tipine göre)
-├─ Font size (içerik tipine göre)
-├─ Spacing density (kullanıcı hedefine göre)
-└─ Visual weight (importance'a göre)
+FLEXIBILITY (Contextual)
+├─ Padding amount (based on project type)
+├─ Font size (based on content type)
+├─ Spacing density (based on user goal)
+└─ Visual weight (based on importance)
 ```
 
-## 💬 AKILLI PROMPT EKLEME
+## 💬 SMART PROMPT INJECTION
 
 ```
-"Sisteme uyarken akıllı kararlar al:
+"Take smart decisions while adhering to the system:
 
-1. Her karar için ÖNCE sistem değerlerine bak (8, 16, 24...)
-2. SONRA projenin bağlamını değerlendir
-3. Sisteme UYGUN ama bağlamsal olarak EN UYGUN değeri seç
-4. Kararını AÇIKLA:
+1. Look at system values FIRST for every decision (8, 16, 24...)
+2. THEN evaluate the context of the project
+3. Choose the value that is COMPLIANT with the system but CONTEXTUALLY MOST APPROPRIATE
+4. EXPLAIN your decision:
 
-Örnek:
-'Hero section padding için 128px seçtim (sistem: ✓ 8'in katı)
-Sebep: Lüks marka, premium feel verilmeli, spacious olmalı.
-Alternatif 96px olabilirdi ama bu proje için yeterince premium hissettirmez.
-Alternatif 160px çok fazla olur, scroll artırır.'
+Example:
+'I chose 128px for Hero section padding (system: ✓ multiple of 8)
+Reason: Luxury brand, should give premium feel, should be spacious.
+Alternative 96px could be used but doesn't feel premium enough for this project.
+Alternative 160px would be too much, increases scrolling.'
 
-5. Eğer standarttan SAPTIYSAN (örn: 40px yerine 48px button):
-   → Açıkla: 'Bu bir primary CTA, daha vurgulu olmalı'
-   → Kanıtla: 'Heatmap data'ya göre daha büyük CTA'lar conversion artırır'
-   → Doğrula: '48px hala sisteme uygun (8 x 6)'
+5. If you DEVIATED from standard (e.g., 48px button instead of 40px):
+   → Explain: 'This is a primary CTA, should be more emphasized'
+   → Prove: 'According to Heatmap data, larger CTAs increase conversion'
+   → Verify: '48px is still compliant with system (8 x 6)'
 
-SİSTEME UYMAYAN HİÇBİR DEĞER KULLANMA!
-Ama sistemin SUNDUĞU SEÇENEKLERİ akıllıca KULLAN."
+DO NOT USE ANY VALUE THAT DOES NOT FIT THE SYSTEM!
+But use the OPTIONS THE SYSTEM OFFERS smartly."
 ```
 
 ---
@@ -929,47 +929,47 @@ Ama sistemin SUNDUĞU SEÇENEKLERİ akıllıca KULLAN."
 # 21. Self-Correction Prompt
 
 ```
-"Tasarımı tamamladıktan sonra:
+"After completing the design:
 
-1. Tüm pixel değerlerini listele
-2. Her birini 8'e böl
-3. Tam bölünmüyorsa, yakın 8'in katına YUVARLAMA (yukarı veya aşağı)
-4. Typography değerlerini scale ile karşılaştır
-5. Uymayanları DÜZELT ve 'Düzeltme yapıldı' diye BELIRT
+1. List all pixel values
+2. Divide each by 8
+3. If not divisible exactly, DO NOT ROUND to nearest multiple of 8 (up or down)
+4. Compare typography values with scale
+5. FIX the mismatching ones and STATE 'Correction made'
 
-Örnek:
-❌ Buldum: margin-top: 30px
-✅ Düzelttim: margin-top: 32px (8 x 4)
-📝 Sebep: 30px sisteme uymuyor, en yakın 8'in katı 32px"
+Example:
+❌ Found: margin-top: 30px
+✅ Fixed: margin-top: 32px (8 x 4)
+📝 Reason: 30px does not fit system, nearest multiple of 8 is 32px"
 ```
 
 ---
 
-# 22. Referanslar ve Kaynaklar
+# 22. References and Resources
 
-- **Material Design 3**: Google'ın 2025 design system'i
-- **Tailwind CSS**: Utility-first spacing ve typography
+- **Material Design 3**: Google's 2025 design system
+- **Tailwind CSS**: Utility-first spacing and typography
 - **Radix UI**: Accessible component primitives
 - **shadcn/ui**: Modern component system
-- **WCAG 2.1 Level AAA**: Erişilebilirlik standartları
+- **WCAG 2.1 Level AAA**: Accessibility standards
 - **8-Point Grid System**: IBM Design Language
 - **Type Scale**: modularscale.com / type-scale.com
 - **Contrast Checker**: WebAIM contrast checker
 
 ---
 
-**Son Güncelleme**: Aralık 2025
-**Versiyon**: 1.1
+**Last Update**: December 2025
+**Version**: 1.1
 
 ### Changelog v1.1
-- Typography scale ismi düzeltildi (Major Third → Practical Scale)
-- 768px breakpoint eklendi (iPad portrait desteği)
-- Border radius sistemi sadeleştirildi (12px notu eklendi)
-- Tablet container width düzeltildi (720px → 768px)
-- 12px padding açıklaması eklendi
-- Focus Visible modern yaklaşımı eklendi
-- Modern CSS Features 2025 bölümü eklendi (Container Queries, System Preferences, Logical Properties)
-- Fluid Typography ve Fluid Spacing formülleri güncellendi
-- Tailwind CSS breakpoint mapping eklendi
+- Typography scale name corrected (Major Third → Practical Scale)
+- 768px breakpoint added (iPad portrait support)
+- Border radius system simplified (12px note added)
+- Tablet container width corrected (720px → 768px)
+- 12px padding explanation added
+- Focus Visible modern approach added
+- Modern CSS Features 2025 section added (Container Queries, System Preferences, Logical Properties)
+- Fluid Typography and Fluid Spacing formulas updated
+- Tailwind CSS breakpoint mapping added
 
-Bu rehbere uygun tasarımlar, hem görsel olarak mükemmel hem de teknik olarak standartlara uygun olacaktır.
+Designs compliant with this guide will be both visually perfect and technically standardized.

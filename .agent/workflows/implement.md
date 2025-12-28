@@ -1,118 +1,33 @@
+---
+description: Feature and code implementation workflow with TDD approach and quality checks
+---
+
 # Implement Workflow
 
 ## Description
-Feature and code implementation workflow. Guides through planning, coding, testing, and review phases for new features or changes.
-
----
-
-## Invocation
-```
-/implement [feature description]
-```
+Use this workflow when building new features or making code changes. It guides through planning, test-first development (TDD), implementation, quality checks, and self-review.
 
 ---
 
 ## Steps
 
-### Step 1: Pre-Implementation Planning
+1. **Plan the implementation** - For non-trivial features, call `/plan` first. Define implementation scope, list files to modify and create, and identify any new dependencies needed.
 
-For non-trivial features, first run `/plan`:
+2. **Write tests first (TDD)** - Create test cases before implementation covering happy paths, edge cases, and error conditions. Follow AAA pattern (Arrange, Act, Assert).
 
-```markdown
-## Implementation Scope
+3. **Implement the feature** - Follow established patterns: TypeScript strict mode compliant, no `any` types, proper error handling, input validation, no hardcoded secrets, and OWASP Top 10 security considerations.
 
-### Feature: [Name]
-### Files to Modify:
-- [ ] file1.ts
-- [ ] file2.ts
+4. **Run quality checks** - Execute `npx tsc --noEmit` for type check, `npx eslint .` for linting, `npx prettier --check .` for formatting, and `npm test` to verify all tests pass.
 
-### Files to Create:
-- [ ] newFile.ts
+5. **Perform self-review** - Verify correctness (solves the problem), completeness (edge cases handled), clarity (code is readable), and consistency (follows project patterns).
 
-### Dependencies:
-- [List any new dependencies needed]
-```
+6. **Iterate if needed** - If any quality check fails or review reveals issues, fix and re-run checks until all pass.
 
-### Step 2: Test First (TDD Approach)
-
-Write tests before implementation:
-
-```typescript
-describe('[Feature]', () => {
-  test('should [expected behavior]', () => {
-    // Arrange
-    // Act
-    // Assert
-  });
-});
-```
-
-### Step 3: Implementation
-
-Follow the established patterns:
-
-```markdown
-## Implementation Checklist
-
-### Code Quality
-- [ ] TypeScript strict mode compliant
-- [ ] No `any` types
-- [ ] Proper error handling
-- [ ] Input validation (Zod)
-
-### Security
-- [ ] No hardcoded secrets
-- [ ] Input sanitization
-- [ ] OWASP Top 10 considered
-
-### Performance
-- [ ] No N+1 queries
-- [ ] Proper caching considered
-- [ ] Lazy loading where appropriate
-```
-
-### Step 4: Quality Verification
-
-Run all quality checks:
-
-```bash
-# Type check
-npx tsc --noEmit
-
-# Lint
-npx eslint .
-
-# Format
-npx prettier --check .
-
-# Tests
-npm test
-```
-
-### Step 5: Self-Review
-
-Before requesting review, check:
-
-| Aspect | Question |
-|--------|----------|
-| Correctness | Does it solve the problem? |
-| Completeness | Are all edge cases handled? |
-| Clarity | Is the code readable? |
-| Consistency | Does it follow project patterns? |
-
----
-
-## Output
-
-Completed implementation with:
-- Working code
-- Tests passing
-- Quality gates passed
-- Ready for review
+7. **Mark as ready for review** - Once all checks pass and self-review is complete, the implementation is ready for code review.
 
 ---
 
 ## Related Workflows
-- `/plan` - For complex feature planning
-- `/test` - For comprehensive testing
-- `/review` - For code review
+- Call `/plan` for complex feature planning
+- Call `/test` for comprehensive testing
+- Call `/review` for code review

@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Kapsamlı test stratejileri ve 2025 test araçları. Unit, integration, e2e ve visual testing.
+description: Comprehensive testing strategies and 2025 tools. Unit, integration, e2e, and visual testing.
 metadata:
   skillport:
     category: quality
@@ -11,51 +11,51 @@ metadata:
       - quality-assurance
 ---
 
-# Testing Skill - Kalite Güvence ve Test Stratejileri
+# Testing Skill - QA & Test Strategies
 
-> Yazılım kalitesini sağlamak için sistematik test yaklaşımları.
-> 2025 modern test araçları ve piramit test stratejisi.
+> Systematic approaches to ensure software quality.
+> 2025 modern testing tools and testing pyramid strategy.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Test Piramidi](#1-test-piramidi)
+1. [Test Pyramid](#1-test-pyramid)
 2. [Unit Testing (Jest)](#2-unit-testing-jest)
 3. [Integration Testing](#3-integration-testing)
 4. [E2E Testing (Playwright)](#4-e2e-testing-playwright)
 5. [Visual Regression Testing](#5-visual-regression-testing)
 6. [TDD (Test Driven Development)](#6-tdd-test-driven-development)
-7. [Test Yazım Kuralları](#7-test-yazım-kuralları)
-8. [Kontrol Listesi](#8-kontrol-listesi)
-9. [Yapma Listesi](#9-yapma-listesi)
-10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+7. [Test Writing Rules](#7-test-writing-rules)
+8. [Checklist](#8-checklist)
+9. [Don't List](#9-dont-list)
+10. [Must Do List](#10-must-do-list)
 
 ---
 
-# 1. Test Piramidi
+# 1. Test Pyramid
 
 ```
       / \
-     /E2E\  ← En az (Yavaş, Pahalı, Kırılgan)
+     /E2E\  ← Fewest (Slow, Expensive, Brittle)
     /-----\
-   / INTEGR\ ← Orta (Hız ve Güven dengesi)
+   / INTEGR\ ← Medium (Balance of Speed & Confidence)
   /---------\
- /   UNIT    \ ← En çok (Hızlı, Ucuz, İzole)
+ /   UNIT    \ ← Most (Fast, Cheap, Isolated)
 /-------------\
 ```
 
-| Tip | Kapsam | Hız | Maliyet |
+| Type | Scope | Speed | Cost |
 |-----|--------|-----|---------|
-| **Unit** | Fonksiyon/Component | ⚡⚡⚡ | 💸 |
-| **Integration** | DB/API/Module arası | ⚡⚡ | 💸💸 |
-| **E2E** | Tam kullanıcı akışı | ⚡ | 💸💸💸 |
+| **Unit** | Function/Component | ⚡⚡⚡ | 💸 |
+| **Integration** | Between DB/API/Modules | ⚡⚡ | 💸💸 |
+| **E2E** | Full user flow | ⚡ | 💸💸💸 |
 
 ---
 
 # 2. Unit Testing (Jest)
 
-## 2.1 Temel Test Yapısı
+## 2.1 Basic Test Structure
 
 ```typescript
 import { sum } from './math';
@@ -74,7 +74,7 @@ describe('sum function', () => {
 ## 2.2 Mocking
 
 ```typescript
-// Service mock'lama
+// Mocking service
 jest.mock('./apiService');
 import { fetchData } from './apiService';
 
@@ -111,7 +111,7 @@ describe('POST /api/users', () => {
 
 # 4. E2E Testing (Playwright)
 
-## 4.1 Login Akışı
+## 4.1 Login Flow
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -123,7 +123,7 @@ test('user can login successfully', async ({ page }) => {
   await page.click('button[type="submit"]');
 
   await expect(page).toHaveURL('/dashboard');
-  await expect(page.locator('h1')).toContainText('Hoş Geldiniz');
+  await expect(page.locator('h1')).toContainText('Welcome');
 });
 ```
 
@@ -143,51 +143,51 @@ test('dashboard visual comparison', async ({ page }) => {
 
 # 6. TDD (Test Driven Development)
 
-1. **RED:** Testi yaz ve başarısız olduğunu gör.
-2. **GREEN:** Testin geçmesi için gereken minimum kodu yaz.
-3. **REFACTOR:** Kodu ve testi temizle, standartlara uygun hale getir.
+1. **RED:** Write the test and see it fail.
+2. **GREEN:** Write the minimum code to pass the test.
+3. **REFACTOR:** Clean up code and test, follow standards.
 
 ---
 
-# 7. Test Yazım Kuralları
+# 7. Test Writing Rules
 
 - **AAA Pattern:** Arrange, Act, Assert.
-- **Isolasyon:** Testler birbirinden bağımsız olmalı.
-- **Hız:** Unit testler çok hızlı çalışmalı.
-- **Readable:** Test ismi neyi test ettiğini açıkça söylemeli.
-- **Deterministic:** Aynı girdiyle her zaman aynı sonuç.
+- **Isolation:** Tests must be independent of each other.
+- **Speed:** Unit tests must run very fast.
+- **Readable:** Test name should clearly state what is being tested.
+- **Deterministic:** Same input always yields same result.
 
 ---
 
-# 8. Kontrol Listesi
+# 8. Checklist
 
-- [ ] Unit testler en az %80 coverage sağlıyor mu?
-- [ ] Kritik business logic integration testleri var mı?
-- [ ] En önemli 3-4 kullanıcı akışı E2E ile test edildi mi?
-- [ ] Testler CI/CD pipeline'da otomatik çalışıyor mu?
-- [ ] Mock'lar doğru şekilde temizleniyor mu?
-
----
-
-# 9. Yapma Listesi
-
-❌ Production veritabanında test yapma.
-❌ Çok büyük ve karmaşık unit testler yazma.
-❌ Coverage için anlamsız testler ekleme.
-❌ Başarısız olan testleri silip geçme.
-❌ Test kodunda business logic duplicate etme.
+- [ ] Unit tests cover at least 80%?
+- [ ] Are there integration tests for critical business logic?
+- [ ] Top 3-4 user flows tested with E2E?
+- [ ] Tests running automatically in CI/CD pipeline?
+- [ ] Mocks cleared correctly?
 
 ---
 
-# 10. Mutlaka Yap Listesi
+# 9. Don't List
 
-✅ Önce test edilebilir kod yaz (Dependency Injection).
-✅ Hatalı senaryoları (edge cases) mutlaka test et.
-✅ Test Coverage raporlarını düzenli incele.
-✅ Flaky testleri (bazen geçen bazen kalan) hemen düzelt.
-✅ Her bug fix için o bug'ı yakalayan bir test ekle.
+❌ Do not test against production database.
+❌ Do not write huge and complex unit tests.
+❌ Do not add meaningless tests just for coverage.
+❌ Do not delete failing tests and move on.
+❌ Do not duplicate business logic in test code.
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 10. Must Do List
+
+✅ Write testable code first (Dependency Injection).
+✅ Must test failure scenarios (edge cases).
+✅ Regularly review Test Coverage reports.
+✅ Fix flaky tests immediately.
+✅ Add a test for every bug fix to catch regressions.
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

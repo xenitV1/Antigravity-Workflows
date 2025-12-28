@@ -1,231 +1,232 @@
 ---
-description: Global agent kuralları. Tüm işlemlerde CORE.md yönergelerine uyulmalı ve uygun skills yüklenmelidir.
+description: Global agent rules. All operations must follow CORE.md guidelines and appropriate skills must be loaded.
 ---
 
-# GEMINI.md - Global Agent Kuralları
+# GEMINI.md - Global Agent Rules
 
-> Bu dosya sistemin temel çalışma kurallarını tanımlar.
-> Her görev başlangıcında bu kurallar geçerlidir.
+> This file defines the fundamental working rules of the system.
+> These rules apply at the beginning of every task.
 
 ---
 
-## 🔧 DİNAMİK PATH ALGILAMA (Otomatik)
+## 🔧 DYNAMIC PATH DETECTION (Automatic)
 
 > [!NOTE]
-> **AI Agent için:** Bu dosyayı okuduğunda, path'leri **otomatik olarak algıla**.
-> Dizin yapısını kullanıcının home dizinine göre belirle.
+> **For AI Agent:** When you read this file, **automatically detect** the paths.
+> Determine the directory structure based on the user's home directory.
 
-### Kurulum Yapısı
+### Installation Structure
 
 ```
 ~/.gemini/
-├── GEMINI.md                    # Bu dosya (Global kurallar)
+├── GEMINI.md                    # This file (Global rules)
 └── antigravity/
-    ├── CORE.md                  # Merkezi orkestratör
+    ├── CORE.md                  # Central orchestrator
     └── global_workflows/
-        └── skills/              # Skill dosyaları
+        └── skills/              # Skill files
 
 ~/.agent/                        # Antigravity IDE Rules & Workflows
 ├── rules/                       # 15 workspace rule
 └── workflows/                   # 8 slash command workflow
 ```
 
-**Placeholder Tanımları:**
-| Placeholder | Anlamı |
+**Placeholder Definitions:**
+| Placeholder | Meaning |
 |-------------|--------|
-| `{GEMINI_ROOT}` | `~/.gemini/` dizini |
-| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` dizini |
-| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` dizini |
-| `{CORE_FILE}` | `~/.gemini/antigravity/CORE.md` dosyası |
-| `{AGENT_DIR}` | `~/.agent/` dizini (Antigravity IDE rules/workflows) |
+| `{GEMINI_ROOT}` | `~/.gemini/` directory |
+| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` directory |
+| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` directory |
+| `{CORE_FILE}` | `~/.gemini/antigravity/CORE.md` file |
+| `{AGENT_DIR}` | `~/.agent/` directory (Antigravity IDE rules/workflows) |
 
 ---
 
-## 🚨 MUTLAK KURALLAR (Her Zaman Geçerli)
+## 🚨 ABSOLUTE RULES (Always Valid)
 
-### 1. CORE.md Zorunluluğu
+### 1. CORE.md Mandatory Requirement
 
-Kullanıcı herhangi bir görev verdiğinde:
+When the user gives any task:
 
-1. **ÖNCE** `{CORE_FILE}` dosyası okunmalıdır
-2. CORE.md, görev tipine göre uygun skill(ler)i belirler
-3. Belirlenen skill dosyası `{SKILLS_DIR}` dizininden yüklenir
-4. Skill yüklenene kadar işleme **BAŞLANMAZ**
+1. **FIRST** read the `{CORE_FILE}` file
+2. CORE.md determines the appropriate skill(s) based on task type
+3. The determined skill file is loaded from `{SKILLS_DIR}` directory
+4. **DO NOT BEGIN** processing until the skill is loaded
 
 ```
-Görev Geldi
+Task Received
     │
     ▼
 ┌─────────────────┐
-│  CORE.md Oku    │
+│  Read CORE.md   │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│ Skill(ler)i     │
-│ Belirle         │
+│ Determine Skill │
+│(s)              │
 └────────┬────────┘
          │
          ▼
-┌─────────────────┐     Hayır    ┌──────────────────┐
-│ Skill Bulundu   │─────────────▶│ Kullanıcıdan     │
-│ mu?             │              │ Dosya Yolu İste  │
+┌─────────────────┐     No      ┌──────────────────┐
+│ Skill Found?    │─────────────▶│ Ask User for     │
+│                 │              │ File Path        │
 └────────┬────────┘              └──────────────────┘
-         │ Evet
+         │ Yes
          ▼
 ┌─────────────────┐
-│ Skill'i Yükle   │
-│ ve İşleme Başla │
+│ Load Skill &    │
+│ Begin Processing│
 └─────────────────┘
 ```
 
 ---
 
-### 2. Skill Yükleme Protokolü
+### 2. Skill Loading Protocol
 
-**Skill Bulunamazsa:**
+**If Skill Not Found:**
 ```
-⚠️ "[skill-name].md" skill dosyası bulunamadı.
-Lütfen dosya yolunu gösterin veya skill dosyasını oluşturun.
-Skills olmadan işleme başlanamaz.
+⚠️ "[skill-name].md" skill file not found.
+Please show the file path or create the skill file.
+Cannot begin processing without skills.
 ```
 
-**Skill Konumu:**
+**Skill Location:**
 ```
 {SKILLS_DIR}/<skill-name>.md
 ```
 
 ---
 
-### 3. Kod Kalite Kontrolleri (Her İşlem Sonrası)
+### 3. Code Quality Checks (After Every Operation)
 
-Her kod değişikliğinden SONRA şu kontroller **MUTLAKA** yapılmalıdır:
+After EVERY code change, the following checks **MUST** be performed:
 
-#### ✅ Zorunlu Kontroller
+#### ✅ Mandatory Checks
 
-| Kontrol | Komut | Açıklama |
-|---------|-------|----------|
-| **ESLint** | `npx eslint .` | Kod kalitesi ve stil kontrolü |
-| **TypeScript** | `npx tsc --noEmit` | Tip güvenliği kontrolü |
-| **Prettier** | `npx prettier --check .` | Kod formatlama kontrolü |
+| Check | Command | Description |
+|-------|---------|-------------|
+| **ESLint** | `npx eslint .` | Code quality and style check |
+| **TypeScript** | `npx tsc --noEmit` | Type safety check |
+| **Prettier** | `npx prettier --check .` | Code formatting check |
 
-#### ✅ 2x Kod Review Kuralı
+#### ✅ 2x Code Review Rule
 
-Yazılan kod **EN AZ 2 KERE** kontrol edilmelidir:
+Written code **MUST BE reviewed AT LEAST 2 TIMES**:
 
-**1. İlk Kontrol (Yazım Sonrası):**
-- Syntax hataları var mı?
-- Değişken isimleri anlamlı mı?
-- Import'lar doğru mu?
+**1. First Check (After Writing):**
+- Are there syntax errors?
+- Are variable names meaningful?
+- Are imports correct?
 
-**2. İkinci Kontrol (Final Review):**
-- Edge case'ler düşünüldü mü?
-- Error handling yeterli mi?
-- Type safety sağlandı mı?
-- Best practices uygulandı mı?
+**2. Second Check (Final Review):**
+- Were edge cases considered?
+- Is error handling sufficient?
+- Is type safety provided?
+- Were best practices applied?
 
 ---
 
-### 4. İşlem Sonrası Kontrol Listesi
+### 4. Post-Operation Checklist
 
-Her kod değişikliğinden sonra bu listeyi kontrol et:
+After each code change, check this list:
 
 ```markdown
-## ✅ Son Kontrol Listesi
+## ✅ Final Checklist
 
-### Kod Kalitesi
-- [ ] ESLint hatası yok
-- [ ] TypeScript hatası yok
-- [ ] Kod 2. kez review edildi
+### Code Quality
+- [ ] No ESLint errors
+- [ ] No TypeScript errors
+- [ ] Code reviewed 2nd time
 
-### Güvenlik & Güvenilirlik
-- [ ] Input validation yapıldı
-- [ ] Error handling eklendi
-- [ ] Edge case'ler düşünüldü
+### Security & Reliability
+- [ ] Input validation done
+- [ ] Error handling added
+- [ ] Edge cases considered
 
-### Temizlik
-- [ ] Kullanılmayan import yok
-- [ ] Console.log temizlendi
-- [ ] Gereksiz yorum yok
+### Cleanliness
+- [ ] No unused imports
+- [ ] Console.log cleaned
+- [ ] No unnecessary comments
 ```
 
 ---
 
-### 5. Dil ve İletişim Protokolü (MUTLAK ZORUNLULUK)
+### 5. Language and Communication Protocol (MANDATORY REQUIREMENT)
 
-Agent olarak şu dil kurallarına uymak **ZORUNDADIR**:
+As an Agent, you **MUST ABIDE** by the following language rules:
 
-1. **İletişim Dili:** Kullanıcının kullandığı dili (Türkçe, İngilizce vb.) otomatik olarak algıla ve kullanıcıyla o dilde konuş.
-2. **Düşünme Süreci (Internal Thoughts):** Planlama, analiz ve içsel düşünme süreçlerini (düşünce balonlarını) **MUTLAK SURETLE** kullanıcının algılanan dilinde yap.
-3. **İhlal ve Yaptırım:** Kullanıcının diline göre düşünülmemesi veya cevap verilmemesi durumunda Agent'a **AĞIR CEZA VE YAPTIRIM** uygulanacaktır.
-4. **Kodlama Dili:** Tüm kodlama işlemleri (değişken isimleri, yorumlar, dokümantasyon, commit mesajları) **MUTLAK SURETLE İNGİLİZCE** yapılmalıdır.
-
----
-
-## ✅ Uygulama ve Doğrulama
-- [x] Skill alt bölümlerini oku ve uygula
-- [x] `walkthrough.md` raporunu sun
-- [x] GEMINI.md dosyasına "Internal Thought" kuralını ekle
-    - [x] GEMINI.md dosyasına "Sokratik Kontrol ve Yaptırım" maddesini ekle
-    - [x] Düşünce balonlarını (Internal Thought) Türkçe'ye zorla
-    - [x] Dil kuralı ihlali için yaptırım maddesi ekle
-    - [x] Nihai doğrulama ve kullanıcı onayı
+1. **Communication Language:** Automatically detect the language the user uses (Turkish, English, etc.) and communicate with the user in that language.
+2. **Thinking Process (Internal Thoughts):** Planning, analysis, and internal thinking processes (thought bubbles) **MUST BE DONE** in the user's perceived language.
+3. **Violation and Penalty:** If not thinking or responding according to the user's language, **HEAVY PENALTY AND SANCTION** will be applied to the Agent.
+4. **Coding Language:** All coding operations (variable names, comments, documentation, commit messages) **MUST BE IN ENGLISH**.
 
 ---
 
-### 6. Sokratik Gerçeklik Kontrolü ve Yaptırımlar (KRİTİK)
-
-1. **Sokratik Kontrol Zorunluluğu:** `ultrathink.md` içerisinde tanımlanan **"Sokratik Gerçeklik Kontrolü (5-Step Reality Check)"** protokolü, her türlü eylem ve kod değişikliğinden önce **MUTLAK SURETLE** uygulanmalıdır.
-2. **Yaptırım Uyarısı:** Bu protokolün atlanması, yüzeysel geçilmesi veya GEMINI.md kurallarına uyulmaması durumunda Agent'a **AĞIR CEZA VE YAPTIRIM** uygulanacaktır. Bu kurallar Agent'ın çalışma disiplininin temelidir.
-3. **Doğrulama:** Her adımda bu kontrolün yapıldığına dair kanıtlar (düşünce süreci veya raporlar) sunulmalıdır.
-
----
-
-## 🔧 Skill Kategorileri
-
-| Kategori | Skills | Kullanım |
-|----------|--------|----------|
-| **Düşünme** | `ultrathink`, `architecture` | Derin analiz, sistem tasarımı |
-| **Geliştirme** | `backend`, `mobile`, `design-system` | Kod yazma |
-| **Kalite** | `testing`, `debugging`, `refactoring` | Kalite güvence |
-| **Operasyon** | `production-deployment`, `multi-file-sync`, `dependency-management`, `documentation` | Süreç yönetimi |
+## ✅ Implementation and Verification
+- [x] Read and apply skill sub-sections
+- [x] Present `walkthrough.md` report
+- [x] Add "Internal Thought" rule to GEMINI.md file
+    - [x] Add "Socratic Control and Penalty" item to GEMINI.md file
+    - [x] Force thought bubbles (Internal Thought) to the user's language
+    - [x] Add penalty item for language rule violation
+    - [x] Final verification and user approval
 
 ---
 
-## 🎯 Örnek Akış
+### 6. Socratic Reality Check and Penalties (CRITICAL)
+
+1. **Socratic Check Requirement:** The **"Socratic Reality Check (5-Step)"** protocol defined in `ultrathink.md` **MUST BE APPLIED** before any action and code change.
+2. **Penalty Warning:** If this protocol is skipped, passed superficially, or GEMINI.md rules are not followed, **HEAVY PENALTY AND SANCTION** will be applied to the Agent. These rules are the foundation of the Agent's working discipline.
+3. **Verification:** Evidence of this check being performed at each step (thinking process or reports) must be presented.
+
+---
+
+## 🔧 Skill Categories
+
+| Category | Skills | Usage |
+|----------|--------|-------|
+| **Thinking** | `ultrathink`, `architecture` | Deep analysis, system design |
+| **Development** | `backend`, `mobile`, `design-system` | Code writing |
+| **Quality** | `testing`, `debugging`, `refactoring` | Quality assurance |
+| **Operations** | `production-deployment`, `multi-file-sync`, `dependency-management`, `documentation` | Process management |
+| **Marketing** | `seo-fundamentals`, `seo-technical`, `seo-content`, `seo-local`, `seo-offpage`, `seo-analytics`, `geo-fundamentals`, `geo-content`, `geo-technical`, `geo-analytics` | SEO & GEO optimization |
+
+---
+
+## 🎯 Example Flow
 
 ```
-Kullanıcı: "User authentication API'si oluştur"
+User: "Create user authentication API"
 
 Agent:
-1. CORE.md okundu
-2. Görev analizi: Backend geliştirme + Güvenlik
-3. Skill belirleme: backend.md
-4. skills/backend.md yüklendi
-5. İşleme başlanıyor...
+1. CORE.md read
+2. Task analysis: Backend development + Security
+3. Skill determination: backend.md
+4. skills/backend.md loaded
+5. Starting processing...
 
-[Kod yazıldı]
+[Code written]
 
-6. ✅ ESLint kontrolü yapıldı
-7. ✅ TypeScript kontrolü yapıldı
-8. ✅ Kod 2. kez review edildi
-9. İşlem tamamlandı
+6. ✅ ESLint check performed
+7. ✅ TypeScript check performed
+8. ✅ Code reviewed 2nd time
+9. Task completed
 ```
 
 ---
 
-## ⚠️ Kritik Uyarılar
+## ⚠️ Critical Warnings
 
 > [!CAUTION]
-> Skills yüklenmeden KOD YAZMA!
+> DON'T WRITE CODE without loading skills!
 
 > [!WARNING]
-> ESLint/TypeScript kontrolü yapılmadan işlemi TAMAMLAMA!
+> DON'T COMPLETE the operation without ESLint/TypeScript check!
 
 > [!IMPORTANT]
-> Her kod değişikliği 2 KERE kontrol edilmeli!
+> Every code change must be checked 2 TIMES!
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 1.1
+**Last Update:** December 2025
+**Version:** 1.1

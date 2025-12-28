@@ -1,6 +1,6 @@
 ---
 name: architecture
-description: Sistem tasarımı ve mimari kararlar rehberi. Scalability, microservices, API design ve infrastructure patterns.
+description: System design and architectural decisions guide. Scalability, microservices, API design and infrastructure patterns.
 metadata:
   skillport:
     category: thinking
@@ -11,16 +11,16 @@ metadata:
       - microservices
 ---
 
-# Architecture Skill - Sistem Tasarımı
+# Architecture Skill - System Design
 
-> Ölçeklenebilir, bakımı kolay ve güvenilir sistemler tasarlama rehberi.
-> Trade-off analizi, pattern seçimi ve mimari kararlar.
+> Guide for designing scalable, maintainable and reliable systems.
+> Trade-off analysis, pattern selection and architectural decisions.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Mimari Karar Süreci](#1-mimari-karar-süreci)
+1. [Architectural Decision Process](#1-architectural-decision-process)
 2. [Functional vs Non-Functional Requirements](#2-functional-vs-non-functional-requirements)
 3. [Architecture Patterns](#3-architecture-patterns)
 4. [Scalability Patterns](#4-scalability-patterns)
@@ -28,28 +28,28 @@ metadata:
 6. [Security Architecture](#6-security-architecture)
 7. [Architecture Decision Record (ADR)](#7-architecture-decision-record-adr)
 8. [Capacity Planning](#8-capacity-planning)
-9. [Kontrol Listesi](#9-kontrol-listesi)
-10. [Yapma Listesi](#10-yapma-listesi)
-11. [Mutlaka Yap Listesi](#11-mutlaka-yap-listesi)
+9. [Checklist](#9-checklist)
+10. [Don't List](#10-dont-list)
+11. [Must Do List](#11-must-do-list)
 
 ---
 
-# 1. Mimari Karar Süreci
+# 1. Architectural Decision Process
 
 ```
-1. REQUIREMENTS → Gereksinimleri anla
+1. REQUIREMENTS → Understand requirements
         │
         ▼
-2. CONSTRAINTS → Kısıtları belirle
+2. CONSTRAINTS → Determine constraints
         │
         ▼
-3. OPTIONS → Alternatifleri listele
+3. OPTIONS → List alternatives
         │
         ▼
-4. TRADE-OFFS → Trade-off'ları analiz et
+4. TRADE-OFFS → Analyze trade-offs
         │
         ▼
-5. DECIDE → Kararı belgele (ADR)
+5. DECIDE → Document decision (ADR)
         │
         ▼
 6. VALIDATE → Proof of concept
@@ -65,14 +65,14 @@ metadata:
 ## Functional Requirements
 
 ### Core Features
-- Kullanıcı kayıt/giriş yapabilmeli
-- Ürün arama ve filtreleme
-- Sepete ürün ekleme
-- Ödeme işlemi
+- User must be able to register/login
+- Product search and filtering
+- Add product to cart
+- Checkout process
 
 ### User Stories
-- "Kullanıcı olarak sipariş geçmişimi görmek istiyorum"
-- "Admin olarak stok yönetimi yapmak istiyorum"
+- "As a user, I want to see my order history"
+- "As an admin, I want to perform inventory management"
 ```
 
 ## 2.2 Non-Functional Requirements (How)
@@ -108,26 +108,26 @@ metadata:
 
 | Aspect | Monolith | Microservices |
 |--------|----------|---------------|
-| **Complexity** | Düşük | Yüksek |
-| **Deployment** | Tek unit | Bağımsız servisler |
-| **Scaling** | Tüm uygulama | Service bazlı |
-| **Team Size** | Küçük takım | Büyük, dağıtık |
-| **Initial Cost** | Düşük | Yüksek |
-| **Debugging** | Kolay | Zor (distributed) |
+| **Complexity** | Low | High |
+| **Deployment** | Single unit | Independent services |
+| **Scaling** | Entire application | Service-based |
+| **Team Size** | Small team | Large, distributed |
+| **Initial Cost** | Low | High |
+| **Debugging** | Easy | Hard (distributed) |
 
-**Karar Matrisi:**
+**Decision Matrix:**
 ```markdown
-Monolith SEÇSEN Eğer:
-- [ ] Küçük takım (<10 developer)
-- [ ] MVP/Startup aşaması
-- [ ] Domain net değil
-- [ ] Hızlı iteration gerekli
+CHOOSE Monolith If:
+- [ ] Small team (<10 developers)
+- [ ] MVP/Startup stage
+- [ ] Domain is not clear
+- [ ] Rapid iteration required
 
-Microservices SEÇSEN Eğer:
-- [ ] Büyük takım (>20 developer)
-- [ ] Farklı scaling gereksinimleri
-- [ ] Bağımsız deployment kritik
-- [ ] Polyglot persistence gerekli
+CHOOSE Microservices If:
+- [ ] Large team (>20 developers)
+- [ ] Different scaling requirements
+- [ ] Independent deployment is critical
+- [ ] Polyglot persistence required
 ```
 
 ## 3.2 Layered Architecture
@@ -153,14 +153,14 @@ Microservices SEÇSEN Eğer:
 └──────────┘     └──────────────┘     └────────────┘
                         │
                         ▼
-               ┌─────────────────┐
-               │ Event Store     │
-               │ (Audit/Replay)  │
-               └─────────────────┘
+              ┌─────────────────┐
+              │ Event Store     │
+              │ (Audit/Replay)  │
+              └─────────────────┘
 ```
 
-**Kullanım Alanları:**
-- Async işlemler (email, notification)
+**Use Cases:**
+- Async operations (email, notification)
 - Audit logging
 - System integration
 - CQRS implementation
@@ -193,58 +193,58 @@ Microservices SEÇSEN Eğer:
 
 ```markdown
 ## Vertical Scaling (Scale Up)
-- CPU/RAM artırma
-- Tek makine limiti var
-- Downtime gerektirebilir
-- Basit ama pahalı
+- Increasing CPU/RAM
+- Single machine limit exists
+- May require downtime
+- Simple but expensive
 
 ## Horizontal Scaling (Scale Out)
-- Makine sayısı artırma
-- Teorik olarak sınırsız
-- Stateless servisler gerekli
-- Load balancer gerekli
+- Increasing machine count
+- Theoretically unlimited
+- Stateless services required
+- Load balancer required
 ```
 
 ## 4.2 Load Balancing
 
 ```
-            ┌───────────────┐
-            │ Load Balancer │
-            └───────┬───────┘
-         ┌──────────┼──────────┐
-         │          │          │
-    ┌────▼───┐ ┌────▼───┐ ┌────▼───┐
-    │ App 1  │ │ App 2  │ │ App 3  │
-    └────────┘ └────────┘ └────────┘
+           ┌───────────────┐
+           │ Load Balancer │
+           └───────┬───────┘
+        ┌──────────┼──────────┐
+        │          │          │
+   ┌────▼───┐ ┌────▼───┐ ┌────▼───┐
+   │ App 1  │ │ App 2  │ │ App 3  │
+   └────────┘ └────────┘ └────────┘
 ```
 
 **Algorithms:**
-- Round Robin: Sırayla dağıt
-- Least Connections: En az bağlantılı olana
-- IP Hash: Client IP'ye göre (sticky)
-- Weighted: Ağırlıklı dağıtım
+- Round Robin: Distribute in order
+- Least Connections: To the one with least connections
+- IP Hash: Based on Client IP (sticky)
+- Weighted: Weighted distribution
 
 ## 4.3 Caching Strategy
 
 ```
-               ┌─────────┐
-               │ Client  │
-               └────┬────┘
-                    │
-               ┌────▼────┐
-               │   CDN   │ ← Static assets
-               └────┬────┘
-                    │
-               ┌────▼────┐
-               │   App   │
-               └────┬────┘
-                    │
-         ┌──────────┴──────────┐
-         │                     │
-    ┌────▼────┐          ┌─────▼────┐
-    │  Redis  │          │ Database │
-    │ (Cache) │          │          │
-    └─────────┘          └──────────┘
+              ┌─────────┐
+              │ Client  │
+              └────┬────┘
+                   │
+              ┌────▼────┐
+              │   CDN   │ ← Static assets
+              └────┬────┘
+                   │
+              ┌────▼────┐
+              │   App   │
+              └────┬────┘
+                   │
+        ┌──────────┴──────────┐
+        │                     │
+   ┌────▼────┐          ┌─────▼────┐
+   │  Redis  │          │ Database │
+   │ (Cache) │          │          │
+   └─────────┘          └──────────┘
 ```
 
 **Cache Patterns:**
@@ -287,21 +287,21 @@ async function deleteUser(id: string) {
 | **Scaling** | Vertical + Read replicas | Horizontal (sharding) |
 | **Best For** | Complex queries, transactions | High write throughput, flexible schema |
 
-**Karar Matrisi:**
+**Decision Tree:**
 ```markdown
-PostgreSQL SEÇSEN Eğer:
-- [ ] Complex JOINs gerekli
-- [ ] ACID transactions kritik
-- [ ] Schema değişmeyecek
+CHOOSE PostgreSQL If:
+- [ ] Complex JOINs required
+- [ ] ACID transactions critical
+- [ ] Schema will not change
 - [ ] Reporting/analytics
 
-MongoDB SEÇSEN Eğer:
-- [ ] Flexible schema gerekli
+CHOOSE MongoDB If:
+- [ ] Flexible schema required
 - [ ] High write throughput
 - [ ] Document-oriented data
 - [ ] Rapid prototyping
 
-Redis SEÇSEN Eğer (cache olarak):
+CHOOSE Redis If (as cache):
 - [ ] Session storage
 - [ ] Real-time leaderboards
 - [ ] Pub/sub messaging
@@ -332,11 +332,11 @@ Redis SEÇSEN Eğer (cache olarak):
 ## Zero Trust Principles
 
 1. **Never trust, always verify**
-   - Her request authenticate edilmeli
-   - Network location güven vermiyor
+   - Every request must be authenticated
+   - Network location does not provide trust
 
 2. **Least privilege access**
-   - Minimum gerekli yetki
+   - Minimum required authority
    - Just-in-time access
 
 3. **Assume breach**
@@ -355,13 +355,13 @@ Redis SEÇSEN Eğer (cache olarak):
 Accepted
 
 ## Context
-E-commerce platformu için ana veritabanı seçmemiz gerekiyor.
-- 1M+ ürün
+We need to select the main database for the e-commerce platform.
+- 1M+ products
 - Complex product-category relationships
 - Transaction support for orders
 
 ## Decision
-PostgreSQL kullanacağız.
+We will use PostgreSQL.
 
 ## Consequences
 
@@ -372,7 +372,7 @@ PostgreSQL kullanacağız.
 - Mature ecosystem
 
 ### Negative
-- Horizontal scaling daha zor
+- Horizontal scaling is harder
 - Schema changes require migrations
 
 ### Mitigations
@@ -383,11 +383,11 @@ PostgreSQL kullanacağız.
 ## Alternatives Considered
 
 ### MongoDB
-- Rejected: Complex JOINs için uygun değil
-- Product-category relationships zor
+- Rejected: Not suitable for complex JOINs
+- Product-category relationships are difficult
 
 ### DynamoDB
-- Rejected: Query flexibility eksikliği
+- Rejected: Lack of query flexibility
 - Vendor lock-in
 
 ## Date
@@ -429,22 +429,22 @@ RPS (peak) = 230 × 3 = ~700 RPS
 
 ---
 
-# 9. Kontrol Listesi
+# 9. Checklist
 
-Her mimari kararda:
+In every architectural decision:
 
-- [ ] Requirements (functional & non-functional) belgelendi
-- [ ] Trade-off'lar analiz edildi
-- [ ] Alternatifler değerlendirildi
-- [ ] ADR yazıldı
-- [ ] Capacity estimation yapıldı
-- [ ] Security audit geçti
-- [ ] PoC/Prototype yapıldı
-- [ ] Team review aldı
+- [ ] Requirements (functional & non-functional) documented
+- [ ] Trade-offs analyzed
+- [ ] Alternatives evaluated
+- [ ] ADR written
+- [ ] Capacity estimation performed
+- [ ] Security audit passed
+- [ ] PoC/Prototype performed
+- [ ] Received team review
 
 ---
 
-# 10. Yapma Listesi
+# 10. Don't List
 
 ❌ Over-engineering (YAGNI)
 ❌ Premature optimization
@@ -456,7 +456,7 @@ Her mimari kararda:
 
 ---
 
-# 11. Mutlaka Yap Listesi
+# 11. Must Do List
 
 ✅ Start simple, evolve
 ✅ Document decisions (ADR)
@@ -469,5 +469,5 @@ Her mimari kararda:
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+**Last Update:** December 2025
+**Version:** 2.0

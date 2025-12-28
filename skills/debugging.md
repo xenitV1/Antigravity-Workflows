@@ -1,6 +1,6 @@
 ---
 name: debugging
-description: Sistematik hata ayıklama rehberi. Root cause analysis, debugging metodolojileri ve 2025 araçları.
+description: Systematic debugging guide. Root cause analysis, debugging methodologies and 2025 tools.
 metadata:
   skillport:
     category: quality
@@ -11,238 +11,238 @@ metadata:
       - error-handling
 ---
 
-# Debugging Skill - Sistematik Hata Ayıklama
+# Debugging Skill - Systematic Error Correction
 
-> Sistematik ve bilimsel yaklaşımla hata ayıklama metodolojisi.
-> Problem çözme, root cause analysis ve debugging araçları.
-
----
-
-# 📋 İçindekiler
-
-1. [Debugging Döngüsü](#1-debugging-döngüsü)
-2. [Faz 1: REPRODUCE (Tekrarlama)](#2-faz-1-reproduce-tekrarlama)
-3. [Faz 2: UNDERSTAND (Anlama)](#3-faz-2-understand-anlama)
-4. [Faz 3: ISOLATE (İzolasyon)](#4-faz-3-isolate-izolasyon)
-5. [Faz 4: HYPOTHESIZE (Hipotez)](#5-faz-4-hypothesize-hipotez)
-6. [Faz 5: TEST (Test Etme)](#6-faz-5-test-test-etme)
-7. [Faz 6: FIX (Düzeltme)](#7-faz-6-fix-düzeltme)
-8. [Faz 7: REFLECT (Yansıtma)](#8-faz-7-reflect-yansıtma)
-9. [Debugging Araçları](#9-debugging-araçları)
-10. [Kontrol Listesi](#10-kontrol-listesi)
-11. [Yapma Listesi](#11-yapma-listesi)
-12. [Mutlaka Yap Listesi](#12-mutlaka-yap-listesi)
+> Methodology for debugging with a systematic and scientific approach.
+> Problem solving, root cause analysis, and debugging tools.
 
 ---
 
-# 1. Debugging Döngüsü
+# 📋 Contents
+
+1. [Debugging Cycle](#1-debugging-cycle)
+2. [Phase 1: REPRODUCE](#2-phase-1-reproduce)
+3. [Phase 2: UNDERSTAND](#3-phase-2-understand)
+4. [Phase 3: ISOLATE](#4-phase-3-isolate)
+5. [Phase 4: HYPOTHESIZE](#5-phase-4-hypothesize)
+6. [Phase 5: TEST](#6-phase-5-test)
+7. [Phase 6: FIX](#7-phase-6-fix)
+8. [Phase 7: REFLECT](#8-phase-7-reflect)
+9. [Debugging Tools](#9-debugging-tools)
+10. [Checklist](#10-checklist)
+11. [Don't List](#11-dont-list)
+12. [Must Do List](#12-must-do-list)
+
+---
+
+# 1. Debugging Cycle
 
 ```
 ┌─────────────┐
-│  REPRODUCE  │ ← Hatayı tutarlı şekilde tekrarla
+│  REPRODUCE  │ ← Repeat the error consistently
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│ UNDERSTAND  │ ← Sistemi ve beklenen davranışı anla
+│ UNDERSTAND  │ ← Understand the system and expected behavior
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│   ISOLATE   │ ← Problemi dar bir alana sıkıştır
+│   ISOLATE   │ ← Narrow down the problem to a specific area
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│ HYPOTHESIZE │ ← Olası nedenleri listele
+│ HYPOTHESIZE │ ← List possible causes
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│    TEST     │ ← Hipotezleri test et
+│    TEST     │ ← Test the hypotheses
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│     FIX     │ ← Düzelt ve doğrula
+│     FIX     │ ← Fix and verify
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│   REFLECT   │ ← Öğrenilenleri belgele
+│   REFLECT   │ ← Document what was learned
 └─────────────┘
 ```
 
 ---
 
-# 2. Faz 1: REPRODUCE (Tekrarlama)
+# 2. Phase 1: REPRODUCE
 
-## 2.1 Hatayı Tutarlı Tekrarla
+## 2.1 Reproduce the Error Consistently
 
 ```markdown
-## Hata Tekrarlama Raporu
+## Bug Reproduction Report
 
-### Gözlemlenen Davranış
-- Ne oluyor? [Detaylı açıklama]
-- Hata mesajı: [Tam hata metni]
-- Ne zaman başladı? [Tarih/commit]
+### Observed Behavior
+- What is happening? [Detailed description]
+- Error message: [Full error text]
+- When did it start? [Date/commit]
 
-### Tekrarlama Adımları
-1. [Adım 1]
-2. [Adım 2]
-3. [Adım 3]
-→ Hata oluşuyor
+### Steps to Reproduce
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+→ Error occurs
 
-### Ortam Bilgisi
-- OS: [Windows/Mac/Linux versiyonu]
-- Node: [Versiyon]
-- Browser: [Chrome/Firefox + versiyon]
-- Dependencies: [İlgili paket versiyonları]
+### Environment Info
+- OS: [Windows/Mac/Linux version]
+- Node: [Version]
+- Browser: [Chrome/Firefox + version]
+- Dependencies: [Relevant package versions]
 
-### Tekrarlanabilirlik
-- [ ] Her seferinde oluyor (100%)
-- [ ] Sık sık oluyor (~%80)
-- [ ] Bazen oluyor (~%50)
-- [ ] Nadiren oluyor (~%10)
-- [ ] Henüz tekrarlayamadım
+### Reproducibility
+- [ ] Every time (100%)
+- [ ] Often (~80%)
+- [ ] Sometimes (~50%)
+- [ ] Rarely (~10%)
+- [ ] Not yet reproduced
 ```
 
-## 2.2 Tekrarlama İpuçları
+## 2.2 Reproduction Hints
 
 ```typescript
-// Seed kullanarak deterministik test
-Math.random = () => 0.5; // Random'ı sabit yap
+// Deterministic test using Seed
+Math.random = () => 0.5; // Fix Random
 
-// Tarih sabitleyerek test
+// Test by fixing date
 jest.useFakeTimers();
 jest.setSystemTime(new Date('2025-01-01'));
 
-// Network koşullarını simüle et
+// Simulate network conditions
 await page.route('**/*', route => route.abort()); // Offline
 ```
 
 ---
 
-# 3. Faz 2: UNDERSTAND (Anlama)
+# 3. Phase 2: UNDERSTAND
 
-## 3.1 Sistemi Anla
+## 3.1 Understand the System
 
 ```markdown
-## Sistem Haritası
+## System Map
 
-### İlgili Bileşenler
-1. [Bileşen A] → [Görevi]
-2. [Bileşen B] → [Görevi]
-3. [Bileşen C] → [Görevi]
+### Relevant Components
+1. [Component A] → [Task]
+2. [Component B] → [Task]
+3. [Component C] → [Task]
 
-### Veri Akışı
+### Data Flow
 ```
 User Input → API → Service → Database
      ↓
   Response ← Transform ← Query Result
 ```
 
-### Beklenen Davranış vs Gerçek Davranış
-| Adım | Beklenen | Gerçek |
+### Expected Behavior vs Actual Behavior
+| Step | Expected | Actual |
 |------|----------|--------|
 | Input | X | X ✅ |
 | Process | Y | Z ❌ |
 | Output | A | B ❌ |
 ```
 
-## 3.2 5 Whys Tekniği
+## 3.2 5 Whys Technique
 
 ```markdown
 ## 5 Whys Analysis
 
-**Problem:** Kullanıcı login olamıyor
+**Problem:** User cannot login
 
-1. **Neden?** → API 401 dönüyor
-2. **Neden?** → Token geçersiz
-3. **Neden?** → Token expire olmuş
-4. **Neden?** → Token yenileme çalışmıyor
-5. **Neden?** → Refresh token endpoint'i değişmiş ama client güncellenmemiş
+1. **Why?** → API returns 401
+2. **Why?** → Token is invalid
+3. **Why?** → Token has expired
+4. **Why?** → Token refresh not working
+5. **Why?** → Refresh token endpoint changed but client not updated
 
-**Root Cause:** API versiyonu güncellendi ama client'ta breaking change handle edilmedi
+**Root Cause:** API version updated but breaking change not handled in client
 ```
 
 ---
 
-# 4. Faz 3: ISOLATE (İzolasyon)
+# 4. Phase 3: ISOLATE
 
-## 4.1 Binary Search ile Hata Bulma
+## 4.1 Binary Search for Bug Finding
 
 ```markdown
-## İzolasyon Stratejisi
+## Isolation Strategy
 
 ### Divide and Conquer
-1. Sistemin yarısını devre dışı bırak
-2. Hata hala var mı?
-   - Evet → O yarıda ara
-   - Hayır → Diğer yarıda ara
-3. Tekrarla: kalan yarıyı ikiye böl
+1. Disable half of the system
+2. Does the error persist?
+   - Yes → Search in that half
+   - No → Search in the other half
+3. Repeat: divide the remaining half into two
 ```
 
 ```bash
-# Git bisect ile hatalı commit bulma
+# Git bisect to find faulty commit
 git bisect start
-git bisect bad HEAD           # Şu an hatalı
-git bisect good v1.0.0        # Bu versiyon düzgündü
-# Git otomatik olarak commit'ler arasında binary search yapar
-git bisect run npm test       # Otomatik test çalıştır
+git bisect bad HEAD           # Current is faulty
+git bisect good v1.0.0        # This version was fine
+# Git performs binary search automatically
+git bisect run npm test       # Run automatic test
 ```
 
 ## 4.2 Minimal Reproduction
 
 ```typescript
-// Büyük uygulamadan minimal örnek çıkar
-// ❌ Tüm uygulama ile debug etme
+// Extract minimal example from large app
+// ❌ Do not debug with the whole app
 
-// ✅ Minimal repro oluştur
+// ✅ Create minimal repro
 const minimalExample = () => {
-  // Sadece hatayı tetikleyen minimum kod
+  // Only the minimum code triggering the error
   const data = { id: null };
-  return data.id.toString(); // TypeError burada!
+  return data.id.toString(); // TypeError is here!
 };
 ```
 
 ---
 
-# 5. Faz 4: HYPOTHESIZE (Hipotez)
+# 5. Phase 4: HYPOTHESIZE
 
-## 5.1 Olası Nedenleri Listele
+## 5.1 List Possible Causes
 
 ```markdown
-## Hipotez Listesi
+## Hypothesis List
 
-| # | Hipotez | Olasılık | Test Yöntemi |
+| # | Hypothesis | Probability | Test Method |
 |---|---------|----------|--------------|
-| 1 | Null pointer | %40 | Console.log ile değer kontrol |
-| 2 | Race condition | %30 | Timeout ekleyerek test |
-| 3 | Cache stale | %20 | Cache temizleyerek test |
-| 4 | API değişikliği | %10 | API response kontrol |
+| 1 | Null pointer | 40% | Value check with Console.log |
+| 2 | Race condition | 30% | Test by adding timeout |
+| 3 | Cache stale | 20% | Test by clearing cache |
+| 4 | API change | 10% | Check API response |
 
-### En Olası Hipotez İlk Test Edilmeli
-→ Başla: Hipotez #1
+### Most Likely Hypothesis Should Be Tested First
+→ Start: Hypothesis #1
 ```
 
 ## 5.2 Common Bug Patterns
 
-| Pattern | Belirtiler | Kontrol Et |
+| Pattern | Symptoms | Check |
 |---------|------------|------------|
-| **Null Reference** | TypeError: Cannot read | Değer undefined/null mı? |
-| **Off-by-One** | Array out of bounds | İndex hesaplaması |
-| **Race Condition** | Intermittent failure | Async sıralama |
-| **Memory Leak** | Slow over time | Cleanup yapılıyor mu? |
-| **Infinite Loop** | Freeze/hang | Loop koşulu |
+| **Null Reference** | TypeError: Cannot read | Is value undefined/null? |
+| **Off-by-One** | Array out of bounds | Index calculation |
+| **Race Condition** | Intermittent failure | Async ordering |
+| **Memory Leak** | Slow over time | Is cleanup performed? |
+| **Infinite Loop** | Freeze/hang | Loop condition |
 | **Wrong Scope** | Unexpected value | Closure/scope |
 | **Type Coercion** | `'5' + 5 = '55'` | Strict equality |
 
 ---
 
-# 6. Faz 5: TEST (Test Etme)
+# 6. Phase 5: TEST
 
-## 6.1 Debugging Araçları
+## 6.1 Debugging Tools
 
 ```typescript
 // 1. Console methods
@@ -260,7 +260,7 @@ function processData(data) {
   return transform(data);
 }
 
-// 3. Conditional breakpoint (DevTools'da)
+// 3. Conditional breakpoint (in DevTools)
 // Right-click on line number → Add conditional breakpoint
 // Condition: user.role === 'admin'
 ```
@@ -270,7 +270,7 @@ function processData(data) {
 ```bash
 # Node Inspector
 node --inspect src/index.js
-# Chrome'da chrome://inspect
+# Chrome: chrome://inspect
 
 # Node Inspector with break
 node --inspect-brk src/index.js
@@ -317,18 +317,18 @@ axios.interceptors.response.use(
 
 ---
 
-# 7. Faz 6: FIX (Düzeltme)
+# 7. Phase 6: FIX
 
-## 7.1 Fix Stratejisi
+## 7.1 Fix Strategy
 
 ```markdown
-## Fix Planı
+## Fix Plan
 
 ### Root Cause
-[Net olarak root cause'u belirt]
+[Clearly state the root cause]
 
 ### Proposed Fix
-[Düzeltme yaklaşımını açıkla]
+[Explain the fix approach]
 
 ### Code Changes
 ```diff
@@ -337,16 +337,16 @@ axios.interceptors.response.use(
 ```
 
 ### Verification
-- [ ] Bug artık oluşmuyor
-- [ ] Yeni bug yaratılmadı (regression)
-- [ ] Test yazıldı
-- [ ] Edge case'ler kontrol edildi
+- [ ] Bug no longer occurs
+- [ ] No new bug created (regression)
+- [ ] Test written
+- [ ] Edge cases checked
 ```
 
-## 7.2 Fix Sonrası Test
+## 7.2 Post-Fix Test
 
 ```typescript
-// Regression test yaz
+// Write regression test
 test('should handle null item in data', () => {
   const data = { item: null };
   expect(() => processData(data)).not.toThrow();
@@ -361,54 +361,54 @@ test('should handle missing item property', () => {
 
 ---
 
-# 8. Faz 7: REFLECT (Yansıtma)
+# 8. Phase 7: REFLECT
 
-## 8.1 Post-Mortem Dokumentasyonu
+## 8.1 Post-Mortem Documentation
 
 ```markdown
 ## Bug Post-Mortem
 
-### Özet
-[Hatanın kısa özeti]
+### Summary
+[Brief summary of the error]
 
 ### Timeline
-- [Tarih] Hata raporlandı
-- [Tarih] Root cause bulundu
-- [Tarih] Fix deploy edildi
+- [Date] Error reported
+- [Date] Root cause found
+- [Date] Fix deployed
 
 ### Root Cause
-[Detaylı açıklama]
+[Detailed explanation]
 
 ### Impact
-- Etkilenen kullanıcı sayısı: [X]
-- Downtime: [Y dakika]
-- Revenue impact: [Varsa]
+- Number of affected users: [X]
+- Downtime: [Y minutes]
+- Revenue impact: [If any]
 
 ### Lessons Learned
-1. [Öğrenilen 1]
-2. [Öğrenilen 2]
+1. [Learned 1]
+2. [Learned 2]
 
 ### Prevention
-Bu tür hataları önlemek için:
-1. [ ] [Aksiyon 1]
-2. [ ] [Aksiyon 2]
+To prevent such errors:
+1. [ ] [Action 1]
+2. [ ] [Action 2]
 ```
 
 ---
 
-# 9. Debugging Araçları
+# 9. Debugging Tools
 
 ## 9.1 Static Analysis
 
 ```bash
-# ESLint ile potansiyel hataları bul
+# Find potential errors with ESLint
 npx eslint . --ext .ts,.tsx
 
 # TypeScript type checking
 npx tsc --noEmit
 
 # SonarQube/SonarLint
-# VS Code extension veya CI integration
+# VS Code extension or CI integration
 ```
 
 ## 9.2 Runtime Analysis
@@ -450,46 +450,46 @@ logger.fatal('Fatal error');
 
 ---
 
-# 10. Kontrol Listesi
+# 10. Checklist
 
-Her debugging session'da:
+In every debugging session:
 
-- [ ] Hata tutarlı şekilde tekrarlandı
-- [ ] Sistem ve beklenen davranış anlaşıldı
-- [ ] Problem izole edildi
-- [ ] Hipotezler listelendi ve önceliklendirildi
-- [ ] En olası hipotez ilk test edildi
-- [ ] Root cause bulundu
-- [ ] Fix uygulandı ve doğrulandı
-- [ ] Regression test yazıldı
-- [ ] Post-mortem dokümante edildi
-
----
-
-# 11. Yapma Listesi
-
-❌ Tahminle düzeltmeye çalışma (print debugging loop)
-❌ Birden fazla şeyi aynı anda değiştirme
-❌ Root cause'u anlamadan fix yapma
-❌ Test yazmadan PR açma
-❌ Debugging kodunu commit etme (console.log)
-❌ Hataları sessizce yutma (empty catch)
-❌ Timeout ile "fix" yaptığını sanma
+- [ ] Error reproduced consistently
+- [ ] System and expected behavior understood
+- [ ] Problem isolated
+- [ ] Hypotheses listed and prioritized
+- [ ] Most likely hypothesis tested first
+- [ ] Root cause found
+- [ ] Fix applied and verified
+- [ ] Regression test written
+- [ ] Post-mortem documented
 
 ---
 
-# 12. Mutlaka Yap Listesi
+# 11. Don't List
 
-✅ Önce tekrarla, sonra debug et
-✅ Binary search ile izole et
-✅ Hipotezleri yaz ve test et
-✅ Bir seferde bir değişiklik yap
-✅ Her fix için test yaz
-✅ Öğrenilenleri belgele
-✅ Stack trace'i dikkatlice oku
-✅ Version control kullan (git stash, bisect)
+❌ Do not try to fix by guessing (print debugging loop)
+❌ Do not change multiple things at once
+❌ Do not fix without understanding the root cause
+❌ Do not open PR without writing tests
+❌ Do not commit debugging code (console.log)
+❌ Do not swallow errors silently (empty catch)
+❌ Do not assume "fixed" with just a timeout
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 12. Must Do List
+
+✅ Reproduce first, then debug
+✅ Isolate with binary search
+✅ Write down and test hypotheses
+✅ Make one change at a time
+✅ Write a test for every fix
+✅ Document lessons learned
+✅ Read the stack trace carefully
+✅ Use version control (git stash, bisect)
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

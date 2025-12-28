@@ -27,9 +27,7 @@ build/
 out/
 
 # Environment
-.env
-.env.local
-.env.*.local
+
 
 # Debug
 npm-debug.log*

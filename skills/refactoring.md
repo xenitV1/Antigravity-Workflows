@@ -1,6 +1,6 @@
 ---
 name: refactoring
-description: Güvenli kod yeniden yapılandırma rehberi. Behavior preservation, incremental changes ve 2025 refactoring patterns.
+description: Safe code refactoring guide. Behavior preservation, incremental changes, and 2025 refactoring patterns.
 metadata:
   skillport:
     category: quality
@@ -11,71 +11,71 @@ metadata:
       - technical-debt
 ---
 
-# Refactoring Skill - Güvenli Kod İyileştirme
+# Refactoring Skill - Safe Code Improvement
 
-> Mevcut kodu bozmadan iyileştirme metodolojisi.
-> Behavior preservation, incremental changes ve test-first refactoring.
+> Methodology for improving existing code without breaking it.
+> Behavior preservation, incremental changes, and test-first refactoring.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Refactoring Altın Kuralı](#1-refactoring-altın-kuralı)
-2. [Ne Zaman Refactor?](#2-ne-zaman-refactor)
-3. [Refactoring Süreci](#3-refactoring-süreci)
+1. [The Golden Rule of Refactoring](#1-the-golden-rule-of-refactoring)
+2. [When to Refactor?](#2-when-to-refactor)
+3. [The Refactoring Process](#3-the-refactoring-process)
 4. [Common Refactoring Patterns](#4-common-refactoring-patterns)
 5. [Code Smells](#5-code-smells)
 6. [Safe Refactoring Checklist](#6-safe-refactoring-checklist)
 7. [Incremental Refactoring Strategy](#7-incremental-refactoring-strategy)
-8. [Kontrol Listesi](#8-kontrol-listesi)
-9. [Yapma Listesi](#9-yapma-listesi)
-10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+8. [Checklist](#8-checklist)
+9. [Don't List](#9-dont-list)
+10. [Must Do List](#10-must-do-list)
 
 ---
 
-# 1. Refactoring Altın Kuralı
+# 1. The Golden Rule of Refactoring
 
-> **"Refactoring davranışı DEĞİŞTİRMEZ, sadece yapıyı iyileştirir"**
+> **"Refactoring does NOT change behavior, it only improves structure"**
 
 ```
 Before Refactoring:
   Input: X → [Code A] → Output: Y
 
 After Refactoring:
-  Input: X → [Code B] → Output: Y  (AYNI Output!)
+  Input: X → [Code B] → Output: Y  (SAME Output!)
 ```
 
 ---
 
-# 2. Ne Zaman Refactor?
+# 2. When to Refactor?
 
-## 2.1 Refactor Zamanı
+## 2.1 Time to Refactor
 
-| Sinyal | Örnek |
+| Signal | Example |
 |--------|-------|
 | **Code Smell** | Duplicate code, long method, large class |
-| **Boy Scout Rule** | "Kodu bulduğundan daha temiz bırak" |
-| **Before adding feature** | Yeni özellik eklemeden önce zemin hazırla |
-| **After fixing bug** | Bug fix sonrası kodu iyileştir |
-| **Code review feedback** | İyileştirme önerileri alındığında |
+| **Boy Scout Rule** | "Leave the code cleaner than you found it" |
+| **Before adding feature** | Prepare the ground before adding a new feature |
+| **After fixing bug** | Improve the code after a bug fix |
+| **Code review feedback** | When receiving improvement suggestions |
 
-## 2.2 Refactor Etme Zamanı DEĞİL
+## 2.2 When NOT to Refactor
 
-| Durum | Neden? |
+| Case | Why? |
 |-------|--------|
-| ❌ Deadline çok yakın | Risk çok yüksek |
-| ❌ Test coverage düşük | Güvenlik ağı yok |
-| ❌ Sistemi anlamadan | Yanlış yere müdahale |
-| ❌ Feature ile birlikte | Ayrı commit'lerde yap |
+| ❌ Deadline is very close | Risk is too high |
+| ❌ Test coverage is low | No safety net |
+| ❌ Without understanding the system | Intervening in the wrong place |
+| ❌ Along with a feature | Keep them in separate commits |
 
 ---
 
-# 3. Refactoring Süreci
+# 3. The Refactoring Process
 
-## 3.1 Adım 1: Güvenlik Ağı Oluştur
+## 3.1 Step 1: Create a Safety Net
 
 ```typescript
-// Mevcut davranışı belgele ve test et
+// Document and test current behavior
 describe('calculateTotal', () => {
   // Existing behavior tests (characterization tests)
   test('should calculate total for single item', () => {
@@ -100,30 +100,30 @@ describe('calculateTotal', () => {
 });
 ```
 
-## 3.2 Adım 2: Küçük Adımlarla İlerle
+## 3.2 Step 2: Proceed in Small Steps
 
 ```typescript
-// ❌ YANLIŞ: Büyük değişiklik
-// Tüm dosyayı sil ve yeniden yaz
+// ❌ INCORRECT: Large change
+// Delete the entire file and rewrite
 
-// ✅ DOĞRU: Küçük adımlar
+// ✅ CORRECT: Small steps
 // Commit 1: Extract helper function
 // Commit 2: Rename variables
 // Commit 3: Simplify conditionals
 // Commit 4: Remove duplication
 ```
 
-## 3.3 Adım 3: Her Adımda Test Çalıştır
+## 3.3 Step 3: Run Tests at Every Step
 
 ```bash
-# Her küçük değişiklikten sonra
+# After every small change
 npm test
 
-# Testler geçtiyse commit
+# If tests pass, commit
 git add .
 git commit -m "refactor: extract calculateItemTotal helper"
 
-# Sonraki adıma geç
+# Move to next step
 ```
 
 ---
@@ -133,7 +133,7 @@ git commit -m "refactor: extract calculateItemTotal helper"
 ## 4.1 Extract Function
 
 ```typescript
-// ❌ ÖNCE: Long function
+// ❌ BEFORE: Long function
 function processOrder(order: Order) {
   // Validation (10 lines)
   if (!order.items) throw new Error('No items');
@@ -152,7 +152,7 @@ function processOrder(order: Order) {
   // ...
 }
 
-// ✅ SONRA: Extracted functions
+// ✅ AFTER: Extracted functions
 function processOrder(order: Order) {
   validateOrder(order);
   const grandTotal = calculateOrderTotal(order);
@@ -178,7 +178,7 @@ function calculateOrderTotal(order: Order): number {
 ## 4.2 Replace Conditional with Polymorphism
 
 ```typescript
-// ❌ ÖNCE: Switch statement
+// ❌ BEFORE: Switch statement
 function calculateShipping(order: Order): number {
   switch (order.shippingType) {
     case 'standard':
@@ -192,7 +192,7 @@ function calculateShipping(order: Order): number {
   }
 }
 
-// ✅ SONRA: Strategy pattern
+// ✅ AFTER: Strategy pattern
 interface ShippingStrategy {
   calculate(order: Order): number;
 }
@@ -231,12 +231,12 @@ function calculateShipping(order: Order): number {
 ## 4.3 Replace Magic Numbers with Constants
 
 ```typescript
-// ❌ ÖNCE
+// ❌ BEFORE
 if (user.age >= 18) { /* ... */ }
 const tax = amount * 0.18;
 if (retryCount > 3) { /* ... */ }
 
-// ✅ SONRA
+// ✅ AFTER
 const LEGAL_AGE = 18;
 const TAX_RATE = 0.18;
 const MAX_RETRY_COUNT = 3;
@@ -249,7 +249,7 @@ if (retryCount > MAX_RETRY_COUNT) { /* ... */ }
 ## 4.4 Simplify Conditionals
 
 ```typescript
-// ❌ ÖNCE: Nested conditionals
+// ❌ BEFORE: Nested conditionals
 function getDiscount(user: User, order: Order): number {
   if (user.isPremium) {
     if (order.total > 1000) {
@@ -270,7 +270,7 @@ function getDiscount(user: User, order: Order): number {
   }
 }
 
-// ✅ SONRA: Early return + table
+// ✅ AFTER: Early return + table
 const DISCOUNT_TABLE = {
   premium: { high: 0.20, medium: 0.15, low: 0.10 },
   regular: { high: 0.10, medium: 0.05, low: 0 },
@@ -292,7 +292,7 @@ function getOrderLevel(total: number): 'high' | 'medium' | 'low' {
 ## 4.5 Remove Duplication (DRY)
 
 ```typescript
-// ❌ ÖNCE: Duplicated code
+// ❌ BEFORE: Duplicated code
 async function createUser(data: CreateUserDto) {
   const user = await prisma.user.create({ data });
   await sendEmail(user.email, 'Welcome!', 'Welcome to our platform');
@@ -307,7 +307,7 @@ async function createAdmin(data: CreateAdminDto) {
   return admin;
 }
 
-// ✅ SONRA: Extracted common logic
+// ✅ AFTER: Extracted common logic
 async function createAccount<T>(
   createFn: () => Promise<T & { id: string; email: string }>,
   welcomeMessage: string,
@@ -334,18 +334,18 @@ async function createUser(data: CreateUserDto) {
 
 ## 5.1 Identification
 
-| Smell | Belirti | Çözüm |
+| Smell | Symptom | Solution |
 |-------|---------|-------|
-| **Long Method** | >20 satır | Extract Method |
-| **Large Class** | >300 satır | Extract Class |
-| **Long Parameter List** | >3 param | Introduce Parameter Object |
+| **Long Method** | >20 lines | Extract Method |
+| **Large Class** | >300 lines | Extract Class |
+| **Long Parameter List** | >3 params | Introduce Parameter Object |
 | **Duplicate Code** | Copy-paste | Extract Method/Class |
-| **Feature Envy** | Başka class'ın verisiyle çok çalışma | Move Method |
-| **Data Clumps** | Hep beraber gezen veriler | Extract Class |
-| **Primitive Obsession** | String/number yerine object | Value Object |
-| **Switch Statements** | Çok switch/if-else | Polymorphism |
-| **Parallel Inheritance** | Her yeni class'ta ikizini yaratma | Inheritance refactor |
-| **Dead Code** | Kullanılmayan kod | Remove |
+| **Feature Envy** | Working too much with another class's data | Move Method |
+| **Data Clumps** | Data hanging out together | Extract Class |
+| **Primitive Obsession** | Not using objects for string/number | Value Object |
+| **Switch Statements** | Many switch/if-else | Polymorphism |
+| **Parallel Inheritance** | Creating twin for every new class | Inheritance refactor |
+| **Dead Code** | Unused code | Remove |
 
 ## 5.2 Detection Tools
 
@@ -375,23 +375,23 @@ sonar.qualitygate.wait=true
 ## Pre-Refactoring Checklist
 
 ### Safety Net
-- [ ] Test coverage yeterli mi? (minimum %80)
-- [ ] Tüm testler geçiyor mu?
-- [ ] CI/CD pipeline yeşil mi?
+- [ ] Is test coverage sufficient? (minimum 80%)
+- [ ] Do all tests pass?
+- [ ] Is CI/CD pipeline green?
 
 ### Understanding
-- [ ] Mevcut kodu anlıyor muyum?
-- [ ] Edge case'leri biliyor muyum?
-- [ ] Bağımlılıkları haritaladım mı?
+- [ ] Do I understand the current code?
+- [ ] Do I know the edge cases?
+- [ ] Have I mapped the dependencies?
 
 ### Planning
-- [ ] Hangi refactoring pattern uygulayacağım?
-- [ ] Adımları planladım mı?
-- [ ] Rollback stratejim var mı?
+- [ ] Which refactoring pattern will I apply?
+- [ ] Have I planned the steps?
+- [ ] Do I have a rollback strategy?
 
 ### Communication
-- [ ] Takımı bilgilendirdim mi?
-- [ ] Code freeze var mı?
+- [ ] Have I informed the team?
+- [ ] Is there a code freeze?
 ```
 
 ## 6.2 During Refactoring
@@ -399,11 +399,11 @@ sonar.qualitygate.wait=true
 ```markdown
 ## During Refactoring
 
-- [ ] Küçük adımlarla ilerliyorum
-- [ ] Her adımda test çalıştırıyorum
-- [ ] Her başarılı adımı commit ediyorum
-- [ ] Feature eklemiyorum (sadece refactor)
-- [ ] Bug fix yapmıyorum (sadece refactor)
+- [ ] Proceeding in small steps
+- [ ] Running tests at every step
+- [ ] Committing every successful step
+- [ ] Not adding features (only refactor)
+- [ ] Not fixing bugs (only refactor)
 ```
 
 ## 6.3 After Refactoring
@@ -411,12 +411,12 @@ sonar.qualitygate.wait=true
 ```markdown
 ## Post-Refactoring
 
-- [ ] Tüm testler geçiyor
-- [ ] Lint hata yok
-- [ ] Type error yok
-- [ ] Performance regresyon yok
-- [ ] Code review istendi
-- [ ] Documentation güncellendi
+- [ ] All tests pass
+- [ ] No lint errors
+- [ ] No type errors
+- [ ] No performance regression
+- [ ] Code review requested
+- [ ] Documentation updated
 ```
 
 ---
@@ -426,20 +426,20 @@ sonar.qualitygate.wait=true
 ## 7.1 Strangler Fig Pattern
 
 ```typescript
-// Eski kodu sarmala, yavaşça yenisiyle değiştir
+// Apply new code wrapper, slowly replace the old one
 
-// Step 1: Wrapper oluştur
+// Step 1: Create wrapper
 class UserServiceWrapper {
   private legacyService: LegacyUserService;
   private newService: NewUserService;
 
   async getUser(id: string) {
-    // Başta legacy kullan
+    // Use legacy at first
     return this.legacyService.getUser(id);
   }
 }
 
-// Step 2: Feature flag ile yönlendir
+// Step 2: Route with Feature flag
 async getUser(id: string) {
   if (featureFlags.useNewUserService) {
     return this.newService.getUser(id);
@@ -447,56 +447,56 @@ async getUser(id: string) {
   return this.legacyService.getUser(id);
 }
 
-// Step 3: Tamamen geçiş
+// Step 3: Full transition
 async getUser(id: string) {
   return this.newService.getUser(id);
 }
 
-// Step 4: Legacy'yi kaldır
+// Step 4: Remove legacy
 ```
 
 ---
 
-# 8. Kontrol Listesi
+# 8. Checklist
 
-Her refactoring'de:
+In every refactoring:
 
-- [ ] Yeterli test coverage var
-- [ ] Mevcut davranış belgelendi
-- [ ] Küçük adımlarla ilerleniyor
-- [ ] Her adım ayrı commit
-- [ ] Testler her adımda geçiyor
-- [ ] Feature eklenmedi
-- [ ] Bug fix yapılmadı
-- [ ] Performance kontrol edildi
-- [ ] Code review yapıldı
-
----
-
-# 9. Yapma Listesi
-
-❌ Test olmadan refactor
-❌ Büyük değişiklikleri tek seferde
-❌ Refactor + feature aynı PR'da
-❌ Refactor + bugfix aynı commit'te
-❌ Davranışı değiştiren "refactor"
-❌ Anlamadan refactor
-❌ Deadline'da refactor
+- [ ] Sufficient test coverage present
+- [ ] Current behavior documented
+- [ ] Proceeding in small steps
+- [ ] Every step is a separate commit
+- [ ] Tests pass at every step
+- [ ] No features added
+- [ ] No bug fixes made
+- [ ] Performance checked
+- [ ] Code review performed
 
 ---
 
-# 10. Mutlaka Yap Listesi
+# 9. Don't List
 
-✅ Önce test yaz veya mevcut testleri doğrula
-✅ Mevcut davranışı anla
-✅ Küçük adımlarla ilerle
-✅ Her adımda test çalıştır
-✅ Her adımı ayrı commit et
-✅ Rollback stratejin olsun
-✅ Code review al
-✅ Performance'ı ölç
+❌ Do not refactor without tests
+❌ Do not make large changes at once
+❌ Do not put refactor + feature in the same PR
+❌ Do not put refactor + bugfix in the same commit
+❌ Do not "refactor" in a way that changes behavior
+❌ Do not refactor without understanding
+❌ Do not refactor right at the deadline
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 10. Must Do List
+
+✅ Write tests first or verify existing tests
+✅ Understand current behavior
+✅ Proceed in small steps
+✅ Run tests at every step
+✅ Commit every step separately
+✅ Have a rollback strategy
+✅ Get code review
+✅ Measure performance
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

@@ -1,6 +1,6 @@
 ---
 name: backend
-description: Backend geliştirme rehberi. Node.js, TypeScript, API tasarımı, veritabanı entegrasyonu ve güvenlik için 2025 best practices.
+description: Backend development guide. 2025 best practices for Node.js, TypeScript, API design, database integration, and security.
 metadata:
   skillport:
     category: development
@@ -14,46 +14,46 @@ metadata:
 
 # Backend Development Skill
 
-> Node.js ve TypeScript ile modern, güvenli ve ölçeklenebilir backend geliştirme rehberi.
-> 2025 best practices ve endüstri standartlarına uygun.
+> Guide for developing modern, secure, and scalable backends with Node.js and TypeScript.
+> Compliant with 2025 best practices and industry standards.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Kapsam](#1-kapsam)
-2. [Temel Prensipler](#2-temel-prensipler)
-3. [Proje Yapısı](#3-proje-yapısı)
-4. [API Tasarım Kuralları](#4-api-tasarım-kuralları)
+1. [Scope](#1-scope)
+2. [Core Principles](#2-core-principles)
+3. [Project Structure](#3-project-structure)
+4. [API Design Rules](#4-api-design-rules)
 5. [Input Validation (Zod)](#5-input-validation-zod)
-6. [Güvenlik Best Practices](#6-güvenlik-best-practices)
-7. [Veritabanı Patterns](#7-veritabanı-patterns)
+6. [Security Best Practices](#6-security-best-practices)
+7. [Database Patterns](#7-database-patterns)
 8. [Performance Optimization](#8-performance-optimization)
 9. [Error Handling](#9-error-handling)
-10. [Kontrol Listesi](#10-kontrol-listesi)
-11. [Yapma Listesi](#11-yapma-listesi)
-12. [Mutlaka Yap Listesi](#12-mutlaka-yap-listesi)
+10. [Checklist](#10-checklist)
+11. [Don't List](#11-dont-list)
+12. [Must Do List](#12-must-do-list)
 
 ---
 
-# 1. Kapsam
+# 1. Scope
 
-| Alan | Teknolojiler |
+| Area | Technologies |
 |------|--------------|
 | Runtime | Node.js 20+ (LTS) |
-| Dil | TypeScript (Strict Mode) |
+| Language | TypeScript (Strict Mode) |
 | Framework | NestJS, Fastify, Express |
 | API | REST, GraphQL, tRPC |
-| Veritabanı | PostgreSQL, MongoDB, Redis |
+| Database | PostgreSQL, MongoDB, Redis |
 | ORM | Prisma, Drizzle, TypeORM |
 | Auth | JWT, OAuth 2.0, Passport |
 | Test | Jest, Vitest, Supertest |
 
 ---
 
-# 2. Temel Prensipler
+# 2. Core Principles
 
-## 2.1 TypeScript Strict Mode (Zorunlu)
+## 2.1 TypeScript Strict Mode (Mandatory)
 
 ```json
 // tsconfig.json
@@ -71,15 +71,15 @@ metadata:
 }
 ```
 
-## 2.2 `any` Tipi Yasak
+## 2.2 `any` Type is Forbidden
 
 ```typescript
-// ❌ YANLIŞ
+// ❌ INCORRECT
 function processData(data: any) {
   return data.value;
 }
 
-// ✅ DOĞRU
+// ✅ CORRECT
 interface DataPayload {
   value: string;
   metadata?: Record<string, unknown>;
@@ -89,7 +89,7 @@ function processData(data: DataPayload): string {
   return data.value;
 }
 
-// Bilinmeyen veri için unknown kullan
+// Use unknown for unknown data
 function parseInput(input: unknown): DataPayload {
   if (isDataPayload(input)) {
     return input;
@@ -98,7 +98,7 @@ function parseInput(input: unknown): DataPayload {
 }
 ```
 
-## 2.3 ES Modules (ESM) Kullan
+## 2.3 Use ES Modules (ESM)
 
 ```typescript
 // ✅ Modern ESM syntax
@@ -115,9 +115,9 @@ export const userRouter = Router();
 
 ---
 
-# 3. Proje Yapısı
+# 3. Project Structure
 
-## 3.1 Feature-First Structure (Önerilen)
+## 3.1 Feature-First Structure (Recommended)
 
 ```
 src/
@@ -155,12 +155,12 @@ src/
 
 ---
 
-# 4. API Tasarım Kuralları
+# 4. API Design Rules
 
 ## 4.1 RESTful Endpoint Conventions
 
 ```typescript
-// Resource naming (çoğul, küçük harf, kebab-case)
+// Resource naming (plural, lowercase, kebab-case)
 GET    /api/v1/users           // List
 GET    /api/v1/users/:id       // Get one
 POST   /api/v1/users           // Create
@@ -176,10 +176,10 @@ POST   /api/v1/users/:userId/orders
 GET    /api/v1/users?page=1&limit=10&sort=createdAt:desc&filter[status]=active
 ```
 
-## 4.2 Response Format Standardı
+## 4.2 Response Format Standard
 
 ```typescript
-// Başarılı response
+// Successful response
 interface SuccessResponse<T> {
   success: true;
   data: T;
@@ -191,18 +191,18 @@ interface SuccessResponse<T> {
   };
 }
 
-// Hata response
+// Error response
 interface ErrorResponse {
   success: false;
   error: {
     code: string;
     message: string;
     details?: Record<string, unknown>;
-    stack?: string; // Sadece development
+    stack?: string; // Only development
   };
 }
 
-// Örnek implementasyon
+// Example implementation
 function createSuccessResponse<T>(data: T, meta?: object): SuccessResponse<T> {
   return { success: true, data, meta };
 }
@@ -217,19 +217,19 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 
 ## 4.3 HTTP Status Codes
 
-| Kod | Kullanım |
+| Code | Usage |
 |-----|----------|
-| 200 | Başarılı GET, PATCH, PUT |
-| 201 | Başarılı POST (Created) |
-| 204 | Başarılı DELETE (No Content) |
-| 400 | Validation hatası |
-| 401 | Authentication gerekli |
-| 403 | Yetki yok (Forbidden) |
-| 404 | Resource bulunamadı |
-| 409 | Conflict (duplicate vb.) |
+| 200 | Successful GET, PATCH, PUT |
+| 201 | Successful POST (Created) |
+| 204 | Successful DELETE (No Content) |
+| 400 | Validation error |
+| 401 | Authentication required |
+| 403 | Forbidden (No permissions) |
+| 404 | Resource not found |
+| 409 | Conflict (duplicate etc.) |
 | 422 | Unprocessable Entity |
-| 429 | Rate limit aşıldı |
-| 500 | Server hatası |
+| 429 | Rate limit exceeded |
+| 500 | Server error |
 
 ---
 
@@ -238,20 +238,20 @@ function createErrorResponse(code: string, message: string): ErrorResponse {
 ```typescript
 import { z } from 'zod';
 
-// Schema tanımı
+// Schema definition
 const CreateUserSchema = z.object({
-  email: z.string().email('Geçerli email giriniz'),
+  email: z.string().email('Enter a valid email'),
   password: z.string()
-    .min(8, 'Şifre en az 8 karakter olmalı')
-    .regex(/[A-Z]/, 'En az 1 büyük harf')
-    .regex(/[0-9]/, 'En az 1 rakam'),
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'At least 1 uppercase letter')
+    .regex(/[0-9]/, 'At least 1 digit'),
   name: z.string().min(2).max(100),
   age: z.number().int().min(13).max(120).optional(),
 });
 
 type CreateUserDto = z.infer<typeof CreateUserSchema>;
 
-// Middleware olarak kullanım
+// Use as middleware
 function validateBody<T>(schema: z.ZodSchema<T>) {
   return (req: Request, res: Response, next: NextFunction) => {
     const result = schema.safeParse(req.body);
@@ -265,13 +265,13 @@ function validateBody<T>(schema: z.ZodSchema<T>) {
   };
 }
 
-// Route'da kullanım
+// Use in route
 router.post('/users', validateBody(CreateUserSchema), createUser);
 ```
 
 ---
 
-# 6. Güvenlik Best Practices
+# 6. Security Best Practices
 
 ## 6.1 Environment Variables
 
@@ -289,10 +289,10 @@ const envSchema = z.object({
 
 export const env = envSchema.parse(process.env);
 
-// ❌ ASLA yapma
+// ❌ NEVER do this
 const secret = "hardcoded-secret-key";
 
-// ✅ Her zaman env'den al
+// ✅ Always get from env
 const secret = env.JWT_SECRET;
 ```
 
@@ -319,8 +319,8 @@ app.use(cors({
 
 // Rate limiting
 app.use(rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 dakika
-  max: 100, // IP başına 100 istek
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per IP
   message: { error: 'Too many requests' }
 }));
 ```
@@ -328,15 +328,15 @@ app.use(rateLimit({
 ## 6.3 SQL Injection Prevention
 
 ```typescript
-// ❌ ASLA raw query'de değişken kullanma
+// ❌ NEVER use variables in raw query
 const query = `SELECT * FROM users WHERE id = ${userId}`;
 
-// ✅ Parametrized query kullan
+// ✅ Use parametrized query
 const user = await prisma.user.findUnique({
   where: { id: userId }
 });
 
-// Veya raw query gerekiyorsa
+// Or if raw query is necessary
 const users = await prisma.$queryRaw`
   SELECT * FROM users WHERE id = ${userId}
 `;
@@ -380,13 +380,13 @@ function requireRole(...roles: string[]) {
   };
 }
 
-// Kullanım
+// Usage
 router.delete('/users/:id', authMiddleware, requireRole('admin'), deleteUser);
 ```
 
 ---
 
-# 7. Veritabanı Patterns
+# 7. Database Patterns
 
 ## 7.1 Repository Pattern
 
@@ -415,7 +415,7 @@ class UserRepository implements IUserRepository {
     return this.prisma.user.create({ data });
   }
   
-  // ... diğer metodlar
+  // ... other methods
 }
 ```
 
@@ -450,19 +450,19 @@ async function transferMoney(fromId: string, toId: string, amount: number) {
 ## 8.1 Async/Await Best Practices
 
 ```typescript
-// ❌ Sequential (yavaş)
+// ❌ Sequential (slow)
 const user = await getUser(id);
 const orders = await getOrders(id);
 const payments = await getPayments(id);
 
-// ✅ Parallel (hızlı)
+// ✅ Parallel (fast)
 const [user, orders, payments] = await Promise.all([
   getUser(id),
   getOrders(id),
   getPayments(id),
 ]);
 
-// Promise.allSettled (hata toleranslı)
+// Promise.allSettled (fault tolerant)
 const results = await Promise.allSettled([
   fetchData1(),
   fetchData2(),
@@ -480,16 +480,16 @@ const redis = new Redis(env.REDIS_URL);
 async function getCachedUser(id: string): Promise<User | null> {
   const cacheKey = `user:${id}`;
   
-  // Cache'den oku
+  // Read from cache
   const cached = await redis.get(cacheKey);
   if (cached) {
     return JSON.parse(cached);
   }
   
-  // DB'den çek ve cache'le
+  // Fetch from DB and cache
   const user = await userRepository.findById(id);
   if (user) {
-    await redis.set(cacheKey, JSON.stringify(user), 'EX', 3600); // 1 saat
+    await redis.set(cacheKey, JSON.stringify(user), 'EX', 3600); // 1 hour
   }
   
   return user;
@@ -512,12 +512,12 @@ for (const user of users) {
   const posts = await prisma.post.findMany({ where: { authorId: user.id } });
 }
 
-// ✅ Include ile tek sorgu
+// ✅ Single query with Include
 const users = await prisma.user.findMany({
   include: { posts: true },
 });
 
-// ✅ Select ile sadece gerekli alanlar
+// ✅ Select only necessary fields
 const users = await prisma.user.findMany({
   select: {
     id: true,
@@ -578,51 +578,51 @@ app.use(errorHandler);
 
 ---
 
-# 10. Kontrol Listesi
+# 10. Checklist
 
-Her backend geliştirmede:
+In every backend development:
 
-- [ ] TypeScript strict mode aktif
-- [ ] `any` tipi kullanılmadı
-- [ ] Tüm inputlar validate edildi (Zod)
-- [ ] Environment variables env'den okunuyor
-- [ ] SQL injection koruması var
-- [ ] Authentication/Authorization implement edildi
-- [ ] Rate limiting aktif
-- [ ] CORS doğru yapılandırıldı
-- [ ] Error handling merkezi
-- [ ] Logging implement edildi
-- [ ] Unit testler yazıldı
-
----
-
-# 11. Yapma Listesi
-
-❌ `any` tipi kullanma
-❌ Hardcoded secret/password yazma
-❌ Raw SQL'de değişken birleştirme
-❌ Sync fonksiyonlarla dosya/network işlemi
-❌ Console.log production'da bırakma
-❌ Error stack'i kullanıcıya gösterme
-❌ Input validation'ı atlama
-❌ N+1 query yapma
+- [ ] TypeScript strict mode active
+- [ ] `any` type not used
+- [ ] All inputs validated (Zod)
+- [ ] Environment variables read from env
+- [ ] SQL injection protection present
+- [ ] Authentication/Authorization implemented
+- [ ] Rate limiting active
+- [ ] CORS configured correctly
+- [ ] Error handling centralized
+- [ ] Logging implemented
+- [ ] Unit tests written
 
 ---
 
-# 12. Mutlaka Yap Listesi
+# 11. Don't List
 
-✅ Her endpoint için input validation
-✅ Tüm async işlemlerde try-catch
+❌ Do not use `any` type
+❌ Do not write hardcoded secrets/passwords
+❌ Do not concatenate variables in raw SQL
+❌ Do not perform file/network operations with sync functions
+❌ Do not leave console.log in production
+❌ Do not show error stack to the user
+❌ Do not skip input validation
+❌ Do not make N+1 queries
+
+---
+
+# 12. Must Do List
+
+✅ Input validation for every endpoint
+✅ Try-catch in all async operations
 ✅ Proper HTTP status codes
-✅ Response format standardizasyonu
+✅ Response format standardization
 ✅ Environment-based configuration
 ✅ Security headers (Helmet)
 ✅ Rate limiting
 ✅ Request logging
 ✅ Database transactions where needed
-✅ Cache stratejisi
+✅ Cache strategy
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+**Last Update:** December 2025
+**Version:** 2.0
