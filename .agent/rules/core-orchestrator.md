@@ -49,6 +49,12 @@
 | Documentation | @documentation.md | Glob: `*.md, README*` |
 | Performance | @optimization.md | Model Decision |
 
+### Marketing Skills
+| Scenario | Rule | Activation |
+|----------|------|------------|
+| SEO (Google/Bing) | @seo-specialist.md | Model Decision |
+| GEO (AI Engines) | @geo-specialist.md | Model Decision |
+
 ---
 
 ## Skill Loading Protocol
@@ -90,6 +96,9 @@ Determine complexity (1-10)
 | Major Refactoring | ultrathink → refactoring → multi-file-sync → testing |
 | Bug Fix | debugging → testing |
 | Performance Issue | optimization → ultrathink → debugging |
+| SEO Strategy | seo-specialist → documentation |
+| GEO Strategy | geo-specialist → documentation |
+| Marketing Campaign | seo-specialist + geo-specialist → documentation |
 
 ---
 

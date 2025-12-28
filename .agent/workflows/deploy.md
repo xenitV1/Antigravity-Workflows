@@ -1,179 +1,36 @@
+---
+description: Production deployment workflow with pre-deployment checks and rollback procedures
+---
+
 # Deploy Workflow
 
 ## Description
-Production deployment workflow with safety checks, progressive rollout, and rollback procedures. Ensures safe and reliable deployments.
-
----
-
-## Invocation
-```
-/deploy [environment: staging|production]
-```
+Use this workflow for deploying code to staging or production. It covers pre-deployment checks, migration verification, progressive rollout, monitoring, and rollback procedures.
 
 ---
 
 ## Steps
 
-### Step 1: Pre-Deployment Checklist
+1. **Run pre-deployment checks** - Verify all tests pass with coverage >= 80%, no lint errors, no TypeScript errors, build succeeds, npm audit is clean, code review is approved, and CHANGELOG is updated.
 
-```markdown
-## Pre-Deployment Verification
+2. **Check database migrations** - Ensure migrations are backward compatible, rollback script is prepared, migrations are tested on staging, performance impact is evaluated, and downtime is planned if needed.
 
-### Code Quality
-- [ ] All tests passing
-- [ ] Coverage >= 80%
-- [ ] No lint errors
-- [ ] No TypeScript errors
-- [ ] Build successful
+3. **Select deployment strategy** - Choose direct deployment for low-risk changes, canary deployment (5% → 25% → 50% → 100%) for medium-risk changes, or blue-green deployment with feature flags for high-risk changes.
 
-### Security
-- [ ] npm audit clean
-- [ ] No hardcoded secrets
-- [ ] OWASP Top 10 reviewed
+4. **Notify team and prepare** - Send deployment notification to communication channel, confirm on-call engineer is available, and open monitoring dashboard.
 
-### Review
-- [ ] Code review approved
-- [ ] All comments addressed
+5. **Execute deployment** - Trigger deployment pipeline, monitor logs for errors, and watch metrics for anomalies during rollout.
 
-### Documentation
-- [ ] CHANGELOG updated
-- [ ] Breaking changes documented
-- [ ] API changes noted
-```
+6. **Monitor progressive rollout** - For canary deployments: observe 10 minutes at 5% traffic, then 25%, then 50%, then 100%. Check health metrics at each stage.
 
-### Step 2: Database Migration Check
+7. **Verify post-deployment** - Confirm health endpoint is responding, all services are healthy, no increased error rate, smoke tests pass, critical paths work, and response times are normal.
 
-```markdown
-## Migration Checklist
+8. **Rollback if needed** - Trigger rollback if error rate > 5%, P95 latency > 2x normal, or critical functionality is broken. Verify rollback successful and investigate root cause.
 
-- [ ] Migration is backward compatible
-- [ ] Rollback script prepared
-- [ ] Migration tested on staging
-- [ ] Performance impact evaluated
-- [ ] Downtime planned (if needed)
-```
-
-### Step 3: Deployment Strategy Selection
-
-```markdown
-## Deployment Strategy
-
-### For Low-Risk Changes
-- [ ] Direct deployment with monitoring
-
-### For Medium-Risk Changes
-- [ ] Canary deployment (5% -> 25% -> 50% -> 100%)
-
-### For High-Risk Changes
-- [ ] Blue-Green deployment with quick rollback
-- [ ] Feature flag with kill switch
-```
-
-### Step 4: Execute Deployment
-
-```markdown
-## Deployment Execution
-
-### Pre-Deploy
-- [ ] Notify team in communication channel
-- [ ] Confirm on-call engineer available
-- [ ] Open monitoring dashboard
-
-### Deploy
-- [ ] Trigger deployment pipeline
-- [ ] Monitor logs for errors
-- [ ] Watch metrics for anomalies
-
-### Rollout (Canary)
-- [ ] 5% traffic - observe 10 minutes
-- [ ] 25% traffic - observe 10 minutes
-- [ ] 50% traffic - observe 10 minutes
-- [ ] 100% traffic - deployment complete
-```
-
-### Step 5: Post-Deployment Verification
-
-```markdown
-## Post-Deployment Checks
-
-### Health
-- [ ] Health endpoint responding
-- [ ] All services healthy
-- [ ] No increased error rate
-
-### Functionality
-- [ ] Smoke tests passing
-- [ ] Critical paths working
-- [ ] No user complaints
-
-### Metrics
-- [ ] Response times normal
-- [ ] Error rate < 1%
-- [ ] CPU/Memory stable
-```
-
-### Step 6: Rollback Procedure (If Needed)
-
-```markdown
-## Rollback Steps
-
-### Trigger Conditions
-- Error rate > 5%
-- P95 latency > 2x normal
-- Critical functionality broken
-
-### Execute Rollback
-```bash
-# Kubernetes
-kubectl rollout undo deployment/app-name
-
-# Verify previous version
-kubectl get pods
-```
-
-### Post-Rollback
-- [ ] Verify rollback successful
-- [ ] Investigate root cause
-- [ ] Create incident report
-```
-
----
-
-## Communication Template
-
-```markdown
-## Deployment Notification
-
-### Starting Deployment
-:rocket: Deploying v[X.Y.Z] to [environment]
-- Changes: [brief summary]
-- Rollout: [strategy]
-- ETA: [time]
-
-### Deployment Complete
-:white_check_mark: v[X.Y.Z] deployed successfully
-- All health checks passing
-- Metrics stable
-
-### Rollback (if needed)
-:warning: Rolling back v[X.Y.Z]
-- Reason: [description]
-- Investigating...
-```
-
----
-
-## Output
-
-Successful deployment with:
-- All pre-checks passed
-- Progressive rollout completed
-- Health verified
-- Team notified
-- Rollback plan ready
+9. **Complete deployment** - Mark deployment as successful in tracking system, document any issues, and create incident report if rollback occurred.
 
 ---
 
 ## Related Workflows
-- `/test` - Ensure tests pass before deploy
-- `/review` - Code review before deploy
+- Call `/test` to ensure tests pass before deploy
+- Call `/review` to complete code review before deploy

@@ -1,17 +1,15 @@
 # Antigravity Workflows - AI Agent Skills System
 
-> [EN] Comprehensive AI Agent skill system for Antigravity IDE. Includes rules, workflows, and skills with automatic activation.
->
-> [TR] Antigravity IDE için kapsamlı AI Agent yetenek sistemi. Otomatik aktivasyon ile rules, workflows ve skills içerir.
+> Comprehensive AI Agent skill system for Antigravity IDE. Includes rules, workflows, and skills with automatic activation.
 
 ---
 
-## 🚀 Kurulum / Installation
+## 🚀 Installation
 
 ### Windows (PowerShell)
 
 ```powershell
-# 1. Dizinleri oluştur
+# 1. Create directories
 New-Item -ItemType Directory -Force -Path "$HOME\.gemini\antigravity\global_workflows"
 New-Item -ItemType Directory -Force -Path "$HOME\.agent\rules"
 New-Item -ItemType Directory -Force -Path "$HOME\.agent\workflows"
@@ -35,7 +33,7 @@ Copy-Item ".\.agent\workflows\*" "$HOME\.agent\workflows\" -Recurse
 ### macOS/Linux (Bash)
 
 ```bash
-# 1. Dizinleri oluştur
+# 1. Create directories
 mkdir -p ~/.gemini/antigravity/global_workflows
 mkdir -p ~/.agent/rules
 mkdir -p ~/.agent/workflows
@@ -58,22 +56,32 @@ cp -r .agent/workflows/* ~/.agent/workflows/
 
 ---
 
-## 📁 Kurulum Sonrası Yapı
+## 📁 Post-Installation Structure
 
 ```
 ~/.gemini/
-├── GEMINI.md                           # Global kurallar
+├── GEMINI.md                           # Global rules
 └── antigravity/
-    ├── CORE.md                         # Merkezi orkestratör
+    ├── CORE.md                         # Central orchestrator
     └── global_workflows/
-        └── skills/                     # 13 skill dosyası
+        └── skills/                     # 23 skill files
             ├── ultrathink.md
             ├── architecture.md
             ├── backend.md
+            ├── seo-fundamentals.md
+            ├── seo-technical.md
+            ├── seo-content.md
+            ├── seo-local.md
+            ├── seo-offpage.md
+            ├── seo-analytics.md
+            ├── geo-fundamentals.md
+            ├── geo-content.md
+            ├── geo-technical.md
+            ├── geo-analytics.md
             └── ...
 
 ~/.agent/                               # Antigravity IDE Native
-├── rules/                              # 15 workspace rule
+├── rules/                              # 16 workspace rule
 │   ├── ultrathink.md       (Model Decision)
 │   ├── quality-gates.md    (Always On)
 │   ├── backend.md          (Glob: *.ts, *.js)
@@ -94,112 +102,135 @@ cp -r .agent/workflows/* ~/.agent/workflows/
 
 ## 🔧 Antigravity IDE Rules
 
-### Aktivasyon Modları
+### Activation Modes
 
-| Mod | Açıklama | Örnek |
-|-----|----------|-------|
-| **Always On** | Her zaman aktif | `quality-gates.md` |
-| **Model Decision** | AI karar verir | `ultrathink.md`, `debugging.md` |
-| **Glob** | Dosya pattern'ine göre | `*.ts` -> `backend.md` |
+| Mode | Description | Example |
+|-----|-------------|---------|
+| **Always On** | Always active | `quality-gates.md` |
+| **Model Decision** | AI decides | `ultrathink.md`, `debugging.md` |
+| **Glob** | Based on file pattern | `*.ts` -> `backend.md` |
 
-### Rule Listesi (15 adet)
+### Rule List (16 items)
 
-| Rule | Aktivasyon | Açıklama |
-|------|------------|----------|
-| `ultrathink.md` | Model Decision | Derin analiz protokolü |
-| `core-orchestrator.md` | Model Decision | Skill yönlendirici |
-| `quality-gates.md` | **Always On** | Kalite kontrolleri |
-| `backend.md` | Glob: `*.ts, *.js` | Backend geliştirme |
-| `testing.md` | Glob: `*.test.*` | Test stratejileri |
-| `debugging.md` | Model Decision | Hata ayıklama |
-| `architecture.md` | Model Decision | Sistem tasarımı |
-| `refactoring.md` | Model Decision | Kod iyileştirme |
-| `design-system.md` | Glob: `*.css` | UI tutarlılık |
-| `mobile.md` | Glob: `*.tsx, App.*` | Mobil geliştirme |
+| Rule | Activation | Description |
+|------|------------|-------------|
+| `ultrathink.md` | Model Decision | Deep analysis protocol |
+| `core-orchestrator.md` | Model Decision | Skill director |
+| `quality-gates.md` | **Always On** | Quality controls |
+| `backend.md` | Glob: `*.ts, *.js` | Backend development |
+| `testing.md` | Glob: `*.test.*` | Test strategies |
+| `debugging.md` | Model Decision | Debugging |
+| `architecture.md` | Model Decision | System design |
+| `refactoring.md` | Model Decision | Code improvement |
+| `design-system.md` | Glob: `*.css` | UI consistency |
+| `mobile.md` | Glob: `*.tsx, App.*` | Mobile development |
 | `production-deployment.md` | Model Decision | DevOps/CI-CD |
-| `multi-file-sync.md` | Model Decision | Çoklu dosya |
-| `dependency-management.md` | Glob: `package.json` | Paket yönetimi |
-| `documentation.md` | Glob: `*.md` | Dokümantasyon |
-| `optimization.md` | Model Decision | Performans |
+| `multi-file-sync.md` | Model Decision | Multi-file |
+| `dependency-management.md` | Glob: `package.json` | Package management |
+| `documentation.md` | Glob: `*.md` | Documentation |
+| `optimization.md` | Model Decision | Performance |
+| `seo-specialist.md` | Model Decision | SEO & GEO optimization |
+
+---
+
+## 📚 SEO & GEO Skills
+
+### SEO Skills (Traditional Search Engine Optimization)
+| Skill | Description |
+|-------|-------------|
+| `seo-fundamentals.md` | 2025 algorithm updates, E-E-A-T principles |
+| `seo-technical.md` | Core Web Vitals, technical SEO, mobile-first |
+| `seo-content.md` | Keyword research, on-page SEO, content strategy |
+| `seo-local.md` | Google Business Profile, local SEO, NAP consistency |
+| `seo-offpage.md` | Link building, backlinks, digital PR |
+| `seo-analytics.md` | Google Analytics 4, Search Console, reporting |
+
+### GEO Skills (Generative Engine Optimization)
+| Skill | Description |
+|-------|-------------|
+| `geo-fundamentals.md` | RAG architecture, AI engines (ChatGPT, Claude, Perplexity), GEO vs SEO |
+| `geo-content.md` | Entity optimization, AI-friendly content, citation strategies |
+| `geo-technical.md` | Structured data for AI, schema markup, crawler optimization |
+| `geo-analytics.md` | AI citation tracking, generative appearance measurement |
 
 ---
 
 ## ⚡ Antigravity Workflows (Slash Commands)
 
-| Workflow | Komut | Açıklama |
-|----------|-------|----------|
-| `ultrathink.md` | `/ultrathink` | Derin düşünme modu |
-| `plan.md` | `/plan` | Görev planlama |
-| `implement.md` | `/implement` | Özellik geliştirme |
-| `review.md` | `/review` | Kod inceleme |
-| `debug.md` | `/debug` | Hata ayıklama |
-| `test.md` | `/test` | Test yazma |
-| `refactor.md` | `/refactor` | Güvenli refactoring |
+| Workflow | Command | Description |
+|----------|---------|-------------|
+| `ultrathink.md` | `/ultrathink` | Deep thinking mode |
+| `plan.md` | `/plan` | Task planning |
+| `implement.md` | `/implement` | Feature development |
+| `review.md` | `/review` | Code review |
+| `debug.md` | `/debug` | Debugging |
+| `test.md` | `/test` | Test writing |
+| `refactor.md` | `/refactor` | Safe refactoring |
 | `deploy.md` | `/deploy` | Production deployment |
 
 ---
 
-## 🎯 Nasıl Çalışır?
+## 🎯 How It Works?
 
-### Antigravity IDE Akışı
+### Antigravity IDE Flow
 
 ```
-Kullanıcı komutu verir
+User gives command
         │
         ▼
 ┌─────────────────────────┐
-│ Glob Pattern Kontrolü   │ → *.ts dosyası? -> backend.md aktif
+│ Glob Pattern Check      │ → *.ts file? -> backend.md active
 └───────────┬─────────────┘
             │
             ▼
 ┌─────────────────────────┐
-│ Always On Rules         │ → quality-gates.md her zaman aktif
+│ Always On Rules         │ → quality-gates.md always active
 └───────────┬─────────────┘
             │
             ▼
 ┌─────────────────────────┐
-│ Model Decision          │ → Karmaşık görev? -> ultrathink.md
+│ Model Decision          │ → Complex task? -> ultrathink.md
 └───────────┬─────────────┘
             │
             ▼
 ┌─────────────────────────┐
-│ Workflow Çağrısı        │ → /debug -> debug.md workflow'u
+│ Workflow Call           │ → /debug -> debug.md workflow
 └─────────────────────────┘
 ```
 
-### Workflow Zincirleme
+### Workflow Chaining
 
 ```
-/plan -> /ultrathink (karmaşık görevler için)
+/plan -> /ultrathink (for complex tasks)
 /implement -> /plan + /test
 /deploy -> /test + /review
 ```
 
 ---
 
-## 📏 Kurallar
+## 📏 Rules
 
-- ✅ Her işlemden sonra ESLint/TypeScript kontrolü
-- ✅ Kod en az 2 kez review edilmeli
-- ✅ Skill/Rule yüklenmeden işleme başlanmaz
-- ✅ Sokratik Gerçeklik Kontrolü (5-Step) her eylemden önce
-
----
-
-## 🌍 Dil Versiyonları
-
-| Dil | Konum |
-|-----|-------|
-| 🇹🇷 Türkçe | `./` (root) |
-| 🇺🇸 English | `./en_version/` |
+- ✅ ESLint/TypeScript check after every operation
+- ✅ Code must be reviewed at least 2 times
+- ✅ Do not start processing without loading Skill/Rule
+- ✅ Socratic Reality Check (5-Step) before every action
 
 ---
 
-## 📄 Lisans / License
+## 🌍 Language Versions
+
+| Language | Location |
+|----------|----------|
+| 🇺🇸 English | `./` (root) |
+| 🇹🇷 Türkçe | `./tr_version/` |
+
+---
+
+## 📄 License
 
 MIT License
 
 ---
 
-**Geliştiren / Developed by:** [@xenit-v0](https://x.com/xenit_v0)
-**Versiyon:** 2.0 (Antigravity IDE Native Support)
+**Developed by:** [@xenit-v0](https://x.com/xenit_v0)
+**Version:** 2.0 (Antigravity IDE Native Support)

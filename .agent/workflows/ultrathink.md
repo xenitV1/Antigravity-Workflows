@@ -1,110 +1,33 @@
+---
+description: Deep analysis workflow for complex problems requiring maximum cognitive capacity
+---
+
 # UltraThink Workflow
 
 ## Description
-Deep analysis workflow for complex problems requiring maximum cognitive capacity. Use when facing architectural decisions, debugging difficult issues, or planning major features.
-
----
-
-## Invocation
-```
-/ultrathink [problem description]
-```
+Use this workflow for complex problems requiring deep analysis. It's essential when facing architectural decisions, debugging difficult issues, or planning major features with high uncertainty.
 
 ---
 
 ## Steps
 
-### Step 1: Socratic Reality Check (MANDATORY)
+1. **Socratic Reality Check (MANDATORY)** - Before ANY action, answer these 5 questions:
+   - What EXACTLY does the user want?
+   - Am I working on the correct file/location?
+   - What am I about to do right now?
+   - Why this way? Is there a simpler approach?
+   - What could this change break?
 
-Before ANY action, answer these 5 questions:
+2. **Problem decomposition** - Break down the problem into layers: Surface Level (visible symptom, user experience), Technical Level (systems involved, dependencies), and Root Cause (why it's happening, fundamental issue).
 
-1. **User Intent:** "What EXACTLY does the user want?"
-2. **Context:** "Am I working on the correct file/location?"
-3. **Action:** "What am I about to do right now?"
-4. **Rationale:** "Why this way? Is there a simpler approach?"
-5. **Ripple Effect:** "What could this change break?"
+3. **Multi-perspective analysis** - Examine from different viewpoints: User (what do they need?), Developer (how maintainable?), System (performance impact?), Security (what are the risks?), Future (how will it scale?).
 
-### Step 2: Problem Decomposition
+4. **Solution exploration** - Generate multiple solution options with approach, pros, cons, and effort estimation for each.
 
-Break down the problem into layers:
-
-```
-LAYER 1: Surface Level
-- What is the visible symptom?
-- What does the user experience?
-
-LAYER 2: Technical Level
-- What systems are involved?
-- What are the dependencies?
-
-LAYER 3: Root Cause
-- Why is this happening?
-- What is the fundamental issue?
-```
-
-### Step 3: Multi-Perspective Analysis
-
-Examine from different viewpoints:
-
-| Perspective | Questions |
-|-------------|-----------|
-| User | What does the user need? |
-| Developer | How maintainable is this? |
-| System | How does this affect performance? |
-| Security | What are the risks? |
-| Future | How will this scale? |
-
-### Step 4: Solution Exploration
-
-Generate multiple solutions:
-
-```markdown
-## Solution Options
-
-### Option A: [Name]
-- Approach: [Description]
-- Pros: [Benefits]
-- Cons: [Drawbacks]
-- Effort: [Low/Medium/High]
-
-### Option B: [Name]
-- Approach: [Description]
-- Pros: [Benefits]
-- Cons: [Drawbacks]
-- Effort: [Low/Medium/High]
-```
-
-### Step 5: Decision & Action Plan
-
-```markdown
-## Decision
-
-### Selected: Option [X]
-**Reason:** [Why this option was chosen]
-
-### Implementation Steps
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-### Risks & Mitigations
-- Risk 1 -> Mitigation 1
-- Risk 2 -> Mitigation 2
-```
-
----
-
-## Output
-
-Deliver a comprehensive analysis including:
-- Problem understanding
-- Root cause identification
-- Solution options with trade-offs
-- Recommended action plan
-- Risk assessment
+5. **Decision and action plan** - Select the best option with clear reasoning, define implementation steps, and identify risks with mitigations.
 
 ---
 
 ## Related Workflows
-- `/plan` - For task decomposition after analysis
-- `/debug` - Uses UltraThink for complex debugging
+- Call `/plan` for task decomposition after analysis
+- Call `/debug` which uses UltraThink for complex debugging

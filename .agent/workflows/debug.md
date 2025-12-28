@@ -1,163 +1,32 @@
+---
+description: Systematic debugging workflow for identifying and resolving issues
+---
+
 # Debug Workflow
 
 ## Description
-Systematic debugging workflow for identifying and resolving issues. Uses structured approach to isolate, understand, and fix bugs.
-
----
-
-## Invocation
-```
-/debug [error description or symptom]
-```
+Use this workflow when facing bugs or errors. It guides through reproducing the issue, isolating the root cause, testing hypotheses, applying fixes, and verifying solutions.
 
 ---
 
 ## Steps
 
-### Step 1: Reproduce the Issue
+1. **Reproduce the issue** - Gather exact error messages, steps to reproduce, environment details (OS, runtime version, browser if applicable), and note reproducibility (always, sometimes, rare).
 
-```markdown
-## Bug Reproduction Report
+2. **Understand the system** - Map data flow through components, identify expected vs actual behavior, and understand the context. For complex issues, call `/ultrathink` first for deep analysis.
 
-### Observed Behavior
-- What happens: [Description]
-- Error message: [Full text]
-- When started: [Date/commit if known]
+3. **Isolate the problem** - Use binary search method to narrow down which part of the code contains the bug, create minimal reproduction case, and pinpoint the exact location.
 
-### Steps to Reproduce
-1. [Step 1]
-2. [Step 2]
-3. [Step 3] -> Error occurs
+4. **Form hypotheses** - List possible root causes with probability estimates, define test methods for each hypothesis, and systematically test each one.
 
-### Environment
-- OS: [Version]
-- Node: [Version]
-- Browser: [If applicable]
+5. **Apply the fix** - Implement the minimal change that addresses the root cause, ensure the fix doesn't break related functionality, and document why the fix works.
 
-### Reproducibility
-- [ ] Always
-- [ ] Sometimes (rate: %)
-- [ ] Rare
-```
+6. **Verify the solution** - Confirm the bug no longer reproduces, test related functionality still works, write regression tests to prevent recurrence, and run full test suite.
 
-### Step 2: Understand the System
-
-For complex issues, invoke `/ultrathink`:
-
-```markdown
-## System Context
-
-### Data Flow
-Input -> [Component A] -> [Component B] -> Output
-
-### Expected Behavior
-[What should happen]
-
-### Actual Behavior
-[What is happening]
-```
-
-### Step 3: Isolate the Problem
-
-Use binary search method:
-
-```markdown
-## Isolation Process
-
-1. Which 50% of the code contains the bug?
-2. Divide that half
-3. Repeat until pinpointed
-
-### Minimal Reproduction
-- Remove code until bug disappears
-- Add back until it reappears
-- Smallest case = isolation complete
-```
-
-### Step 4: Hypothesize & Test
-
-```markdown
-## Hypothesis List
-
-| # | Hypothesis | Probability | Test Method |
-|---|------------|-------------|-------------|
-| 1 | [H1 Description] | 40% | [How to test] |
-| 2 | [H2 Description] | 30% | [How to test] |
-| 3 | [H3 Description] | 20% | [How to test] |
-
-## Test Results
-
-### H1: [Hypothesis]
-- Test: [What was done]
-- Result: [CONFIRMED / REJECTED]
-- Evidence: [What proved it]
-```
-
-### Step 5: Apply Fix
-
-```markdown
-## Fix Implementation
-
-### Before (Bug)
-```code
-[old code]
-```
-
-### After (Fix)
-```code
-[new code]
-```
-
-### Why This Fixes It
-[Explanation of root cause and how fix addresses it]
-```
-
-### Step 6: Verify & Prevent
-
-```markdown
-## Verification
-
-- [ ] Bug no longer reproduces
-- [ ] Related functionality still works
-- [ ] Regression test written
-
-## Post-Mortem
-
-### Root Cause
-[What actually caused the bug]
-
-### Why Not Caught Earlier
-[Gap in testing/review]
-
-### Prevention
-[How to prevent similar bugs]
-```
-
----
-
-## Common Bug Patterns
-
-| Pattern | Symptoms | Check |
-|---------|----------|-------|
-| Null Reference | TypeError | Value undefined? |
-| Race Condition | Intermittent | Async ordering? |
-| Memory Leak | Slow over time | Cleanup present? |
-| Off-by-One | Edge values wrong | Loop bounds? |
-| State Mutation | Unexpected changes | Immutability? |
-
----
-
-## Output
-
-Complete debugging report with:
-- Reproduction steps
-- Root cause analysis
-- Applied fix
-- Regression test
-- Prevention recommendations
+7. **Document findings** - Create post-mortem with root cause analysis, identify why it wasn't caught earlier, and recommend prevention strategies.
 
 ---
 
 ## Related Workflows
-- `/ultrathink` - For complex root cause analysis
-- `/test` - Write regression tests
+- Call `/ultrathink` for complex root cause analysis
+- Call `/test` to write regression tests after fixing

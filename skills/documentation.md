@@ -1,6 +1,6 @@
 ---
 name: documentation
-description: Teknik dokümantasyon ve kod dokümantasyonu rehberi. Docs-as-code, API documentation ve 2025 best practices.
+description: Technical documentation and code documentation guide. Docs-as-code, API documentation, and 2025 best practices.
 metadata:
   skillport:
     category: operations
@@ -13,36 +13,36 @@ metadata:
 
 # Documentation Skill
 
-> Etkili teknik dokümantasyon yazma rehberi.
-> Docs-as-code yaklaşımı, API documentation ve maintainable docs.
+> Guide for writing effective technical documentation.
+> Docs-as-code approach, API documentation, and maintainable docs.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Dokümantasyon Tipleri](#1-dokümantasyon-tipleri)
+1. [Documentation Types](#1-documentation-types)
 2. [README Best Practices](#2-readme-best-practices)
 3. [Code Documentation](#3-code-documentation)
 4. [API Documentation](#4-api-documentation)
 5. [Changelog](#5-changelog)
 6. [Architecture Documentation](#6-architecture-documentation)
 7. [Writing Guidelines](#7-writing-guidelines)
-8. [Kontrol Listesi](#8-kontrol-listesi)
-9. [Yapma Listesi](#9-yapma-listesi)
-10. [Mutlaka Yap Listesi](#10-mutlaka-yap-listesi)
+8. [Checklist](#8-checklist)
+9. [Don't List](#9-dont-list)
+10. [Must Do List](#10-must-do-list)
 
 ---
 
-# 1. Dokümantasyon Tipleri
+# 1. Documentation Types
 
-| Tip | Hedef Kitle | Amaç |
+| Type | Target Audience | Purpose |
 |-----|-------------|------|
-| **README** | İlk kez görenler | Quick start, genel bakış |
-| **API Docs** | Geliştiriciler | Endpoint kullanımı |
-| **Code Comments** | Bakım yapan | Why, not what |
-| **Architecture** | Takım | Sistem tasarımı |
-| **Changelog** | Kullanıcılar | Değişiklik takibi |
-| **Runbook** | Ops/SRE | Operasyonel prosedürler |
+| **README** | First-time viewers | Quick start, overview |
+| **API Docs** | Developers | Endpoint usage |
+| **Code Comments** | Maintainers | Why, not what |
+| **Architecture** | Team | System design |
+| **Changelog** | Users | Change tracking |
+| **Runbook** | Ops/SRE | Operational procedures |
 
 ---
 
@@ -53,7 +53,7 @@ metadata:
 ```markdown
 # Project Name
 
-> Tek cümleyle projenin ne yaptığını açıkla.
+> Explain what the project does in one sentence.
 
 ![Build Status](https://img.shields.io/badge/build-passing-green)
 ![Coverage](https://img.shields.io/badge/coverage-95%25-green)
@@ -99,15 +99,15 @@ const result = myFunction({ option: 'value' });
 MIT © [Your Name](https://github.com/yourusername)
 ```
 
-## 2.2 README Kuralları
+## 2.2 README Rules
 
-| Kural | Açıklama |
+| Rule | Description |
 |-------|----------|
-| **Başlık açık olmalı** | Ne olduğu hemen anlaşılmalı |
-| **Quick start kısa** | 5 dakikada çalıştırabilmeli |
-| **Copy-paste ready** | Kod blokları doğrudan çalışmalı |
-| **Görsel kullan** | Badge, screenshot, diagram |
-| **Güncel tut** | Eski bilgi yok |
+| **Clear Title** | Should be immediately understood |
+| **Short Quick Start** | Should be runnable in 5 minutes |
+| **Copy-paste ready** | Code blocks should work directly |
+| **Use Visuals** | Badges, screenshots, diagrams |
+| **Keep it updated** | No outdated info |
 
 ---
 
@@ -143,33 +143,33 @@ function calculateTotal(amount: number, taxRate: number): number {
 ## 3.2 Comment Best Practices
 
 ```typescript
-// ❌ YANLIŞ: What (kod zaten söylüyor)
+// ❌ WRONG: What (code already says it)
 // Increment counter by 1
 counter++;
 
-// ❌ YANLIŞ: Obvious
+// ❌ WRONG: Obvious
 // Loop through users
 for (const user of users) { }
 
-// ✅ DOĞRU: Why (neden böyle yapıldığını açıklıyor)
+// ✅ CORRECT: Why (explains why it was done this way)
 // Using setTimeout to debounce frequent updates and prevent
 // overwhelming the API with requests during rapid user input
 setTimeout(() => saveChanges(), 500);
 
-// ✅ DOĞRU: Business logic
+// ✅ CORRECT: Business logic
 // Premium users get 20% discount on orders over $100
 // as per marketing campaign agreement (JIRA-1234)
 if (user.isPremium && order.total > 100) {
   discount = 0.20;
 }
 
-// ✅ DOĞRU: Warning
+// ✅ CORRECT: Warning
 // ⚠️ Do not change the order of these middleware!
 // Authentication must run before authorization
 app.use(authenticate);
 app.use(authorize);
 
-// ✅ DOĞRU: TODO with context
+// ✅ CORRECT: TODO with context
 // TODO(john): Refactor after Q1 release - JIRA-5678
 // Current implementation handles edge case but is O(n²)
 ```
@@ -482,52 +482,52 @@ We will use JWT tokens for authentication with refresh token rotation.
 
 ---
 
-# 8. Kontrol Listesi
+# 8. Checklist
 
 ### README
-- [ ] Tek cümlelik açıklama
-- [ ] Quick start çalışıyor
-- [ ] Kod örnekleri test edildi
-- [ ] Link'ler çalışıyor
-- [ ] Badge'ler güncel
+- [ ] One sentence explanation
+- [ ] Quick start works
+- [ ] Code examples tested
+- [ ] Links are working
+- [ ] Badges updated
 
 ### API Docs
-- [ ] Tüm endpoint'ler belgelendi
-- [ ] Request/response örnekleri var
-- [ ] Error codes açıklandı
-- [ ] Authentication açıklandı
-- [ ] cURL örnekleri var
+- [ ] All endpoints documented
+- [ ] Request/response examples present
+- [ ] Error codes explained
+- [ ] Authentication explained
+- [ ] cURL examples present
 
 ### Code Comments
-- [ ] Why açıklanmış, what değil
-- [ ] Business logic belgelendi
-- [ ] Edge cases açıklandı
-- [ ] TODO'lar context içeriyor
+- [ ] Why explained, not what
+- [ ] Business logic documented
+- [ ] Edge cases explained
+- [ ] TODOs contain context
 
 ---
 
-# 9. Yapma Listesi
+# 9. Don't List
 
-❌ Obvious comment'ler yazma
-❌ Güncellemeden bırakma
-❌ Jargon kullanma (açıkla)
-❌ Tek seferlik yazıp unutma
-❌ Sadece happy path'i belgele
-
----
-
-# 10. Mutlaka Yap Listesi
-
-✅ README ile başla
-✅ API'yi OpenAPI ile belgele
-✅ Code'da "why" açıkla
-✅ Changelog tut
-✅ ADR yaz
-✅ Düzenli güncelle
-✅ Örnekler ver
-✅ Test et (dokümandaki kod çalışmalı)
+❌ Do not write obvious comments
+❌ Do not leave without updating
+❌ Do not use jargon (explain it)
+❌ Do not write once and forget
+❌ Do not document only the happy path
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 10. Must Do List
+
+✅ Start with a README
+✅ Document API with OpenAPI
+✅ Explain "why" in code
+✅ Keep a Changelog
+✅ Write ADRs
+✅ Update regularly
+✅ Provide examples
+✅ Test (documentation code must work)
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

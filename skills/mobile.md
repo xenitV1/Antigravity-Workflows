@@ -1,6 +1,6 @@
 ---
 name: mobile
-description: Cross-platform mobile geliştirme rehberi. React Native ve Flutter için 2025 best practices, performans optimizasyonu ve state management.
+description: Cross-platform mobile development guide. 2025 best practices, performance optimization, and state management for React Native and Flutter.
 metadata:
   skillport:
     category: development
@@ -15,41 +15,41 @@ metadata:
 
 # Mobile Development Skill
 
-> React Native ve Flutter ile modern, performanslı cross-platform mobile uygulama geliştirme rehberi.
-> 2025 best practices ve platform-specific optimizasyonlar.
+> Guide for developing modern, performant cross-platform mobile applications with React Native and Flutter.
+> 2025 best practices and platform-specific optimizations.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Framework Seçimi](#1-framework-seçimi)
+1. [Framework Selection](#1-framework-selection)
 2. [React Native Best Practices](#2-react-native-best-practices)
 3. [Flutter Best Practices](#3-flutter-best-practices)
 4. [Mobile Security](#4-mobile-security)
 5. [Platform-Specific Code](#5-platform-specific-code)
-6. [Kontrol Listesi](#6-kontrol-listesi)
-7. [Yapma Listesi](#7-yapma-listesi)
-8. [Mutlaka Yap Listesi](#8-mutlaka-yap-listesi)
+6. [Checklist](#6-checklist)
+7. [Don't List](#7-dont-list)
+8. [Must Do List](#8-must-do-list)
 
 ---
 
-# 1. Framework Seçimi
+# 1. Framework Selection
 
-| Kriter | React Native | Flutter |
+| Criterion | React Native | Flutter |
 |--------|--------------|---------|
-| **Dil** | TypeScript/JavaScript | Dart |
+| **Language** | TypeScript/JavaScript | Dart |
 | **UI** | Native components | Custom rendering (Skia) |
-| **Performans** | Çok iyi (Fabric) | Mükemmel (Impeller) |
-| **Hot Reload** | ✅ | ✅ (Daha hızlı) |
-| **Ekosistem** | npm (devasa) | pub.dev (büyüyen) |
-| **Öğrenme** | React biliyorsan kolay | Yeni dil öğrenme |
-| **Web desteği** | React Native Web | Flutter Web |
+| **Performance** | Very Good (Fabric) | Excellent (Impeller) |
+| **Hot Reload** | ✅ | ✅ (Faster) |
+| **Ecosystem** | npm (huge) | pub.dev (growing) |
+| **Learning** | Easy if you know React | Learn new language |
+| **Web support** | React Native Web | Flutter Web |
 
 ---
 
 # 2. React Native Best Practices
 
-## 2.1 Proje Yapısı
+## 2.1 Project Structure
 
 ```
 src/
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 ## 2.3 Performance Optimization
 
 ```typescript
-// ✅ FlatList optimizasyonu
+// ✅ FlatList optimization
 import { FlatList } from 'react-native';
 
 <FlatList
@@ -185,17 +185,17 @@ export const useAuthStore = create<AuthState>()(
   )
 );
 
-// Kullanım
+// Usage
 const { user, login, logout } = useAuthStore();
 ```
 
 ## 2.5 Secure Storage
 
 ```typescript
-// ❌ YANLIŞ - AsyncStorage güvenli değil
+// ❌ INCORRECT - AsyncStorage is not secure
 await AsyncStorage.setItem('token', userToken);
 
-// ✅ DOĞRU - SecureStore kullan
+// ✅ CORRECT - Use SecureStore
 import * as SecureStore from 'expo-secure-store';
 
 await SecureStore.setItemAsync('token', userToken);
@@ -240,7 +240,7 @@ export function RootNavigator() {
 
 # 3. Flutter Best Practices
 
-## 3.1 Proje Yapısı (Feature-First)
+## 3.1 Project Structure (Feature-First)
 
 ```
 lib/
@@ -270,7 +270,7 @@ lib/
 ## 3.2 Widget Best Practices
 
 ```dart
-// ✅ const constructor kullan
+// ✅ Use const constructor
 class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
@@ -290,7 +290,7 @@ class MyButton extends StatelessWidget {
   }
 }
 
-// ✅ Küçük widget'lara böl
+// ✅ Break down into smaller widgets
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key, required this.user});
   final User user;
@@ -299,9 +299,9 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _UserAvatar(user: user),      // Ayrı widget
-        _UserInfo(user: user),        // Ayrı widget
-        _UserActions(user: user),     // Ayrı widget
+        _UserAvatar(user: user),      // Separate widget
+        _UserInfo(user: user),        // Separate widget
+        _UserActions(user: user),     // Separate widget
       ],
     );
   }
@@ -357,7 +357,7 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier(ref.watch(authRepositoryProvider));
 });
 
-// Kullanım
+// Usage
 class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -375,7 +375,7 @@ class LoginScreen extends ConsumerWidget {
 ## 3.4 Performance Optimization
 
 ```dart
-// ✅ ListView.builder kullan (lazy loading)
+// ✅ Use ListView.builder (lazy loading)
 ListView.builder(
   itemCount: items.length,
   itemBuilder: (context, index) {
@@ -383,16 +383,16 @@ ListView.builder(
   },
 )
 
-// ✅ const widget'ları işaretle
+// ✅ Mark const widgets
 const SizedBox(height: 16),
 const Divider(),
 
-// ✅ RepaintBoundary ile rebuild izole et
+// ✅ Isolate rebuilds with RepaintBoundary
 RepaintBoundary(
   child: ExpensiveWidget(),
 )
 
-// ✅ Isolate ile CPU-heavy işlemler
+// ✅ Use Isolate for CPU-heavy tasks
 Future<List<User>> parseUsers(String jsonString) async {
   return compute(_parseUsers, jsonString);
 }
@@ -406,7 +406,7 @@ List<User> _parseUsers(String jsonString) {
 ## 3.5 Responsive Design
 
 ```dart
-// ✅ MediaQuery kullan
+// ✅ Use MediaQuery
 class ResponsiveLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -419,7 +419,7 @@ class ResponsiveLayout extends StatelessWidget {
   }
 }
 
-// ✅ LayoutBuilder ile constraint-based
+// ✅ LayoutBuilder for constraint-based
 LayoutBuilder(
   builder: (context, constraints) {
     if (constraints.maxWidth > 600) {
@@ -429,7 +429,7 @@ LayoutBuilder(
   },
 )
 
-// ✅ FittedBox ile scaling
+// ✅ FittedBox for scaling
 FittedBox(
   fit: BoxFit.scaleDown,
   child: Text('Long text that should scale'),
@@ -537,45 +537,45 @@ Platform.isIOS
 
 ---
 
-# 6. Kontrol Listesi
+# 6. Checklist
 
-Her mobile projede:
+In every mobile project:
 
-- [ ] TypeScript/Dart strict mode aktif
-- [ ] Folder structure organize
-- [ ] State management implement edildi
-- [ ] Navigation yapılandırıldı
-- [ ] Secure storage kullanılıyor
-- [ ] API calls error handling ile
-- [ ] Loading states var
-- [ ] Empty states var
-- [ ] Error states var
-- [ ] Offline support düşünüldü
-- [ ] Performance profiling yapıldı
-- [ ] Platform-specific optimizasyonlar
-
----
-
-# 7. Yapma Listesi
-
-❌ AsyncStorage'da hassas veri tutma
-❌ Inline styles (StyleSheet kullan)
-❌ Anonymous functions in render
-❌ Large images optimize etmeden kullanma
-❌ Console.log production'da bırakma
-❌ State'i doğrudan mutate etme
-❌ useEffect'te cleanup yapmamak
-❌ FlatList yerine ScrollView (büyük listeler için)
+- [ ] TypeScript/Dart strict mode active
+- [ ] Folder structure organized
+- [ ] State management implemented
+- [ ] Navigation configured
+- [ ] Secure storage used
+- [ ] API calls with error handling
+- [ ] Loading states present
+- [ ] Empty states present
+- [ ] Error states present
+- [ ] Offline support considered
+- [ ] Performance profiling performed
+- [ ] Platform-specific optimizations applied
 
 ---
 
-# 8. Mutlaka Yap Listesi
+# 7. Don't List
 
-✅ React.memo / const widgets kullan
-✅ useCallback/useMemo ile memoization
-✅ FlatList/ListView.builder ile lazy loading
-✅ Secure storage ile token saklama
-✅ Error boundaries implement et
+❌ Do not keep sensitive data in AsyncStorage
+❌ Do not use inline styles (use StyleSheet)
+❌ Do not use anonymous functions in render
+❌ Do not use large images without optimizing
+❌ Do not leave console.log in production
+❌ Do not mutate state directly
+❌ Do not skip cleanup in useEffect
+❌ Do not use ScrollView instead of FlatList for large lists
+
+---
+
+# 8. Must Do List
+
+✅ Use React.memo / const widgets
+✅ Memoization with useCallback/useMemo
+✅ Lazy loading with FlatList/ListView.builder
+✅ Store tokens with secure storage
+✅ Implement error boundaries
 ✅ Loading/Error/Empty states
 ✅ Platform-specific UX
 ✅ Accessibility labels
@@ -584,5 +584,5 @@ Her mobile projede:
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+**Last Update:** December 2025
+**Version:** 2.0

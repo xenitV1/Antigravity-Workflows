@@ -1,6 +1,6 @@
 ---
 name: multi-file-sync
-description: Çoklu dosya değişikliği ve bağlam koruma rehberi. Atomik değişiklikler, refactoring across files ve safe migration.
+description: Multi-file change and context preservation guide. Atomic changes, refactoring across files, and safe migration.
 metadata:
   skillport:
     category: operations
@@ -13,67 +13,67 @@ metadata:
 
 # Multi-File Sync Skill
 
-> Birden fazla dosyayı güvenli ve tutarlı şekilde değiştirme rehberi.
-> Atomik adımlar, bağlam koruma ve rollback stratejileri.
+> Guide for changing multiple files safely and consistently.
+> Atomic steps, context preservation, and rollback strategies.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Temel Prensipler](#1-temel-prensipler)
-2. [Multi-File Değişiklik Süreci](#2-multi-file-değişiklik-süreci)
-3. [Araçlar ve Teknikler](#3-araçlar-ve-teknikler)
-4. [Bağlam Koruma (Context Keeping)](#4-bağlam-koruma-context-keeping)
-5. [Tehlikeli Durumlar](#5-tehlikeli-durumlar)
-6. [Rollback Stratejileri](#6-rollback-stratejileri)
-7. [Kontrol Listesi](#7-kontrol-listesi)
-8. [Yapma Listesi](#8-yapma-listesi)
-9. [Mutlaka Yap Listesi](#9-mutlaka-yap-listesi)
+1. [Core Principles](#1-core-principles)
+2. [Multi-File Change Process](#2-multi-file-change-process)
+3. [Tools and Techniques](#3-tools-and-techniques)
+4. [Context Preservation (Context Keeping)](#4-context-preservation-context-keeping)
+5. [Dangerous Situations](#5-dangerous-situations)
+6. [Rollback Strategies](#6-rollback-strategies)
+7. [Checklist](#7-checklist)
+8. [Don't List](#8-dont-list)
+9. [Must Do List](#9-must-do-list)
 
 ---
 
-# 1. Temel Prensipler
+# 1. Core Principles
 
-## 1.1 Atomik Değişiklikler
+## 1.1 Atomic Changes
 
 ```markdown
-## Atomik Değişiklik Kuralı
+## Atomic Change Rule
 
-Her commit TEK bir mantıksal değişiklik içermeli:
+Every commit should contain only ONE logical change:
 
-✅ DOĞRU:
+✅ CORRECT:
 - Commit 1: "rename: userId -> customerId in types"
 - Commit 2: "rename: userId -> customerId in services"
 - Commit 3: "rename: userId -> customerId in controllers"
 
-❌ YANLIŞ:
-- Commit 1: "refactor everything" (tüm değişiklikler tek commit'te)
+❌ INCORRECT:
+- Commit 1: "refactor everything" (all changes in one commit)
 ```
 
-## 1.2 Test-First Yaklaşım
+## 1.2 Test-First Approach
 
 ```bash
-# Her adımdan önce ve sonra testleri çalıştır
+# Run tests before and after each step
 npm test
 
-# Adım yap
-# ... değişiklik ...
+# Make step
+# ... change ...
 
-# Tekrar test et
+# Test again
 npm test
 
-# Geçtiyse commit
+# If passed, commit
 git commit -m "step X: description"
 ```
 
-## 1.3 Bağımlılık Sıralaması
+## 1.3 Dependency Order
 
 ```markdown
-## Değişiklik Sırası
+## Change Order
 
-Bağımlılık yönünde ilerle:
+Follow the direction of dependencies:
 
-1. Types/Interfaces (en bağımsız)
+1. Types/Interfaces (most independent)
 2. Utilities/Helpers
 3. Services/Repositories
 4. Controllers/Handlers
@@ -84,24 +84,24 @@ Bağımlılık yönünde ilerle:
 
 ---
 
-# 2. Multi-File Değişiklik Süreci
+# 2. Multi-File Change Process
 
-## 2.1 Faz 1: Analiz ve Planlama
+## 2.1 Phase 1: Analysis and Planning
 
 ```markdown
-## Değişiklik Planı
+## Change Plan
 
-### Etki Analizi
-Değişiklik: [Ne değişecek]
+### Impact Analysis
+Change: [What will change]
 
-### Etkilenen Dosyalar
-1. `src/types/user.ts` - Type tanımı
+### Affected Files
+1. `src/types/user.ts` - Type definition
 2. `src/services/userService.ts` - Service layer
 3. `src/controllers/userController.ts` - Controller
 4. `src/routes/userRoutes.ts` - Routes
 5. `tests/user.test.ts` - Tests
 
-### Bağımlılık Grafiği
+### Dependency Graph
 ```
 types/user.ts
      │
@@ -114,39 +114,39 @@ types/user.ts
      └── tests/user.test.ts
 ```
 
-### Risk Değerlendirmesi
-- Breaking change: [Evet/Hayır]
-- Downtime gerekli: [Evet/Hayır]
-- Rollback planı: [Strateji]
+### Risk Assessment
+- Breaking change: [Yes/No]
+- Downtime required: [Yes/No]
+- Rollback plan: [Strategy]
 ```
 
-## 2.2 Faz 2: Hazırlık
+## 2.2 Phase 2: Preparation
 
 ```bash
-# 1. Temiz branch oluştur
+# 1. Create clean branch
 git checkout -b feature/rename-user-to-customer
 
-# 2. Çalışan durumu doğrula
+# 2. Verify working state
 npm test
 npm run build
 npm run lint
 
-# 3. Backup/stash (güvenlik için)
+# 3. Backup/stash (for safety)
 git stash push -m "backup before big refactor"
 ```
 
-## 2.3 Faz 3: Adım Adım Uygulama
+## 2.3 Phase 3: Step-by-Step Implementation
 
 ```typescript
-// ADIM 1: Type tanımını değiştir
+// STEP 1: Change Type definition
 // src/types/user.ts
-// ❌ Eski
+// ❌ Old
 interface User {
   userId: string;
   name: string;
 }
 
-// ✅ Yeni
+// ✅ New
 interface User {
   customerId: string;  // userId -> customerId
   name: string;
@@ -156,7 +156,7 @@ interface User {
 ```
 
 ```typescript
-// ADIM 2: Service'i güncelle
+// STEP 2: Update Service
 // src/services/userService.ts
 export async function getUser(customerId: string) { // userId -> customerId
   return db.user.findUnique({
@@ -168,48 +168,48 @@ export async function getUser(customerId: string) { // userId -> customerId
 ```
 
 ```typescript
-// ADIM 3: Controller'ı güncelle
+// STEP 3: Update Controller
 // Commit: "rename: userId -> customerId in userController"
 
-// ADIM 4: Route'ları güncelle
+// STEP 4: Update Routes
 // Commit: "rename: userId -> customerId in routes"
 
-// ADIM 5: Testleri güncelle
+// STEP 5: Update Tests
 // Commit: "rename: userId -> customerId in tests"
 ```
 
-## 2.4 Faz 4: Doğrulama
+## 2.4 Phase 4: Verification
 
 ```bash
-# Tüm kontrolleri çalıştır
+# Run all checks
 npm run lint
 npx tsc --noEmit
 npm test
 npm run build
 
-# Eğer hepsi geçtiyse
+# If all pass
 git push origin feature/rename-user-to-customer
 ```
 
 ---
 
-# 3. Araçlar ve Teknikler
+# 3. Tools and Techniques
 
 ## 3.1 IDE Refactoring (Rename Symbol)
 
 ```typescript
 // VS Code / WebStorm
-// F2 veya Sağ tık -> Rename Symbol
+// F2 or Right Click -> Rename Symbol
 
-// Tüm kullanım yerlerini otomatik günceller
-// AMA: Sadece TypeScript/JavaScript referansları
-// String içindeki kullanımları bulamaz!
+// Automatically updates all usages
+// BUT: Only TypeScript/JavaScript references
+// Won't find usages inside strings!
 ```
 
-## 3.2 Grep ile Kontrol
+## 3.2 Check with Grep
 
 ```bash
-# Tüm kullanım yerlerini bul
+# Find all usages
 grep -r "userId" --include="*.ts" --include="*.tsx" src/
 
 # Case insensitive
@@ -219,80 +219,80 @@ grep -ri "userid" src/
 grep -r "userId" --exclude-dir={node_modules,dist} .
 ```
 
-## 3.3 Find and Replace (Dikkatli!)
+## 3.3 Find and Replace (Carefully!)
 
 ```bash
-# Sed ile replace (DIKKATLI KULLAN!)
-# Önce preview
+# Replace with sed (USE CAREFULLY!)
+# Preview first
 grep -r "oldName" src/
 
-# Sonra replace
+# Then replace
 find src -type f -name "*.ts" -exec sed -i 's/oldName/newName/g' {} +
 
-# UYARI: Sed kör değiştirme yapar, yanlış eşleşmeler olabilir!
+# WARNING: Sed does blind replacement, false matches possible!
 ```
 
-## 3.4 TypeScript ile Otomatik Tespit
+## 3.4 Auto-detection with TypeScript
 
 ```bash
-# Type error'ları göster
+# Show type errors
 npx tsc --noEmit
 
-# Watch modunda
+# Watch mode
 npx tsc --noEmit --watch
 ```
 
 ---
 
-# 4. Bağlam Koruma (Context Keeping)
+# 4. Context Preservation (Context Keeping)
 
-## 4.1 Çalışma Durumunu Belgele
+## 4.1 Document Working State
 
 ```markdown
 ## Progress Tracker
 
-### Tamamlanan Adımlar
-- [x] Types güncellendi
-- [x] Services güncellendi
-- [ ] Controllers güncellendi
-- [ ] Routes güncellendi
-- [ ] Tests güncellendi
+### Completed Steps
+- [x] Types updated
+- [x] Services updated
+- [ ] Controllers updated
+- [ ] Routes updated
+- [ ] Tests updated
 
-### Şu Anki Adım
-Controllers'da `userId` -> `customerId` değişikliği
+### Current Step
+Updating `userId` -> `customerId` in Controllers
 
-### Bekleyen Sorunlar
+### Pending Issues
 - [ ] Legacy API backward compatibility
-- [ ] Database migration gerekebilir
+- [ ] Database migration might be needed
 
-### Notlar
-- userController.ts'de 3 yerde userId var
-- Biri query param, ikisi body'de
+### Notes
+- There are 3 places with userId in userController.ts
+- One is query param, two are in body
 ```
 
-## 4.2 Git Stash Kullanımı
+## 4.2 Using Git Stash
 
 ```bash
-# Yarım kalan işi kaydet
-git stash push -m "WIP: userId rename, controllers kaldı"
+# Save unfinished work
+git stash push -m "WIP: userId rename, controllers remaining"
 
-# Stash listele
+# List stashes
 git stash list
 
-# Geri al
+# Apply back
 git stash pop
 
-# Belirli stash'i geri al
+# Apply specific stash
 git stash apply stash@{0}
 ```
 
-## 4.3 Branch Stratejisi
+## 4.3 Branch Strategy
 
 ```bash
 # Feature branch
 git checkout -b refactor/rename-userid
 
-# Ara commit'ler
+# Intermediate commits
 git commit -m "WIP: types done"
 git commit -m "WIP: services done"
 
@@ -303,117 +303,117 @@ git rebase -i main
 
 ---
 
-# 5. Tehlikeli Durumlar
+# 5. Dangerous Situations
 
 ## 5.1 Breaking Change Detection
 
 ```typescript
-// API değişikliği = Breaking change
-// ÖNCE: /users/:userId
-// SONRA: /users/:customerId
+// API change = Breaking change
+// BEFORE: /users/:userId
+// AFTER: /users/:customerId
 
-// Çözüm 1: Hem eski hem yeni destekle
+// Solution 1: Support both old and new
 router.get('/users/:userId', handleByUserId);
 router.get('/users/:customerId', handleByCustomerId);
 
-// Çözüm 2: Aliasing
+// Solution 2: Aliasing
 router.get('/users/:id', (req) => {
-  const id = req.params.id; // Generic isim
+  const id = req.params.id; // Generic name
 });
 ```
 
 ## 5.2 Database Column Rename
 
 ```sql
--- TEHLIKELI: Direkt rename
+-- DANGEROUS: Direct rename
 ALTER TABLE users RENAME COLUMN user_id TO customer_id;
--- ❌ Eski kod kırılır!
+-- ❌ Breaks old code!
 
--- GÜVENLİ: Expand and Contract pattern
--- Step 1: Yeni column ekle
+-- SAFE: Expand and Contract pattern
+-- Step 1: Add new column
 ALTER TABLE users ADD COLUMN customer_id UUID;
 UPDATE users SET customer_id = user_id;
 
--- Step 2: Kodu güncelle (her iki column'u destekle)
+-- Step 2: Update code (support both columns)
 
--- Step 3: Eski column'u kaldır (kod tamamen geçtikten sonra)
+-- Step 3: Remove old column (after code is fully migrated)
 ALTER TABLE users DROP COLUMN user_id;
 ```
 
 ---
 
-# 6. Rollback Stratejileri
+# 6. Rollback Strategies
 
 ## 6.1 Git Revert
 
 ```bash
-# Belirli commit'i geri al
+# Revert specific commit
 git revert <commit-hash>
 
 # Range revert
 git revert HEAD~3..HEAD
 
-# Merge'i revert
+# Revert merge
 git revert -m 1 <merge-commit>
 ```
 
 ## 6.2 Partial Rollback
 
 ```bash
-# Sadece belirli dosyayı eski haline getir
+# Revert only specific file
 git checkout HEAD~1 -- src/services/userService.ts
 
-# Belirli commit'teki versiyona
+# Revert to specific commit version
 git checkout abc123 -- src/services/userService.ts
 ```
 
 ---
 
-# 7. Kontrol Listesi
+# 7. Checklist
 
-### Başlamadan Önce
-- [ ] Etkilenen dosyalar listelendi
-- [ ] Bağımlılık sırası belirlendi
-- [ ] Testler çalışıyor
-- [ ] Temiz git state
+### Before Starting
+- [ ] Affected files listed
+- [ ] Dependency order determined
+- [ ] Tests passed
+- [ ] Clean git state
 
-### Her Adımda
-- [ ] Tek mantıksal değişiklik
-- [ ] Testler geçiyor
-- [ ] Type check geçiyor
-- [ ] Ayrı commit yapıldı
+### At Every Step
+- [ ] One logical change
+- [ ] Tests passed
+- [ ] Type check passed
+- [ ] Separate commit made
 
-### Tamamlandıktan Sonra
-- [ ] Tüm testler geçiyor
-- [ ] Build başarılı
-- [ ] Lint temiz
-- [ ] Code review alındı
-- [ ] Documentation güncellendi
-
----
-
-# 8. Yapma Listesi
-
-❌ Tüm değişiklikleri tek commit'te yapma
-❌ Test çalıştırmadan devam etme
-❌ Bağımlılık sırasını atlama
-❌ Elle string replace (grep + sed) güvenilmez
-❌ Database column rename + code change aynı deployment'ta
+### After Completion
+- [ ] All tests passed
+- [ ] Build successful
+- [ ] Lint clean
+- [ ] Code review received
+- [ ] Documentation updated
 
 ---
 
-# 9. Mutlaka Yap Listesi
+# 8. Don't List
 
-✅ Etki analizini yap ve belgele
-✅ Bağımlılık sırasına göre ilerle
-✅ Her adımda test çalıştır
-✅ Her adımı ayrı commit et
-✅ IDE refactoring araçlarını kullan
-✅ Grep ile kontrol et
-✅ TypeScript hataları sıfır olmalı
-✅ Rollback planın olsun
+❌ Do not make all changes in a single commit
+❌ Do not proceed without running tests
+❌ Do not skip the dependency order
+❌ Do not rely solely on manual string replacement (grep + sed)
+❌ Do not perform DB column rename + code change in the same deployment
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 9. Must Do List
+
+✅ Document impact analysis
+✅ Follow dependency order
+✅ Run tests after every step
+✅ Commit every atomic step
+✅ Use IDE refactoring tools
+✅ Check with Grep
+✅ Ensure Zero TypeScript errors
+✅ Have a rollback plan
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0

@@ -1,7 +1,11 @@
+---
+description: Safe refactoring workflow that preserves behavior while improving code structure. Ensures proper test coverage and incremental changes.
+---
+
 # Refactor Workflow
 
 ## Description
-Safe refactoring workflow that preserves behavior while improving code structure. Ensures proper test coverage and incremental changes.
+Use this workflow when improving code structure without changing behavior. It ensures proper test coverage, incremental changes, and verification at each step.
 
 ---
 

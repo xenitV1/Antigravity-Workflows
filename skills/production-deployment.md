@@ -1,6 +1,6 @@
 ---
 name: production-deployment
-description: Güvenli production deployment rehberi. DevSecOps, CI/CD, progressive delivery ve 2025 güvenlik standartları.
+description: Safe production deployment guide. DevSecOps, CI/CD, progressive delivery, and 2025 security standards.
 metadata:
   skillport:
     category: operations
@@ -14,86 +14,87 @@ metadata:
 
 # Production Deployment Skill
 
-> Güvenli ve güvenilir production deployment metodolojisi.
-> DevSecOps, CI/CD pipeline güvenliği ve progressive delivery.
+> Secure and reliable production deployment methodology.
+> DevSecOps, CI/CD pipeline security, and progressive delivery.
 
 ---
 
-# 📋 İçindekiler
+# 📋 Contents
 
-1. [Deployment Prensipleri](#1-deployment-prensipleri)
-2. [Pre-Deployment Kontrol Listesi](#2-pre-deployment-checklist)
+1. [Deployment Principles](#1-deployment-principles)
+2. [Pre-Deployment Checklist](#2-pre-deployment-checklist)
 3. [CI/CD Pipeline](#3-cicd-pipeline)
-4. [Deployment Stratejileri](#4-deployment-stratejileri-deployment-strategies)
-    - [4.1 Blue-Green Deployment](#41-blue-green-deployment)
-    - [4.2 Canary Deployment](#42-canary-deployment)
-    - [4.3 Feature Flags](#43-feature-flags)
-5. [Monitoring & Observability](#5-monitoring--observability)
-6. [Rollback Stratejisi](#6-rollback-strategy)
-7. [Deployment Kontrol Listesi](#7-deployment-kontrol-listesi)
-8. [Mutlaka Yap Listesi](#8-mutlaka-yap-listesi)
+4. [Pipeline Security](#4-pipeline-security)
+5. [Deployment Strategies](#5-deployment-strategies)
+6. [Monitoring & Observability](#6-monitoring--observability)
+7. [Rollback Strategy](#7-rollback-strategy)
+8. [Checklist](#8-checklist)
+9. [Don't List](#9-dont-list)
+10. [Must Do List](#10-must-do-list)
 
 ---
 
-# 1. Deployment Prensipleri
+# 1. Deployment Principles
 
-| Prensip | Açıklama |
+| Principle | Description |
 |---------|----------|
-| **Automate Everything** | Manuel adım = Hata riski |
-| **Shift-Left Security** | Güvenlik en baştan |
-| **Progressive Delivery** | Kademeli rollout |
-| **Immutable Infrastructure** | Değiştir değil, değiştir |
+| **Automate Everything** | Manual steps = Risk of error |
+| **Shift-Left Security** | Security from the very beginning |
+| **Progressive Delivery** | Gradual rollout |
+| **Immutable Infrastructure** | Do not modify, replace |
 | **Everything as Code** | Config, infra, policy = Code |
-| **Fail Fast, Rollback Faster** | Hızlı tespit, hızlı geri al |
+| **Fail Fast, Rollback Faster** | Detect fast, revert faster |
 
 ---
 
 # 2. Pre-Deployment Checklist
 
-## 2.1 Kod Kalitesi
+## 2.1 Code Quality
 
 ```markdown
+## Pre-Deployment Checklist
+
 ### Code Quality
-- [ ] Tüm testler geçiyor (unit, integration, e2e)
-- [ ] Test coverage threshold karşılanıyor (>80%)
-- [ ] Lint hatası yok
-- [ ] TypeScript type error yok
-- [ ] Build başarılı
+- [ ] All tests pass (unit, integration, e2e)
+- [ ] Test coverage threshold met (>80%)
+- [ ] No lint errors
+- [ ] No TypeScript type errors
+- [ ] Build is successful
 
 ### Security
-- [ ] Dependency audit yapıldı (npm audit)
-- [ ] SAST (Static Analysis) geçti
-- [ ] Secrets hardcoded değil
-- [ ] OWASP Top 10 kontrol edildi
+- [ ] Dependency audit performed (npm audit)
+- [ ] SAST (Static Analysis) passed
+- [ ] No hardcoded secrets
+- [ ] OWASP Top 10 checked
 
 ### Code Review
-- [ ] En az 1 approval alındı
-- [ ] Tüm review yorumları addressed
-- [ ] Merge conflict yok
+- [ ] At least 1 approval received
+- [ ] All review comments addressed
+- [ ] No merge conflicts
 
 ### Documentation
-- [ ] Breaking changes belgelendi
-- [ ] API changes update edildi
-- [ ] Changelog güncellendi
+- [ ] Breaking changes documented
+- [ ] API changes updated
+- [ ] Changelog updated
 ```
 
 ## 2.2 Database Migrations
 
 ```markdown
-### Database Migration Checklist
+## Database Migration Checklist
 
-- [ ] Migration backward compatible
-- [ ] Rollback script hazır
-- [ ] Migration test ortamında çalıştırıldı
-- [ ] Performance impact değerlendirildi
-- [ ] Downtime gerekiyorsa planlandı
+- [ ] Migration is backward compatible
+- [ ] Rollback script is ready
+- [ ] Migration tested in test environment
+- [ ] Performance impact evaluated
+- [ ] Downtime planned (if necessary)
 ```
 
 ---
 
 # 3. CI/CD Pipeline
 
-## 3.1 GitHub Actions Örneği
+## 3.1 GitHub Actions Example
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -184,22 +185,24 @@ jobs:
           echo "Deploying to production..."
 ```
 
-## 3.2 Pipeline Security
+---
 
-### Secret Management
+# 4. Pipeline Security
+
+## 4.1 Secret Management
 
 ```yaml
-# ✅ DOĞRU: GitHub Secrets kullan
+# ✅ RIGHT: Use GitHub Secrets
 env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   API_KEY: ${{ secrets.API_KEY }}
 
-# ❌ YANLIŞ: Hardcoded secrets
+# ❌ WRONG: Hardcoded secrets
 env:
-  API_KEY: "sk-12345..."  # ASLA!
+  API_KEY: "sk-12345..."  # NEVER!
 ```
 
-### OIDC Federation (Secretless)
+## 4.2 OIDC Federation (Secretless)
 
 ```yaml
 # AWS OIDC - No static credentials
@@ -216,7 +219,7 @@ jobs:
           aws-region: eu-west-1
 ```
 
-### Dependency Security
+## 4.3 Dependency Security
 
 ```yaml
 # Automated dependency updates
@@ -235,9 +238,9 @@ updates:
 
 ---
 
-# 4. Deployment Stratejileri (Deployment Strategies)
+# 5. Deployment Strategies
 
-## 4.1 Blue-Green Deployment
+## 5.1 Blue-Green Deployment
 
 ```
                     Load Balancer
@@ -250,13 +253,13 @@ updates:
      │   v1.0      │          │   v1.1      │
      └─────────────┘          └─────────────┘
 
-1. Green'e deploy et
-2. Green'i test et
-3. Traffic'i Green'e yönlendir
-4. Blue'yu standby tut (rollback için)
+1. Deploy to Green.
+2. Test Green.
+3. Divert traffic to Green.
+4. Keep Blue on standby (for rollback).
 ```
 
-## 4.2 Canary Deployment
+## 5.2 Canary Deployment
 
 ```
                     Load Balancer
@@ -269,13 +272,13 @@ updates:
        │   v1.0      │      │   v1.1      │
        └─────────────┘      └─────────────┘
 
-1. Canary'ye deploy et (5% traffic)
-2. Metrikleri izle
-3. Sorun yoksa traffic'i artır (10%, 25%, 50%, 100%)
-4. Sorun varsa geri al
+1. Deploy to Canary (5% traffic).
+2. Monitor metrics.
+3. If no issues, increase traffic (10%, 25%, 50%, 100%).
+4. Revert immediately if issues are detected.
 ```
 
-## 4.3 Feature Flags
+## 5.3 Feature Flags
 
 ```typescript
 // Feature flag implementation
@@ -299,9 +302,9 @@ const featureFlags = {
 
 ---
 
-# 5. Monitoring & Observability
+# 6. Monitoring & Observability
 
-## 5.1 Health Checks
+## 6.1 Health Checks
 
 ```typescript
 // Health check endpoint
@@ -331,7 +334,7 @@ app.get('/live', (req, res) => {
 });
 ```
 
-## 5.2 Metrics & Alerting
+## 6.2 Metrics & Alerting
 
 ```typescript
 // Prometheus metrics
@@ -372,7 +375,7 @@ app.get('/metrics', async (req, res) => {
 });
 ```
 
-## 5.3 Alert Rules
+## 6.3 Alert Rules
 
 ```yaml
 # Prometheus alerting rules
@@ -403,9 +406,9 @@ groups:
 
 ---
 
-# 6. Rollback Strategy
+# 7. Rollback Strategy
 
-## 6.1 Automated Rollback
+## 7.1 Automated Rollback
 
 ```yaml
 # GitHub Actions rollback
@@ -433,7 +436,7 @@ deploy:
       run: ./rollback.sh
 ```
 
-## 6.2 Manual Rollback Procedure
+## 7.2 Manual Rollback Procedure
 
 ```markdown
 ## Emergency Rollback Procedure
@@ -472,22 +475,22 @@ vercel rollback
 
 ---
 
-# 7. Deployment Kontrol Listesi
+# 8. Checklist
 
-## 7.1 Pre-Deployment
-- [ ] Tüm testler geçiyor
-- [ ] Security scan temiz
+### Pre-Deployment
+- [ ] All tests pass
+- [ ] Security scan clean
 - [ ] Code review approved
-- [ ] Changelog güncel
-- [ ] Rollback plan hazır
+- [ ] Changelog up to date
+- [ ] Rollback plan ready
 
-## 7.2 During Deployment
-- [ ] Maintenance window (gerekiyorsa)
-- [ ] Monitoring dashboard açık
-- [ ] On-call engineer hazır
-- [ ] Communication channel açık
+### During Deployment
+- [ ] Maintenance window (if necessary)
+- [ ] Monitoring dashboard open
+- [ ] On-call engineer ready
+- [ ] Communication channel open
 
-## 7.3 Post-Deployment
+### Post-Deployment
 - [ ] Health checks passing
 - [ ] Smoke tests passing
 - [ ] Metrics normal
@@ -496,29 +499,31 @@ vercel rollback
 
 ---
 
-# 8. Mutlaka Yap Listesi
+# 9. Don't List
 
-## 🔴 Yapma
-- ❌ Cuma günü deploy etme
-- ❌ Test edilmemiş kodu deploy etme
-- ❌ Tek seferde büyük değişiklik
-- ❌ Rollback planı olmadan deploy
-- ❌ Monitoring olmadan deploy
-- ❌ Off-hours'da (nöbetçi yokken) deploy
-- ❌ Database migration'ı app deploy ile birleştirme
-
-## ✅ Mutlaka Yap
-- ✅ Automated testing
-- ✅ Security scanning
-- ✅ Progressive rollout (canary)
-- ✅ Feature flags kullan
-- ✅ Health check endpoint'leri
-- ✅ Monitoring & alerting
-- ✅ Rollback plan hazırla
-- ✅ Post-deployment verification
-- ✅ Incident response plan
+❌ Do not deploy on Fridays
+❌ Do not deploy untested code
+❌ Do not make large changes at once
+❌ Do not deploy without a rollback plan
+❌ Do not deploy without monitoring
+❌ Do not deploy during off-hours (no one on call)
+❌ Do not combine database migration with app deploy
 
 ---
 
-**Son Güncelleme:** Aralık 2025
-**Versiyon:** 2.0
+# 10. Must Do List
+
+✅ Automated testing
+✅ Security scanning
+✅ Progressive rollout (canary)
+✅ Use feature flags
+✅ Health check endpoints
+✅ Monitoring & alerting
+✅ Prepare rollback plan
+✅ Post-deployment verification
+✅ Incident response plan
+
+---
+
+**Last Update:** December 2025
+**Version:** 2.0
