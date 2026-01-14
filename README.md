@@ -13,16 +13,19 @@
 ```powershell
 # 1. Create directories
 New-Item -ItemType Directory -Force -Path "$HOME\.gemini\antigravity"
+New-Item -ItemType Directory -Force -Path "$HOME\.gemini\global_workflows"
 New-Item -ItemType Directory -Force -Path "$HOME\.agent"
 
 # 2. GEMINI.md -> ~/.gemini/
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 
-# 3. Antigravity System (Commands, Skills) -> ~/.gemini/antigravity/
-Copy-Item -Recurse ".\commands" "$HOME\.gemini\antigravity\"
+# 3. Global Workflows (Commands) -> ~/.gemini/global_workflows/
+Copy-Item ".\global_workflows\*" "$HOME\.gemini\global_workflows\"
+
+# 4. Antigravity System (Skills) -> ~/.gemini/antigravity/
 Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\"
 
-# 4. Agents -> ~/.agent/
+# 5. Agents -> ~/.agent/
 Copy-Item ".\.agent\*" "$HOME\.agent\" -Recurse
 ```
 
@@ -31,16 +34,19 @@ Copy-Item ".\.agent\*" "$HOME\.agent\" -Recurse
 ```bash
 # 1. Create directories
 mkdir -p ~/.gemini/antigravity
+mkdir -p ~/.gemini/global_workflows
 mkdir -p ~/.agent
 
 # 2. GEMINI.md -> ~/.gemini/
 cp GEMINI.md ~/.gemini/GEMINI.md
 
-# 3. Antigravity System (Commands, Skills) -> ~/.gemini/antigravity/
-cp -r commands ~/.gemini/antigravity/
+# 3. Global Workflows (Commands) -> ~/.gemini/global_workflows/
+cp -r global_workflows/* ~/.gemini/global_workflows/
+
+# 4. Antigravity System (Skills) -> ~/.gemini/antigravity/
 cp -r skills ~/.gemini/antigravity/
 
-# 4. Agents -> ~/.agent/
+# 5. Agents -> ~/.agent/
 cp -r .agent/* ~/.agent/
 ```
 
@@ -51,8 +57,11 @@ cp -r .agent/* ~/.agent/
 ```
 ~/.gemini/                              # Global Config
 ├── GEMINI.md                           # Maestro Configuration
+├── global_workflows/                   # Slash Commands (/)
+│   ├── brainstorm.md                   # /brainstorm
+│   ├── create.md                       # /create
+│   └── ...
 └── antigravity/                        # Core System
-    ├── commands/                       # Slash Commands
     └── skills/                         # Skill Library
         ├── ultrathink.md
         ├── architecture.md
@@ -137,7 +146,6 @@ _See `ARCHITECTURE.md` for the complete list._
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Full system structure
 - **[GEMINI.md](GEMINI.md)** - Maestro configuration & rules
-- **[CODEBASE.md](CODEBASE.md)** - Codebase context
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ---
@@ -149,4 +157,4 @@ MIT License
 ---
 
 **Developed by:** [@xenit-v0](https://x.com/xenit_v0)
-**Version:** 0.2.0 (Antigravity IDE Native Support)
+**Version:** 0.2.2 (Antigravity IDE Native Support)
