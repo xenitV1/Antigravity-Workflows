@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2] - 2026-01-14
+
+### Changed
+- **Commands Directory Location:** Moved `commands/` to `global_workflows/commands/` to ensure slash commands appear with `/` prefix in Antigravity IDE.
+- **Installation Scripts:** Updated installation instructions for Windows (PowerShell) and macOS/Linux (Bash) in `README.md` to reflect the new `global_workflows` directory structure.
+- **Documentation:** Updated `ARCHITECTURE.md` and `README.md` to reflect the new directory layout.
+
 ## [0.2.1] - 2026-01-14
 
 ### Removed
