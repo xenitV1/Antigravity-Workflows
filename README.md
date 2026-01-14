@@ -146,7 +146,6 @@ _See `ARCHITECTURE.md` for the complete list._
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Full system structure
 - **[GEMINI.md](GEMINI.md)** - Maestro configuration & rules
-- **[CODEBASE.md](CODEBASE.md)** - Codebase context
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ---
