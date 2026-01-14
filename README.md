@@ -70,129 +70,78 @@ cp -r .agent/* ~/.agent/
 
 ---
 
-## 🔧 Antigravity IDE Rules
+## 🤖 Available Agents (16)
 
-### Activation Modes
-
-| Mode | Description | Example |
-|-----|-------------|---------|
-| **Always On** | Always active | `quality-gates.md` |
-| **Model Decision** | AI decides | `ultrathink.md`, `debugging.md` |
-| **Glob** | Based on file pattern | `*.ts` -> `backend.md` |
-
-### Rule List (16 items)
-
-| Rule | Activation | Description |
-|------|------------|-------------|
-| `ultrathink.md` | Model Decision | Deep analysis protocol |
-| `core-orchestrator.md` | Model Decision | Skill director |
-| `quality-gates.md` | **Always On** | Quality controls |
-| `backend.md` | Glob: `*.ts, *.js` | Backend development |
-| `testing.md` | Glob: `*.test.*` | Test strategies |
-| `debugging.md` | Model Decision | Debugging |
-| `architecture.md` | Model Decision | System design |
-| `refactoring.md` | Model Decision | Code improvement |
-| `design-system.md` | Glob: `*.css` | UI consistency |
-| `mobile.md` | Glob: `*.tsx, App.*` | Mobile development |
-| `production-deployment.md` | Model Decision | DevOps/CI-CD |
-| `multi-file-sync.md` | Model Decision | Multi-file |
-| `dependency-management.md` | Glob: `package.json` | Package management |
-| `documentation.md` | Glob: `*.md` | Documentation |
-| `optimization.md` | Model Decision | Performance |
-| `seo-specialist.md` | Model Decision | SEO & GEO optimization |
+| Agent | Domain & Focus |
+|-------|----------------|
+| `orchestrator` | Multi-agent coordination and synthesis |
+| `project-planner` | Discovery, Architecture, and Task Planning |
+| `backend-specialist` | Backend Architect (API + Database + Server) |
+| `database-architect` | Database Schema, SQL Optimization |
+| `frontend-specialist` | Frontend & Growth (UI/UX + SEO) |
+| `mobile-developer` | Mobile Specialist (Cross-platform) |
+| `game-developer` | Game Logic & Assets & Performance |
+| `security-auditor` | Cybersecurity Auditing |
+| `debugger` | Root Cause Analysis & Bug Fixing |
+| `devops-engineer` | CI/CD, Infrastructure, Deployment |
+| `documentation-writer` | Technical Documentation |
+| `explorer-agent` | Discovery, File Listing, Analysis |
+| `penetration-tester` | Offensive Security |
+| `performance-optimizer` | Speed, Vital Metrics |
+| `seo-specialist` | SEO, GEO, Analytics |
+| `test-engineer` | Testing Strategy, E2E, Unit Tests |
 
 ---
 
-## 📚 SEO & GEO Skills
+## ⚡ Slash Commands (10)
 
-### SEO Skills (Traditional Search Engine Optimization)
-| Skill | Description |
-|-------|-------------|
-| `seo-fundamentals.md` | 2025 algorithm updates, E-E-A-T principles |
-| `seo-technical.md` | Core Web Vitals, technical SEO, mobile-first |
-| `seo-content.md` | Keyword research, on-page SEO, content strategy |
-| `seo-local.md` | Google Business Profile, local SEO, NAP consistency |
-| `seo-offpage.md` | Link building, backlinks, digital PR |
-| `seo-analytics.md` | Google Analytics 4, Search Console, reporting |
-
-### GEO Skills (Generative Engine Optimization)
-| Skill | Description |
-|-------|-------------|
-| `geo-fundamentals.md` | RAG architecture, AI engines (ChatGPT, Claude, Perplexity), GEO vs SEO |
-| `geo-content.md` | Entity optimization, AI-friendly content, citation strategies |
-| `geo-technical.md` | Structured data for AI, schema markup, crawler optimization |
-| `geo-analytics.md` | AI citation tracking, generative appearance measurement |
+| Command | Description |
+|---------|-------------|
+| `/brainstorm` | Structured brainstorming |
+| `/create` | Create new application |
+| `/debug` | Debug and troubleshoot |
+| `/deploy` | Production deployment |
+| `/enhance` | Add/update features |
+| `/orchestrate` | Multi-agent coordination |
+| `/plan` | Task planning |
+| `/preview` | Preview server management |
+| `/status` | Project status display |
+| `/test` | Test generation and running |
 
 ---
 
-## ⚡ Antigravity Workflows (Slash Commands)
+## 📚 Skills (35 Categories)
 
-| Workflow | Command | Description |
-|----------|---------|-------------|
-| `ultrathink.md` | `/ultrathink` | Deep thinking mode |
-| `plan.md` | `/plan` | Task planning |
-| `implement.md` | `/implement` | Feature development |
-| `review.md` | `/review` | Code review |
-| `debug.md` | `/debug` | Debugging |
-| `test.md` | `/test` | Test writing |
-| `refactor.md` | `/refactor` | Safe refactoring |
-| `deploy.md` | `/deploy` | Production deployment |
+Skills are organized in `~/.gemini/antigravity/skills/` and cover:
+- **Development:** `clean-code`, `react-patterns`, `python-patterns`
+- **Architecture:** `architecture`, `api-patterns`, `database-design`
+- **Quality:** `testing-patterns`, `code-review-checklist`, `tdd-workflow`
+- **Security:** `vulnerability-scanner`, `red-team-tactics`
+- **Performance:** `performance-profiling`, `tailwind-patterns`
+- **SEO/GEO:** `seo-fundamentals`, `geo-fundamentals`
+- **DevOps:** `deployment-procedures`, `server-management`
 
----
-
-## 🎯 How It Works?
-
-### Antigravity IDE Flow
-
-```
-User gives command
-        │
-        ▼
-┌─────────────────────────┐
-│ Glob Pattern Check      │ → *.ts file? -> backend.md active
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Always On Rules         │ → quality-gates.md always active
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Model Decision          │ → Complex task? -> ultrathink.md
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Workflow Call           │ → /debug -> debug.md workflow
-└─────────────────────────┘
-```
-
-### Workflow Chaining
-
-```
-/plan -> /ultrathink (for complex tasks)
-/implement -> /plan + /test
-/deploy -> /test + /review
-```
+_See `ARCHITECTURE.md` for the complete list._
 
 ---
 
-## 📏 Rules
+## 🎯 Key Features
 
-- ✅ ESLint/TypeScript check after every operation
-- ✅ Code must be reviewed at least 2 times
-- ✅ Do not start processing without loading Skill/Rule
-- ✅ Socratic Reality Check (5-Step) before every action
+- ✅ **16 Specialized Agents** for different development domains
+- ✅ **35 Skill Categories** covering full-stack development
+- ✅ **10 Slash Commands** for streamlined workflows
+- ✅ **Maestro v4.1 Standards** integrated
+- ✅ **Dynamic User Paths** (`~/.agent/`, `~/.gemini/antigravity/`)
+- ✅ **Clean Code Mandate** enforced globally
 
 ---
 
-## 🌍 Language Versions
+## 📖 Documentation
 
-| Language | Location |
-|----------|----------|
-| 🇺🇸 English | `./` (root) |
-| 🇹🇷 Türkçe | `./tr_version/` |
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Full system structure
+- **[GEMINI.md](GEMINI.md)** - Maestro configuration & rules
+- **[CODEBASE.md](CODEBASE.md)** - Codebase context
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ---
 
