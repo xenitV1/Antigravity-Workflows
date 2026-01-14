@@ -25,18 +25,17 @@
 
 ~/.gemini/                            # [CONFIG ROOT] Gemini Configuration
 ├── GEMINI.md                         # Global Configuration
-├── global_workflows/                 # [COMMANDS] Slash Commands (/)
-│   └── commands/                     # 10 Slash Commands
-│       ├── brainstorm.md             # /brainstorm
-│       ├── create.md                 # /create
-│       ├── debug.md                  # /debug
-│       ├── deploy.md                 # /deploy
-│       ├── enhance.md                # /enhance
-│       ├── orchestrate.md            # /orchestrate
-│       ├── plan.md                   # /plan
-│       ├── preview.md                # /preview
-│       ├── status.md                 # /status
-│       └── test.md                   # /test
+├── global_workflows/                 # [COMMANDS] 10 Slash Commands (/)
+│   ├── brainstorm.md                 # /brainstorm
+│   ├── create.md                     # /create
+│   ├── debug.md                      # /debug
+│   ├── deploy.md                     # /deploy
+│   ├── enhance.md                    # /enhance
+│   ├── orchestrate.md                # /orchestrate
+│   ├── plan.md                       # /plan
+│   ├── preview.md                    # /preview
+│   ├── status.md                     # /status
+│   └── test.md                       # /test
 │
 └── antigravity/                      # [CORE] Antigravity System
     └── skills/                       # 35 Skill Categories

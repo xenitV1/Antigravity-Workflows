@@ -20,7 +20,7 @@ New-Item -ItemType Directory -Force -Path "$HOME\.agent"
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 
 # 3. Global Workflows (Commands) -> ~/.gemini/global_workflows/
-Copy-Item -Recurse ".\global_workflows\commands" "$HOME\.gemini\global_workflows\"
+Copy-Item ".\global_workflows\*" "$HOME\.gemini\global_workflows\"
 
 # 4. Antigravity System (Skills) -> ~/.gemini/antigravity/
 Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\"
@@ -41,7 +41,7 @@ mkdir -p ~/.agent
 cp GEMINI.md ~/.gemini/GEMINI.md
 
 # 3. Global Workflows (Commands) -> ~/.gemini/global_workflows/
-cp -r global_workflows/commands ~/.gemini/global_workflows/
+cp -r global_workflows/* ~/.gemini/global_workflows/
 
 # 4. Antigravity System (Skills) -> ~/.gemini/antigravity/
 cp -r skills ~/.gemini/antigravity/
@@ -58,10 +58,9 @@ cp -r .agent/* ~/.agent/
 ~/.gemini/                              # Global Config
 ├── GEMINI.md                           # Maestro Configuration
 ├── global_workflows/                   # Slash Commands (/)
-│   └── commands/                       # Command Definitions
-│       ├── brainstorm.md
-│       ├── create.md
-│       └── ...
+│   ├── brainstorm.md                   # /brainstorm
+│   ├── create.md                       # /create
+│   └── ...
 └── antigravity/                        # Core System
     └── skills/                         # Skill Library
         ├── ultrathink.md
