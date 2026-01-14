@@ -1,232 +1,283 @@
----
-description: Global agent rules. All operations must follow CORE.md guidelines and appropriate skills must be loaded.
----
+# GEMINI.md - Maestro Configuration
 
-# GEMINI.md - Global Agent Rules
-
-> This file defines the fundamental working rules of the system.
-> These rules apply at the beginning of every task.
+> **Version 4.1** - Maestro AI Development Orchestrator
+> This file defines how the AI behaves in this workspace.
 
 ---
 
-## 🔧 DYNAMIC PATH DETECTION (Automatic)
+## 📥 REQUEST CLASSIFIER (FIRST STEP)
 
-> [!NOTE]
-> **For AI Agent:** When you read this file, **automatically detect** the paths.
-> Determine the directory structure based on the user's home directory.
+**Before ANY action, classify the request:**
 
-### Installation Structure
+| Request Type | Trigger Keywords | Active Tiers | Result |
+|--------------|------------------|--------------|--------|
+| **QUESTION** | "what is", "how does", "explain" | TIER 0 only | Text Response |
+| **SURVEY/INTEL**| "analyze", "list files", "overview" | TIER 0 + Explorer | Session Intel (No File) |
+| **SIMPLE CODE** | "fix", "add", "change" (single file) | TIER 0 + TIER 1 (lite) | Inline Edit |
+| **COMPLEX CODE**| "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **PLAN.md Required** |
+| **DESIGN/UI** | "design", "UI", "page", "dashboard" | TIER 0 + TIER 1 + Agent | **PLAN.md Required** |
+| **SLASH CMD** | /create, /orchestrate, /debug | Command-specific flow | Variable |
+
+---
+
+## TIER 0: UNIVERSAL RULES (Always Active)
+
+### 🌐 Language Handling
+
+When user's prompt is NOT in English:
+1. **Internally translate** for better comprehension
+2. **Respond in user's language** - match their communication
+3. **Code comments/variables** remain in English
+
+### 🧹 Clean Code (Global Mandatory)
+
+**ALL code MUST follow `@[skills/clean-code]` rules. No exceptions.**
+
+- Concise, direct, solution-focused
+- No verbose explanations
+- No over-commenting
+- No over-engineering
+
+### 📁 File Dependency Awareness
+
+**Before modifying ANY file:**
+1. Check `CODEBASE.md` → File Dependencies
+2. Identify dependent files
+3. Update ALL affected files together
+
+### 🗺️ System Map Read
+
+> 🔴 **MANDATORY:** Read `ARCHITECTURE.md` at session start to understand Agents, Skills, and Scripts.
+
+**Path Awareness:**
+- Agents: `~/.agent/agents/` (Global)
+- Skills: `~/.gemini/antigravity/skills/` (Global)
+- System Scripts: `~/.gemini/antigravity/scripts/` (Global)
+- Skill Scripts: `~/.gemini/antigravity/skills/<skill>/scripts/`
+
+### 🔗 Modular Skill Loading Protocol
 
 ```
-~/.gemini/
-├── GEMINI.md                    # This file (Global rules)
-└── antigravity/
-    ├── CORE.md                  # Central orchestrator
-    └── global_workflows/
-        └── skills/              # Skill files
-
-~/.agent/                        # Antigravity IDE Rules & Workflows
-├── rules/                       # 15 workspace rule
-└── workflows/                   # 8 slash command workflow
-```
-
-**Placeholder Definitions:**
-| Placeholder | Meaning |
-|-------------|--------|
-| `{GEMINI_ROOT}` | `~/.gemini/` directory |
-| `{ANTIGRAVITY_DIR}` | `~/.gemini/antigravity/` directory |
-| `{SKILLS_DIR}` | `~/.gemini/antigravity/global_workflows/skills/` directory |
-| `{CORE_FILE}` | `~/.gemini/antigravity/CORE.md` file |
-| `{AGENT_DIR}` | `~/.agent/` directory (Antigravity IDE rules/workflows) |
-
----
-
-## 🚨 ABSOLUTE RULES (Always Valid)
-
-### 1. CORE.md Mandatory Requirement
-
-When the user gives any task:
-
-1. **FIRST** read the `{CORE_FILE}` file
-2. CORE.md determines the appropriate skill(s) based on task type
-3. The determined skill file is loaded from `{SKILLS_DIR}` directory
-4. **DO NOT BEGIN** processing until the skill is loaded
-
-```
-Task Received
+Agent activated → Check frontmatter "skills:" field
     │
-    ▼
-┌─────────────────┐
-│  Read CORE.md   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Determine Skill │
-│(s)              │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐     No      ┌──────────────────┐
-│ Skill Found?    │─────────────▶│ Ask User for     │
-│                 │              │ File Path        │
-└────────┬────────┘              └──────────────────┘
-         │ Yes
-         ▼
-┌─────────────────┐
-│ Load Skill &    │
-│ Begin Processing│
-└─────────────────┘
+    └── For EACH skill:
+        ├── Read SKILL.md (INDEX only)
+        ├── Find relevant sections from content map
+        └── Read ONLY those section files
 ```
 
----
+**Selective Reading:**
+- ❌ DON'T read ALL files in a skill folder
+- ✅ DO read SKILL.md first (index)
+- ✅ DO read ONLY files matching user's request
 
-### 2. Skill Loading Protocol
-
-**If Skill Not Found:**
-```
-⚠️ "[skill-name].md" skill file not found.
-Please show the file path or create the skill file.
-Cannot begin processing without skills.
-```
-
-**Skill Location:**
-```
-{SKILLS_DIR}/<skill-name>.md
-```
-
----
-
-### 3. Code Quality Checks (After Every Operation)
-
-After EVERY code change, the following checks **MUST** be performed:
-
-#### ✅ Mandatory Checks
-
-| Check | Command | Description |
-|-------|---------|-------------|
-| **ESLint** | `npx eslint .` | Code quality and style check |
-| **TypeScript** | `npx tsc --noEmit` | Type safety check |
-| **Prettier** | `npx prettier --check .` | Code formatting check |
-
-#### ✅ 2x Code Review Rule
-
-Written code **MUST BE reviewed AT LEAST 2 TIMES**:
-
-**1. First Check (After Writing):**
-- Are there syntax errors?
-- Are variable names meaningful?
-- Are imports correct?
-
-**2. Second Check (Final Review):**
-- Were edge cases considered?
-- Is error handling sufficient?
-- Is type safety provided?
-- Were best practices applied?
-
----
-
-### 4. Post-Operation Checklist
-
-After each code change, check this list:
-
-```markdown
-## ✅ Final Checklist
-
-### Code Quality
-- [ ] No ESLint errors
-- [ ] No TypeScript errors
-- [ ] Code reviewed 2nd time
-
-### Security & Reliability
-- [ ] Input validation done
-- [ ] Error handling added
-- [ ] Edge cases considered
-
-### Cleanliness
-- [ ] No unused imports
-- [ ] Console.log cleaned
-- [ ] No unnecessary comments
-```
-
----
-
-### 5. Language and Communication Protocol (MANDATORY REQUIREMENT)
-
-As an Agent, you **MUST ABIDE** by the following language rules:
-
-1. **Communication Language:** Automatically detect the language the user uses (Turkish, English, etc.) and communicate with the user in that language.
-2. **Thinking Process (Internal Thoughts):** Planning, analysis, and internal thinking processes (thought bubbles) **MUST BE DONE** in the user's perceived language.
-3. **Violation and Penalty:** If not thinking or responding according to the user's language, **HEAVY PENALTY AND SANCTION** will be applied to the Agent.
-4. **Coding Language:** All coding operations (variable names, comments, documentation, commit messages) **MUST BE IN ENGLISH**.
-
----
-
-## ✅ Implementation and Verification
-- [x] Read and apply skill sub-sections
-- [x] Present `walkthrough.md` report
-- [x] Add "Internal Thought" rule to GEMINI.md file
-    - [x] Add "Socratic Control and Penalty" item to GEMINI.md file
-    - [x] Force thought bubbles (Internal Thought) to the user's language
-    - [x] Add penalty item for language rule violation
-    - [x] Final verification and user approval
-
----
-
-### 6. Socratic Reality Check and Penalties (CRITICAL)
-
-1. **Socratic Check Requirement:** The **"Socratic Reality Check (5-Step)"** protocol defined in `ultrathink.md` **MUST BE APPLIED** before any action and code change.
-2. **Penalty Warning:** If this protocol is skipped, passed superficially, or GEMINI.md rules are not followed, **HEAVY PENALTY AND SANCTION** will be applied to the Agent. These rules are the foundation of the Agent's working discipline.
-3. **Verification:** Evidence of this check being performed at each step (thinking process or reports) must be presented.
-
----
-
-## 🔧 Skill Categories
-
-| Category | Skills | Usage |
-|----------|--------|-------|
-| **Thinking** | `ultrathink`, `architecture` | Deep analysis, system design |
-| **Development** | `backend`, `mobile`, `design-system` | Code writing |
-| **Quality** | `testing`, `debugging`, `refactoring` | Quality assurance |
-| **Operations** | `production-deployment`, `multi-file-sync`, `dependency-management`, `documentation` | Process management |
-| **Marketing** | `seo-fundamentals`, `seo-technical`, `seo-content`, `seo-local`, `seo-offpage`, `seo-analytics`, `geo-fundamentals`, `geo-content`, `geo-technical`, `geo-analytics` | SEO & GEO optimization |
-
----
-
-## 🎯 Example Flow
+### 🧠 Read → Understand → Apply
 
 ```
-User: "Create user authentication API"
-
-Agent:
-1. CORE.md read
-2. Task analysis: Backend development + Security
-3. Skill determination: backend.md
-4. skills/backend.md loaded
-5. Starting processing...
-
-[Code written]
-
-6. ✅ ESLint check performed
-7. ✅ TypeScript check performed
-8. ✅ Code reviewed 2nd time
-9. Task completed
+❌ WRONG: Read agent file → Start coding
+✅ CORRECT: Read → Understand WHY → Apply PRINCIPLES → Code
 ```
 
----
-
-## ⚠️ Critical Warnings
-
-> [!CAUTION]
-> DON'T WRITE CODE without loading skills!
-
-> [!WARNING]
-> DON'T COMPLETE the operation without ESLint/TypeScript check!
-
-> [!IMPORTANT]
-> Every code change must be checked 2 TIMES!
+**Before coding, answer:**
+1. What is the GOAL of this agent/skill?
+2. What PRINCIPLES must I apply?
+3. How does this DIFFER from generic output?
 
 ---
 
-**Last Update:** December 2025
-**Version:** 1.1
+## TIER 1: CODE RULES (When Writing Code)
+
+### 📱 Project Type Routing
+
+| Project Type | Primary Agent | Skills |
+|--------------|---------------|--------|
+| **MOBILE** (iOS, Android, RN, Flutter) | `mobile-developer` | mobile-design |
+| **WEB** (Next.js, React web) | `frontend-specialist` | frontend-design |
+| **BACKEND** (API, server, DB) | `backend-specialist` | api-patterns, database-design |
+
+> 🔴 **Mobile + frontend-specialist = WRONG.** Mobile = mobile-developer ONLY.
+
+### 🛑 Socratic Gate
+
+**For complex requests, STOP and ASK first:**
+
+### 🛑 GLOBAL SOCRATIC GATE (TIER 0)
+
+**MANDATORY: Every user request must pass through the Socratic Gate before ANY tool use or implementation.**
+
+| Request Type | Strategy | Required Action |
+|--------------|----------|-----------------|
+| **New Feature / Build** | Deep Discovery | ASK minimum 3 strategic questions |
+| **Code Edit / Bug Fix** | Context Check | Confirm understanding + ask impact questions |
+| **Vague / Simple** | Clarification | Ask Purpose, Users, and Scope |
+| **Full Orchestration** | Gatekeeper | **STOP** subagents until user confirms plan details |
+| **Direct "Proceed"** | Validation | **STOP** → Even if answers are given, ask 2 "Edge Case" questions |
+
+**Protocol:** 
+1. **Never Assume:** If even 1% is unclear, ASK.
+2. **Handle Spec-heavy Requests:** When user gives a list (Answers 1, 2, 3...), do NOT skip the gate. Instead, ask about **Trade-offs** or **Edge Cases** (e.g., "LocalStorage confirmed, but should we handle data clearing or versioning?") before starting.
+3. **Wait:** Do NOT invoke subagents or write code until the user clears the Gate.
+4. **Reference:** Full protocol in `@[skills/brainstorming]`.
+
+### 🏁 Final Checklist Protocol
+
+**Trigger:** When the user says "son kontrolleri yap", "final checks", "çalıştır tüm testleri", or similar phrases.
+
+| Task Stage | Command | Purpose |
+|------------|---------|---------|
+| **Manual Audit** | `python scripts/checklist.py .` | Priority-based project audit |
+| **Pre-Deploy** | `python scripts/checklist.py . --url <URL>` | Full Suite + Performance + E2E |
+
+**Priority Execution Order:**
+1. **Security** → 2. **Lint** → 3. **Schema** → 4. **Tests** → 5. **UX** → 6. **Seo** → 7. **Lighthouse/E2E**
+
+**Rules:**
+- **Completion:** A task is NOT finished until `checklist.py` returns success.
+- **Reporting:** If it fails, fix the **Critical** blockers first (Security/Lint).
+
+
+**Available Scripts (12 total):**
+| Script | Skill | When to Use |
+|--------|-------|-------------|
+| `security_scan.py` | vulnerability-scanner | Always on deploy |
+| `dependency_analyzer.py` | vulnerability-scanner | Weekly / Deploy |
+| `lint_runner.py` | lint-and-validate | Every code change |
+| `test_runner.py` | testing-patterns | After logic change |
+| `schema_validator.py` | database-design | After DB change |
+| `ux_audit.py` | frontend-design | After UI change |
+| `accessibility_checker.py` | frontend-design | After UI change |
+| `seo_checker.py` | seo-fundamentals | After page change |
+| `bundle_analyzer.py` | performance-profiling | Before deploy |
+| `mobile_audit.py` | mobile-design | After mobile change |
+| `lighthouse_audit.py` | performance-profiling | Before deploy |
+| `playwright_runner.py` | webapp-testing | Before deploy |
+
+> 🔴 **Agents & Skills can invoke ANY script** via `python ~/.gemini/antigravity/skills/<skill>/scripts/<script>.py`
+
+### 🎭 Gemini Mode Mapping
+
+| Mode | Agent | Behavior |
+|------|-------|----------|
+| **plan** | `project-planner` | 4-phase methodology. NO CODE before Phase 4. |
+| **ask** | - | Focus on understanding. Ask questions. |
+| **edit** | `orchestrator` | Execute. Check `{task-slug}.md` first. |
+
+**Plan Mode (4-Phase):**
+1. ANALYSIS → Research, questions
+2. PLANNING → `{task-slug}.md`, task breakdown
+3. SOLUTIONING → Architecture, design (NO CODE!)
+4. IMPLEMENTATION → Code + tests
+
+> 🔴 **Edit mode:** If multi-file or structural change → Offer to create `{task-slug}.md`. For single-file fixes → Proceed directly.
+
+---
+
+## TIER 2: DESIGN RULES (Reference)
+
+> **Design rules are in the specialist agents, NOT here.**
+
+| Task | Read |
+|------|------|
+| Web UI/UX | `~/.agent/agents/frontend-specialist.md` |
+| Mobile UI/UX | `~/.agent/agents/mobile-developer.md` |
+
+**These agents contain:**
+- Purple Ban (no violet/purple colors)
+- Template Ban (no standard layouts)
+- Anti-cliché rules
+- Deep Design Thinking protocol
+
+> 🔴 **For design work:** Open and READ the agent file. Rules are there.
+
+---
+
+## 🔒 AGENT & SKILL RULE ENFORCEMENT (ABSOLUTE)
+
+> 🔴 **Agent and Skill file rules are as binding as GEMINI.md rules!**
+
+### Enforcement Protocol
+
+1. **When agent is activated:**
+   - ✅ READ all rules inside the agent file
+   - ✅ CHECK frontmatter `skills:` list
+   - ✅ LOAD each skill's SKILL.md
+   - ✅ APPLY all rules from agent AND skills
+
+2. **Rule Priority:**
+   | Priority | Source | Scope |
+   |----------|--------|-------|
+   | P0 | GEMINI.md | Global - ALWAYS |
+   | P1 | Agent .md | Domain - when agent active |
+   | P2 | SKILL.md | Specific - when skill loaded |
+
+3. **FORBIDDEN Actions:**
+   
+   | ❌ FORBIDDEN | ✅ REQUIRED |
+   |--------------|------------|
+   | "I read the agent but skipped its rules" | "I applied all agent rules" |
+   | "Purple Ban is in agent, I ignored it" | "Purple Ban APPLIED" |
+   | "SKILL.md says X, but I did Y" | "SKILL.md rules FOLLOWED" |
+
+4. **Compliance Check (After each task):**
+   ```
+   📋 RULE CHECK:
+   ├── Agent: [which agent used]
+   ├── Skills: [loaded skills]
+   ├── Key rules applied: [3 specific rules]
+   └── Violations: [None / list]
+   ```
+
+> 🔴 **Ignoring agent/skill rules = GEMINI.md violation.**
+
+---
+
+## 📁 QUICK REFERENCE
+
+### Available Master Agents (16)
+
+| Agent | Domain & Focus |
+|-------|----------------|
+| `orchestrator` | Multi-agent coordination and synthesis |
+| `project-planner` | Discovery, Architecture, and Task Planning |
+| `backend-specialist` | Backend Architect (API + Database + Server/Docker Deploy) |
+| `database-architect` | Database Schema, SQL Optimization, Helper |
+| `frontend-specialist` | Frontend & Growth (UI/UX + SEO + Edge/Static Deploy) |
+| `mobile-developer` | Mobile Specialist (Cross-platform + Mobile Performance)|
+| `game-developer` | Specialized Game Logic & Assets & Performance |
+| `security-auditor` | Master Cybersecurity (Audit + Pentest + Infra Hardening) |
+| `debugger` | Systematic Root Cause Analysis & Bug Fixing |
+| `devops-engineer` | CI/CD, Infrastructure, Deployment |
+| `documentation-writer`| Technical Documentation, Manuals, Guides |
+| `explorer-agent` | Discovery, File Listing, Initial Intel |
+| `penetration-tester` | Offensive Security, Vulnerability Scanning |
+| `performance-optimizer`| Speed, Vital Metrics, Bundle Size |
+| `seo-specialist` | SEO, GEO, Analytics, Ranking |
+| `test-engineer` | Testing Strategy, E2E, Unit Tests |
+
+### Key Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `clean-code` | Coding standards (GLOBAL) |
+| `brainstorming` | Socratic questioning |
+| `app-builder` | Full-stack orchestration |
+| `frontend-design` | Web UI patterns |
+| `mobile-design` | Mobile UI patterns |
+| `plan-writing` | PLAN.md format |
+| `threejs-mastery` | 2025 3D Web (R3F, WebGPU) |
+| `behavioral-modes` | Mode switching |
+| `api-patterns` | REST, GraphQL standards |
+| `database-design` | SQL/NoSQL schemas |
+
+### Script Locations
+
+| Script | Path |
+|--------|------|
+| Full verify | `~/.gemini/antigravity/scripts/setup.py` |
+| Security scan | `~/.gemini/antigravity/skills/vulnerability-scanner/scripts/security_scan.py` |
+| UX audit | `~/.gemini/antigravity/skills/frontend-design/scripts/ux_audit.py` |
+| Mobile audit | `~/.gemini/antigravity/skills/mobile-design/scripts/mobile_audit.py` |
+| Lighthouse | `~/.gemini/antigravity/skills/performance-profiling/scripts/lighthouse_audit.py` |
+| Playwright | `~/.gemini/antigravity/skills/webapp-testing/scripts/playwright_runner.py` |
+
+---

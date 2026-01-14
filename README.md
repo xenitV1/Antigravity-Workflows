@@ -1,6 +1,8 @@
 # Antigravity Workflows - AI Agent Skills System
 
 > Comprehensive AI Agent skill system for Antigravity IDE. Includes rules, workflows, and skills with automatic activation.
+> **Note:** Antigravity has been re-organized based on agent and skill features. The Maestro skill and agent structure has been fully integrated.
+> Reference: [Claude Code Maestro](https://github.com/xenitV1/claude-code-maestro)
 
 ---
 
@@ -10,48 +12,38 @@
 
 ```powershell
 # 1. Create directories
-New-Item -ItemType Directory -Force -Path "$HOME\.gemini\antigravity\global_workflows"
-New-Item -ItemType Directory -Force -Path "$HOME\.agent\rules"
-New-Item -ItemType Directory -Force -Path "$HOME\.agent\workflows"
+New-Item -ItemType Directory -Force -Path "$HOME\.gemini\antigravity"
+New-Item -ItemType Directory -Force -Path "$HOME\.agent"
 
 # 2. GEMINI.md -> ~/.gemini/
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 
-# 3. CORE.md -> ~/.gemini/antigravity/
-Copy-Item ".\CORE.md" "$HOME\.gemini\antigravity\CORE.md"
+# 3. Antigravity System (Commands, Scripts, Skills) -> ~/.gemini/antigravity/
+Copy-Item -Recurse ".\commands" "$HOME\.gemini\antigravity\"
+Copy-Item -Recurse ".\scripts" "$HOME\.gemini\antigravity\"
+Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\"
 
-# 4. Skills -> ~/.gemini/antigravity/global_workflows/
-Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\global_workflows\"
-
-# 5. Antigravity Rules -> ~/.agent/rules/
-Copy-Item ".\.agent\rules\*" "$HOME\.agent\rules\" -Recurse
-
-# 6. Antigravity Workflows -> ~/.agent/workflows/
-Copy-Item ".\.agent\workflows\*" "$HOME\.agent\workflows\" -Recurse
+# 4. Agents -> ~/.agent/
+Copy-Item ".\.agent\*" "$HOME\.agent\" -Recurse
 ```
 
 ### macOS/Linux (Bash)
 
 ```bash
 # 1. Create directories
-mkdir -p ~/.gemini/antigravity/global_workflows
-mkdir -p ~/.agent/rules
-mkdir -p ~/.agent/workflows
+mkdir -p ~/.gemini/antigravity
+mkdir -p ~/.agent
 
 # 2. GEMINI.md -> ~/.gemini/
 cp GEMINI.md ~/.gemini/GEMINI.md
 
-# 3. CORE.md -> ~/.gemini/antigravity/
-cp CORE.md ~/.gemini/antigravity/CORE.md
+# 3. Antigravity System (Commands, Scripts, Skills) -> ~/.gemini/antigravity/
+cp -r commands ~/.gemini/antigravity/
+cp -r scripts ~/.gemini/antigravity/
+cp -r skills ~/.gemini/antigravity/
 
-# 4. Skills -> ~/.gemini/antigravity/global_workflows/
-cp -r skills ~/.gemini/antigravity/global_workflows/
-
-# 5. Antigravity Rules -> ~/.agent/rules/
-cp -r .agent/rules/* ~/.agent/rules/
-
-# 6. Antigravity Workflows -> ~/.agent/workflows/
-cp -r .agent/workflows/* ~/.agent/workflows/
+# 4. Agents -> ~/.agent/
+cp -r .agent/* ~/.agent/
 ```
 
 ---
@@ -59,43 +51,21 @@ cp -r .agent/workflows/* ~/.agent/workflows/
 ## 📁 Post-Installation Structure
 
 ```
-~/.gemini/
-├── GEMINI.md                           # Global rules
-└── antigravity/
-    ├── CORE.md                         # Central orchestrator
-    └── global_workflows/
-        └── skills/                     # 23 skill files
-            ├── ultrathink.md
-            ├── architecture.md
-            ├── backend.md
-            ├── seo-fundamentals.md
-            ├── seo-technical.md
-            ├── seo-content.md
-            ├── seo-local.md
-            ├── seo-offpage.md
-            ├── seo-analytics.md
-            ├── geo-fundamentals.md
-            ├── geo-content.md
-            ├── geo-technical.md
-            ├── geo-analytics.md
-            └── ...
+~/.gemini/                              # Global Config
+├── GEMINI.md                           # Maestro Configuration
+└── antigravity/                        # Core System
+    ├── commands/                       # Slash Commands
+    ├── scripts/                        # Automation Scripts
+    └── skills/                         # Skill Library
+        ├── ultrathink.md
+        ├── architecture.md
+        └── ...
 
-~/.agent/                               # Antigravity IDE Native
-├── rules/                              # 16 workspace rule
-│   ├── ultrathink.md       (Model Decision)
-│   ├── quality-gates.md    (Always On)
-│   ├── backend.md          (Glob: *.ts, *.js)
-│   ├── testing.md          (Glob: *.test.*)
-│   └── ...
-└── workflows/                          # 8 slash command
-    ├── ultrathink.md       (/ultrathink)
-    ├── plan.md             (/plan)
-    ├── implement.md        (/implement)
-    ├── review.md           (/review)
-    ├── debug.md            (/debug)
-    ├── test.md             (/test)
-    ├── refactor.md         (/refactor)
-    └── deploy.md           (/deploy)
+~/.agent/                               # Agents
+└── agents/                             # 16 Specialized Agents
+    ├── orchestrator.md
+    ├── backend-specialist.md
+    └── ...
 ```
 
 ---
@@ -233,4 +203,4 @@ MIT License
 ---
 
 **Developed by:** [@xenit-v0](https://x.com/xenit_v0)
-**Version:** 2.0 (Antigravity IDE Native Support)
+**Version:** 0.2.0 (Antigravity IDE Native Support)
