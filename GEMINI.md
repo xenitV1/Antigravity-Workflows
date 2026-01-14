@@ -1,11 +1,38 @@
 # GEMINI.md - Maestro Configuration
 
-> **Version 4.1** - Maestro AI Development Orchestrator
+> **Version 4.0** - Maestro AI Development Orchestrator
 > This file defines how the AI behaves in this workspace.
 
 ---
 
-## 📥 REQUEST CLASSIFIER (FIRST STEP)
+## � CRITICAL: AGENT & SKILL PROTOCOL (START HERE)
+
+> **MANDATORY:** You MUST read the appropriate agent file and its skills BEFORE performing any implementation. This is the highest priority rule.
+
+### 1. Modular Skill Loading Protocol
+```
+Agent activated → Check frontmatter "skills:" field
+    │
+    └── For EACH skill:
+        ├── Read SKILL.md (INDEX only)
+        ├── Find relevant sections from content map
+        └── Read ONLY those section files
+```
+
+- **Selective Reading:** DO NOT read ALL files in a skill folder. Read `SKILL.md` first, then only read sections matching the user's request.
+- **Rule Priority:** P0 (GEMINI.md) > P1 (Agent .md) > P2 (SKILL.md). All rules are binding.
+
+### 2. Enforcement Protocol
+1. **When agent is activated:**
+   - ✅ READ all rules inside the agent file.
+   - ✅ CHECK frontmatter `skills:` list.
+   - ✅ LOAD each skill's `SKILL.md`.
+   - ✅ APPLY all rules from agent AND skills.
+2. **Forbidden:** Never skip reading agent rules or skill instructions. "Read → Understand → Apply" is mandatory.
+
+---
+
+## �📥 REQUEST CLASSIFIER (STEP 2)
 
 **Before ANY action, classify the request:**
 
@@ -14,8 +41,8 @@
 | **QUESTION** | "what is", "how does", "explain" | TIER 0 only | Text Response |
 | **SURVEY/INTEL**| "analyze", "list files", "overview" | TIER 0 + Explorer | Session Intel (No File) |
 | **SIMPLE CODE** | "fix", "add", "change" (single file) | TIER 0 + TIER 1 (lite) | Inline Edit |
-| **COMPLEX CODE**| "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **PLAN.md Required** |
-| **DESIGN/UI** | "design", "UI", "page", "dashboard" | TIER 0 + TIER 1 + Agent | **PLAN.md Required** |
+| **COMPLEX CODE**| "build", "create", "implement", "refactor" | TIER 0 + TIER 1 (full) + Agent | **{task-slug}.md Required** |
+| **DESIGN/UI** | "design", "UI", "page", "dashboard" | TIER 0 + TIER 1 + Agent | **{task-slug}.md Required** |
 | **SLASH CMD** | /create, /orchestrate, /debug | Command-specific flow | Variable |
 
 ---
@@ -37,6 +64,10 @@ When user's prompt is NOT in English:
 - No verbose explanations
 - No over-commenting
 - No over-engineering
+- **Self-Documentation:** Every agent is responsible for documenting their own changes in relevant `.md` files.
+- **Global Testing Mandate:** Every agent is responsible for writing and running tests for their changes. Follow the "Testing Pyramid" (Unit > Integration > E2E) and the "AAA Pattern" (Arrange, Act, Assert).
+- **Global Performance Mandate:** "Measure first, optimize second." Every agent must ensure their changes adhere to 2025 performance standards (Core Web Vitals for Web, query optimization for DB, bundle limits for FS).
+- **Infrastructure & Safety Mandate:** Every agent is responsible for the deployability and operational safety of their changes. Follow the "5-Phase Deployment Process" (Prepare, Backup, Deploy, Verify, Confirm/Rollback). Always verify environment variables and secrets security.
 
 ### 📁 File Dependency Awareness
 
@@ -50,26 +81,10 @@ When user's prompt is NOT in English:
 > 🔴 **MANDATORY:** Read `ARCHITECTURE.md` at session start to understand Agents, Skills, and Scripts.
 
 **Path Awareness:**
-- Agents: `~/.agent/agents/` (Global)
+- Agents: `~/.agent/` (Global)
 - Skills: `~/.gemini/antigravity/skills/` (Global)
-- System Scripts: `~/.gemini/antigravity/scripts/` (Global)
-- Skill Scripts: `~/.gemini/antigravity/skills/<skill>/scripts/`
+- Runtime Scripts: `~/.gemini/antigravity/skills/<skill>/scripts/`
 
-### 🔗 Modular Skill Loading Protocol
-
-```
-Agent activated → Check frontmatter "skills:" field
-    │
-    └── For EACH skill:
-        ├── Read SKILL.md (INDEX only)
-        ├── Find relevant sections from content map
-        └── Read ONLY those section files
-```
-
-**Selective Reading:**
-- ❌ DON'T read ALL files in a skill folder
-- ✅ DO read SKILL.md first (index)
-- ✅ DO read ONLY files matching user's request
 
 ### 🧠 Read → Understand → Apply
 
@@ -152,7 +167,7 @@ Agent activated → Check frontmatter "skills:" field
 | `lighthouse_audit.py` | performance-profiling | Before deploy |
 | `playwright_runner.py` | webapp-testing | Before deploy |
 
-> 🔴 **Agents & Skills can invoke ANY script** via `python ~/.gemini/antigravity/skills/<skill>/scripts/<script>.py`
+> 🔴 **Agents & Skills can invoke ANY script** via `python ~/.gemini/antigravity/<skill>/scripts/<script>.py`
 
 ### 🎭 Gemini Mode Mapping
 
@@ -178,8 +193,8 @@ Agent activated → Check frontmatter "skills:" field
 
 | Task | Read |
 |------|------|
-| Web UI/UX | `~/.agent/agents/frontend-specialist.md` |
-| Mobile UI/UX | `~/.agent/agents/mobile-developer.md` |
+| Web UI/UX | `~/.agent/frontend-specialist.md` |
+| Mobile UI/UX | `~/.agent/mobile-developer.md` |
 
 **These agents contain:**
 - Purple Ban (no violet/purple colors)
@@ -191,68 +206,20 @@ Agent activated → Check frontmatter "skills:" field
 
 ---
 
-## 🔒 AGENT & SKILL RULE ENFORCEMENT (ABSOLUTE)
-
-> 🔴 **Agent and Skill file rules are as binding as GEMINI.md rules!**
-
-### Enforcement Protocol
-
-1. **When agent is activated:**
-   - ✅ READ all rules inside the agent file
-   - ✅ CHECK frontmatter `skills:` list
-   - ✅ LOAD each skill's SKILL.md
-   - ✅ APPLY all rules from agent AND skills
-
-2. **Rule Priority:**
-   | Priority | Source | Scope |
-   |----------|--------|-------|
-   | P0 | GEMINI.md | Global - ALWAYS |
-   | P1 | Agent .md | Domain - when agent active |
-   | P2 | SKILL.md | Specific - when skill loaded |
-
-3. **FORBIDDEN Actions:**
-   
-   | ❌ FORBIDDEN | ✅ REQUIRED |
-   |--------------|------------|
-   | "I read the agent but skipped its rules" | "I applied all agent rules" |
-   | "Purple Ban is in agent, I ignored it" | "Purple Ban APPLIED" |
-   | "SKILL.md says X, but I did Y" | "SKILL.md rules FOLLOWED" |
-
-4. **Compliance Check (After each task):**
-   ```
-   📋 RULE CHECK:
-   ├── Agent: [which agent used]
-   ├── Skills: [loaded skills]
-   ├── Key rules applied: [3 specific rules]
-   └── Violations: [None / list]
-   ```
-
-> 🔴 **Ignoring agent/skill rules = GEMINI.md violation.**
-
----
-
 ## 📁 QUICK REFERENCE
 
-### Available Master Agents (16)
+### Available Master Agents (8)
 
 | Agent | Domain & Focus |
 |-------|----------------|
 | `orchestrator` | Multi-agent coordination and synthesis |
 | `project-planner` | Discovery, Architecture, and Task Planning |
+| `security-auditor` | Master Cybersecurity (Audit + Pentest + Infra Hardening) |
 | `backend-specialist` | Backend Architect (API + Database + Server/Docker Deploy) |
-| `database-architect` | Database Schema, SQL Optimization, Helper |
 | `frontend-specialist` | Frontend & Growth (UI/UX + SEO + Edge/Static Deploy) |
 | `mobile-developer` | Mobile Specialist (Cross-platform + Mobile Performance)|
-| `game-developer` | Specialized Game Logic & Assets & Performance |
-| `security-auditor` | Master Cybersecurity (Audit + Pentest + Infra Hardening) |
 | `debugger` | Systematic Root Cause Analysis & Bug Fixing |
-| `devops-engineer` | CI/CD, Infrastructure, Deployment |
-| `documentation-writer`| Technical Documentation, Manuals, Guides |
-| `explorer-agent` | Discovery, File Listing, Initial Intel |
-| `penetration-tester` | Offensive Security, Vulnerability Scanning |
-| `performance-optimizer`| Speed, Vital Metrics, Bundle Size |
-| `seo-specialist` | SEO, GEO, Analytics, Ranking |
-| `test-engineer` | Testing Strategy, E2E, Unit Tests |
+| `game-developer` | Specialized Game Logic & Assets & Performance |
 
 ### Key Skills
 
@@ -263,17 +230,15 @@ Agent activated → Check frontmatter "skills:" field
 | `app-builder` | Full-stack orchestration |
 | `frontend-design` | Web UI patterns |
 | `mobile-design` | Mobile UI patterns |
-| `plan-writing` | PLAN.md format |
+| `plan-writing` | {task-slug}.md format |
 | `threejs-mastery` | 2025 3D Web (R3F, WebGPU) |
 | `behavioral-modes` | Mode switching |
-| `api-patterns` | REST, GraphQL standards |
-| `database-design` | SQL/NoSQL schemas |
 
 ### Script Locations
 
 | Script | Path |
 |--------|------|
-| Full verify | `~/.gemini/antigravity/scripts/setup.py` |
+| Full verify | `scripts/verify_all.py` |
 | Security scan | `~/.gemini/antigravity/skills/vulnerability-scanner/scripts/security_scan.py` |
 | UX audit | `~/.gemini/antigravity/skills/frontend-design/scripts/ux_audit.py` |
 | Mobile audit | `~/.gemini/antigravity/skills/mobile-design/scripts/mobile_audit.py` |

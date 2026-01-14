@@ -38,14 +38,6 @@
     │   ├── status.md                 # /status
     │   └── test.md                   # /test
     │
-    ├── scripts/                      # 6 System Control Scripts
-    │   ├── auto_preview.py           # Live preview
-    │   ├── dependency_scanner.py     # File dependency map
-    │   ├── explorer_helper.py        # Context builder
-    │   ├── session_hooks.py          # Startup/Shutdown logic
-    │   ├── session_manager.py        # Session persistence
-    │   └── setup.py                  # Global installer
-    │
     └── skills/                       # 35 Skill Categories
         ├── api-patterns/             # [API] REST, GraphQL
         ├── app-builder/              # [APP] Scaffolding

@@ -18,9 +18,8 @@ New-Item -ItemType Directory -Force -Path "$HOME\.agent"
 # 2. GEMINI.md -> ~/.gemini/
 Copy-Item ".\GEMINI.md" "$HOME\.gemini\GEMINI.md"
 
-# 3. Antigravity System (Commands, Scripts, Skills) -> ~/.gemini/antigravity/
+# 3. Antigravity System (Commands, Skills) -> ~/.gemini/antigravity/
 Copy-Item -Recurse ".\commands" "$HOME\.gemini\antigravity\"
-Copy-Item -Recurse ".\scripts" "$HOME\.gemini\antigravity\"
 Copy-Item -Recurse ".\skills" "$HOME\.gemini\antigravity\"
 
 # 4. Agents -> ~/.agent/
@@ -37,9 +36,8 @@ mkdir -p ~/.agent
 # 2. GEMINI.md -> ~/.gemini/
 cp GEMINI.md ~/.gemini/GEMINI.md
 
-# 3. Antigravity System (Commands, Scripts, Skills) -> ~/.gemini/antigravity/
+# 3. Antigravity System (Commands, Skills) -> ~/.gemini/antigravity/
 cp -r commands ~/.gemini/antigravity/
-cp -r scripts ~/.gemini/antigravity/
 cp -r skills ~/.gemini/antigravity/
 
 # 4. Agents -> ~/.agent/
@@ -55,7 +53,6 @@ cp -r .agent/* ~/.agent/
 ├── GEMINI.md                           # Maestro Configuration
 └── antigravity/                        # Core System
     ├── commands/                       # Slash Commands
-    ├── scripts/                        # Automation Scripts
     └── skills/                         # Skill Library
         ├── ultrathink.md
         ├── architecture.md
